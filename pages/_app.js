@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }) {
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-9TY4WQ89PC');
+      gtag('config', 'G-RTHH33WQWQ');
     }
   }, [])
 

@@ -7,14 +7,14 @@ export default function Document() {
     <Html lang="en">
       <Head>
            {/* Google Analytics Tag */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9TY4WQ89PC"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-9TY4WQ89PC');
+              gtag('config', 'G-RTHH33WQWQ');
             `
           }}
         />
