@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://freestreamcinema.vercel.app/sitemap.xml
+
