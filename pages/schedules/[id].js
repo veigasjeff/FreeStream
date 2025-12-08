@@ -341,7 +341,7 @@
 
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import schedule from '../../Data/schedules.json';
+import schedule from '../../data/schedules.json';
 import YouTubePlayer from '../../components/YouTubePlayer';
 import { 
   FacebookShareButton, 

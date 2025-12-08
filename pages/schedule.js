@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import schedule from '../Data/schedules.json';
+import schedule from '../data/schedules.json';
 import { FaCalendarAlt, FaClock, FaFilm, FaExclamationTriangle } from 'react-icons/fa';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
