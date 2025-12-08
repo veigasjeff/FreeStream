@@ -6,6 +6,18 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
+           {/* Google Analytics Tag */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-9TY4WQ89PC"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-9TY4WQ89PC');
+            `
+          }}
+        />
         <meta name="description" content="TV, shows, news, and movies for free with Freestream Cinema. Access thousands of movies + live news, entertainment, weather and more. Watch now." />
         <meta name="keywords" content="free movies, free streaming, watch online, TV shows, no subscription, free movie streaming, live cinema online, watch movies free, scheduled movie times, streaming, HD movies online, live movie streaming, free cinema, online movie theater, news, news online" />
         <link 
