@@ -213,7 +213,8 @@ export default function Header() {
         <div className="header-content">
           {/* Logo */}
           <Link href="/" className="logo">
-            Free Streaming
+              <span className="text-2xl font-display font-black gradient-text">   Free Streaming
+              </span>
           </Link>
 
           {/* Desktop Navigation */}
