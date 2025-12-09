@@ -43,7 +43,7 @@ export default function Document() {
         <link rel="manifest" href="/site.webmanifest" />
 
        <meta name="google-site-verification" content="BZNZaUyoS1nXyRfa99f4VJ3ABKZUZhkKB0pZ3DU3L8s" />
-        <meta name="yandex-verification" content="xxxxxxxxxxxxxxxxxxxx" />
+       <meta name="yandex-verification" content="36e10a0828a7c53f" />
         <meta name="facebook-domain-verification" content="https://www.facebook.com/profile.php?id=61583910555206" />
 
         </Head>
