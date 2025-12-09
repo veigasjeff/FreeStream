@@ -50,7 +50,7 @@ export default function ShowPage({ show }) {
           "@id": `${baseUrl}/#/schema/person/admin`,
           "name": "FreeStream Admin"
         },
-        "headline": `Watch ${show.title} - Live Movie Streaming on Free Streaming`,
+        "headline": `Watch ${show.title} - Now Streaming on Free Streaming`,
         "datePublished": show.date + "T10:00:00+00:00",
         "dateModified": new Date().toISOString(),
         "mainEntityOfPage": {
