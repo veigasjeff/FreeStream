@@ -1960,7 +1960,7 @@
 
 
 
-// pages/player/[id].js
+// // pages/player/[id].js
 // import { useEffect, useRef, useState } from "react";
 // import Head from "next/head";
 // import Link from "next/link";
@@ -2197,358 +2197,316 @@
 
 
 
-
+// pages/player/[id].js
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import rawSchedule from "../../data/schedules.json";
+import schedule from "../../data/schedules.json";
 import { FaExpand, FaCompress } from "react-icons/fa";
 
-
-// FILTER EFFECT
-const filterStyle =
-  "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
-
-// NORMALIZE SCHEDULE FORMAT
-function normalizeSchedule(raw) {
-  if (!raw) return [];
-  if (Array.isArray(raw)) return raw;
-  if (raw.data && Array.isArray(raw.data)) return raw.data;
-  if (raw.shows && Array.isArray(raw.shows)) return raw.shows;
-
-  try {
-    const vals = Object.values(raw).filter((v) => Array.isArray(v));
-    if (vals.length === 1) return vals[0];
-    if (vals.length > 1) return vals.flat();
-  } catch {}
-
-  return [];
-}
-
-const schedule = normalizeSchedule(rawSchedule);
-
-// STREAM URL RESOLVER
-function findStreamUrlFromShow(show) {
-  if (!show || typeof show !== "object") return null;
-
-  const candidates = [
-    "streamUrl",
-    "stream_url",
-    "streamURL",
-    "stream",
-    "url",
-    "src",
-    "source",
-    "m3u8",
-    "file",
-    "link"
-  ];
-
-  for (const key of candidates) {
-    if (show[key] && typeof show[key] === "string") return show[key];
-  }
-
-  for (const val of Object.values(show)) {
-    if (val && typeof val === "object") {
-      for (const key of candidates) {
-        if (val[key] && typeof val[key] === "string") return val[key];
-      }
-    }
-  }
-
-  return null;
-}
-
-// REMOVE AD PARAMS
-function stripAdParams(url) {
-  if (!url || typeof url !== "string") return url || "";
-  return String(url)
-    .replace(/(\?|&)ads?=[^&]*/gi, "")
-    .replace(/(\?|&)adtag=[^&]*/gi, "")
-    .replace(/(\?|&)ad=[^&]*/gi, "")
-    .replace(/#EXT-X-DISCONTINUITY/gi, "")
-    .replace(/#EXTINF:\d+\.\d+,ad/gi, "");
-}
-
-// DETECT ANDROID WEBVIEW
-function isAndroidWebView() {
-  if (typeof navigator === "undefined") return false;
-  const ua = navigator.userAgent || "";
-  return /Android/i.test(ua) && /wv/i.test(ua);
-}
-
-export default function PlayerPage({ show, requestedId }) {
+export default function PlayerPage({ show }) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const iframeRef = useRef(null);
-
-  const [streamUrl, setStreamUrl] = useState(null);
-  const [forceVideoFallback, setForceVideoFallback] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [isAndroidWebView, setIsAndroidWebView] = useState(false);
 
-  // RESOLVE STREAM URL
+  const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+
+  // Detect Android WebView (Median.co conversion)
   useEffect(() => {
-    let candidate = findStreamUrlFromShow(show);
-
-    if (!candidate && typeof show === "string") candidate = show;
-
-    if (!candidate && requestedId) {
-      const fallback = schedule.find(
-        (s) => String(s?.id) === String(requestedId)
-      );
-      if (fallback) candidate = findStreamUrlFromShow(fallback);
+    if (typeof window !== 'undefined') {
+      const ua = navigator.userAgent.toLowerCase();
+      const isAndroid = /android/.test(ua);
+      const isWebView = /wv|webview/.test(ua);
+      const isMedianApp = /median/.test(ua) || document.referrer.includes('median');
+      setIsAndroidWebView((isAndroid && (isWebView || isMedianApp)) || false);
     }
+  }, []);
 
-    setStreamUrl(candidate ? stripAdParams(candidate) : null);
-  }, [show, requestedId]);
-
-  // SMART AUTO MODE: Decide video or iframe
-  const cleanedUrl = streamUrl || "";
-
-  const isMp4 = /\.mp4($|\?)/i.test(cleanedUrl);
-  const isM3u8 = /\.m3u8($|\?)/i.test(cleanedUrl);
-
-  const isVideoType = isMp4 || isM3u8;
-  const isAndroidWV = isAndroidWebView();
-
-  // FULLSCREEN
-  const enterFS = async () => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    try {
-      if (el.requestFullscreen) await el.requestFullscreen();
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-    } catch {}
-  };
-
-  const exitFS = async () => {
-    try {
-      if (document.exitFullscreen) await document.exitFullscreen();
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-    } catch {}
-  };
-
-  const toggleFS = () => {
-    isFullscreen ? exitFS() : enterFS();
-  };
-
+  // Set viewport height for mobile
   useEffect(() => {
-    const detect = () => {
-      setIsFullscreen(
-        Boolean(
-          document.fullscreenElement || document.webkitFullscreenElement
-        )
-      );
+    const setVH = () => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+    const handleResize = () => {
+      setVH();
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     };
-
-    document.addEventListener("fullscreenchange", detect);
-    document.addEventListener("webkitfullscreenchange", detect);
-
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
     return () => {
-      document.removeEventListener("fullscreenchange", detect);
-      document.removeEventListener("webkitfullscreenchange", detect);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
     };
   }, []);
 
-  // LOAD VIDEO STREAM
+  const stripAdParams = (url) => {
+    if (!url) return url;
+    return String(url)
+      .replace(/(\?|&)ads?=[^&]*/gi, "")
+      .replace(/(\?|&)adtag=[^&]*/gi, "")
+      .replace(/(\?|&)ad=[^&]*/gi, "")
+      .replace(/#EXT-X-DISCONTINUITY/gi, "")
+      .replace(/#EXTINF:\d+\.\d+,ad/gi, "");
+  };
+
+  const enterFullscreen = async () => {
+    const el = containerRef.current;
+    if (!el) return;
+    try {
+      if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    } catch {}
+  };
+
+  const exitFullscreen = async () => {
+    try {
+      if (document.exitFullscreen) await document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+    } catch {}
+  };
+
+  const toggleFullscreen = () => {
+    if (isFullscreen) exitFullscreen();
+    else enterFullscreen();
+  };
+
   useEffect(() => {
-    if (!isVideoType || forceVideoFallback) return;
+    const handler = () => {
+      const el =
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement;
+      setIsFullscreen(Boolean(el));
+    };
+    document.addEventListener("fullscreenchange", handler);
+    document.addEventListener("webkitfullscreenchange", handler);
+    document.addEventListener("mozfullscreenchange", handler);
+    document.addEventListener("MSFullscreenChange", handler);
+    document.addEventListener("keydown", (e) => e.key === "Escape" && setTimeout(handler, 50));
+    return () => {
+      document.removeEventListener("fullscreenchange", handler);
+      document.removeEventListener("webkitfullscreenchange", handler);
+      document.removeEventListener("mozfullscreenchange", handler);
+      document.removeEventListener("MSFullscreenChange", handler);
+    };
+  }, []);
 
-    const video = videoRef.current;
-    if (!video) return;
-
+  // HLS/MP4 setup
+  useEffect(() => {
     let hls = null;
+    const src = stripAdParams(show?.streamUrl || "");
+    const video = videoRef.current;
+    if (!video || !src) return;
 
-    const load = async () => {
-      if (isMp4) {
-        video.src = cleanedUrl;
-        video.style.filter = filterStyle;
-        video.play().catch(() => {});
+    const isHls = src.toLowerCase().includes(".m3u8");
+    const isMp4 = src.toLowerCase().includes(".mp4");
+
+    const setup = async () => {
+      if (!isHls) {
+        if (isMp4) {
+          video.src = src;
+          await video.play().catch(() => {});
+        }
         return;
       }
 
-      if (isM3u8) {
-        const native = video.canPlayType("application/vnd.apple.mpegurl");
+      const canPlayNative = video.canPlayType("application/vnd.apple.mpegurl") !== "";
+      if (canPlayNative) {
+        video.src = src;
+        await video.play().catch(() => {});
+        return;
+      }
 
-        if (native) {
-          video.src = cleanedUrl;
-          video.style.filter = filterStyle;
-          video.play().catch(() => {});
-          return;
+      try {
+        const Hls = (await import("hls.js")).default;
+        if (Hls.isSupported()) {
+          hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+          hls.loadSource(src);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, async () => await video.play().catch(() => {}));
+        } else {
+          video.src = src;
+          await video.play().catch(() => {});
         }
-
-        try {
-          const Hls = (await import("hls.js")).default;
-          if (Hls.isSupported()) {
-            hls = new Hls({ enableWorker: true });
-            hls.loadSource(cleanedUrl);
-            hls.attachMedia(video);
-
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-              video.style.filter = filterStyle;
-              video.play().catch(() => {});
-            });
-
-            return;
-          }
-        } catch {}
-
-        video.src = cleanedUrl;
-        video.style.filter = filterStyle;
-        video.play().catch(() => {});
+      } catch {
+        video.src = src;
+        await video.play().catch(() => {});
       }
     };
+    setup();
 
-    load();
+    return () => hls && hls.destroy();
+  }, [show]);
 
-    return () => {
-      if (hls) {
-        try {
-          hls.destroy();
-        } catch {}
-      }
-    };
-  }, [cleanedUrl, isVideoType, forceVideoFallback]);
+  const rawStream = show?.streamUrl || "";
+  const strippedStream = stripAdParams(rawStream);
+  const isHls = strippedStream.toLowerCase().includes(".m3u8");
+  const isMp4 = strippedStream.toLowerCase().includes(".mp4");
 
-  // IFRAME CONFIG + FAILSAFE
-  useEffect(() => {
-    if (isVideoType) return;
+  // Android WebView iframe attributes (for Median.co conversion)
+  const androidIframeAttributes = {
+    sandbox: "allow-same-origin allow-scripts allow-popups allow-forms allow-presentation allow-modals allow-orientation-lock allow-pointer-lock",
+    allow: "autoplay; encrypted-media; picture-in-picture; fullscreen; accelerometer; gyroscope",
+    allowFullScreen: true,
+    referrerPolicy: "no-referrer-when-downgrade",
+    loading: "eager"
+  };
 
-    const el = iframeRef.current;
-    if (!el) return;
+  // Standard iframe attributes
+  const standardIframeAttributes = {
+    allow: "autoplay; encrypted-media; picture-in-picture; fullscreen",
+    allowFullScreen: true
+  };
 
-    el.removeAttribute("sandbox");
-    el.setAttribute(
-      "allow",
-      "autoplay; fullscreen; encrypted-media; picture-in-picture"
-    );
-    el.setAttribute("allowfullscreen", "true");
+  // Choose attributes based on Android WebView detection
+  const iframeAttributes = isAndroidWebView ? androidIframeAttributes : standardIframeAttributes;
 
-    const timer = setTimeout(() => {
-      if (!el.contentWindow) {
-        setForceVideoFallback(true);
-      }
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, [cleanedUrl, isVideoType]);
-
-  const shouldUseVideo =
-    isVideoType || forceVideoFallback || isAndroidWV;
-
+  // Styles - BACK BUTTON ALWAYS VISIBLE
   const styles = {
-    page: {
-      width: "100vw",
-      height: "100vh",
-      background: "#000",
-      display: "flex",
-      flexDirection: "column",
-      overflow: "hidden"
+    page: { 
+      width: "100vw", 
+      height: "100vh", 
+      background: "#000", 
+      display: "flex", 
+      flexDirection: "column", 
+      overflow: "hidden" 
     },
-    header: {
-      height: 56,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      color: "#fff",
-      background: "rgba(0,0,0,0.8)",
-      fontWeight: "bold"
+    header: { 
+      height: 56, 
+      display: "flex", 
+      alignItems: "center", 
+      padding: "0 12px", 
+      background: "rgba(0,0,0,0.85)", 
+      fontWeight: 700 
     },
-    playerWrap: {
-      flex: 1,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      position: "relative"
+    title: { 
+      margin: "0 auto", 
+      fontSize: 16, 
+      whiteSpace: "nowrap", 
+      overflow: "hidden", 
+      textOverflow: "ellipsis",
+      color: "#fff"
     },
-    container: {
-      width: "100%",
-      height: "100%",
-      position: "relative"
+    playerWrap: { 
+      flex: "1 1 auto", 
+      display: "flex", 
+      justifyContent: "center", 
+      alignItems: "center", 
+      position: "relative" 
     },
-    video: {
-      width: "100%",
-      height: "100%",
-      objectFit: "cover",
-      background: "#000",
-      filter: filterStyle
+    playerContainer: { 
+      width: "100%", 
+      height: "100%", 
+      position: "relative", 
+      maxWidth: "none" 
     },
-    iframe: {
-      width: "100%",
-      height: "100%",
-      border: "none",
-      background: "#000"
+    controlsBtn: { 
+      position: "absolute", 
+      top: 12, 
+      right: 12, 
+      zIndex: 9999, 
+      background: "rgba(0,0,0,0.7)", 
+      color: "#fff", 
+      padding: "8px 12px", 
+      borderRadius: 8, 
+      display: "flex", 
+      alignItems: "center", 
+      gap: 8, 
+      fontSize: 14, 
+      cursor: "pointer", 
+      border: "1px solid rgba(255,255,255,0.1)" 
     },
-    footer: {
-      height: 56,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      background: "rgba(0,0,0,0.8)"
+    video: { 
+      width: "100%", 
+      height: "100%", 
+      objectFit: "contain", 
+      position: "absolute", 
+      top: 0, 
+      left: 0, 
+      background: "#000", 
+      filter: filterStyle 
     },
-    back: {
-      color: "#fff",
-      textDecoration: "none",
-      padding: "8px 12px",
-      borderRadius: 6,
-      background: "rgba(255,255,255,0.07)"
+    iframe: { 
+      width: "100%", 
+      height: "100%", 
+      border: "none", 
+      position: "absolute", 
+      top: 0, 
+      left: 0, 
+      background: "#000", 
+      filter: filterStyle 
     },
-    fsBtn: {
-      position: "absolute",
-      top: 12,
-      right: 12,
-      background: "rgba(0,0,0,0.55)",
-      padding: "8px 12px",
-      borderRadius: 8,
-      color: "#fff",
-      display: "flex",
-      alignItems: "center",
-      gap: 8,
-      cursor: "pointer",
-      border: "1px solid rgba(255,255,255,0.08)",
-      zIndex: 9999
-    }
+    footer: { 
+      height: 56, 
+      display: "flex", 
+      alignItems: "center", 
+      justifyContent: "center", 
+      background: "rgba(0,0,0,0.85)" 
+    },
+    backLink: { 
+      color: "#fff", 
+      padding: "8px 12px", 
+      borderRadius: 6, 
+      textDecoration: "none", 
+      background: "rgba(255,255,255,0.04)" 
+    },
   };
 
   return (
     <>
       <Head>
         <title>{show?.title || "Player"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#000000" />
       </Head>
-
       <div style={styles.page}>
-        <div style={styles.header}>{show?.title || "Player"}</div>
+        {/* HEADER - ALWAYS VISIBLE */}
+        <div style={styles.header}>
+          <div style={styles.title}>
+            {isAndroidWebView ? `📱 ${show?.title || "Untitled"}` : show?.title || "Untitled"}
+          </div>
+        </div>
 
         <div style={styles.playerWrap}>
-          <div ref={containerRef} style={styles.container}>
-            <button style={styles.fsBtn} onClick={toggleFS}>
-              {isFullscreen ? <FaCompress /> : <FaExpand />}{" "}
+          <div ref={containerRef} style={styles.playerContainer}>
+            <button style={styles.controlsBtn} onClick={toggleFullscreen}>
+              {isFullscreen ? <FaCompress /> : <FaExpand />}
               {isFullscreen ? "Exit" : "Fullscreen"}
             </button>
 
-            {!cleanedUrl ? (
-              <div style={{ color: "#fff", textAlign: "center", padding: 20 }}>
-                Stream not available.
-              </div>
-            ) : shouldUseVideo ? (
+            {isHls || isMp4 ? (
               <video
                 ref={videoRef}
+                style={styles.video}
                 controls
                 playsInline
                 webkit-playsinline="true"
-                style={styles.video}
+                src={isMp4 ? strippedStream : undefined}
               />
             ) : (
-              <iframe ref={iframeRef} src={cleanedUrl} style={styles.iframe} />
+              // CONDITIONAL RENDERING FOR ANDROID WEBVIEW
+              <iframe
+                ref={iframeRef}
+                src={strippedStream}
+                style={styles.iframe}
+                {...iframeAttributes}
+                title={show?.title || "player-iframe"}
+              />
             )}
           </div>
         </div>
 
+        {/* FOOTER WITH BACK BUTTON - ALWAYS VISIBLE */}
         <div style={styles.footer}>
-          <Link href="/schedules" style={styles.back}>
-            ← Back to Schedule
+          <Link href="/schedule" style={styles.backLink}>
+            ← Back to Full Schedule
           </Link>
         </div>
       </div>
@@ -2556,24 +2514,27 @@ export default function PlayerPage({ show, requestedId }) {
   );
 }
 
-export async function getStaticPaths() {
-  const paths = schedule.map((item) => ({
-    params: { id: String(item.id) }
-  }));
+function normalizeSchedule(s) {
+  if (!s) return [];
+  if (Array.isArray(s)) return s;
+  if (s?.shows) return s.shows;
+  if (s?.default) return s.default;
+  try {
+    const vals = Object.values(s);
+    if (Array.isArray(vals) && vals.length && typeof vals[0] === "object") return vals;
+  } catch {}
+  return [];
+}
 
-  return { paths, fallback: "blocking" };
+export async function getStaticPaths() {
+  const list = normalizeSchedule(schedule);
+  const paths = list.map((item) => ({ params: { id: String(item.id) } }));
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-  let show = null;
-
-  try {
-    show = schedule.find((s) => String(s.id) === String(params.id));
-    if (!show && rawSchedule[params.id]) show = rawSchedule[params.id];
-  } catch {}
-
-  return {
-    props: { show: show || null, requestedId: params.id },
-    revalidate: 30
-  };
+  const list = normalizeSchedule(schedule);
+  const show = list.find((item) => String(item.id) === String(params.id));
+  if (!show) return { notFound: true };
+  return { props: { show }, revalidate: 30 };
 }
