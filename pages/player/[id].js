@@ -2350,24 +2350,6 @@ export default function PlayerPage({ show }) {
   const isHls = strippedStream.toLowerCase().includes(".m3u8");
   const isMp4 = strippedStream.toLowerCase().includes(".mp4");
 
-  // Android WebView iframe attributes (for Median.co conversion)
-  const androidIframeAttributes = {
-    sandbox: "allow-same-origin allow-scripts allow-popups allow-forms allow-presentation allow-modals allow-orientation-lock allow-pointer-lock",
-    allow: "autoplay; encrypted-media; picture-in-picture; fullscreen; accelerometer; gyroscope",
-    allowFullScreen: true,
-    referrerPolicy: "no-referrer-when-downgrade",
-    loading: "eager"
-  };
-
-  // Standard iframe attributes
-  const standardIframeAttributes = {
-    allow: "autoplay; encrypted-media; picture-in-picture; fullscreen",
-    allowFullScreen: true
-  };
-
-  // Choose attributes based on Android WebView detection
-  const iframeAttributes = isAndroidWebView ? androidIframeAttributes : standardIframeAttributes;
-
   // Styles - BACK BUTTON ALWAYS VISIBLE
   const styles = {
     page: { 
@@ -2491,12 +2473,13 @@ export default function PlayerPage({ show }) {
                 src={isMp4 ? strippedStream : undefined}
               />
             ) : (
-              // CONDITIONAL RENDERING FOR ANDROID WEBVIEW
+              // SAME IFRAME FOR ALL DEVICES - NO SPECIAL ATTRIBUTES
               <iframe
                 ref={iframeRef}
                 src={strippedStream}
                 style={styles.iframe}
-                {...iframeAttributes}
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allowFullScreen
                 title={show?.title || "player-iframe"}
               />
             )}
