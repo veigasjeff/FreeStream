@@ -2467,6 +2467,406 @@
 
 
 
+// // pages/player/[id].js
+// import { useEffect, useRef, useState } from "react";
+// import Head from "next/head";
+// import Link from "next/link";
+// import schedule from "../../data/schedules.json";
+// import { FaExpand, FaCompress } from "react-icons/fa";
+
+// export default function PlayerPage({ show }) {
+//   const containerRef = useRef(null);
+//   const videoRef = useRef(null);
+//   const iframeRef = useRef(null);
+
+//   const [isFullscreen, setIsFullscreen] = useState(false);
+//   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+//   const filterStyle =
+//     "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+
+//   // Set viewport height for mobile
+//   useEffect(() => {
+//     const setVH = () =>
+//       document.documentElement.style.setProperty(
+//         "--vh",
+//         `${window.innerHeight * 0.01}px`
+//       );
+
+//     const handleResize = () => {
+//       setVH();
+//       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+//     };
+
+//     handleResize();
+//     window.addEventListener("resize", handleResize);
+//     window.addEventListener("orientationchange", handleResize);
+
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//       window.removeEventListener("orientationchange", handleResize);
+//     };
+//   }, []);
+
+//   // Strip ad parameters from URL
+//   const stripAdParams = (url) => {
+//     if (!url) return url;
+//     let cleanUrl = String(url);
+
+//     const adParams = [
+//       "ads?", "adtag", "adunit", "advertise", "advertising", "adprovider", "adserver", "adnetwork", "adbanner",
+//       "adplacement", "adclick", "adid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+//       "gclid", "fbclid", "msclkid", "dclid", "irclickid", "irgwc", "irpid", "iradid", "ircid",
+//     ];
+
+//     adParams.forEach((param) => {
+//       const regex = new RegExp(`([?&])${param}=[^&]*`, "gi");
+//       cleanUrl = cleanUrl.replace(regex, (match, p1) =>
+//         p1 === "?" ? "?" : ""
+//       );
+//     });
+
+//     cleanUrl = cleanUrl
+//       .replace(/#EXT-X-DISCONTINUITY/gi, "")
+//       .replace(/#EXTINF:\d+\.\d+,ad/gi, "")
+//       .replace(/#EXT-X-CUE-OUT/gi, "")
+//       .replace(/#EXT-X-CUE-IN/gi, "")
+//       .replace(/#EXT-X-SPLICEPOINT/gi, "");
+
+//     cleanUrl = cleanUrl
+//       .replace(/\?\?/g, "?")
+//       .replace(/\?\&/g, "?")
+//       .replace(/\&\&/g, "&")
+//       .replace(/\?$/, "")
+//       .replace(/\&$/, "");
+
+//     if (cleanUrl.indexOf("?") === 0 && cleanUrl.indexOf("=") === -1)
+//       cleanUrl = cleanUrl.substring(1);
+
+//     return cleanUrl;
+//   };
+
+//   // FULLSCREEN
+//   const enterFullscreen = async () => {
+//     const el = containerRef.current;
+//     if (!el) return;
+//     try {
+//       if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
+//       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+//       else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+//       else if (el.msRequestFullscreen) el.msRequestFullscreen();
+//     } catch {}
+//   };
+
+//   const exitFullscreen = async () => {
+//     try {
+//       if (document.exitFullscreen) await document.exitFullscreen();
+//       else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+//       else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+//       else if (document.msExitFullscreen) document.msExitFullscreen();
+//     } catch {}
+//   };
+
+//   const toggleFullscreen = () =>
+//     isFullscreen ? exitFullscreen() : enterFullscreen();
+
+//   useEffect(() => {
+//     const handler = () => {
+//       const el =
+//         document.fullscreenElement ||
+//         document.webkitFullscreenElement ||
+//         document.mozFullScreenElement ||
+//         document.msFullscreenElement;
+
+//       setIsFullscreen(Boolean(el));
+//     };
+
+//     document.addEventListener("fullscreenchange", handler);
+//     document.addEventListener("webkitfullscreenchange", handler);
+//     document.addEventListener("mozfullscreenchange", handler);
+//     document.addEventListener("MSFullscreenChange", handler);
+//     document.addEventListener("keydown", (e) => {
+//       if (e.key === "Escape") setTimeout(handler, 50);
+//     });
+
+//     return () => {
+//       document.removeEventListener("fullscreenchange", handler);
+//       document.removeEventListener("webkitfullscreenchange", handler);
+//       document.removeEventListener("mozfullscreenchange", handler);
+//       document.removeEventListener("MSFullscreenChange", handler);
+//     };
+//   }, []);
+
+//   // HLS/MP4 SETUP + POPUP BLOCK FOR UNMUTE CLICK
+//   useEffect(() => {
+//     let hls = null;
+//     const src = stripAdParams(show?.streamUrl || "");
+//     const video = videoRef.current;
+//     if (!video || !src) return;
+
+//     const isHls = src.toLowerCase().includes(".m3u8");
+//     const isMp4 = src.toLowerCase().includes(".mp4");
+
+//     const init = async () => {
+//       if (!isHls) {
+//         if (isMp4) {
+//           video.src = src;
+//           await video.play().catch(() => {});
+//         }
+//         return;
+//       }
+
+//       const canPlayNative =
+//         video.canPlayType("application/vnd.apple.mpegurl") !== "";
+
+//       if (canPlayNative) {
+//         video.src = src;
+//         await video.play().catch(() => {});
+//         return;
+//       }
+
+//       try {
+//         const Hls = (await import("hls.js")).default;
+
+//         if (Hls.isSupported()) {
+//           hls = new Hls({
+//             enableWorker: true,
+//             lowLatencyMode: true,
+//           });
+
+//           hls.loadSource(src);
+//           hls.attachMedia(video);
+//           hls.on(Hls.Events.MANIFEST_PARSED, async () => {
+//             await video.play().catch(() => {});
+//           });
+//         } else {
+//           video.src = src;
+//           await video.play().catch(() => {});
+//         }
+//       } catch {
+//         video.src = src;
+//         await video.play().catch(() => {});
+//       }
+//     };
+
+//     init();
+
+//     // POPUP BLOCKER FOR UNMUTE CLICK
+//     const unmuteClick = (e) => {
+//       e.preventDefault();
+//       e.stopPropagation();
+
+//       const original = window.open;
+//       window.open = () => null;
+
+//       setTimeout(() => {
+//         window.open = original;
+//       }, 400);
+
+//       video.muted = false;
+//       video.volume = 1;
+
+//       video.play().catch(() => {});
+//     };
+
+//     video.addEventListener("click", unmuteClick);
+
+//     return () => {
+//       if (hls) hls.destroy();
+//       video.removeEventListener("click", unmuteClick);
+//     };
+//   }, [show]);
+
+//   const raw = show?.streamUrl || "";
+//   const cleaned = stripAdParams(raw);
+//   const isHls = cleaned.toLowerCase().includes(".m3u8");
+//   const isMp4 = cleaned.toLowerCase().includes(".mp4");
+
+//   const styles = {
+//     page: {
+//       width: "100vw",
+//       height: "100vh",
+//       background: "#000",
+//       display: "flex",
+//       flexDirection: "column",
+//       overflow: "hidden",
+//     },
+//     header: {
+//       height: 56,
+//       display: "flex",
+//       alignItems: "center",
+//       padding: "0 12px",
+//       background: "rgba(0,0,0,0.85)",
+//       fontWeight: 700,
+//     },
+//     title: {
+//       margin: "0 auto",
+//       fontSize: 16,
+//       whiteSpace: "nowrap",
+//       overflow: "hidden",
+//       textOverflow: "ellipsis",
+//       color: "#fff",
+//     },
+//     playerWrap: {
+//       flex: "1 1 auto",
+//       display: "flex",
+//       justifyContent: "center",
+//       alignItems: "center",
+//       position: "relative",
+//     },
+//     playerContainer: {
+//       width: "100%",
+//       height: "100%",
+//       position: "relative",
+//       maxWidth: "none",
+//     },
+//     controlsBtn: {
+//       position: "absolute",
+//       top: 12,
+//       right: 12,
+//       zIndex: 9999,
+//       background: "rgba(0,0,0,0.7)",
+//       color: "#fff",
+//       padding: "8px 12px",
+//       borderRadius: 8,
+//       display: "flex",
+//       alignItems: "center",
+//       gap: 8,
+//       fontSize: 14,
+//       cursor: "pointer",
+//       border: "1px solid rgba(255,255,255,0.1)",
+//     },
+//     video: {
+//       width: "100%",
+//       height: "100%",
+//       objectFit: "contain",
+//       position: "absolute",
+//       top: 0,
+//       left: 0,
+//       background: "#000",
+//       filter: filterStyle,
+//     },
+//     iframe: {
+//       width: "100%",
+//       height: "100%",
+//       border: "none",
+//       position: "absolute",
+//       top: 0,
+//       left: 0,
+//       background: "#000",
+//       filter: filterStyle,
+//     },
+//     footer: {
+//       height: 56,
+//       display: "flex",
+//       alignItems: "center",
+//       justifyContent: "center",
+//       background: "rgba(0,0,0,0.85)",
+//     },
+//     backLink: {
+//       color: "#fff",
+//       padding: "8px 12px",
+//       borderRadius: 6,
+//       textDecoration: "none",
+//       background: "rgba(255,255,255,0.04)",
+//     },
+//   };
+
+//   return (
+//     <>
+//       <Head>
+//         <title>{show?.title || "Player"}</title>
+//         <meta
+//           name="viewport"
+//           content="width=device-width, initial-scale=1, viewport-fit=cover"
+//         />
+//       </Head>
+
+//       <div style={styles.page}>
+//         <div style={styles.header}>
+//           <div style={styles.title}>{show?.title || "Untitled"}</div>
+//         </div>
+
+//         <div style={styles.playerWrap}>
+//           <div ref={containerRef} style={styles.playerContainer}>
+//             <button style={styles.controlsBtn} onClick={toggleFullscreen}>
+//               {isFullscreen ? <FaCompress /> : <FaExpand />}
+//               {isFullscreen ? "Exit" : "Fullscreen"}
+//             </button>
+
+//             {isHls || isMp4 ? (
+//               <video
+//                 ref={videoRef}
+//                 style={styles.video}
+//                 controls
+//                 playsInline
+//                 webkit-playsinline="true"
+//                 unmuted
+//                 src={isMp4 ? cleaned : undefined}
+//               />
+//             ) : (
+//               <iframe
+//                 ref={iframeRef}
+//                 src={cleaned}
+//                 style={styles.iframe}
+//                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+//                 allowFullScreen
+//                 title={show?.title || "player-iframe"}
+//               />
+//             )}
+//           </div>
+//         </div>
+
+//         <div style={styles.footer}>
+//           <Link href="/schedule" style={styles.backLink}>
+//             ← Back to Full Schedule
+//           </Link>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
+// function normalizeSchedule(s) {
+//   if (!s) return [];
+//   if (Array.isArray(s)) return s;
+//   if (s?.shows) return s.shows;
+//   if (s?.default) return s.default;
+//   try {
+//     const vals = Object.values(s);
+//     if (Array.isArray(vals) && vals.length && typeof vals[0] === "object")
+//       return vals;
+//   } catch {}
+//   return [];
+// }
+
+// export async function getStaticPaths() {
+//   const list = normalizeSchedule(schedule);
+//   const paths = list.map((item) => ({
+//     params: { id: String(item.id) },
+//   }));
+//   return { paths, fallback: false };
+// }
+
+// export async function getStaticProps({ params }) {
+//   const list = normalizeSchedule(schedule);
+//   const show = list.find(
+//     (item) => String(item.id) === String(params.id)
+//   );
+//   if (!show) return { notFound: true };
+//   return { props: { show }, revalidate: 30 };
+// }
+
+
+
+
+
+
+
+
+
+
+
 // pages/player/[id].js
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
@@ -2481,9 +2881,75 @@ export default function PlayerPage({ show }) {
 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [isAudioEnabled, setIsAudioEnabled] = useState(false);
 
   const filterStyle =
     "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+
+  // Persistent popup blocker - active for entire component lifecycle
+  useEffect(() => {
+    // Store original functions
+    const originalOpen = window.open;
+    const originalAlert = window.alert;
+    const originalConfirm = window.confirm;
+    const originalBeforeUnload = window.onbeforeunload;
+    
+    // Block all popup methods
+    window.open = function() {
+      console.log("Popup blocked by player");
+      return null;
+    };
+    
+    window.alert = function() {
+      console.log("Alert blocked by player");
+      return undefined;
+    };
+    
+    window.confirm = function() {
+      console.log("Confirm dialog blocked by player");
+      return false;
+    };
+    
+    // Prevent beforeunload popups
+    window.onbeforeunload = null;
+    
+    // Also block iframe contentWindow methods
+    const blockIframePopups = () => {
+      if (iframeRef.current && iframeRef.current.contentWindow) {
+        try {
+          iframeRef.current.contentWindow.open = function() { return null; };
+          iframeRef.current.contentWindow.alert = function() { return undefined; };
+          iframeRef.current.contentWindow.confirm = function() { return false; };
+        } catch (e) {
+          // Cross-origin restrictions may prevent this
+        }
+      }
+    };
+    
+    // Cleanup on unmount
+    return () => {
+      window.open = originalOpen;
+      window.alert = originalAlert;
+      window.confirm = originalConfirm;
+      window.onbeforeunload = originalBeforeUnload;
+    };
+  }, []);
+
+  // Enhanced unmute function with comprehensive popup blocking
+  const enableAudio = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    
+    // Force mute state off and volume up
+    video.muted = false;
+    video.volume = 1.0;
+    setIsAudioEnabled(true);
+    
+    // Try to play
+    video.play().catch(err => {
+      console.log("Auto-play prevented, user interaction required:", err);
+    });
+  };
 
   // Set viewport height for mobile
   useEffect(() => {
@@ -2597,7 +3063,7 @@ export default function PlayerPage({ show }) {
     };
   }, []);
 
-  // HLS/MP4 SETUP + POPUP BLOCK FOR UNMUTE CLICK
+  // HLS/MP4 SETUP
   useEffect(() => {
     let hls = null;
     const src = stripAdParams(show?.streamUrl || "");
@@ -2651,29 +3117,8 @@ export default function PlayerPage({ show }) {
 
     init();
 
-    // POPUP BLOCKER FOR UNMUTE CLICK
-    const unmuteClick = (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const original = window.open;
-      window.open = () => null;
-
-      setTimeout(() => {
-        window.open = original;
-      }, 400);
-
-      video.muted = false;
-      video.volume = 1;
-
-      video.play().catch(() => {});
-    };
-
-    video.addEventListener("click", unmuteClick);
-
     return () => {
       if (hls) hls.destroy();
-      video.removeEventListener("click", unmuteClick);
     };
   }, [show]);
 
@@ -2736,6 +3181,23 @@ export default function PlayerPage({ show }) {
       cursor: "pointer",
       border: "1px solid rgba(255,255,255,0.1)",
     },
+    unmuteBtn: {
+      position: "absolute",
+      top: 12,
+      left: 12,
+      zIndex: 9999,
+      background: isAudioEnabled ? "#4CAF50" : "#f44336",
+      color: "#fff",
+      padding: "8px 12px",
+      borderRadius: 8,
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      fontSize: 14,
+      cursor: "pointer",
+      border: "none",
+      fontWeight: "bold",
+    },
     video: {
       width: "100%",
       height: "100%",
@@ -2794,6 +3256,12 @@ export default function PlayerPage({ show }) {
               {isFullscreen ? "Exit" : "Fullscreen"}
             </button>
 
+            {(isHls || isMp4) && (
+              <button style={styles.unmuteBtn} onClick={enableAudio}>
+                {isAudioEnabled ? "🔊 Audio ON" : "🔇 Enable Audio"}
+              </button>
+            )}
+
             {isHls || isMp4 ? (
               <video
                 ref={videoRef}
@@ -2801,7 +3269,7 @@ export default function PlayerPage({ show }) {
                 controls
                 playsInline
                 webkit-playsinline="true"
-                unmuted
+                muted={!isAudioEnabled}
                 src={isMp4 ? cleaned : undefined}
               />
             ) : (
@@ -2856,4 +3324,3 @@ export async function getStaticProps({ params }) {
   if (!show) return { notFound: true };
   return { props: { show }, revalidate: 30 };
 }
-
