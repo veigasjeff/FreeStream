@@ -681,8 +681,8 @@ export default function SchedulePage() {
             </p>
             
             {/* Show count indicator */}
-            <div className="mt-4 text-gray-400 text-sm">
-              Showing {visibleShows.length} of {allShows.length} movies
+            <div className="mt-4 text-gray-400 text-3xl">
+              Showing {visibleShows.length} of {allShows.length} Movies, Tv Show & Sports Events. 
             </div>
             
             {/* FAQ Section for SEO */}
