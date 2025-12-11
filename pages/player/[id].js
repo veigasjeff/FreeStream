@@ -3336,7 +3336,6 @@
 
 
 // pages/player/[id].js
-
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -3349,35 +3348,47 @@ export default function PlayerPage({ show }) {
   const iframeRef = useRef(null);
 
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [isAudioEnabled, setIsAudioEnabled] = useState(false);
+  const [useProxy, setUseProxy] = useState(false);
+  const [lastError, setLastError] = useState(null);
 
   const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
 
-  // FORCE REMOVE SANDBOX FOR WEBVIEW (Median.co fix)
+  // Utility: sanitize and short-validate a URL
+  const normalizeUrl = (u) => {
+    if (!u) return "";
+    try {
+      const url = new URL(String(u));
+      if (url.protocol !== "http:" && url.protocol !== "https:") return "";
+      return url.toString();
+    } catch (e) {
+      return "";
+    }
+  };
+
+  // Attempt to remove sandbox attribute (fast attempt; may fail if injected natively)
   useEffect(() => {
-    const interval = setInterval(() => {
+    const id = setInterval(() => {
       const iframe = iframeRef.current;
       if (iframe) {
-        iframe.removeAttribute("sandbox");
-        iframe.setAttribute("allow", "*");
-        iframe.setAttribute("referrerPolicy", "no-referrer");
+        try {
+          iframe.removeAttribute("sandbox");
+          iframe.setAttribute("allow", "*");
+          iframe.setAttribute("referrerPolicy", "no-referrer");
+        } catch (e) {}
       }
-    }, 300);
-
-    return () => clearInterval(interval);
+    }, 200);
+    return () => clearInterval(id);
   }, []);
 
-  // Popup blocker
+  // Force-block common popup methods (safety)
   useEffect(() => {
     const originalOpen = window.open;
     const originalAlert = window.alert;
     const originalConfirm = window.confirm;
-
     window.open = () => null;
     window.alert = () => undefined;
     window.confirm = () => false;
-
     return () => {
       window.open = originalOpen;
       window.alert = originalAlert;
@@ -3385,96 +3396,29 @@ export default function PlayerPage({ show }) {
     };
   }, []);
 
-  const enableAudio = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = false;
-    video.volume = 1.0;
-    setIsAudioEnabled(true);
-
-    video.play().catch(() => {});
-  };
-
-  // Mobile viewport
+  // Mobile viewport CSS variable
   useEffect(() => {
     const setVH = () =>
       document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
-
-    const resize = () => {
-      setVH();
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    const handle = () => setVH();
+    handle();
+    window.addEventListener("resize", handle);
+    window.addEventListener("orientationchange", handle);
+    return () => {
+      window.removeEventListener("resize", handle);
+      window.removeEventListener("orientationchange", handle);
     };
-
-    resize();
-    window.addEventListener("resize", resize);
-
-    return () => window.removeEventListener("resize", resize);
   }, []);
 
-  // Strip ad parameters
-  const stripAdParams = (url) => {
-    if (!url) return url;
-    let u = String(url);
-
-    const adParams = [
-      "ads?", "adtag", "adunit", "advertise", "advertising", "adprovider",
-      "adserver", "adnetwork", "adbanner", "adplacement", "adclick", "adid",
-      "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
-      "gclid", "fbclid", "msclkid", "dclid", "irclickid", "irgwc",
-      "irpid", "iradid", "ircid"
-    ];
-
-    adParams.forEach(p => {
-      const regex = new RegExp(`([?&])${p}=[^&]*`, "gi");
-      u = u.replace(regex, (m, p1) => (p1 === "?" ? "?" : ""));
-    });
-
-    return u
-      .replace(/\?\?/g, "?")
-      .replace(/\?\&/g, "?")
-      .replace(/\&\&/g, "&")
-      .replace(/\?$/, "")
-      .replace(/\&$/, "");
-  };
-
-  // Fullscreen
-  const enterFullscreen = async () => {
-    const el = containerRef.current;
-    if (!el) return;
-    try {
-      if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
-    } catch {}
-  };
-
-  const exitFullscreen = async () => {
-    try {
-      if (document.exitFullscreen) await document.exitFullscreen();
-    } catch {}
-  };
-
-  const toggleFullscreen = () => (isFullscreen ? exitFullscreen() : enterFullscreen());
-
-  useEffect(() => {
-    const handler = () => {
-      const el = document.fullscreenElement;
-      setIsFullscreen(Boolean(el));
-    };
-
-    document.addEventListener("fullscreenchange", handler);
-    return () => document.removeEventListener("fullscreenchange", handler);
-  }, []);
-
-  // HLS / MP4 setup
+  // HLS/MP4 playback support
   useEffect(() => {
     let hls = null;
-    const src = stripAdParams(show?.streamUrl || "");
+    const src = normalizeUrl(show?.streamUrl || "");
     const video = videoRef.current;
-
     if (!video || !src) return;
 
-    const isHls = src.includes(".m3u8");
-    const isMp4 = src.includes(".mp4");
+    const isHls = src.toLowerCase().includes(".m3u8");
+    const isMp4 = src.toLowerCase().includes(".mp4");
 
     const init = async () => {
       if (!isHls) {
@@ -3486,7 +3430,6 @@ export default function PlayerPage({ show }) {
       }
 
       const canPlayNative = video.canPlayType("application/vnd.apple.mpegurl") !== "";
-
       if (canPlayNative) {
         video.src = src;
         await video.play().catch(() => {});
@@ -3495,14 +3438,16 @@ export default function PlayerPage({ show }) {
 
       try {
         const Hls = (await import("hls.js")).default;
-
         if (Hls.isSupported()) {
-          hls = new Hls({ enableWorker: true });
+          hls = new Hls({ enableWorker: true, lowLatencyMode: true });
           hls.loadSource(src);
           hls.attachMedia(video);
           hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+        } else {
+          video.src = src;
+          await video.play().catch(() => {});
         }
-      } catch {
+      } catch (e) {
         video.src = src;
         await video.play().catch(() => {});
       }
@@ -3510,114 +3455,141 @@ export default function PlayerPage({ show }) {
 
     init();
 
-    return () => hls && hls.destroy();
+    return () => {
+      if (hls) hls.destroy();
+    };
   }, [show]);
 
-  const cleaned = stripAdParams(show?.streamUrl || "");
-  const isHls = cleaned.includes(".m3u8");
-  const isMp4 = cleaned.includes(".mp4");
+  const enableAudio = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = false;
+    v.volume = 1.0;
+    setIsAudioEnabled(true);
+    v.play().catch(() => {});
+  };
+
+  const enterFullscreen = async () => {
+    const el = containerRef.current;
+    if (!el) return;
+    try {
+      if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
+    } catch {}
+  };
+  const exitFullscreen = async () => {
+    try {
+      if (document.exitFullscreen) await document.exitFullscreen();
+    } catch {}
+  };
+  const toggleFullscreen = () => (isFullscreen ? exitFullscreen() : enterFullscreen());
+
+  useEffect(() => {
+    const handler = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    document.addEventListener("fullscreenchange", handler);
+    return () => document.removeEventListener("fullscreenchange", handler);
+  }, []);
+
+  // If iframe fails to load or reports sandbox issue, swap to proxied URL
+  // We'll detect iframe load errors and message events
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    const onIframeLoad = () => {
+      // If the iframe has a sandbox attribute still present -> use proxy
+      try {
+        if (iframe.hasAttribute && iframe.hasAttribute("sandbox")) {
+          setLastError("iframe_sandbox_present");
+          setUseProxy(true);
+        } else {
+          setLastError(null);
+        }
+      } catch (e) {
+        // cross-origin access may throw; if we cannot access contentWindow we still check visually
+      }
+    };
+
+    const onIframeError = () => {
+      setLastError("iframe_load_error");
+      setUseProxy(true);
+    };
+
+    iframe.addEventListener("load", onIframeLoad);
+    iframe.addEventListener("error", onIframeError);
+
+    // Also set a timeout: if iframe hasn't loaded in 3 seconds, attempt proxy
+    const t = setTimeout(() => {
+      try {
+        // If iframe contentWindow location is about:blank or not updated, use proxy
+        if (iframe && iframe.getAttribute && (!iframe.src || iframe.src === "about:blank")) {
+          setLastError("iframe_timeout");
+          setUseProxy(true);
+        }
+      } catch (e) {
+        setUseProxy(true);
+      }
+    }, 3000);
+
+    return () => {
+      iframe.removeEventListener("load", onIframeLoad);
+      iframe.removeEventListener("error", onIframeError);
+      clearTimeout(t);
+    };
+  }, [useProxy, show]);
+
+  // Helper: proxied URL path on this host
+  const proxiedUrlFor = (sourceUrl) => {
+    const u = normalizeUrl(sourceUrl);
+    if (!u) return "";
+    return `/api/proxy?url=${encodeURIComponent(u)}`;
+  };
+
+  const raw = show?.streamUrl || "";
+  const cleaned = normalizeUrl(raw);
+  const isHls = cleaned.toLowerCase().includes(".m3u8");
+  const isMp4 = cleaned.toLowerCase().includes(".mp4");
 
   const styles = {
-    page: {
-      width: "100vw",
-      height: "100vh",
-      background: "#000",
-      display: "flex",
-      flexDirection: "column",
-      overflow: "hidden",
-    },
-    header: {
-      height: 56,
-      display: "flex",
-      alignItems: "center",
-      padding: "0 12px",
-      background: "rgba(0,0,0,0.85)",
-      fontWeight: 700,
-    },
-    title: {
-      margin: "0 auto",
-      fontSize: 16,
-      color: "#fff",
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-    },
-    playerWrap: {
-      flex: 1,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      position: "relative",
-    },
-    playerContainer: {
-      width: "100%",
-      height: "100%",
-      position: "relative",
-    },
-    controlsBtn: {
-      position: "absolute",
-      top: 12,
-      right: 12,
-      zIndex: 99,
-      background: "rgba(0,0,0,0.7)",
-      color: "#fff",
-      padding: "8px 12px",
-      borderRadius: 8,
-      fontSize: 14,
-      display: "flex",
-      alignItems: "center",
-      gap: 8,
-      cursor: "pointer",
-    },
-    unmuteBtn: {
-      position: "absolute",
-      top: 12,
-      left: 12,
-      zIndex: 99,
-      background: isAudioEnabled ? "#4CAF50" : "#f44336",
-      color: "#fff",
-      padding: "8px 12px",
-      borderRadius: 8,
-      fontSize: 14,
-      cursor: "pointer",
-      border: "none",
-      fontWeight: "bold",
-    },
-    video: {
-      width: "100%",
-      height: "100%",
-      objectFit: "contain",
-      background: "#000",
-      filter: filterStyle,
-    },
-    iframe: {
-      width: "100%",
-      height: "100%",
-      border: "none",
-      background: "#000",
-      filter: filterStyle,
-    },
-    footer: {
-      height: 56,
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      background: "rgba(0,0,0,0.85)",
-    },
-    backLink: {
-      color: "#fff",
-      padding: "8px 12px",
-      borderRadius: 6,
-      textDecoration: "none",
-      background: "rgba(255,255,255,0.04)",
-    },
+    page: { width: "100vw", height: "100vh", background: "#000", display: "flex", flexDirection: "column", overflow: "hidden" },
+    header: { height: 56, display: "flex", alignItems: "center", padding: "0 12px", background: "rgba(0,0,0,0.85)", fontWeight: 700 },
+    title: { margin: "0 auto", fontSize: 16, color: "#fff", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
+    playerWrap: { flex: 1, display: "flex", justifyContent: "center", alignItems: "center", position: "relative" },
+    playerContainer: { width: "100%", height: "100%", position: "relative" },
+    controlsBtn: { position: "absolute", top: 12, right: 12, zIndex: 99, background: "rgba(0,0,0,0.7)", color: "#fff", padding: "8px 12px", borderRadius: 8, fontSize: 14, display: "flex", alignItems: "center", gap: 8, cursor: "pointer" },
+    unmuteBtn: { position: "absolute", top: 12, left: 12, zIndex: 99, background: isAudioEnabled ? "#4CAF50" : "#f44336", color: "#fff", padding: "8px 12px", borderRadius: 8, fontSize: 14, cursor: "pointer", border: "none", fontWeight: "bold" },
+    video: { width: "100%", height: "100%", objectFit: "contain", background: "#000", filter: filterStyle },
+    iframe: { width: "100%", height: "100%", border: "none", background: "#000", filter: filterStyle },
+    footer: { height: 56, display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0,0,0,0.85)" },
+    backLink: { color: "#fff", padding: "8px 12px", borderRadius: 6, textDecoration: "none", background: "rgba(255,255,255,0.04)" },
+    debug: { position: "absolute", bottom: 70, left: 12, zIndex: 9999, color: "#fff", background: "rgba(0,0,0,0.5)", padding: "6px 8px", borderRadius: 6, fontSize: 12 }
   };
+
+  // If an iframe is blocked by native sandbox injection, switching to proxy should fix it.
+  // If proxy also faces blocking (rare), open proxied URL in top window.
+  useEffect(() => {
+    if (useProxy && cleaned) {
+      const p = proxiedUrlFor(cleaned);
+      // attempt to set iframe src to proxied url
+      try {
+        if (iframeRef.current) {
+          iframeRef.current.src = p;
+        }
+      } catch (e) {}
+      // final fallback: after 2.5s, if still error, open top window
+      const t = setTimeout(() => {
+        if (!iframeRef.current) {
+          window.location.href = p;
+        }
+      }, 2500);
+      return () => clearTimeout(t);
+    }
+  }, [useProxy, cleaned]);
 
   return (
     <>
       <Head>
         <title>{show?.title || "Player"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </Head>
 
       <div style={styles.page}>
@@ -3651,14 +3623,18 @@ export default function PlayerPage({ show }) {
             ) : (
               <iframe
                 ref={iframeRef}
-                src={cleaned}
+                src={useProxy && cleaned ? proxiedUrlFor(cleaned) : cleaned || "about:blank"}
                 style={styles.iframe}
-                allow="*"
-                referrerPolicy="no-referrer"
+                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                 allowFullScreen
                 title={show?.title || "player-iframe"}
               />
             )}
+
+            <div style={styles.debug}>
+              {lastError ? `debug: ${lastError}` : `debug: loaded`}
+              {useProxy ? " (using proxy)" : ""}
+            </div>
           </div>
         </div>
 
@@ -3687,14 +3663,14 @@ function normalizeSchedule(s) {
 export async function getStaticPaths() {
   const list = normalizeSchedule(schedule);
   return {
-    paths: list.map(item => ({ params: { id: String(item.id) } })),
+    paths: list.map((item) => ({ params: { id: String(item.id) } })),
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
   const list = normalizeSchedule(schedule);
-  const show = list.find(item => String(item.id) === params.id);
+  const show = list.find((item) => String(item.id) === String(params.id));
   if (!show) return { notFound: true };
   return { props: { show }, revalidate: 30 };
 }
