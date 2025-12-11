@@ -3349,10 +3349,9 @@ export default function PlayerPage({ show }) {
 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isAudioEnabled, setIsAudioEnabled] = useState(false);
-  const [useProxy, setUseProxy] = useState(false);
-  const [lastError, setLastError] = useState(null);
 
-  const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+  const filterStyle =
+    "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
 
   const normalizeUrl = (u) => {
     if (!u) return "";
@@ -3360,49 +3359,23 @@ export default function PlayerPage({ show }) {
       const url = new URL(String(u));
       if (url.protocol !== "http:" && url.protocol !== "https:") return "";
       return url.toString();
-    } catch (e) {
+    } catch {
       return "";
     }
   };
 
   useEffect(() => {
-    const id = setInterval(() => {
-      const iframe = iframeRef.current;
-      if (iframe) {
-        try {
-          iframe.removeAttribute("sandbox");
-          iframe.setAttribute("allow", "*");
-          iframe.setAttribute("referrerPolicy", "no-referrer");
-        } catch (e) {}
-      }
-    }, 200);
-    return () => clearInterval(id);
-  }, []);
-
-  useEffect(() => {
-    const originalOpen = window.open;
-    const originalAlert = window.alert;
-    const originalConfirm = window.confirm;
-    window.open = () => null;
-    window.alert = () => undefined;
-    window.confirm = () => false;
-    return () => {
-      window.open = originalOpen;
-      window.alert = originalAlert;
-      window.confirm = originalConfirm;
-    };
-  }, []);
-
-  useEffect(() => {
     const setVH = () =>
-      document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
-    const handle = () => setVH();
-    handle();
-    window.addEventListener("resize", handle);
-    window.addEventListener("orientationchange", handle);
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`
+      );
+    setVH();
+    window.addEventListener("resize", setVH);
+    window.addEventListener("orientationchange", setVH);
     return () => {
-      window.removeEventListener("resize", handle);
-      window.removeEventListener("orientationchange", handle);
+      window.removeEventListener("resize", setVH);
+      window.removeEventListener("orientationchange", setVH);
     };
   }, []);
 
@@ -3410,6 +3383,7 @@ export default function PlayerPage({ show }) {
     let hls = null;
     const src = normalizeUrl(show?.streamUrl || "");
     const video = videoRef.current;
+
     if (!video || !src) return;
 
     const isHls = src.toLowerCase().includes(".m3u8");
@@ -3424,7 +3398,8 @@ export default function PlayerPage({ show }) {
         return;
       }
 
-      const canPlayNative = video.canPlayType("application/vnd.apple.mpegurl") !== "";
+      const canPlayNative =
+        video.canPlayType("application/vnd.apple.mpegurl") !== "";
       if (canPlayNative) {
         video.src = src;
         await video.play().catch(() => {});
@@ -3437,12 +3412,14 @@ export default function PlayerPage({ show }) {
           hls = new Hls({ enableWorker: true, lowLatencyMode: true });
           hls.loadSource(src);
           hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
+          hls.on(Hls.Events.MANIFEST_PARSED, () =>
+            video.play().catch(() => {})
+          );
         } else {
           video.src = src;
           await video.play().catch(() => {});
         }
-      } catch (e) {
+      } catch {
         video.src = src;
         await video.play().catch(() => {});
       }
@@ -3467,7 +3444,8 @@ export default function PlayerPage({ show }) {
     const el = containerRef.current;
     if (!el) return;
     try {
-      if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
+      if (el.requestFullscreen)
+        await el.requestFullscreen({ navigationUI: "hide" });
     } catch {}
   };
 
@@ -3477,98 +3455,120 @@ export default function PlayerPage({ show }) {
     } catch {}
   };
 
-  const toggleFullscreen = () => (isFullscreen ? exitFullscreen() : enterFullscreen());
+  const toggleFullscreen = () =>
+    isFullscreen ? exitFullscreen() : enterFullscreen();
 
   useEffect(() => {
-    const handler = () => setIsFullscreen(Boolean(document.fullscreenElement));
+    const handler = () =>
+      setIsFullscreen(Boolean(document.fullscreenElement));
     document.addEventListener("fullscreenchange", handler);
     return () => document.removeEventListener("fullscreenchange", handler);
   }, []);
 
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    if (!iframe) return;
-
-    const onIframeLoad = () => {
-      try {
-        if (iframe.hasAttribute && iframe.hasAttribute("sandbox")) {
-          setLastError("iframe_sandbox_present");
-          setUseProxy(true);
-        } else {
-          setLastError(null);
-        }
-      } catch (e) {}
-    };
-
-    const onIframeError = () => {
-      setLastError("iframe_load_error");
-      setUseProxy(true);
-    };
-
-    iframe.addEventListener("load", onIframeLoad);
-    iframe.addEventListener("error", onIframeError);
-
-    const t = setTimeout(() => {
-      try {
-        if (iframe && iframe.getAttribute && (!iframe.src || iframe.src === "about:blank")) {
-          setLastError("iframe_timeout");
-          setUseProxy(true);
-        }
-      } catch (e) {
-        setUseProxy(true);
-      }
-    }, 3000);
-
-    return () => {
-      iframe.removeEventListener("load", onIframeLoad);
-      iframe.removeEventListener("error", onIframeError);
-      clearTimeout(t);
-    };
-  }, [useProxy, show]);
-
-  const proxiedUrlFor = (sourceUrl) => {
-    const u = normalizeUrl(sourceUrl);
-    if (!u) return "";
-    return `/api/proxy?url=${encodeURIComponent(u)}`;
-  };
-
-  const raw = show?.streamUrl || "";
-  const cleaned = normalizeUrl(raw);
+  const cleaned = normalizeUrl(show?.streamUrl || "");
   const isHls = cleaned.toLowerCase().includes(".m3u8");
   const isMp4 = cleaned.toLowerCase().includes(".mp4");
 
   const styles = {
-    page: { width: "100vw", height: "100vh", background: "#000", display: "flex", flexDirection: "column", overflow: "hidden" },
-    header: { height: 56, display: "flex", alignItems: "center", padding: "0 12px", background: "rgba(0,0,0,0.85)", fontWeight: 700 },
-    title: { margin: "0 auto", fontSize: 16, color: "#fff", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
-    playerWrap: { flex: 1, display: "flex", justifyContent: "center", alignItems: "center", position: "relative" },
+    page: {
+      width: "100vw",
+      height: "100vh",
+      background: "#000",
+      display: "flex",
+      flexDirection: "column",
+      overflow: "hidden",
+    },
+    header: {
+      height: 56,
+      display: "flex",
+      alignItems: "center",
+      padding: "0 12px",
+      background: "rgba(0,0,0,0.85)",
+      fontWeight: 700,
+    },
+    title: {
+      margin: "0 auto",
+      fontSize: 16,
+      color: "#fff",
+      whiteSpace: "nowrap",
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+    },
+    playerWrap: {
+      flex: 1,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "relative",
+    },
     playerContainer: { width: "100%", height: "100%", position: "relative" },
-    controlsBtn: { position: "absolute", top: 12, right: 12, zIndex: 99, background: "rgba(0,0,0,0.7)", color: "#fff", padding: "8px 12px", borderRadius: 8, fontSize: 14, display: "flex", alignItems: "center", gap: 8, cursor: "pointer" },
-    unmuteBtn: { position: "absolute", top: 12, left: 12, zIndex: 99, background: isAudioEnabled ? "#4CAF50" : "#f44336", color: "#fff", padding: "8px 12px", borderRadius: 8, fontSize: 14, cursor: "pointer", border: "none", fontWeight: "bold" },
-    video: { width: "100%", height: "100%", objectFit: "contain", background: "#000", filter: filterStyle },
-    iframe: { width: "100%", height: "100%", border: "none", background: "#000", filter: filterStyle },
-    footer: { height: 56, display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0,0,0,0.85)" },
-    backLink: { color: "#fff", padding: "8px 12px", borderRadius: 6, textDecoration: "none", background: "rgba(255,255,255,0.04)" }
+    controlsBtn: {
+      position: "absolute",
+      top: 12,
+      right: 12,
+      zIndex: 99,
+      background: "rgba(0,0,0,0.7)",
+      color: "#fff",
+      padding: "8px 12px",
+      borderRadius: 8,
+      fontSize: 14,
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      cursor: "pointer",
+    },
+    unmuteBtn: {
+      position: "absolute",
+      top: 12,
+      left: 12,
+      zIndex: 99,
+      background: isAudioEnabled ? "#4CAF50" : "#f44336",
+      color: "#fff",
+      padding: "8px 12px",
+      borderRadius: 8,
+      fontSize: 14,
+      cursor: "pointer",
+      border: "none",
+      fontWeight: "bold",
+    },
+    video: {
+      width: "100%",
+      height: "100%",
+      objectFit: "contain",
+      background: "#000",
+      filter: filterStyle,
+    },
+    iframe: {
+      width: "100%",
+      height: "100%",
+      border: "none",
+      background: "#000",
+      filter: filterStyle,
+    },
+    footer: {
+      height: 56,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      background: "rgba(0,0,0,0.85)",
+    },
+    backLink: {
+      color: "#fff",
+      padding: "8px 12px",
+      borderRadius: 6,
+      textDecoration: "none",
+      background: "rgba(255,255,255,0.04)",
+    },
   };
-
-  useEffect(() => {
-    if (useProxy && cleaned) {
-      const p = proxiedUrlFor(cleaned);
-      try {
-        if (iframeRef.current) iframeRef.current.src = p;
-      } catch (e) {}
-      const t = setTimeout(() => {
-        if (!iframeRef.current) window.location.href = p;
-      }, 2500);
-      return () => clearTimeout(t);
-    }
-  }, [useProxy, cleaned]);
 
   return (
     <>
       <Head>
         <title>{show?.title || "Player"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
       </Head>
 
       <div style={styles.page}>
@@ -3602,7 +3602,7 @@ export default function PlayerPage({ show }) {
             ) : (
               <iframe
                 ref={iframeRef}
-                src={useProxy && cleaned ? proxiedUrlFor(cleaned) : cleaned || "about:blank"}
+                src={cleaned || "about:blank"}
                 style={styles.iframe}
                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                 allowFullScreen
