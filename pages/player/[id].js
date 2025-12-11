@@ -2198,6 +2198,276 @@
 
 
 // pages/player/[id].js
+// import { useEffect, useRef, useState } from "react";
+// import Head from "next/head";
+// import Link from "next/link";
+// import schedule from "../../data/schedules.json";
+// import { FaExpand, FaCompress } from "react-icons/fa";
+
+// export default function PlayerPage({ show }) {
+//   const containerRef = useRef(null);
+//   const videoRef = useRef(null);
+//   const iframeRef = useRef(null);
+//   const [isFullscreen, setIsFullscreen] = useState(false);
+//   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+
+//   const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+
+//   useEffect(() => {
+//     const setVH = () => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+//     const handleResize = () => {
+//       setVH();
+//       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+//     };
+//     handleResize();
+//     window.addEventListener("resize", handleResize);
+//     window.addEventListener("orientationchange", handleResize);
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//       window.removeEventListener("orientationchange", handleResize);
+//     };
+//   }, []);
+
+//   const stripAdParams = (url) => {
+//     if (!url) return url;
+//     let cleanUrl = String(url);
+
+//     const adParams = [
+//       "ads?", "adtag", "adunit", "advertise", "advertising", "adprovider",
+//       "adserver", "adnetwork", "adbanner", "adplacement", "adclick", "adid",
+//       "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+//       "gclid", "fbclid", "msclkid", "dclid", "irclickid", "irgwc", "irpid",
+//       "iradid", "ircid", "trk", "tracking", "ref", "referrer", "clickid", "cid",
+//       "pubid", "zoneid", "bannerid", "partnerid", "source", "affid"
+//     ];
+
+//     adParams.forEach((param) => {
+//       const regex = new RegExp(`([?&])${param}=[^&]*`, "gi");
+//       cleanUrl = cleanUrl.replace(regex, (match, p1) => (p1 === "?" ? "?" : ""));
+//     });
+
+//     cleanUrl = cleanUrl
+//       .replace(/#EXT-X-DISCONTINUITY/gi, "")
+//       .replace(/#EXTINF:\d+\.\d+,ad/gi, "")
+//       .replace(/#EXT-X-CUE-OUT/gi, "")
+//       .replace(/#EXT-X-CUE-IN/gi, "")
+//       .replace(/#EXT-X-SPLICEPOINT/gi, "");
+
+//     cleanUrl = cleanUrl.replace(/\?\?/g, "?").replace(/\?\&/g, "?").replace(/\&\&/g, "&").replace(/\?$/, "").replace(/\&$/, "");
+//     if (cleanUrl.indexOf("?") === 0 && cleanUrl.indexOf("=") === -1) cleanUrl = cleanUrl.substring(1);
+//     return cleanUrl;
+//   };
+
+//   const enterFullscreen = async () => {
+//     const el = containerRef.current;
+//     if (!el) return;
+//     try {
+//       if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
+//       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+//       else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+//       else if (el.msRequestFullscreen) el.msRequestFullscreen();
+//     } catch {}
+//   };
+
+//   const exitFullscreen = async () => {
+//     try {
+//       if (document.exitFullscreen) await document.exitFullscreen();
+//       else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+//       else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+//       else if (document.msExitFullscreen) document.msExitFullscreen();
+//     } catch {}
+//   };
+
+//   const toggleFullscreen = () => (isFullscreen ? exitFullscreen() : enterFullscreen());
+
+//   useEffect(() => {
+//     const handler = () => {
+//       const el =
+//         document.fullscreenElement ||
+//         document.webkitFullscreenElement ||
+//         document.mozFullScreenElement ||
+//         document.msFullscreenElement;
+//       setIsFullscreen(Boolean(el));
+//     };
+//     document.addEventListener("fullscreenchange", handler);
+//     document.addEventListener("webkitfullscreenchange", handler);
+//     document.addEventListener("mozfullscreenchange", handler);
+//     document.addEventListener("MSFullscreenChange", handler);
+//     document.addEventListener("keydown", (e) => e.key === "Escape" && setTimeout(handler, 50));
+//     return () => {
+//       document.removeEventListener("fullscreenchange", handler);
+//       document.removeEventListener("webkitfullscreenchange", handler);
+//       document.removeEventListener("mozfullscreenchange", handler);
+//       document.removeEventListener("MSFullscreenChange", handler);
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//     let hls = null;
+//     const src = stripAdParams(show?.streamUrl || "");
+//     const video = videoRef.current;
+//     if (!video || !src) return;
+
+//     const isHls = src.toLowerCase().includes(".m3u8");
+//     const isMp4 = src.toLowerCase().includes(".mp4");
+
+//     const setup = async () => {
+//       if (!isHls) {
+//         if (isMp4) {
+//           video.src = src;
+//           await video.play().catch(() => {});
+//         }
+//         return;
+//       }
+
+//       const canPlayNative = video.canPlayType("application/vnd.apple.mpegurl") !== "";
+//       if (canPlayNative) {
+//         video.src = src;
+//         await video.play().catch(() => {});
+//         return;
+//       }
+
+//       try {
+//         const Hls = (await import("hls.js")).default;
+//         if (Hls.isSupported()) {
+//           hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+//           hls.loadSource(src);
+//           hls.attachMedia(video);
+//           hls.on(Hls.Events.MANIFEST_PARSED, async () => await video.play().catch(() => {}));
+//         } else {
+//           video.src = src;
+//           await video.play().catch(() => {});
+//         }
+//       } catch {
+//         video.src = src;
+//         await video.play().catch(() => {});
+//       }
+//     };
+//     setup();
+
+//     // Prevent unmute popup ads
+//     const unmuteHandler = (e) => {
+//       e.stopPropagation();
+//       e.preventDefault();
+//       video.muted = false;
+//       video.volume = 1; // ensure full volume
+//       video.play().catch(() => {});
+//     };
+
+//     video.addEventListener("click", unmuteHandler);
+//     return () => {
+//       hls && hls.destroy();
+//       video.removeEventListener("click", unmuteHandler);
+//     };
+//   }, [show]);
+
+//   const rawStream = show?.streamUrl || "";
+//   const strippedStream = stripAdParams(rawStream);
+//   const isHls = strippedStream.toLowerCase().includes(".m3u8");
+//   const isMp4 = strippedStream.toLowerCase().includes(".mp4");
+
+//   const styles = {
+//     page: { width: "100vw", height: "100vh", background: "#000", display: "flex", flexDirection: "column", overflow: "hidden" },
+//     header: { height: 56, display: "flex", alignItems: "center", padding: "0 12px", background: "rgba(0,0,0,0.85)", fontWeight: 700 },
+//     title: { margin: "0 auto", fontSize: 16, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", color: "#fff" },
+//     playerWrap: { flex: "1 1 auto", display: "flex", justifyContent: "center", alignItems: "center", position: "relative" },
+//     playerContainer: { width: "100%", height: "100%", position: "relative", maxWidth: "none" },
+//     controlsBtn: { position: "absolute", top: 12, right: 12, zIndex: 9999, background: "rgba(0,0,0,0.7)", color: "#fff", padding: "8px 12px", borderRadius: 8, display: "flex", alignItems: "center", gap: 8, fontSize: 14, cursor: "pointer", border: "1px solid rgba(255,255,255,0.1)" },
+//     video: { width: "100%", height: "100%", objectFit: "contain", position: "absolute", top: 0, left: 0, background: "#000", filter: filterStyle },
+//     iframe: { width: "100%", height: "100%", border: "none", position: "absolute", top: 0, left: 0, background: "#000", filter: filterStyle },
+//     footer: { height: 56, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.85)" },
+//     backLink: { color: "#fff", padding: "8px 12px", borderRadius: 6, textDecoration: "none", background: "rgba(255,255,255,0.04)" },
+//   };
+
+//   return (
+//     <>
+//       <Head>
+//         <title>{show?.title || "Player"}</title>
+//         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+//       </Head>
+//       <div style={styles.page}>
+//         <div style={styles.header}>
+//           <div style={styles.title}>{show?.title || "Untitled"}</div>
+//         </div>
+//         <div style={styles.playerWrap}>
+//           <div ref={containerRef} style={styles.playerContainer}>
+//             <button style={styles.controlsBtn} onClick={toggleFullscreen}>
+//               {isFullscreen ? <FaCompress /> : <FaExpand />}
+//               {isFullscreen ? "Exit" : "Fullscreen"}
+//             </button>
+
+//             {isHls || isMp4 ? (
+//               <video
+//                 ref={videoRef}
+//                 style={styles.video}
+//                 controls
+//                 playsInline
+//                 webkit-playsinline="true"
+//                 src={isMp4 ? strippedStream : undefined}
+//               />
+//             ) : (
+//               <iframe
+//                 ref={iframeRef}
+//                 src={strippedStream}
+//                 style={styles.iframe}
+//                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+//                 allowFullScreen
+//                 title={show?.title || "player-iframe"}
+//               />
+//             )}
+//           </div>
+//         </div>
+
+//         <div style={styles.footer}>
+//           <Link href="/schedule" style={styles.backLink}>
+//             ← Back to Full Schedule
+//           </Link>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
+// function normalizeSchedule(s) {
+//   if (!s) return [];
+//   if (Array.isArray(s)) return s;
+//   if (s?.shows) return s.shows;
+//   if (s?.default) return s.default;
+//   try {
+//     const vals = Object.values(s);
+//     if (Array.isArray(vals) && vals.length && typeof vals[0] === "object") return vals;
+//   } catch {}
+//   return [];
+// }
+
+// export async function getStaticPaths() {
+//   const list = normalizeSchedule(schedule);
+//   const paths = list.map((item) => ({ params: { id: String(item.id) } }));
+//   return { paths, fallback: false };
+// }
+
+// export async function getStaticProps({ params }) {
+//   const list = normalizeSchedule(schedule);
+//   const show = list.find((item) => String(item.id) === String(params.id));
+//   if (!show) return { notFound: true };
+//   return { props: { show }, revalidate: 30 };
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// pages/player/[id].js
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -2208,37 +2478,75 @@ export default function PlayerPage({ show }) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const iframeRef = useRef(null);
+
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
-  const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+  const filterStyle =
+    "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
 
   // Set viewport height for mobile
   useEffect(() => {
-    const setVH = () => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+    const setVH = () =>
+      document.documentElement.style.setProperty(
+        "--vh",
+        `${window.innerHeight * 0.01}px`
+      );
+
     const handleResize = () => {
       setVH();
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     };
+
     handleResize();
     window.addEventListener("resize", handleResize);
     window.addEventListener("orientationchange", handleResize);
+
     return () => {
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("orientationchange", handleResize);
     };
   }, []);
 
+  // Strip ad parameters from URL
   const stripAdParams = (url) => {
     if (!url) return url;
-    return String(url)
-      .replace(/(\?|&)ads?=[^&]*/gi, "")
-      .replace(/(\?|&)adtag=[^&]*/gi, "")
-      .replace(/(\?|&)ad=[^&]*/gi, "")
+    let cleanUrl = String(url);
+
+    const adParams = [
+      "ads?", "adtag", "adunit", "advertise", "advertising", "adprovider", "adserver", "adnetwork", "adbanner",
+      "adplacement", "adclick", "adid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+      "gclid", "fbclid", "msclkid", "dclid", "irclickid", "irgwc", "irpid", "iradid", "ircid",
+    ];
+
+    adParams.forEach((param) => {
+      const regex = new RegExp(`([?&])${param}=[^&]*`, "gi");
+      cleanUrl = cleanUrl.replace(regex, (match, p1) =>
+        p1 === "?" ? "?" : ""
+      );
+    });
+
+    cleanUrl = cleanUrl
       .replace(/#EXT-X-DISCONTINUITY/gi, "")
-      .replace(/#EXTINF:\d+\.\d+,ad/gi, "");
+      .replace(/#EXTINF:\d+\.\d+,ad/gi, "")
+      .replace(/#EXT-X-CUE-OUT/gi, "")
+      .replace(/#EXT-X-CUE-IN/gi, "")
+      .replace(/#EXT-X-SPLICEPOINT/gi, "");
+
+    cleanUrl = cleanUrl
+      .replace(/\?\?/g, "?")
+      .replace(/\?\&/g, "?")
+      .replace(/\&\&/g, "&")
+      .replace(/\?$/, "")
+      .replace(/\&$/, "");
+
+    if (cleanUrl.indexOf("?") === 0 && cleanUrl.indexOf("=") === -1)
+      cleanUrl = cleanUrl.substring(1);
+
+    return cleanUrl;
   };
 
+  // FULLSCREEN
   const enterFullscreen = async () => {
     const el = containerRef.current;
     if (!el) return;
@@ -2259,10 +2567,8 @@ export default function PlayerPage({ show }) {
     } catch {}
   };
 
-  const toggleFullscreen = () => {
-    if (isFullscreen) exitFullscreen();
-    else enterFullscreen();
-  };
+  const toggleFullscreen = () =>
+    isFullscreen ? exitFullscreen() : enterFullscreen();
 
   useEffect(() => {
     const handler = () => {
@@ -2271,13 +2577,18 @@ export default function PlayerPage({ show }) {
         document.webkitFullscreenElement ||
         document.mozFullScreenElement ||
         document.msFullscreenElement;
+
       setIsFullscreen(Boolean(el));
     };
+
     document.addEventListener("fullscreenchange", handler);
     document.addEventListener("webkitfullscreenchange", handler);
     document.addEventListener("mozfullscreenchange", handler);
     document.addEventListener("MSFullscreenChange", handler);
-    document.addEventListener("keydown", (e) => e.key === "Escape" && setTimeout(handler, 50));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setTimeout(handler, 50);
+    });
+
     return () => {
       document.removeEventListener("fullscreenchange", handler);
       document.removeEventListener("webkitfullscreenchange", handler);
@@ -2286,7 +2597,7 @@ export default function PlayerPage({ show }) {
     };
   }, []);
 
-  // HLS/MP4 setup
+  // HLS/MP4 SETUP + POPUP BLOCK FOR UNMUTE CLICK
   useEffect(() => {
     let hls = null;
     const src = stripAdParams(show?.streamUrl || "");
@@ -2296,7 +2607,7 @@ export default function PlayerPage({ show }) {
     const isHls = src.toLowerCase().includes(".m3u8");
     const isMp4 = src.toLowerCase().includes(".mp4");
 
-    const setup = async () => {
+    const init = async () => {
       if (!isHls) {
         if (isMp4) {
           video.src = src;
@@ -2305,7 +2616,9 @@ export default function PlayerPage({ show }) {
         return;
       }
 
-      const canPlayNative = video.canPlayType("application/vnd.apple.mpegurl") !== "";
+      const canPlayNative =
+        video.canPlayType("application/vnd.apple.mpegurl") !== "";
+
       if (canPlayNative) {
         video.src = src;
         await video.play().catch(() => {});
@@ -2314,11 +2627,18 @@ export default function PlayerPage({ show }) {
 
       try {
         const Hls = (await import("hls.js")).default;
+
         if (Hls.isSupported()) {
-          hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+          hls = new Hls({
+            enableWorker: true,
+            lowLatencyMode: true,
+          });
+
           hls.loadSource(src);
           hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, async () => await video.play().catch(() => {}));
+          hls.on(Hls.Events.MANIFEST_PARSED, async () => {
+            await video.play().catch(() => {});
+          });
         } else {
           video.src = src;
           await video.play().catch(() => {});
@@ -2328,104 +2648,127 @@ export default function PlayerPage({ show }) {
         await video.play().catch(() => {});
       }
     };
-    setup();
 
-    return () => hls && hls.destroy();
+    init();
+
+    // POPUP BLOCKER FOR UNMUTE CLICK
+    const unmuteClick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const original = window.open;
+      window.open = () => null;
+
+      setTimeout(() => {
+        window.open = original;
+      }, 400);
+
+      video.muted = false;
+      video.volume = 1;
+
+      video.play().catch(() => {});
+    };
+
+    video.addEventListener("click", unmuteClick);
+
+    return () => {
+      if (hls) hls.destroy();
+      video.removeEventListener("click", unmuteClick);
+    };
   }, [show]);
 
-  const rawStream = show?.streamUrl || "";
-  const strippedStream = stripAdParams(rawStream);
-  const isHls = strippedStream.toLowerCase().includes(".m3u8");
-  const isMp4 = strippedStream.toLowerCase().includes(".mp4");
+  const raw = show?.streamUrl || "";
+  const cleaned = stripAdParams(raw);
+  const isHls = cleaned.toLowerCase().includes(".m3u8");
+  const isMp4 = cleaned.toLowerCase().includes(".mp4");
 
-  // Styles
   const styles = {
-    page: { 
-      width: "100vw", 
-      height: "100vh", 
-      background: "#000", 
-      display: "flex", 
-      flexDirection: "column", 
-      overflow: "hidden" 
+    page: {
+      width: "100vw",
+      height: "100vh",
+      background: "#000",
+      display: "flex",
+      flexDirection: "column",
+      overflow: "hidden",
     },
-    header: { 
-      height: 56, 
-      display: "flex", 
-      alignItems: "center", 
-      padding: "0 12px", 
-      background: "rgba(0,0,0,0.85)", 
-      fontWeight: 700 
+    header: {
+      height: 56,
+      display: "flex",
+      alignItems: "center",
+      padding: "0 12px",
+      background: "rgba(0,0,0,0.85)",
+      fontWeight: 700,
     },
-    title: { 
-      margin: "0 auto", 
-      fontSize: 16, 
-      whiteSpace: "nowrap", 
-      overflow: "hidden", 
+    title: {
+      margin: "0 auto",
+      fontSize: 16,
+      whiteSpace: "nowrap",
+      overflow: "hidden",
       textOverflow: "ellipsis",
-      color: "#fff"
+      color: "#fff",
     },
-    playerWrap: { 
-      flex: "1 1 auto", 
-      display: "flex", 
-      justifyContent: "center", 
-      alignItems: "center", 
-      position: "relative" 
+    playerWrap: {
+      flex: "1 1 auto",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "relative",
     },
-    playerContainer: { 
-      width: "100%", 
-      height: "100%", 
-      position: "relative", 
-      maxWidth: "none" 
+    playerContainer: {
+      width: "100%",
+      height: "100%",
+      position: "relative",
+      maxWidth: "none",
     },
-    controlsBtn: { 
-      position: "absolute", 
-      top: 12, 
-      right: 12, 
-      zIndex: 9999, 
-      background: "rgba(0,0,0,0.7)", 
-      color: "#fff", 
-      padding: "8px 12px", 
-      borderRadius: 8, 
-      display: "flex", 
-      alignItems: "center", 
-      gap: 8, 
-      fontSize: 14, 
-      cursor: "pointer", 
-      border: "1px solid rgba(255,255,255,0.1)" 
+    controlsBtn: {
+      position: "absolute",
+      top: 12,
+      right: 12,
+      zIndex: 9999,
+      background: "rgba(0,0,0,0.7)",
+      color: "#fff",
+      padding: "8px 12px",
+      borderRadius: 8,
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      fontSize: 14,
+      cursor: "pointer",
+      border: "1px solid rgba(255,255,255,0.1)",
     },
-    video: { 
-      width: "100%", 
-      height: "100%", 
-      objectFit: "contain", 
-      position: "absolute", 
-      top: 0, 
-      left: 0, 
-      background: "#000", 
-      filter: filterStyle 
+    video: {
+      width: "100%",
+      height: "100%",
+      objectFit: "contain",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: "#000",
+      filter: filterStyle,
     },
-    iframe: { 
-      width: "100%", 
-      height: "100%", 
-      border: "none", 
-      position: "absolute", 
-      top: 0, 
-      left: 0, 
-      background: "#000", 
-      filter: filterStyle 
+    iframe: {
+      width: "100%",
+      height: "100%",
+      border: "none",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      background: "#000",
+      filter: filterStyle,
     },
-    footer: { 
-      height: 56, 
-      display: "flex", 
-      alignItems: "center", 
-      justifyContent: "center", 
-      background: "rgba(0,0,0,0.85)" 
+    footer: {
+      height: 56,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "rgba(0,0,0,0.85)",
     },
-    backLink: { 
-      color: "#fff", 
-      padding: "8px 12px", 
-      borderRadius: 6, 
-      textDecoration: "none", 
-      background: "rgba(255,255,255,0.04)" 
+    backLink: {
+      color: "#fff",
+      padding: "8px 12px",
+      borderRadius: 6,
+      textDecoration: "none",
+      background: "rgba(255,255,255,0.04)",
     },
   };
 
@@ -2433,8 +2776,12 @@ export default function PlayerPage({ show }) {
     <>
       <Head>
         <title>{show?.title || "Player"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, viewport-fit=cover"
+        />
       </Head>
+
       <div style={styles.page}>
         <div style={styles.header}>
           <div style={styles.title}>{show?.title || "Untitled"}</div>
@@ -2454,12 +2801,13 @@ export default function PlayerPage({ show }) {
                 controls
                 playsInline
                 webkit-playsinline="true"
-                src={isMp4 ? strippedStream : undefined}
+                unmuted
+                src={isMp4 ? cleaned : undefined}
               />
             ) : (
               <iframe
                 ref={iframeRef}
-                src={strippedStream}
+                src={cleaned}
                 style={styles.iframe}
                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                 allowFullScreen
@@ -2486,20 +2834,26 @@ function normalizeSchedule(s) {
   if (s?.default) return s.default;
   try {
     const vals = Object.values(s);
-    if (Array.isArray(vals) && vals.length && typeof vals[0] === "object") return vals;
+    if (Array.isArray(vals) && vals.length && typeof vals[0] === "object")
+      return vals;
   } catch {}
   return [];
 }
 
 export async function getStaticPaths() {
   const list = normalizeSchedule(schedule);
-  const paths = list.map((item) => ({ params: { id: String(item.id) } }));
+  const paths = list.map((item) => ({
+    params: { id: String(item.id) },
+  }));
   return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const list = normalizeSchedule(schedule);
-  const show = list.find((item) => String(item.id) === String(params.id));
+  const show = list.find(
+    (item) => String(item.id) === String(params.id)
+  );
   if (!show) return { notFound: true };
   return { props: { show }, revalidate: 30 };
 }
+
