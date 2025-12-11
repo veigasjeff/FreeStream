@@ -3354,7 +3354,6 @@ export default function PlayerPage({ show }) {
 
   const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
 
-  // Utility: sanitize and short-validate a URL
   const normalizeUrl = (u) => {
     if (!u) return "";
     try {
@@ -3366,7 +3365,6 @@ export default function PlayerPage({ show }) {
     }
   };
 
-  // Attempt to remove sandbox attribute (fast attempt; may fail if injected natively)
   useEffect(() => {
     const id = setInterval(() => {
       const iframe = iframeRef.current;
@@ -3381,7 +3379,6 @@ export default function PlayerPage({ show }) {
     return () => clearInterval(id);
   }, []);
 
-  // Force-block common popup methods (safety)
   useEffect(() => {
     const originalOpen = window.open;
     const originalAlert = window.alert;
@@ -3396,7 +3393,6 @@ export default function PlayerPage({ show }) {
     };
   }, []);
 
-  // Mobile viewport CSS variable
   useEffect(() => {
     const setVH = () =>
       document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
@@ -3410,7 +3406,6 @@ export default function PlayerPage({ show }) {
     };
   }, []);
 
-  // HLS/MP4 playback support
   useEffect(() => {
     let hls = null;
     const src = normalizeUrl(show?.streamUrl || "");
@@ -3454,7 +3449,6 @@ export default function PlayerPage({ show }) {
     };
 
     init();
-
     return () => {
       if (hls) hls.destroy();
     };
@@ -3476,11 +3470,13 @@ export default function PlayerPage({ show }) {
       if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
     } catch {}
   };
+
   const exitFullscreen = async () => {
     try {
       if (document.exitFullscreen) await document.exitFullscreen();
     } catch {}
   };
+
   const toggleFullscreen = () => (isFullscreen ? exitFullscreen() : enterFullscreen());
 
   useEffect(() => {
@@ -3489,14 +3485,11 @@ export default function PlayerPage({ show }) {
     return () => document.removeEventListener("fullscreenchange", handler);
   }, []);
 
-  // If iframe fails to load or reports sandbox issue, swap to proxied URL
-  // We'll detect iframe load errors and message events
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!iframe) return;
 
     const onIframeLoad = () => {
-      // If the iframe has a sandbox attribute still present -> use proxy
       try {
         if (iframe.hasAttribute && iframe.hasAttribute("sandbox")) {
           setLastError("iframe_sandbox_present");
@@ -3504,9 +3497,7 @@ export default function PlayerPage({ show }) {
         } else {
           setLastError(null);
         }
-      } catch (e) {
-        // cross-origin access may throw; if we cannot access contentWindow we still check visually
-      }
+      } catch (e) {}
     };
 
     const onIframeError = () => {
@@ -3517,10 +3508,8 @@ export default function PlayerPage({ show }) {
     iframe.addEventListener("load", onIframeLoad);
     iframe.addEventListener("error", onIframeError);
 
-    // Also set a timeout: if iframe hasn't loaded in 3 seconds, attempt proxy
     const t = setTimeout(() => {
       try {
-        // If iframe contentWindow location is about:blank or not updated, use proxy
         if (iframe && iframe.getAttribute && (!iframe.src || iframe.src === "about:blank")) {
           setLastError("iframe_timeout");
           setUseProxy(true);
@@ -3537,7 +3526,6 @@ export default function PlayerPage({ show }) {
     };
   }, [useProxy, show]);
 
-  // Helper: proxied URL path on this host
   const proxiedUrlFor = (sourceUrl) => {
     const u = normalizeUrl(sourceUrl);
     if (!u) return "";
@@ -3560,26 +3548,17 @@ export default function PlayerPage({ show }) {
     video: { width: "100%", height: "100%", objectFit: "contain", background: "#000", filter: filterStyle },
     iframe: { width: "100%", height: "100%", border: "none", background: "#000", filter: filterStyle },
     footer: { height: 56, display: "flex", justifyContent: "center", alignItems: "center", background: "rgba(0,0,0,0.85)" },
-    backLink: { color: "#fff", padding: "8px 12px", borderRadius: 6, textDecoration: "none", background: "rgba(255,255,255,0.04)" },
-    debug: { position: "absolute", bottom: 70, left: 12, zIndex: 9999, color: "#fff", background: "rgba(0,0,0,0.5)", padding: "6px 8px", borderRadius: 6, fontSize: 12 }
+    backLink: { color: "#fff", padding: "8px 12px", borderRadius: 6, textDecoration: "none", background: "rgba(255,255,255,0.04)" }
   };
 
-  // If an iframe is blocked by native sandbox injection, switching to proxy should fix it.
-  // If proxy also faces blocking (rare), open proxied URL in top window.
   useEffect(() => {
     if (useProxy && cleaned) {
       const p = proxiedUrlFor(cleaned);
-      // attempt to set iframe src to proxied url
       try {
-        if (iframeRef.current) {
-          iframeRef.current.src = p;
-        }
+        if (iframeRef.current) iframeRef.current.src = p;
       } catch (e) {}
-      // final fallback: after 2.5s, if still error, open top window
       const t = setTimeout(() => {
-        if (!iframeRef.current) {
-          window.location.href = p;
-        }
+        if (!iframeRef.current) window.location.href = p;
       }, 2500);
       return () => clearTimeout(t);
     }
@@ -3630,11 +3609,6 @@ export default function PlayerPage({ show }) {
                 title={show?.title || "player-iframe"}
               />
             )}
-
-            <div style={styles.debug}>
-              {lastError ? `debug: ${lastError}` : `debug: loaded`}
-              {useProxy ? " (using proxy)" : ""}
-            </div>
           </div>
         </div>
 
