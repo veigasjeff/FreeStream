@@ -3334,7 +3334,6 @@
 
 
 
-
 // pages/player/[id].js
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
@@ -3348,42 +3347,199 @@ export default function PlayerPage({ show }) {
   const iframeRef = useRef(null);
 
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [isAudioEnabled, setIsAudioEnabled] = useState(false);
 
   const filterStyle =
     "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
 
-  const normalizeUrl = (u) => {
-    if (!u) return "";
-    try {
-      const url = new URL(String(u));
-      if (url.protocol !== "http:" && url.protocol !== "https:") return "";
-      return url.toString();
-    } catch {
-      return "";
-    }
+  // Persistent popup blocker - active for entire component lifecycle
+  useEffect(() => {
+    // Store original functions
+    const originalOpen = window.open;
+    const originalAlert = window.alert;
+    const originalConfirm = window.confirm;
+    const originalBeforeUnload = window.onbeforeunload;
+    
+    // Block all popup methods
+    window.open = function() {
+      console.log("Popup blocked by player");
+      return null;
+    };
+    
+    window.alert = function() {
+      console.log("Alert blocked by player");
+      return undefined;
+    };
+    
+    window.confirm = function() {
+      console.log("Confirm dialog blocked by player");
+      return false;
+    };
+    
+    // Prevent beforeunload popups
+    window.onbeforeunload = null;
+    
+    // Also block iframe contentWindow methods
+    const blockIframePopups = () => {
+      if (iframeRef.current && iframeRef.current.contentWindow) {
+        try {
+          iframeRef.current.contentWindow.open = function() { return null; };
+          iframeRef.current.contentWindow.alert = function() { return undefined; };
+          iframeRef.current.contentWindow.confirm = function() { return false; };
+        } catch (e) {
+          // Cross-origin restrictions may prevent this
+        }
+      }
+    };
+    
+    // run once now and also on interval to try to catch dynamic iframes
+    blockIframePopups();
+    const intervalId = setInterval(blockIframePopups, 1000);
+    
+    // Cleanup on unmount
+    return () => {
+      clearInterval(intervalId);
+      window.open = originalOpen;
+      window.alert = originalAlert;
+      window.confirm = originalConfirm;
+      window.onbeforeunload = originalBeforeUnload;
+    };
+  }, []);
+
+  // Enhanced unmute function with comprehensive popup blocking
+  const enableAudio = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    
+    // Force mute state off and volume up
+    video.muted = false;
+    video.volume = 1.0;
+    setIsAudioEnabled(true);
+    
+    // Try to play
+    video.play().catch(err => {
+      console.log("Auto-play prevented, user interaction required:", err);
+    });
   };
 
+  // Set viewport height for mobile
   useEffect(() => {
     const setVH = () =>
       document.documentElement.style.setProperty(
         "--vh",
         `${window.innerHeight * 0.01}px`
       );
-    setVH();
-    window.addEventListener("resize", setVH);
-    window.addEventListener("orientationchange", setVH);
+
+    const handleResize = () => {
+      setVH();
+      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleResize);
+
     return () => {
-      window.removeEventListener("resize", setVH);
-      window.removeEventListener("orientationchange", setVH);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleResize);
     };
   }, []);
 
+  // Strip ad parameters from URL
+  const stripAdParams = (url) => {
+    if (!url) return url;
+    let cleanUrl = String(url);
+
+    const adParams = [
+      "ads?", "adtag", "adunit", "advertise", "advertising", "adprovider", "adserver", "adnetwork", "adbanner",
+      "adplacement", "adclick", "adid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+      "gclid", "fbclid", "msclkid", "dclid", "irclickid", "irgwc", "irpid", "iradid", "ircid",
+    ];
+
+    adParams.forEach((param) => {
+      const regex = new RegExp(`([?&])${param}=[^&]*`, "gi");
+      cleanUrl = cleanUrl.replace(regex, (match, p1) =>
+        p1 === "?" ? "?" : ""
+      );
+    });
+
+    cleanUrl = cleanUrl
+      .replace(/#EXT-X-DISCONTINUITY/gi, "")
+      .replace(/#EXTINF:\d+\.\d+,ad/gi, "")
+      .replace(/#EXT-X-CUE-OUT/gi, "")
+      .replace(/#EXT-X-CUE-IN/gi, "")
+      .replace(/#EXT-X-SPLICEPOINT/gi, "");
+
+    cleanUrl = cleanUrl
+      .replace(/\?\?/g, "?")
+      .replace(/\?\&/g, "?")
+      .replace(/\&\&/g, "&")
+      .replace(/\?$/, "")
+      .replace(/\&$/, "");
+
+    if (cleanUrl.indexOf("?") === 0 && cleanUrl.indexOf("=") === -1)
+      cleanUrl = cleanUrl.substring(1);
+
+    return cleanUrl;
+  };
+
+  // FULLSCREEN
+  const enterFullscreen = async () => {
+    const el = containerRef.current;
+    if (!el) return;
+    try {
+      if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
+      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+      else if (el.msRequestFullscreen) el.msRequestFullscreen();
+    } catch {}
+  };
+
+  const exitFullscreen = async () => {
+    try {
+      if (document.exitFullscreen) await document.exitFullscreen();
+      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+      else if (document.msExitFullscreen) document.msExitFullscreen();
+    } catch {}
+  };
+
+  const toggleFullscreen = () =>
+    isFullscreen ? exitFullscreen() : enterFullscreen();
+
+  useEffect(() => {
+    const handler = () => {
+      const el =
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement;
+
+      setIsFullscreen(Boolean(el));
+    };
+
+    document.addEventListener("fullscreenchange", handler);
+    document.addEventListener("webkitfullscreenchange", handler);
+    document.addEventListener("mozfullscreenchange", handler);
+    document.addEventListener("MSFullscreenChange", handler);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setTimeout(handler, 50);
+    });
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handler);
+      document.removeEventListener("webkitfullscreenchange", handler);
+      document.removeEventListener("mozfullscreenchange", handler);
+      document.removeEventListener("MSFullscreenChange", handler);
+    };
+  }, []);
+
+  // HLS/MP4 SETUP
   useEffect(() => {
     let hls = null;
-    const src = normalizeUrl(show?.streamUrl || "");
+    const src = stripAdParams(show?.streamUrl || "");
     const video = videoRef.current;
-
     if (!video || !src) return;
 
     const isHls = src.toLowerCase().includes(".m3u8");
@@ -3400,6 +3556,7 @@ export default function PlayerPage({ show }) {
 
       const canPlayNative =
         video.canPlayType("application/vnd.apple.mpegurl") !== "";
+
       if (canPlayNative) {
         video.src = src;
         await video.play().catch(() => {});
@@ -3408,13 +3565,18 @@ export default function PlayerPage({ show }) {
 
       try {
         const Hls = (await import("hls.js")).default;
+
         if (Hls.isSupported()) {
-          hls = new Hls({ enableWorker: true, lowLatencyMode: true });
+          hls = new Hls({
+            enableWorker: true,
+            lowLatencyMode: true,
+          });
+
           hls.loadSource(src);
           hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, () =>
-            video.play().catch(() => {})
-          );
+          hls.on(Hls.Events.MANIFEST_PARSED, async () => {
+            await video.play().catch(() => {});
+          });
         } else {
           video.src = src;
           await video.play().catch(() => {});
@@ -3426,46 +3588,14 @@ export default function PlayerPage({ show }) {
     };
 
     init();
+
     return () => {
       if (hls) hls.destroy();
     };
   }, [show]);
 
-  const enableAudio = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = false;
-    v.volume = 1.0;
-    setIsAudioEnabled(true);
-    v.play().catch(() => {});
-  };
-
-  const enterFullscreen = async () => {
-    const el = containerRef.current;
-    if (!el) return;
-    try {
-      if (el.requestFullscreen)
-        await el.requestFullscreen({ navigationUI: "hide" });
-    } catch {}
-  };
-
-  const exitFullscreen = async () => {
-    try {
-      if (document.exitFullscreen) await document.exitFullscreen();
-    } catch {}
-  };
-
-  const toggleFullscreen = () =>
-    isFullscreen ? exitFullscreen() : enterFullscreen();
-
-  useEffect(() => {
-    const handler = () =>
-      setIsFullscreen(Boolean(document.fullscreenElement));
-    document.addEventListener("fullscreenchange", handler);
-    return () => document.removeEventListener("fullscreenchange", handler);
-  }, []);
-
-  const cleaned = normalizeUrl(show?.streamUrl || "");
+  const raw = show?.streamUrl || "";
+  const cleaned = stripAdParams(raw);
   const isHls = cleaned.toLowerCase().includes(".m3u8");
   const isMp4 = cleaned.toLowerCase().includes(".mp4");
 
@@ -3489,43 +3619,52 @@ export default function PlayerPage({ show }) {
     title: {
       margin: "0 auto",
       fontSize: 16,
-      color: "#fff",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "ellipsis",
+      color: "#fff",
     },
     playerWrap: {
-      flex: 1,
+      flex: "1 1 auto",
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
       position: "relative",
     },
-    playerContainer: { width: "100%", height: "100%", position: "relative" },
+    playerContainer: {
+      width: "100%",
+      height: "100%",
+      position: "relative",
+      maxWidth: "none",
+    },
     controlsBtn: {
       position: "absolute",
       top: 12,
       right: 12,
-      zIndex: 99,
+      zIndex: 9999,
       background: "rgba(0,0,0,0.7)",
       color: "#fff",
       padding: "8px 12px",
       borderRadius: 8,
-      fontSize: 14,
       display: "flex",
       alignItems: "center",
       gap: 8,
+      fontSize: 14,
       cursor: "pointer",
+      border: "1px solid rgba(255,255,255,0.1)",
     },
     unmuteBtn: {
       position: "absolute",
       top: 12,
       left: 12,
-      zIndex: 99,
+      zIndex: 9999,
       background: isAudioEnabled ? "#4CAF50" : "#f44336",
       color: "#fff",
       padding: "8px 12px",
       borderRadius: 8,
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
       fontSize: 14,
       cursor: "pointer",
       border: "none",
@@ -3535,6 +3674,9 @@ export default function PlayerPage({ show }) {
       width: "100%",
       height: "100%",
       objectFit: "contain",
+      position: "absolute",
+      top: 0,
+      left: 0,
       background: "#000",
       filter: filterStyle,
     },
@@ -3542,14 +3684,17 @@ export default function PlayerPage({ show }) {
       width: "100%",
       height: "100%",
       border: "none",
+      position: "absolute",
+      top: 0,
+      left: 0,
       background: "#000",
       filter: filterStyle,
     },
     footer: {
       height: 56,
       display: "flex",
-      justifyContent: "center",
       alignItems: "center",
+      justifyContent: "center",
       background: "rgba(0,0,0,0.85)",
     },
     backLink: {
@@ -3602,7 +3747,7 @@ export default function PlayerPage({ show }) {
             ) : (
               <iframe
                 ref={iframeRef}
-                src={cleaned || "about:blank"}
+                src={cleaned}
                 style={styles.iframe}
                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
                 allowFullScreen
@@ -3629,22 +3774,25 @@ function normalizeSchedule(s) {
   if (s?.default) return s.default;
   try {
     const vals = Object.values(s);
-    if (Array.isArray(vals) && vals.length) return vals;
+    if (Array.isArray(vals) && vals.length && typeof vals[0] === "object")
+      return vals;
   } catch {}
   return [];
 }
 
 export async function getStaticPaths() {
   const list = normalizeSchedule(schedule);
-  return {
-    paths: list.map((item) => ({ params: { id: String(item.id) } })),
-    fallback: false,
-  };
+  const paths = list.map((item) => ({
+    params: { id: String(item.id) },
+  }));
+  return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
   const list = normalizeSchedule(schedule);
-  const show = list.find((item) => String(item.id) === String(params.id));
+  const show = list.find(
+    (item) => String(item.id) === String(params.id)
+  );
   if (!show) return { notFound: true };
   return { props: { show }, revalidate: 30 };
 }
