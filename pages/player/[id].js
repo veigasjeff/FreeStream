@@ -2865,9 +2865,478 @@
 
 
 
+// FINAL VERSION
+
+// pages/player/[id].js
+// import { useEffect, useRef, useState } from "react";
+// import Head from "next/head";
+// import Link from "next/link";
+// import schedule from "../../data/schedules.json";
+// import { FaExpand, FaCompress } from "react-icons/fa";
+
+// export default function PlayerPage({ show }) {
+//   const containerRef = useRef(null);
+//   const videoRef = useRef(null);
+//   const iframeRef = useRef(null);
+
+//   const [isFullscreen, setIsFullscreen] = useState(false);
+//   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+//   const [isAudioEnabled, setIsAudioEnabled] = useState(false);
+
+//   const filterStyle =
+//     "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+
+//   // Persistent popup blocker - active for entire component lifecycle
+//   useEffect(() => {
+//     // Store original functions
+//     const originalOpen = window.open;
+//     const originalAlert = window.alert;
+//     const originalConfirm = window.confirm;
+//     const originalBeforeUnload = window.onbeforeunload;
+    
+//     // Block all popup methods
+//     window.open = function() {
+//       console.log("Popup blocked by player");
+//       return null;
+//     };
+    
+//     window.alert = function() {
+//       console.log("Alert blocked by player");
+//       return undefined;
+//     };
+    
+//     window.confirm = function() {
+//       console.log("Confirm dialog blocked by player");
+//       return false;
+//     };
+    
+//     // Prevent beforeunload popups
+//     window.onbeforeunload = null;
+    
+//     // Also block iframe contentWindow methods
+//     const blockIframePopups = () => {
+//       if (iframeRef.current && iframeRef.current.contentWindow) {
+//         try {
+//           iframeRef.current.contentWindow.open = function() { return null; };
+//           iframeRef.current.contentWindow.alert = function() { return undefined; };
+//           iframeRef.current.contentWindow.confirm = function() { return false; };
+//         } catch (e) {
+//           // Cross-origin restrictions may prevent this
+//         }
+//       }
+//     };
+    
+//     // Cleanup on unmount
+//     return () => {
+//       window.open = originalOpen;
+//       window.alert = originalAlert;
+//       window.confirm = originalConfirm;
+//       window.onbeforeunload = originalBeforeUnload;
+//     };
+//   }, []);
+
+//   // Enhanced unmute function with comprehensive popup blocking
+//   const enableAudio = () => {
+//     const video = videoRef.current;
+//     if (!video) return;
+    
+//     // Force mute state off and volume up
+//     video.muted = false;
+//     video.volume = 1.0;
+//     setIsAudioEnabled(true);
+    
+//     // Try to play
+//     video.play().catch(err => {
+//       console.log("Auto-play prevented, user interaction required:", err);
+//     });
+//   };
+
+//   // Set viewport height for mobile
+//   useEffect(() => {
+//     const setVH = () =>
+//       document.documentElement.style.setProperty(
+//         "--vh",
+//         `${window.innerHeight * 0.01}px`
+//       );
+
+//     const handleResize = () => {
+//       setVH();
+//       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
+//     };
+
+//     handleResize();
+//     window.addEventListener("resize", handleResize);
+//     window.addEventListener("orientationchange", handleResize);
+
+//     return () => {
+//       window.removeEventListener("resize", handleResize);
+//       window.removeEventListener("orientationchange", handleResize);
+//     };
+//   }, []);
+
+//   // Strip ad parameters from URL
+//   const stripAdParams = (url) => {
+//     if (!url) return url;
+//     let cleanUrl = String(url);
+
+//     const adParams = [
+//       "ads?", "adtag", "adunit", "advertise", "advertising", "adprovider", "adserver", "adnetwork", "adbanner",
+//       "adplacement", "adclick", "adid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+//       "gclid", "fbclid", "msclkid", "dclid", "irclickid", "irgwc", "irpid", "iradid", "ircid",
+//     ];
+
+//     adParams.forEach((param) => {
+//       const regex = new RegExp(`([?&])${param}=[^&]*`, "gi");
+//       cleanUrl = cleanUrl.replace(regex, (match, p1) =>
+//         p1 === "?" ? "?" : ""
+//       );
+//     });
+
+//     cleanUrl = cleanUrl
+//       .replace(/#EXT-X-DISCONTINUITY/gi, "")
+//       .replace(/#EXTINF:\d+\.\d+,ad/gi, "")
+//       .replace(/#EXT-X-CUE-OUT/gi, "")
+//       .replace(/#EXT-X-CUE-IN/gi, "")
+//       .replace(/#EXT-X-SPLICEPOINT/gi, "");
+
+//     cleanUrl = cleanUrl
+//       .replace(/\?\?/g, "?")
+//       .replace(/\?\&/g, "?")
+//       .replace(/\&\&/g, "&")
+//       .replace(/\?$/, "")
+//       .replace(/\&$/, "");
+
+//     if (cleanUrl.indexOf("?") === 0 && cleanUrl.indexOf("=") === -1)
+//       cleanUrl = cleanUrl.substring(1);
+
+//     return cleanUrl;
+//   };
+
+//   // FULLSCREEN
+//   const enterFullscreen = async () => {
+//     const el = containerRef.current;
+//     if (!el) return;
+//     try {
+//       if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
+//       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+//       else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+//       else if (el.msRequestFullscreen) el.msRequestFullscreen();
+//     } catch {}
+//   };
+
+//   const exitFullscreen = async () => {
+//     try {
+//       if (document.exitFullscreen) await document.exitFullscreen();
+//       else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+//       else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+//       else if (document.msExitFullscreen) document.msExitFullscreen();
+//     } catch {}
+//   };
+
+//   const toggleFullscreen = () =>
+//     isFullscreen ? exitFullscreen() : enterFullscreen();
+
+//   useEffect(() => {
+//     const handler = () => {
+//       const el =
+//         document.fullscreenElement ||
+//         document.webkitFullscreenElement ||
+//         document.mozFullScreenElement ||
+//         document.msFullscreenElement;
+
+//       setIsFullscreen(Boolean(el));
+//     };
+
+//     document.addEventListener("fullscreenchange", handler);
+//     document.addEventListener("webkitfullscreenchange", handler);
+//     document.addEventListener("mozfullscreenchange", handler);
+//     document.addEventListener("MSFullscreenChange", handler);
+//     document.addEventListener("keydown", (e) => {
+//       if (e.key === "Escape") setTimeout(handler, 50);
+//     });
+
+//     return () => {
+//       document.removeEventListener("fullscreenchange", handler);
+//       document.removeEventListener("webkitfullscreenchange", handler);
+//       document.removeEventListener("mozfullscreenchange", handler);
+//       document.removeEventListener("MSFullscreenChange", handler);
+//     };
+//   }, []);
+
+//   // HLS/MP4 SETUP
+//   useEffect(() => {
+//     let hls = null;
+//     const src = stripAdParams(show?.streamUrl || "");
+//     const video = videoRef.current;
+//     if (!video || !src) return;
+
+//     const isHls = src.toLowerCase().includes(".m3u8");
+//     const isMp4 = src.toLowerCase().includes(".mp4");
+
+//     const init = async () => {
+//       if (!isHls) {
+//         if (isMp4) {
+//           video.src = src;
+//           await video.play().catch(() => {});
+//         }
+//         return;
+//       }
+
+//       const canPlayNative =
+//         video.canPlayType("application/vnd.apple.mpegurl") !== "";
+
+//       if (canPlayNative) {
+//         video.src = src;
+//         await video.play().catch(() => {});
+//         return;
+//       }
+
+//       try {
+//         const Hls = (await import("hls.js")).default;
+
+//         if (Hls.isSupported()) {
+//           hls = new Hls({
+//             enableWorker: true,
+//             lowLatencyMode: true,
+//           });
+
+//           hls.loadSource(src);
+//           hls.attachMedia(video);
+//           hls.on(Hls.Events.MANIFEST_PARSED, async () => {
+//             await video.play().catch(() => {});
+//           });
+//         } else {
+//           video.src = src;
+//           await video.play().catch(() => {});
+//         }
+//       } catch {
+//         video.src = src;
+//         await video.play().catch(() => {});
+//       }
+//     };
+
+//     init();
+
+//     return () => {
+//       if (hls) hls.destroy();
+//     };
+//   }, [show]);
+
+//   const raw = show?.streamUrl || "";
+//   const cleaned = stripAdParams(raw);
+//   const isHls = cleaned.toLowerCase().includes(".m3u8");
+//   const isMp4 = cleaned.toLowerCase().includes(".mp4");
+
+//   const styles = {
+//     page: {
+//       width: "100vw",
+//       height: "100vh",
+//       background: "#000",
+//       display: "flex",
+//       flexDirection: "column",
+//       overflow: "hidden",
+//     },
+//     header: {
+//       height: 56,
+//       display: "flex",
+//       alignItems: "center",
+//       padding: "0 12px",
+//       background: "rgba(0,0,0,0.85)",
+//       fontWeight: 700,
+//     },
+//     title: {
+//       margin: "0 auto",
+//       fontSize: 16,
+//       whiteSpace: "nowrap",
+//       overflow: "hidden",
+//       textOverflow: "ellipsis",
+//       color: "#fff",
+//     },
+//     playerWrap: {
+//       flex: "1 1 auto",
+//       display: "flex",
+//       justifyContent: "center",
+//       alignItems: "center",
+//       position: "relative",
+//     },
+//     playerContainer: {
+//       width: "100%",
+//       height: "100%",
+//       position: "relative",
+//       maxWidth: "none",
+//     },
+//     controlsBtn: {
+//       position: "absolute",
+//       top: 12,
+//       right: 12,
+//       zIndex: 9999,
+//       background: "rgba(0,0,0,0.7)",
+//       color: "#fff",
+//       padding: "8px 12px",
+//       borderRadius: 8,
+//       display: "flex",
+//       alignItems: "center",
+//       gap: 8,
+//       fontSize: 14,
+//       cursor: "pointer",
+//       border: "1px solid rgba(255,255,255,0.1)",
+//     },
+//     unmuteBtn: {
+//       position: "absolute",
+//       top: 12,
+//       left: 12,
+//       zIndex: 9999,
+//       background: isAudioEnabled ? "#4CAF50" : "#f44336",
+//       color: "#fff",
+//       padding: "8px 12px",
+//       borderRadius: 8,
+//       display: "flex",
+//       alignItems: "center",
+//       gap: 8,
+//       fontSize: 14,
+//       cursor: "pointer",
+//       border: "none",
+//       fontWeight: "bold",
+//     },
+//     video: {
+//       width: "100%",
+//       height: "100%",
+//       objectFit: "contain",
+//       position: "absolute",
+//       top: 0,
+//       left: 0,
+//       background: "#000",
+//       filter: filterStyle,
+//     },
+//     iframe: {
+//       width: "100%",
+//       height: "100%",
+//       border: "none",
+//       position: "absolute",
+//       top: 0,
+//       left: 0,
+//       background: "#000",
+//       filter: filterStyle,
+//     },
+//     footer: {
+//       height: 56,
+//       display: "flex",
+//       alignItems: "center",
+//       justifyContent: "center",
+//       background: "rgba(0,0,0,0.85)",
+//     },
+//     backLink: {
+//       color: "#fff",
+//       padding: "8px 12px",
+//       borderRadius: 6,
+//       textDecoration: "none",
+//       background: "rgba(255,255,255,0.04)",
+//     },
+//   };
+
+//   return (
+//     <>
+//       <Head>
+//         <title>{show?.title || "Player"}</title>
+//         <meta
+//           name="viewport"
+//           content="width=device-width, initial-scale=1, viewport-fit=cover"
+//         />
+//       </Head>
+
+//       <div style={styles.page}>
+//         <div style={styles.header}>
+//           <div style={styles.title}>{show?.title || "Untitled"}</div>
+//         </div>
+
+//         <div style={styles.playerWrap}>
+//           <div ref={containerRef} style={styles.playerContainer}>
+//             <button style={styles.controlsBtn} onClick={toggleFullscreen}>
+//               {isFullscreen ? <FaCompress /> : <FaExpand />}
+//               {isFullscreen ? "Exit" : "Fullscreen"}
+//             </button>
+
+//             {(isHls || isMp4) && (
+//               <button style={styles.unmuteBtn} onClick={enableAudio}>
+//                 {isAudioEnabled ? "🔊 Audio ON" : "🔇 Enable Audio"}
+//               </button>
+//             )}
+
+//             {isHls || isMp4 ? (
+//               <video
+//                 ref={videoRef}
+//                 style={styles.video}
+//                 controls
+//                 playsInline
+//                 webkit-playsinline="true"
+//                 muted={!isAudioEnabled}
+//                 src={isMp4 ? cleaned : undefined}
+//               />
+//             ) : (
+//               <iframe
+//                 ref={iframeRef}
+//                 src={cleaned}
+//                 style={styles.iframe}
+//                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+//                 allowFullScreen
+//                 title={show?.title || "player-iframe"}
+//               />
+//             )}
+//           </div>
+//         </div>
+
+//         <div style={styles.footer}>
+//           <Link href="/schedule" style={styles.backLink}>
+//             ← Back to Full Schedule
+//           </Link>
+//         </div>
+//       </div>
+//     </>
+//   );
+// }
+
+// function normalizeSchedule(s) {
+//   if (!s) return [];
+//   if (Array.isArray(s)) return s;
+//   if (s?.shows) return s.shows;
+//   if (s?.default) return s.default;
+//   try {
+//     const vals = Object.values(s);
+//     if (Array.isArray(vals) && vals.length && typeof vals[0] === "object")
+//       return vals;
+//   } catch {}
+//   return [];
+// }
+
+// export async function getStaticPaths() {
+//   const list = normalizeSchedule(schedule);
+//   const paths = list.map((item) => ({
+//     params: { id: String(item.id) },
+//   }));
+//   return { paths, fallback: false };
+// }
+
+// export async function getStaticProps({ params }) {
+//   const list = normalizeSchedule(schedule);
+//   const show = list.find(
+//     (item) => String(item.id) === String(params.id)
+//   );
+//   if (!show) return { notFound: true };
+//   return { props: { show }, revalidate: 30 };
+// }
+
+
+
+
+
+
+
+
+
 
 
 // pages/player/[id].js
+
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
@@ -2883,195 +3352,129 @@ export default function PlayerPage({ show }) {
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const [isAudioEnabled, setIsAudioEnabled] = useState(false);
 
-  const filterStyle =
-    "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+  const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
 
-  // Persistent popup blocker - active for entire component lifecycle
+  // FORCE REMOVE SANDBOX FOR WEBVIEW (Median.co fix)
   useEffect(() => {
-    // Store original functions
+    const interval = setInterval(() => {
+      const iframe = iframeRef.current;
+      if (iframe) {
+        iframe.removeAttribute("sandbox");
+        iframe.setAttribute("allow", "*");
+        iframe.setAttribute("referrerPolicy", "no-referrer");
+      }
+    }, 300);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Popup blocker
+  useEffect(() => {
     const originalOpen = window.open;
     const originalAlert = window.alert;
     const originalConfirm = window.confirm;
-    const originalBeforeUnload = window.onbeforeunload;
-    
-    // Block all popup methods
-    window.open = function() {
-      console.log("Popup blocked by player");
-      return null;
-    };
-    
-    window.alert = function() {
-      console.log("Alert blocked by player");
-      return undefined;
-    };
-    
-    window.confirm = function() {
-      console.log("Confirm dialog blocked by player");
-      return false;
-    };
-    
-    // Prevent beforeunload popups
-    window.onbeforeunload = null;
-    
-    // Also block iframe contentWindow methods
-    const blockIframePopups = () => {
-      if (iframeRef.current && iframeRef.current.contentWindow) {
-        try {
-          iframeRef.current.contentWindow.open = function() { return null; };
-          iframeRef.current.contentWindow.alert = function() { return undefined; };
-          iframeRef.current.contentWindow.confirm = function() { return false; };
-        } catch (e) {
-          // Cross-origin restrictions may prevent this
-        }
-      }
-    };
-    
-    // Cleanup on unmount
+
+    window.open = () => null;
+    window.alert = () => undefined;
+    window.confirm = () => false;
+
     return () => {
       window.open = originalOpen;
       window.alert = originalAlert;
       window.confirm = originalConfirm;
-      window.onbeforeunload = originalBeforeUnload;
     };
   }, []);
 
-  // Enhanced unmute function with comprehensive popup blocking
   const enableAudio = () => {
     const video = videoRef.current;
     if (!video) return;
-    
-    // Force mute state off and volume up
+
     video.muted = false;
     video.volume = 1.0;
     setIsAudioEnabled(true);
-    
-    // Try to play
-    video.play().catch(err => {
-      console.log("Auto-play prevented, user interaction required:", err);
-    });
+
+    video.play().catch(() => {});
   };
 
-  // Set viewport height for mobile
+  // Mobile viewport
   useEffect(() => {
     const setVH = () =>
-      document.documentElement.style.setProperty(
-        "--vh",
-        `${window.innerHeight * 0.01}px`
-      );
+      document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
 
-    const handleResize = () => {
+    const resize = () => {
       setVH();
       setWindowSize({ width: window.innerWidth, height: window.innerHeight });
     };
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
+    resize();
+    window.addEventListener("resize", resize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
-    };
+    return () => window.removeEventListener("resize", resize);
   }, []);
 
-  // Strip ad parameters from URL
+  // Strip ad parameters
   const stripAdParams = (url) => {
     if (!url) return url;
-    let cleanUrl = String(url);
+    let u = String(url);
 
     const adParams = [
-      "ads?", "adtag", "adunit", "advertise", "advertising", "adprovider", "adserver", "adnetwork", "adbanner",
-      "adplacement", "adclick", "adid", "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
-      "gclid", "fbclid", "msclkid", "dclid", "irclickid", "irgwc", "irpid", "iradid", "ircid",
+      "ads?", "adtag", "adunit", "advertise", "advertising", "adprovider",
+      "adserver", "adnetwork", "adbanner", "adplacement", "adclick", "adid",
+      "utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content",
+      "gclid", "fbclid", "msclkid", "dclid", "irclickid", "irgwc",
+      "irpid", "iradid", "ircid"
     ];
 
-    adParams.forEach((param) => {
-      const regex = new RegExp(`([?&])${param}=[^&]*`, "gi");
-      cleanUrl = cleanUrl.replace(regex, (match, p1) =>
-        p1 === "?" ? "?" : ""
-      );
+    adParams.forEach(p => {
+      const regex = new RegExp(`([?&])${p}=[^&]*`, "gi");
+      u = u.replace(regex, (m, p1) => (p1 === "?" ? "?" : ""));
     });
 
-    cleanUrl = cleanUrl
-      .replace(/#EXT-X-DISCONTINUITY/gi, "")
-      .replace(/#EXTINF:\d+\.\d+,ad/gi, "")
-      .replace(/#EXT-X-CUE-OUT/gi, "")
-      .replace(/#EXT-X-CUE-IN/gi, "")
-      .replace(/#EXT-X-SPLICEPOINT/gi, "");
-
-    cleanUrl = cleanUrl
+    return u
       .replace(/\?\?/g, "?")
       .replace(/\?\&/g, "?")
       .replace(/\&\&/g, "&")
       .replace(/\?$/, "")
       .replace(/\&$/, "");
-
-    if (cleanUrl.indexOf("?") === 0 && cleanUrl.indexOf("=") === -1)
-      cleanUrl = cleanUrl.substring(1);
-
-    return cleanUrl;
   };
 
-  // FULLSCREEN
+  // Fullscreen
   const enterFullscreen = async () => {
     const el = containerRef.current;
     if (!el) return;
     try {
       if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
-      else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
-      else if (el.msRequestFullscreen) el.msRequestFullscreen();
     } catch {}
   };
 
   const exitFullscreen = async () => {
     try {
       if (document.exitFullscreen) await document.exitFullscreen();
-      else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-      else if (document.msExitFullscreen) document.msExitFullscreen();
     } catch {}
   };
 
-  const toggleFullscreen = () =>
-    isFullscreen ? exitFullscreen() : enterFullscreen();
+  const toggleFullscreen = () => (isFullscreen ? exitFullscreen() : enterFullscreen());
 
   useEffect(() => {
     const handler = () => {
-      const el =
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement;
-
+      const el = document.fullscreenElement;
       setIsFullscreen(Boolean(el));
     };
 
     document.addEventListener("fullscreenchange", handler);
-    document.addEventListener("webkitfullscreenchange", handler);
-    document.addEventListener("mozfullscreenchange", handler);
-    document.addEventListener("MSFullscreenChange", handler);
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setTimeout(handler, 50);
-    });
-
-    return () => {
-      document.removeEventListener("fullscreenchange", handler);
-      document.removeEventListener("webkitfullscreenchange", handler);
-      document.removeEventListener("mozfullscreenchange", handler);
-      document.removeEventListener("MSFullscreenChange", handler);
-    };
+    return () => document.removeEventListener("fullscreenchange", handler);
   }, []);
 
-  // HLS/MP4 SETUP
+  // HLS / MP4 setup
   useEffect(() => {
     let hls = null;
     const src = stripAdParams(show?.streamUrl || "");
     const video = videoRef.current;
+
     if (!video || !src) return;
 
-    const isHls = src.toLowerCase().includes(".m3u8");
-    const isMp4 = src.toLowerCase().includes(".mp4");
+    const isHls = src.includes(".m3u8");
+    const isMp4 = src.includes(".mp4");
 
     const init = async () => {
       if (!isHls) {
@@ -3082,8 +3485,7 @@ export default function PlayerPage({ show }) {
         return;
       }
 
-      const canPlayNative =
-        video.canPlayType("application/vnd.apple.mpegurl") !== "";
+      const canPlayNative = video.canPlayType("application/vnd.apple.mpegurl") !== "";
 
       if (canPlayNative) {
         video.src = src;
@@ -3095,19 +3497,10 @@ export default function PlayerPage({ show }) {
         const Hls = (await import("hls.js")).default;
 
         if (Hls.isSupported()) {
-          hls = new Hls({
-            enableWorker: true,
-            lowLatencyMode: true,
-          });
-
+          hls = new Hls({ enableWorker: true });
           hls.loadSource(src);
           hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, async () => {
-            await video.play().catch(() => {});
-          });
-        } else {
-          video.src = src;
-          await video.play().catch(() => {});
+          hls.on(Hls.Events.MANIFEST_PARSED, () => video.play().catch(() => {}));
         }
       } catch {
         video.src = src;
@@ -3117,15 +3510,12 @@ export default function PlayerPage({ show }) {
 
     init();
 
-    return () => {
-      if (hls) hls.destroy();
-    };
+    return () => hls && hls.destroy();
   }, [show]);
 
-  const raw = show?.streamUrl || "";
-  const cleaned = stripAdParams(raw);
-  const isHls = cleaned.toLowerCase().includes(".m3u8");
-  const isMp4 = cleaned.toLowerCase().includes(".mp4");
+  const cleaned = stripAdParams(show?.streamUrl || "");
+  const isHls = cleaned.includes(".m3u8");
+  const isMp4 = cleaned.includes(".mp4");
 
   const styles = {
     page: {
@@ -3147,13 +3537,13 @@ export default function PlayerPage({ show }) {
     title: {
       margin: "0 auto",
       fontSize: 16,
+      color: "#fff",
       whiteSpace: "nowrap",
       overflow: "hidden",
       textOverflow: "ellipsis",
-      color: "#fff",
     },
     playerWrap: {
-      flex: "1 1 auto",
+      flex: 1,
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
@@ -3163,36 +3553,31 @@ export default function PlayerPage({ show }) {
       width: "100%",
       height: "100%",
       position: "relative",
-      maxWidth: "none",
     },
     controlsBtn: {
       position: "absolute",
       top: 12,
       right: 12,
-      zIndex: 9999,
+      zIndex: 99,
       background: "rgba(0,0,0,0.7)",
       color: "#fff",
       padding: "8px 12px",
       borderRadius: 8,
+      fontSize: 14,
       display: "flex",
       alignItems: "center",
       gap: 8,
-      fontSize: 14,
       cursor: "pointer",
-      border: "1px solid rgba(255,255,255,0.1)",
     },
     unmuteBtn: {
       position: "absolute",
       top: 12,
       left: 12,
-      zIndex: 9999,
+      zIndex: 99,
       background: isAudioEnabled ? "#4CAF50" : "#f44336",
       color: "#fff",
       padding: "8px 12px",
       borderRadius: 8,
-      display: "flex",
-      alignItems: "center",
-      gap: 8,
       fontSize: 14,
       cursor: "pointer",
       border: "none",
@@ -3202,9 +3587,6 @@ export default function PlayerPage({ show }) {
       width: "100%",
       height: "100%",
       objectFit: "contain",
-      position: "absolute",
-      top: 0,
-      left: 0,
       background: "#000",
       filter: filterStyle,
     },
@@ -3212,17 +3594,14 @@ export default function PlayerPage({ show }) {
       width: "100%",
       height: "100%",
       border: "none",
-      position: "absolute",
-      top: 0,
-      left: 0,
       background: "#000",
       filter: filterStyle,
     },
     footer: {
       height: 56,
       display: "flex",
-      alignItems: "center",
       justifyContent: "center",
+      alignItems: "center",
       background: "rgba(0,0,0,0.85)",
     },
     backLink: {
@@ -3238,10 +3617,7 @@ export default function PlayerPage({ show }) {
     <>
       <Head>
         <title>{show?.title || "Player"}</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, viewport-fit=cover"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
       <div style={styles.page}>
@@ -3277,7 +3653,8 @@ export default function PlayerPage({ show }) {
                 ref={iframeRef}
                 src={cleaned}
                 style={styles.iframe}
-                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                allow="*"
+                referrerPolicy="no-referrer"
                 allowFullScreen
                 title={show?.title || "player-iframe"}
               />
@@ -3302,25 +3679,22 @@ function normalizeSchedule(s) {
   if (s?.default) return s.default;
   try {
     const vals = Object.values(s);
-    if (Array.isArray(vals) && vals.length && typeof vals[0] === "object")
-      return vals;
+    if (Array.isArray(vals) && vals.length) return vals;
   } catch {}
   return [];
 }
 
 export async function getStaticPaths() {
   const list = normalizeSchedule(schedule);
-  const paths = list.map((item) => ({
-    params: { id: String(item.id) },
-  }));
-  return { paths, fallback: false };
+  return {
+    paths: list.map(item => ({ params: { id: String(item.id) } })),
+    fallback: false,
+  };
 }
 
 export async function getStaticProps({ params }) {
   const list = normalizeSchedule(schedule);
-  const show = list.find(
-    (item) => String(item.id) === String(params.id)
-  );
+  const show = list.find(item => String(item.id) === params.id);
   if (!show) return { notFound: true };
   return { props: { show }, revalidate: 30 };
 }
