@@ -1162,7 +1162,355 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// PERFECT 
+
 // pages/schedules/[id].js
+// import { useEffect, useRef, useState } from 'react';
+// import Head from 'next/head';
+// import Link from 'next/link';
+// import schedule from '../../data/schedules.json';
+// import { FaExpand, FaCompress } from 'react-icons/fa';
+
+// export default function PlayerPage({ show }) {
+//   const containerRef = useRef(null);
+//   const iframeRef = useRef(null);
+//   const videoRef = useRef(null);
+//   const [isFullscreen, setIsFullscreen] = useState(false);
+//   const [isPlayingHls, setIsPlayingHls] = useState(false);
+
+//   const filterStyle = 'brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)';
+
+//   const enterFullscreen = async () => {
+//     const el = containerRef.current;
+//     if (!el) return;
+
+//     try {
+//       if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: 'hide' });
+//       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+//       else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
+//       else if (el.msRequestFullscreen) el.msRequestFullscreen();
+//     } catch {}
+//   };
+
+//   const exitFullscreen = async () => {
+//     try {
+//       if (document.exitFullscreen) await document.exitFullscreen();
+//       else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+//       else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
+//       else if (document.msExitFullscreen) document.msExitFullscreen();
+//     } catch {}
+//   };
+
+//   const toggleFullscreen = () => {
+//     if (isFullscreen) exitFullscreen();
+//     else enterFullscreen();
+//   };
+
+//   useEffect(() => {
+//     function onFsChange() {
+//       const el =
+//         document.fullscreenElement ||
+//         document.webkitFullscreenElement ||
+//         document.mozFullScreenElement ||
+//         document.msFullscreenElement;
+//       setIsFullscreen(Boolean(el));
+//     }
+
+//     document.addEventListener('fullscreenchange', onFsChange);
+//     document.addEventListener('webkitfullscreenchange', onFsChange);
+//     document.addEventListener('mozfullscreenchange', onFsChange);
+//     document.addEventListener('MSFullscreenChange', onFsChange);
+
+//     const onKey = (e) => {
+//       if (e.key === 'Escape') {
+//         setTimeout(() => {
+//           const el =
+//             document.fullscreenElement ||
+//             document.webkitFullscreenElement ||
+//             null;
+//           setIsFullscreen(Boolean(el));
+//         }, 50);
+//       }
+//     };
+
+//     document.addEventListener('keydown', onKey);
+
+//     return () => {
+//       document.removeEventListener('fullscreenchange', onFsChange);
+//       document.removeEventListener('webkitfullscreenchange', onFsChange);
+//       document.removeEventListener('mozfullscreenchange', onFsChange);
+//       document.removeEventListener('MSFullscreenChange', onFsChange);
+//       document.removeEventListener('keydown', onKey);
+//     };
+//   }, []);
+
+//   useEffect(() => {
+//     let hls = null;
+//     const src = show?.streamUrl || '';
+
+//     const setupHls = async () => {
+//       if (!src || !src.endsWith('.m3u8')) return;
+
+//       const video = videoRef.current;
+//       if (!video) return;
+
+//       const canPlayNative =
+//         video.canPlayType('application/vnd.apple.mpegurl') !== '';
+
+//       if (canPlayNative) {
+//           video.src = src;
+//         video.play().catch(() => {});
+//         setIsPlayingHls(true);
+//         return;
+//       }
+
+//       try {
+//         const Hls = (await import('hls.js')).default;
+//         if (Hls.isSupported()) {
+//           hls = new Hls();
+//           hls.loadSource(src);
+//           hls.attachMedia(video);
+//           hls.on(Hls.Events.MANIFEST_PARSED, () => {
+//             video.play().catch(() => {});
+//           });
+//           setIsPlayingHls(true);
+//         } else {
+//           setIsPlayingHls(false);
+//         }
+//       } catch {
+//         try {
+//           video.src = src;
+//           video.play().catch(() => {});
+//           setIsPlayingHls(true);
+//         } catch {
+//           setIsPlayingHls(false);
+//         }
+//       }
+//     };
+
+//     setupHls();
+
+//     return () => {
+//       if (hls) {
+//         try {
+//           hls.destroy();
+//         } catch {}
+//         hls = null;
+//       }
+//     };
+//   }, [show]);
+
+//   useEffect(() => {
+//     const container = containerRef.current;
+//     if (!container) return;
+//     if (isFullscreen) container.style.backgroundColor = 'black';
+//     else container.style.backgroundColor = '';
+//   }, [isFullscreen]);
+
+//   const isM3u8 =
+//     show.streamUrl &&
+//     String(show.streamUrl).toLowerCase().includes('.m3u8');
+
+//   const isDirectMp4 =
+//     show.streamUrl &&
+//     (String(show.streamUrl).toLowerCase().endsWith('.mp4') ||
+//       String(show.streamUrl).toLowerCase().includes('.mp4?'));
+
+//   const styles = {
+//     pageWrapper: {
+//       width: '100%',
+//       minHeight: '100vh',
+//       background: '#000',
+//       color: '#fff',
+//       display: 'flex',
+//       flexDirection: 'column',
+//       alignItems: 'stretch'
+//     },
+//     header: {
+//       padding: '12px 18px',
+//       borderBottom: '1px solid rgba(255,255,255,0.04)',
+//       display: 'flex',
+//       alignItems: 'center',
+//       justifyContent: 'center',
+//       maxWidth: 1200,
+//       margin: '0 auto',
+//       background: 'rgba(0,0,0,0.85)'
+//     },
+//     title: {
+//       fontWeight: 700,
+//       fontSize: 18,
+//       textAlign: 'center',
+//       color: '#fff',
+//       overflow: 'hidden',
+//       textOverflow: 'ellipsis',
+//       whiteSpace: 'nowrap'
+//     },
+//     playerArea: {
+//       width: '100%',
+//       height: 'calc(100vh - 160px)',
+//       background: '#000',
+//       display: 'flex',
+//       alignItems: 'stretch',
+//       justifyContent: 'center'
+//     },
+//     container: {
+//       position: 'relative',
+//       width: '100%',
+//       height: '100%',
+//       maxWidth: '1400px'
+//     },
+//     iframe: {
+//       width: '100%',
+//       height: '100%',
+//       border: 'none',
+//       display: 'block',
+//       background: '#000',
+//       filter: filterStyle
+//     },
+//     video: {
+//       width: '100%',
+//       height: '100%',
+//       background: '#000',
+//       display: 'block',
+//       outline: 'none',
+//       filter: filterStyle
+//     },
+//     controlsButton: {
+//       position: 'absolute',
+//       top: 12,
+//       right: 12,
+//       zIndex: 9999,
+//       background: 'rgba(0,0,0,0.6)',
+//       border: '1px solid rgba(255,255,255,0.08)',
+//       color: '#fff',
+//       padding: '8px 12px',
+//       borderRadius: 8,
+//       cursor: 'pointer',
+//       display: 'inline-flex',
+//       alignItems: 'center',
+//       gap: 8,
+//       fontSize: 14
+//     },
+//     footer: {
+//       padding: '16px 18px',
+//       borderTop: '1px solid rgba(255,255,255,0.04)',
+//       textAlign: 'center',
+//       background: 'rgba(0,0,0,0.85)'
+//     },
+//     backLink: {
+//       display: 'inline-flex',
+//       alignItems: 'center',
+//       gap: 10,
+//       textDecoration: 'none',
+//       color: '#fff',
+//       padding: '8px 12px',
+//       background: 'rgba(255,255,255,0.03)',
+//       borderRadius: 6
+//     }
+//   };
+
+//   return (
+//     <>
+//       <Head>
+//         <title>Watch {show.title} - Player</title>
+//         <meta name="viewport" content="width=device-width, initial-scale=1" />
+//       </Head>
+
+//       <div style={styles.pageWrapper}>
+
+//         {!isFullscreen && (
+//           <header style={styles.header}>
+//             <div style={styles.title}>{show.title}</div>
+//           </header>
+//         )}
+
+//         <div style={styles.playerArea}>
+//           <div ref={containerRef} style={styles.container}>
+
+//             <button
+//               onClick={toggleFullscreen}
+//               aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
+//               style={styles.controlsButton}
+//             >
+//               {isFullscreen ? (
+//                 <>
+//                   <FaCompress /> Exit
+//                 </>
+//               ) : (
+//                 <>
+//                   <FaExpand /> Fullscreen
+//                 </>
+//               )}
+//             </button>
+
+//             {isM3u8 || isDirectMp4 ? (
+//               <video
+//                 ref={videoRef}
+//                 style={styles.video}
+//                 controls
+//                 playsInline
+//                 autoPlay
+//                 webkit-playsinline="true"
+//                 src={isDirectMp4 ? show.streamUrl : undefined}
+//               />
+//             ) : (
+//               <iframe
+//                 ref={iframeRef}
+//                 src={show.streamUrl}
+//                 style={styles.iframe}
+//                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen; accelerometer; gyroscope"
+//                 allowFullScreen
+//                 title={show.title}
+//               />
+//             )}
+//           </div>
+//         </div>
+
+//         {!isFullscreen && (
+//           <footer style={styles.footer}>
+//             <Link href="/schedule" style={styles.backLink}>
+//               ← Back to Full Schedule
+//             </Link>
+//           </footer>
+//         )}
+//       </div>
+//     </>
+//   );
+// }
+
+// export async function getStaticPaths() {
+//   const paths = schedule.shows.map((show) => ({ params: { id: show.id } }));
+//   return { paths, fallback: false };
+// }
+
+// export async function getStaticProps({ params }) {
+//   const show = schedule.shows.find((s) => s.id === params.id);
+//   if (!show) return { notFound: true };
+//   return { props: { show }, revalidate: 60 };
+// }
+
+
+
+
+
+
+
 import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -1178,10 +1526,81 @@ export default function PlayerPage({ show }) {
 
   const filterStyle = 'brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)';
 
+  // -------------------------
+  //   ★ GLOBAL AD BLOCKER ★
+  // -------------------------
+  const injectAdBlocker = () => {
+    try {
+      const iframe = iframeRef.current;
+      if (iframe && iframe.contentWindow) {
+        const win = iframe.contentWindow;
+        const doc = iframe.contentDocument;
+
+        // BLOCK POPUPS / FAKE CLICKS
+        win.open = () => null;
+        win.alert = () => null;
+        win.confirm = () => null;
+        win.prompt = () => null;
+        win.print = () => null;
+        win.onbeforeunload = null;
+        win.onclick = null;
+
+        // BLOCK REDIRECT SCRIPTS
+        Object.defineProperty(win, 'location', {
+          configurable: false,
+          enumerable: false,
+          writable: false,
+          value: win.location
+        });
+
+        // REMOVE ADS EVERY 500ms
+        setInterval(() => {
+          const kills = [
+            'iframe[src*="ads"]',
+            'iframe[src*="doubleclick"]',
+            'iframe[src*="pop"]',
+            'iframe[src*="click"]',
+            '#ad',
+            '.ads',
+            '.ad-banner',
+            '.banner',
+            '.sponsor',
+            '.promotion',
+            '[id*="ad"]',
+            '[class*="ad"]'
+          ];
+          kills.forEach(selector => {
+            const el = doc.querySelector(selector);
+            if (el) el.remove();
+          });
+
+          // REMOVE OVERLAY ADS
+          const overlays = doc.querySelectorAll('*[style*="z-index"],*[style*="position: fixed"]');
+          overlays.forEach(el => {
+            if (el.innerText && el.innerText.toLowerCase().includes("ad")) {
+              el.remove();
+            }
+          });
+
+        }, 500);
+      }
+    } catch {}
+  };
+
+  // HLS / MP4 AD BLOCKER
+  const stripHlsAds = (url) => {
+    if (!url) return url;
+    return url
+      .replace(/(\?|&)ads?=[^&]*/gi, '')
+      .replace(/(\?|&)adtag=[^&]*/gi, '')
+      .replace(/(\?|&)ad=[^&]*/gi, '')
+      .replace(/#EXT-X-DISCONTINUITY/g, '')
+      .replace(/#EXTINF:\d+\.\d+,ad/gi, '');
+  };
+
   const enterFullscreen = async () => {
     const el = containerRef.current;
     if (!el) return;
-
     try {
       if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: 'hide' });
       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
@@ -1244,7 +1663,7 @@ export default function PlayerPage({ show }) {
 
   useEffect(() => {
     let hls = null;
-    const src = show?.streamUrl || '';
+    let src = stripHlsAds(show?.streamUrl || '');
 
     const setupHls = async () => {
       if (!src || !src.endsWith('.m3u8')) return;
@@ -1256,7 +1675,7 @@ export default function PlayerPage({ show }) {
         video.canPlayType('application/vnd.apple.mpegurl') !== '';
 
       if (canPlayNative) {
-          video.src = src;
+        video.src = src;
         video.play().catch(() => {});
         setIsPlayingHls(true);
         return;
@@ -1304,6 +1723,12 @@ export default function PlayerPage({ show }) {
     if (isFullscreen) container.style.backgroundColor = 'black';
     else container.style.backgroundColor = '';
   }, [isFullscreen]);
+
+  // AD BLOCKER for iframe
+  useEffect(() => {
+    const interval = setInterval(() => injectAdBlocker(), 600);
+    return () => clearInterval(interval);
+  }, []);
 
   const isM3u8 =
     show.streamUrl &&
@@ -1449,12 +1874,12 @@ export default function PlayerPage({ show }) {
                 playsInline
                 autoPlay
                 webkit-playsinline="true"
-                src={isDirectMp4 ? show.streamUrl : undefined}
+                src={isDirectMp4 ? stripHlsAds(show.streamUrl) : undefined}
               />
             ) : (
               <iframe
                 ref={iframeRef}
-                src={show.streamUrl}
+                src={stripHlsAds(show.streamUrl)}
                 style={styles.iframe}
                 allow="autoplay; encrypted-media; picture-in-picture; fullscreen; accelerometer; gyroscope"
                 allowFullScreen
@@ -1476,6 +1901,10 @@ export default function PlayerPage({ show }) {
   );
 }
 
+
+// -----------------------------
+// STATIC GENERATION
+// -----------------------------
 export async function getStaticPaths() {
   const paths = schedule.shows.map((show) => ({ params: { id: show.id } }));
   return { paths, fallback: false };
