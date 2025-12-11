@@ -2198,55 +2198,105 @@
 
 
 
-// pages/player/[id].js
 import { useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import schedule from "../../data/schedules.json";
+import rawSchedule from "../../data/schedules.json";
 import { FaExpand, FaCompress } from "react-icons/fa";
 
-export default function PlayerPage({ show }) {
+// YOUR FILTER STYLE
+const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+
+// Normalize schedule formats
+function normalizeSchedule(raw) {
+  if (!raw) return [];
+  if (Array.isArray(raw)) return raw;
+  if (raw.data && Array.isArray(raw.data)) return raw.data;
+  if (raw.shows && Array.isArray(raw.shows)) return raw.shows;
+
+  try {
+    const vals = Object.values(raw).filter((v) => Array.isArray(v));
+    if (vals.length === 1) return vals[0];
+    if (vals.length > 1) return vals.flat();
+  } catch {}
+
+  return [];
+}
+
+const schedule = normalizeSchedule(rawSchedule);
+
+// Resolve stream URL field
+function findStreamUrlFromShow(show) {
+  if (!show || typeof show !== "object") return null;
+
+  const candidates = [
+    "streamUrl",
+    "stream_url",
+    "streamURL",
+    "stream",
+    "url",
+    "src",
+    "source",
+    "m3u8",
+    "file",
+    "link"
+  ];
+
+  for (const key of candidates) {
+    if (show[key] && typeof show[key] === "string") return show[key];
+  }
+
+  for (const val of Object.values(show)) {
+    if (val && typeof val === "object") {
+      for (const key of candidates) {
+        if (val[key] && typeof val[key] === "string") return val[key];
+      }
+    }
+  }
+
+  return null;
+}
+
+// Remove ad params
+function stripAdParams(url) {
+  if (!url || typeof url !== "string") return url || "";
+  return String(url)
+    .replace(/(\?|&)ads?=[^&]*/gi, "")
+    .replace(/(\?|&)adtag=[^&]*/gi, "")
+    .replace(/(\?|&)ad=[^&]*/gi, "")
+    .replace(/#EXT-X-DISCONTINUITY/gi, "")
+    .replace(/#EXTINF:\d+\.\d+,ad/gi, "");
+}
+
+export default function PlayerPage({ show, requestedId }) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const iframeRef = useRef(null);
+
+  const [streamUrl, setStreamUrl] = useState(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
 
-  const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
-
+  // Resolve safe stream URL
   useEffect(() => {
-    const setVH = () => document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
-    const handleResize = () => {
-      setVH();
-      setWindowSize({ width: window.innerWidth, height: window.innerHeight });
-    };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    window.addEventListener("orientationchange", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-      window.removeEventListener("orientationchange", handleResize);
-    };
-  }, []);
+    let candidate = findStreamUrlFromShow(show);
 
-  const stripAdParams = (url) => {
-    if (!url) return url;
-    return String(url)
-      .replace(/(\?|&)ads?=[^&]*/gi, "")
-      .replace(/(\?|&)adtag=[^&]*/gi, "")
-      .replace(/(\?|&)ad=[^&]*/gi, "")
-      .replace(/#EXT-X-DISCONTINUITY/gi, "")
-      .replace(/#EXTINF:\d+\.\d+,ad/gi, "");
-  };
+    if (!candidate && typeof show === "string") candidate = show;
+    if (!candidate && requestedId) {
+      const fallback = schedule.find((s) => String(s?.id) === String(requestedId));
+      if (fallback) candidate = findStreamUrlFromShow(fallback);
+    }
 
+    setStreamUrl(candidate ? stripAdParams(candidate) : null);
+  }, [show, requestedId]);
+
+  // Fullscreen
   const enterFullscreen = async () => {
     const el = containerRef.current;
     if (!el) return;
+
     try {
-      if (el.requestFullscreen) await el.requestFullscreen({ navigationUI: "hide" });
+      if (el.requestFullscreen) await el.requestFullscreen();
       else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
-      else if (el.mozRequestFullScreen) el.mozRequestFullScreen();
-      else if (el.msRequestFullscreen) el.msRequestFullscreen();
     } catch {}
   };
 
@@ -2254,153 +2304,223 @@ export default function PlayerPage({ show }) {
     try {
       if (document.exitFullscreen) await document.exitFullscreen();
       else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
-      else if (document.mozCancelFullScreen) document.mozCancelFullScreen();
-      else if (document.msExitFullscreen) document.msExitFullscreen();
     } catch {}
   };
 
   const toggleFullscreen = () => {
-    if (isFullscreen) exitFullscreen();
-    else enterFullscreen();
+    isFullscreen ? exitFullscreen() : enterFullscreen();
   };
 
   useEffect(() => {
-    const handler = () => {
-      const el =
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement;
-      setIsFullscreen(Boolean(el));
+    const detect = () => {
+      setIsFullscreen(
+        Boolean(document.fullscreenElement || document.webkitFullscreenElement)
+      );
     };
-    document.addEventListener("fullscreenchange", handler);
-    document.addEventListener("webkitfullscreenchange", handler);
-    document.addEventListener("mozfullscreenchange", handler);
-    document.addEventListener("MSFullscreenChange", handler);
-    document.addEventListener("keydown", (e) => e.key === "Escape" && setTimeout(handler, 50));
+
+    document.addEventListener("fullscreenchange", detect);
+    document.addEventListener("webkitfullscreenchange", detect);
+
     return () => {
-      document.removeEventListener("fullscreenchange", handler);
-      document.removeEventListener("webkitfullscreenchange", handler);
-      document.removeEventListener("mozfullscreenchange", handler);
-      document.removeEventListener("MSFullscreenChange", handler);
+      document.removeEventListener("fullscreenchange", detect);
+      document.removeEventListener("webkitfullscreenchange", detect);
     };
   }, []);
 
-  // HLS/MP4 setup
+  // Load video (MP4 + M3U8)
   useEffect(() => {
-    let hls = null;
-    const src = stripAdParams(show?.streamUrl || "");
+    if (!streamUrl || !videoRef.current) return;
+
     const video = videoRef.current;
-    if (!video || !src) return;
+    let hls = null;
 
-    const isHls = src.toLowerCase().includes(".m3u8");
-    const isMp4 = src.toLowerCase().includes(".mp4");
+    const isM3U8 = /\.m3u8($|\?)/i.test(streamUrl);
+    const isMP4 = /\.mp4($|\?)/i.test(streamUrl);
 
-    const setup = async () => {
-      if (!isHls) {
-        if (isMp4) {
-          video.src = src;
-          await video.play().catch(() => {});
-        }
+    const loadVideo = async () => {
+      if (isMP4) {
+        video.src = streamUrl;
+        video.style.filter = filterStyle;
+        video.play().catch(() => {});
         return;
       }
 
-      const canPlayNative = video.canPlayType("application/vnd.apple.mpegurl") !== "";
-      if (canPlayNative) {
-        video.src = src;
-        await video.play().catch(() => {});
-        return;
-      }
+      if (isM3U8) {
+        const native = video.canPlayType("application/vnd.apple.mpegurl");
 
-      try {
-        const Hls = (await import("hls.js")).default;
-        if (Hls.isSupported()) {
-          hls = new Hls({ enableWorker: true, lowLatencyMode: true });
-          hls.loadSource(src);
-          hls.attachMedia(video);
-          hls.on(Hls.Events.MANIFEST_PARSED, async () => await video.play().catch(() => {}));
-        } else {
-          video.src = src;
-          await video.play().catch(() => {});
+        if (native) {
+          video.src = streamUrl;
+          video.style.filter = filterStyle;
+          video.play().catch(() => {});
+          return;
         }
-      } catch {
-        video.src = src;
-        await video.play().catch(() => {});
+
+        try {
+          const Hls = (await import("hls.js")).default;
+          if (Hls.isSupported()) {
+            hls = new Hls({ enableWorker: true });
+            hls.loadSource(streamUrl);
+            hls.attachMedia(video);
+
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+              video.style.filter = filterStyle;
+              video.play().catch(() => {});
+            });
+
+            return;
+          }
+        } catch {}
+
+        video.src = streamUrl;
+        video.style.filter = filterStyle;
+        video.play().catch(() => {});
       }
     };
-    setup();
 
-    return () => hls && hls.destroy();
-  }, [show]);
+    loadVideo();
 
-  // Remove sandbox from iframe after mount (mobile app fix)
+    return () => {
+      if (hls) {
+        try {
+          hls.destroy();
+        } catch {}
+      }
+    };
+  }, [streamUrl]);
+
+  // ALWAYS remove iframe sandbox
   useEffect(() => {
-    if (iframeRef.current) {
-      iframeRef.current.removeAttribute("sandbox");
-    }
-  }, [iframeRef]);
+    const el = iframeRef.current;
+    if (!el) return;
 
-  const rawStream = show?.streamUrl || "";
-  const strippedStream = stripAdParams(rawStream);
-  const isHls = strippedStream.toLowerCase().includes(".m3u8");
-  const isMp4 = strippedStream.toLowerCase().includes(".mp4");
+    try {
+      el.removeAttribute("sandbox");
+      el.setAttribute("allow", "autoplay; fullscreen; encrypted-media; picture-in-picture");
+      el.setAttribute("allowfullscreen", "true");
+    } catch {}
+  }, [streamUrl]);
+
+  const isVideo = /\.m3u8($|\?)|\.mp4($|\?)/i.test(streamUrl || "");
+  const hasStream = Boolean(streamUrl);
 
   const styles = {
-    page: { width: "100vw", height: "100vh", background: "#000", display: "flex", flexDirection: "column", overflow: "hidden" },
-    header: { height: 56, display: isFullscreen ? "none" : "flex", alignItems: "center", padding: "0 12px", background: "rgba(0,0,0,0.85)", fontWeight: 700 },
-    title: { margin: "0 auto", fontSize: 16, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" },
-    playerWrap: { flex: "1 1 auto", display: "flex", justifyContent: "center", alignItems: "center", position: "relative" },
-    playerContainer: { width: "100%", height: "100%", position: "relative", maxWidth: "none" },
-    controlsBtn: { position: "absolute", top: 12, right: 12, zIndex: 9999, background: "rgba(0,0,0,0.7)", color: "#fff", padding: "8px 12px", borderRadius: 8, display: "flex", alignItems: "center", gap: 8, fontSize: 14, cursor: "pointer", border: "1px solid rgba(255,255,255,0.1)" },
-    video: { width: "100%", height: "100%", objectFit: "contain", position: "absolute", top: 0, left: 0, background: "#000", filter: filterStyle },
-    iframe: { width: "100%", height: "100%", border: "none", position: "absolute", top: 0, left: 0, background: "#000", filter: filterStyle },
-    footer: { height: 56, display: isFullscreen ? "none" : "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.85)" },
-    backLink: { color: "#fff", padding: "8px 12px", borderRadius: 6, textDecoration: "none", background: "rgba(255,255,255,0.04)" },
+    page: {
+      width: "100vw",
+      height: "100vh",
+      background: "#000",
+      display: "flex",
+      flexDirection: "column",
+      overflow: "hidden"
+    },
+    header: {
+      height: 56,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#fff",
+      background: "rgba(0,0,0,0.8)",
+      fontWeight: "bold"
+    },
+    playerWrap: {
+      flex: 1,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      position: "relative"
+    },
+    container: {
+      width: "100%",
+      height: "100%",
+      position: "relative"
+    },
+    video: {
+      width: "100%",
+      height: "100%",
+      objectFit: "cover",
+      background: "#000",
+      filter: filterStyle
+    },
+    iframe: {
+      width: "100%",
+      height: "100%",
+      border: "none",
+      background: "#000"
+    },
+    footer: {
+      height: 56,
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      background: "rgba(0,0,0,0.8)"
+    },
+    back: {
+      color: "#fff",
+      textDecoration: "none",
+      padding: "8px 12px",
+      borderRadius: 6,
+      background: "rgba(255,255,255,0.07)"
+    },
+    fsBtn: {
+      position: "absolute",
+      top: 12,
+      right: 12,
+      background: "rgba(0,0,0,0.55)",
+      padding: "8px 12px",
+      borderRadius: 8,
+      color: "#fff",
+      display: "flex",
+      alignItems: "center",
+      gap: 8,
+      cursor: "pointer",
+      border: "1px solid rgba(255,255,255,0.08)",
+      zIndex: 9999
+    }
   };
 
   return (
     <>
       <Head>
         <title>{show?.title || "Player"}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
+
       <div style={styles.page}>
-        <div style={styles.header}>
-          <div style={styles.title}>{show?.title || "Untitled"}</div>
-        </div>
+        <div style={styles.header}>{show?.title || "Player"}</div>
 
         <div style={styles.playerWrap}>
-          <div ref={containerRef} style={styles.playerContainer}>
-            <button style={styles.controlsBtn} onClick={toggleFullscreen}>
-              {isFullscreen ? <FaCompress /> : <FaExpand />}
+          <div ref={containerRef} style={styles.container}>
+            <button style={styles.fsBtn} onClick={toggleFullscreen}>
+              {isFullscreen ? <FaCompress /> : <FaExpand />}{" "}
               {isFullscreen ? "Exit" : "Fullscreen"}
             </button>
 
-            {isHls || isMp4 ? (
-              <video
-                ref={videoRef}
-                style={styles.video}
-                controls
-                playsInline
-                webkit-playsinline="true"
-                src={isMp4 ? strippedStream : undefined}
-              />
+            {hasStream ? (
+              isVideo ? (
+                <video
+                  ref={videoRef}
+                  controls
+                  playsInline
+                  webkit-playsinline="true"
+                  style={styles.video}
+                />
+              ) : (
+                <iframe
+                  ref={iframeRef}
+                  src={streamUrl}
+                  style={styles.iframe}
+                />
+              )
             ) : (
-              <iframe
-                ref={iframeRef}
-                src={strippedStream}
-                style={styles.iframe}
-                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                allowFullScreen
-                title={show?.title || "player-iframe"}
-              />
+              <div style={{ color: "#fff", textAlign: "center", padding: 20 }}>
+                Stream not available for this item.
+              </div>
             )}
           </div>
         </div>
 
         <div style={styles.footer}>
-          <Link href="/schedule" style={styles.backLink}>
-            ← Back to Full Schedule
+          <Link href="/schedules" style={styles.back}>
+            ← Back to Schedule
           </Link>
         </div>
       </div>
@@ -2408,28 +2528,24 @@ export default function PlayerPage({ show }) {
   );
 }
 
-// Schedule helpers
-function normalizeSchedule(s) {
-  if (!s) return [];
-  if (Array.isArray(s)) return s;
-  if (s?.shows) return s.shows;
-  if (s?.default) return s.default;
-  try {
-    const vals = Object.values(s);
-    if (Array.isArray(vals) && vals.length && typeof vals[0] === "object") return vals;
-  } catch {}
-  return [];
-}
-
 export async function getStaticPaths() {
-  const list = normalizeSchedule(schedule);
-  const paths = list.map((item) => ({ params: { id: String(item.id) } }));
-  return { paths, fallback: false };
+  const paths = schedule.map((item) => ({
+    params: { id: String(item.id) }
+  }));
+
+  return { paths, fallback: "blocking" };
 }
 
 export async function getStaticProps({ params }) {
-  const list = normalizeSchedule(schedule);
-  const show = list.find((item) => String(item.id) === String(params.id));
-  if (!show) return { notFound: true };
-  return { props: { show }, revalidate: 30 };
+  let show = null;
+
+  try {
+    show = schedule.find((s) => String(s.id) === String(params.id));
+    if (!show && rawSchedule[params.id]) show = rawSchedule[params.id];
+  } catch {}
+
+  return {
+    props: { show: show || null, requestedId: params.id },
+    revalidate: 30
+  };
 }
