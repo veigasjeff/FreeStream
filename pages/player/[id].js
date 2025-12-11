@@ -2204,10 +2204,11 @@ import Link from "next/link";
 import rawSchedule from "../../data/schedules.json";
 import { FaExpand, FaCompress } from "react-icons/fa";
 
-// YOUR FILTER STYLE
-const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
+// FILTER EFFECT
+const filterStyle =
+  "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
 
-// Normalize schedule formats
+// NORMALIZE SCHEDULE FORMAT
 function normalizeSchedule(raw) {
   if (!raw) return [];
   if (Array.isArray(raw)) return raw;
@@ -2225,7 +2226,7 @@ function normalizeSchedule(raw) {
 
 const schedule = normalizeSchedule(rawSchedule);
 
-// Resolve stream URL field
+// STREAM URL RESOLVER
 function findStreamUrlFromShow(show) {
   if (!show || typeof show !== "object") return null;
 
@@ -2257,7 +2258,7 @@ function findStreamUrlFromShow(show) {
   return null;
 }
 
-// Remove ad params
+// REMOVE AD PARAMS
 function stripAdParams(url) {
   if (!url || typeof url !== "string") return url || "";
   return String(url)
@@ -2268,29 +2269,49 @@ function stripAdParams(url) {
     .replace(/#EXTINF:\d+\.\d+,ad/gi, "");
 }
 
+// DETECT ANDROID WEBVIEW
+function isAndroidWebView() {
+  if (typeof navigator === "undefined") return false;
+  const ua = navigator.userAgent || "";
+  return /Android/i.test(ua) && /wv/i.test(ua);
+}
+
 export default function PlayerPage({ show, requestedId }) {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const iframeRef = useRef(null);
 
   const [streamUrl, setStreamUrl] = useState(null);
+  const [forceVideoFallback, setForceVideoFallback] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  // Resolve safe stream URL
+  // RESOLVE STREAM URL
   useEffect(() => {
     let candidate = findStreamUrlFromShow(show);
 
     if (!candidate && typeof show === "string") candidate = show;
+
     if (!candidate && requestedId) {
-      const fallback = schedule.find((s) => String(s?.id) === String(requestedId));
+      const fallback = schedule.find(
+        (s) => String(s?.id) === String(requestedId)
+      );
       if (fallback) candidate = findStreamUrlFromShow(fallback);
     }
 
     setStreamUrl(candidate ? stripAdParams(candidate) : null);
   }, [show, requestedId]);
 
-  // Fullscreen
-  const enterFullscreen = async () => {
+  // SMART AUTO MODE: Decide video or iframe
+  const cleanedUrl = streamUrl || "";
+
+  const isMp4 = /\.mp4($|\?)/i.test(cleanedUrl);
+  const isM3u8 = /\.m3u8($|\?)/i.test(cleanedUrl);
+
+  const isVideoType = isMp4 || isM3u8;
+  const isAndroidWV = isAndroidWebView();
+
+  // FULLSCREEN
+  const enterFS = async () => {
     const el = containerRef.current;
     if (!el) return;
 
@@ -2300,21 +2321,23 @@ export default function PlayerPage({ show, requestedId }) {
     } catch {}
   };
 
-  const exitFullscreen = async () => {
+  const exitFS = async () => {
     try {
       if (document.exitFullscreen) await document.exitFullscreen();
       else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
     } catch {}
   };
 
-  const toggleFullscreen = () => {
-    isFullscreen ? exitFullscreen() : enterFullscreen();
+  const toggleFS = () => {
+    isFullscreen ? exitFS() : enterFS();
   };
 
   useEffect(() => {
     const detect = () => {
       setIsFullscreen(
-        Boolean(document.fullscreenElement || document.webkitFullscreenElement)
+        Boolean(
+          document.fullscreenElement || document.webkitFullscreenElement
+        )
       );
     };
 
@@ -2327,29 +2350,28 @@ export default function PlayerPage({ show, requestedId }) {
     };
   }, []);
 
-  // Load video (MP4 + M3U8)
+  // LOAD VIDEO STREAM
   useEffect(() => {
-    if (!streamUrl || !videoRef.current) return;
+    if (!isVideoType || forceVideoFallback) return;
 
     const video = videoRef.current;
+    if (!video) return;
+
     let hls = null;
 
-    const isM3U8 = /\.m3u8($|\?)/i.test(streamUrl);
-    const isMP4 = /\.mp4($|\?)/i.test(streamUrl);
-
-    const loadVideo = async () => {
-      if (isMP4) {
-        video.src = streamUrl;
+    const load = async () => {
+      if (isMp4) {
+        video.src = cleanedUrl;
         video.style.filter = filterStyle;
         video.play().catch(() => {});
         return;
       }
 
-      if (isM3U8) {
+      if (isM3u8) {
         const native = video.canPlayType("application/vnd.apple.mpegurl");
 
         if (native) {
-          video.src = streamUrl;
+          video.src = cleanedUrl;
           video.style.filter = filterStyle;
           video.play().catch(() => {});
           return;
@@ -2359,7 +2381,7 @@ export default function PlayerPage({ show, requestedId }) {
           const Hls = (await import("hls.js")).default;
           if (Hls.isSupported()) {
             hls = new Hls({ enableWorker: true });
-            hls.loadSource(streamUrl);
+            hls.loadSource(cleanedUrl);
             hls.attachMedia(video);
 
             hls.on(Hls.Events.MANIFEST_PARSED, () => {
@@ -2371,13 +2393,13 @@ export default function PlayerPage({ show, requestedId }) {
           }
         } catch {}
 
-        video.src = streamUrl;
+        video.src = cleanedUrl;
         video.style.filter = filterStyle;
         video.play().catch(() => {});
       }
     };
 
-    loadVideo();
+    load();
 
     return () => {
       if (hls) {
@@ -2386,22 +2408,33 @@ export default function PlayerPage({ show, requestedId }) {
         } catch {}
       }
     };
-  }, [streamUrl]);
+  }, [cleanedUrl, isVideoType, forceVideoFallback]);
 
-  // ALWAYS remove iframe sandbox
+  // IFRAME CONFIG + FAILSAFE
   useEffect(() => {
+    if (isVideoType) return;
+
     const el = iframeRef.current;
     if (!el) return;
 
-    try {
-      el.removeAttribute("sandbox");
-      el.setAttribute("allow", "autoplay; fullscreen; encrypted-media; picture-in-picture");
-      el.setAttribute("allowfullscreen", "true");
-    } catch {}
-  }, [streamUrl]);
+    el.removeAttribute("sandbox");
+    el.setAttribute(
+      "allow",
+      "autoplay; fullscreen; encrypted-media; picture-in-picture"
+    );
+    el.setAttribute("allowfullscreen", "true");
 
-  const isVideo = /\.m3u8($|\?)|\.mp4($|\?)/i.test(streamUrl || "");
-  const hasStream = Boolean(streamUrl);
+    const timer = setTimeout(() => {
+      if (!el.contentWindow) {
+        setForceVideoFallback(true);
+      }
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [cleanedUrl, isVideoType]);
+
+  const shouldUseVideo =
+    isVideoType || forceVideoFallback || isAndroidWV;
 
   const styles = {
     page: {
@@ -2489,31 +2522,25 @@ export default function PlayerPage({ show, requestedId }) {
 
         <div style={styles.playerWrap}>
           <div ref={containerRef} style={styles.container}>
-            <button style={styles.fsBtn} onClick={toggleFullscreen}>
+            <button style={styles.fsBtn} onClick={toggleFS}>
               {isFullscreen ? <FaCompress /> : <FaExpand />}{" "}
               {isFullscreen ? "Exit" : "Fullscreen"}
             </button>
 
-            {hasStream ? (
-              isVideo ? (
-                <video
-                  ref={videoRef}
-                  controls
-                  playsInline
-                  webkit-playsinline="true"
-                  style={styles.video}
-                />
-              ) : (
-                <iframe
-                  ref={iframeRef}
-                  src={streamUrl}
-                  style={styles.iframe}
-                />
-              )
-            ) : (
+            {!cleanedUrl ? (
               <div style={{ color: "#fff", textAlign: "center", padding: 20 }}>
-                Stream not available for this item.
+                Stream not available.
               </div>
+            ) : shouldUseVideo ? (
+              <video
+                ref={videoRef}
+                controls
+                playsInline
+                webkit-playsinline="true"
+                style={styles.video}
+              />
+            ) : (
+              <iframe ref={iframeRef} src={cleanedUrl} style={styles.iframe} />
             )}
           </div>
         </div>
