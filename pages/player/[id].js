@@ -2204,6 +2204,7 @@ import Link from "next/link";
 import rawSchedule from "../../data/schedules.json";
 import { FaExpand, FaCompress } from "react-icons/fa";
 
+
 // FILTER EFFECT
 const filterStyle =
   "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
