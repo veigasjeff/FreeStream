@@ -2210,20 +2210,8 @@ export default function PlayerPage({ show }) {
   const iframeRef = useRef(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
-  const [isAndroidWebView, setIsAndroidWebView] = useState(false);
 
   const filterStyle = "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)";
-
-  // Detect Android WebView (Median.co conversion)
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const ua = navigator.userAgent.toLowerCase();
-      const isAndroid = /android/.test(ua);
-      const isWebView = /wv|webview/.test(ua);
-      const isMedianApp = /median/.test(ua) || document.referrer.includes('median');
-      setIsAndroidWebView((isAndroid && (isWebView || isMedianApp)) || false);
-    }
-  }, []);
 
   // Set viewport height for mobile
   useEffect(() => {
@@ -2350,7 +2338,7 @@ export default function PlayerPage({ show }) {
   const isHls = strippedStream.toLowerCase().includes(".m3u8");
   const isMp4 = strippedStream.toLowerCase().includes(".mp4");
 
-  // Styles - BACK BUTTON ALWAYS VISIBLE
+  // Styles
   const styles = {
     page: { 
       width: "100vw", 
@@ -2446,14 +2434,10 @@ export default function PlayerPage({ show }) {
       <Head>
         <title>{show?.title || "Player"}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <meta name="theme-color" content="#000000" />
       </Head>
       <div style={styles.page}>
-        {/* HEADER - ALWAYS VISIBLE */}
         <div style={styles.header}>
-          <div style={styles.title}>
-            {isAndroidWebView ? `📱 ${show?.title || "Untitled"}` : show?.title || "Untitled"}
-          </div>
+          <div style={styles.title}>{show?.title || "Untitled"}</div>
         </div>
 
         <div style={styles.playerWrap}>
@@ -2473,7 +2457,6 @@ export default function PlayerPage({ show }) {
                 src={isMp4 ? strippedStream : undefined}
               />
             ) : (
-              // SAME IFRAME FOR ALL DEVICES - NO SPECIAL ATTRIBUTES
               <iframe
                 ref={iframeRef}
                 src={strippedStream}
@@ -2486,7 +2469,6 @@ export default function PlayerPage({ show }) {
           </div>
         </div>
 
-        {/* FOOTER WITH BACK BUTTON - ALWAYS VISIBLE */}
         <div style={styles.footer}>
           <Link href="/schedule" style={styles.backLink}>
             ← Back to Full Schedule
