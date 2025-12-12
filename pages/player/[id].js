@@ -722,6 +722,13 @@ export default function PlayerPage({ show }) {
             </div>
           )}
         </header>
+<h2 className="text-bg font-bold text-light mb-6 text-center flex items-center justify-center gap-2">
+  🔊
+  <span className="gradient-text">
+    Unmute the player inside the player at the bottom section, not at the top. 
+  </span>
+  🔇  
+</h2>
 
         <div ref={containerRef} style={styles.playerWrap} onDoubleClick={toggleFullscreen}>
           <div style={styles.playerContainer}>
@@ -750,30 +757,32 @@ export default function PlayerPage({ show }) {
                 )} */}
                 
                 <iframe 
-                  // ref={iframeRef}
-                  // src={cleaned}
-                  // style={styles.iframe}
-                  // allow="autoplay; encrypted-media; picture-in-picture; fullscreen; accelerometer; gyroscope; microphone; camera"
-                  // allowFullScreen
-                  // title={show?.title || "player-iframe"}
-                  // key={currentStreamUrl}
-                  // onLoad={handleIframeLoad}
-                  // scrolling="no"
-                  // frameBorder="0"
-                  // marginWidth="0"
-                  // marginHeight="0"
-                ref={iframeRef}
-                src={cleaned}
-                style={styles.iframe}
-                allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                allowFullScreen
-                title={show?.title || "player-iframe"}
-                key={currentStreamUrl}
-                onLoad={handleIframeLoad}
-                scrolling="no"
-                frameBorder="0"
-                // sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                referrerPolicy="no-referrer"
+                  ref={iframeRef}
+                  src={cleaned}
+                  style={styles.iframe}
+                  allow="autoplay; encrypted-media; picture-in-picture; fullscreen; accelerometer; gyroscope; microphone; camera"
+                  allowFullScreen
+                  title={show?.title || "player-iframe"}
+                  key={currentStreamUrl}
+                  onLoad={handleIframeLoad}
+                  scrolling="no"
+                  frameBorder="0"
+                  marginWidth="0"
+                  marginHeight="0"
+                  referrerPolicy="no-referrer"
+
+                // ref={iframeRef}
+                // src={cleaned}
+                // style={styles.iframe}
+                // allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+                // allowFullScreen
+                // title={show?.title || "player-iframe"}
+                // key={currentStreamUrl}
+                // onLoad={handleIframeLoad}
+                // scrolling="no"
+                // frameBorder="0"
+                // // sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                // referrerPolicy="no-referrer"
                 />
               </>
             ) : (
@@ -796,6 +805,19 @@ export default function PlayerPage({ show }) {
             ← {isMobile ? "Back to Schedule" : "Back to Full Schedule"}
           </Link>
         </div>
+        {/* <h2 className="text-bg font-bold text-light mb-6 flex flex-col items-center justify-center text-center gap-2">
+         <span className="gradient-text">
+            Unmute it from inside the player section at the bottom section 🔊.
+         </span>
+        </h2> */}
+<h2 className="text-bg font-bold text-light mb-6 text-center flex items-center justify-center gap-2">
+  🔊
+  <span className="gradient-text">
+    Unmute the player inside the player at the bottom section, not at the top. 
+  </span>
+  🔇  
+</h2>
+
       </div>
     </>
   );
