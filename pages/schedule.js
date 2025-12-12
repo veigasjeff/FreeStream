@@ -14,7 +14,7 @@ export default function SchedulePage() {
   const [intendedAction, setIntendedAction] = useState(null);
   
   // Load More Feature States
-  const [visibleShowsCount, setVisibleShowsCount] = useState(25);
+  const [visibleShowsCount, setVisibleShowsCount] = useState(12);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [allShows, setAllShows] = useState([]);
 
@@ -96,7 +96,7 @@ export default function SchedulePage() {
     // Simulate loading delay for 2-3 seconds
     setTimeout(() => {
       setVisibleShowsCount(prevCount => {
-        const newCount = prevCount + 25;
+        const newCount = prevCount + 12;
         // Don't exceed total shows count
         return Math.min(newCount, allShows.length);
       });
