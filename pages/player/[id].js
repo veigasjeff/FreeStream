@@ -2312,11 +2312,11 @@ export default function PlayerPage({ show }) {
             {/* Show iframe for daddyhd.com and other non-video URLs */}
             {useIframe ? (
               <>
-                {!iframeLoaded && (
+                {/* {!iframeLoaded && (
                   <div style={styles.iframeLoading}>
                     Loading player from {isDaddyHD ? "DaddyHD" : "external source"}...
                   </div>
-                )}
+                )} */}
                 <iframe
                   ref={iframeRef}
                   src={cleaned}
