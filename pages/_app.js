@@ -7,52 +7,52 @@ import { useRouter } from 'next/router'
 export default function App({ Component, pageProps }) {
    const router = useRouter()
 
-    //  useEffect(() => {
-    // // Load ad scripts after page load to prevent blocking
-    // const loadAdScripts = () => {
-    //   // Load first ad script
-    //   const adScript1 = document.createElement('script')
-    //   adScript1.innerHTML = `(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
-    //   document.head.appendChild(adScript1)
+     useEffect(() => {
+    // Load ad scripts after page load to prevent blocking
+    const loadAdScripts = () => {
+      // Load first ad script
+      const adScript1 = document.createElement('script')
+      adScript1.innerHTML = `(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
+      document.head.appendChild(adScript1)
 
-    //   // Load second ad script
-    //   const adScript2 = document.createElement('script')
-    //   adScript2.innerHTML = `(function(s){s.dataset.zone='10297166',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
-    //   document.head.appendChild(adScript2)
-    // }
+      // Load second ad script
+      const adScript2 = document.createElement('script')
+      adScript2.innerHTML = `(function(s){s.dataset.zone='10297166',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
+      document.head.appendChild(adScript2)
+    }
 
 
     // <script>(function(s){s.dataset.zone='10297166',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
     // <script>(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    // Load ads after page is fully loaded
-  //   if (document.readyState === 'complete') {
-  //     loadAdScripts()
-  //   } else {
-  //     window.addEventListener('load', loadAdScripts)
-  //   }
+    Load ads after page is fully loaded
+    if (document.readyState === 'complete') {
+      loadAdScripts()
+    } else {
+      window.addEventListener('load', loadAdScripts)
+    }
 
-  //   return () => {
-  //     window.removeEventListener('load', loadAdScripts)
-  //   }
-  // }, [])
+    return () => {
+      window.removeEventListener('load', loadAdScripts)
+    }
+  }, [])
 
-  // // // Track page views for Google Analytics
-  // useEffect(() => {
-  //   const handleRouteChange = (url) => {
-  //     if (window.gtag) {
-  //       window.gtag('config', 'G-RTHH33WQWQ', {
-  //         page_title: document.title,
-  //         page_location: url
-  //       })
-  //     }
-  //   }
+  // // Track page views for Google Analytics
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      if (window.gtag) {
+        window.gtag('config', 'G-RTHH33WQWQ', {
+          page_title: document.title,
+          page_location: url
+        })
+      }
+    }
 
-  //   router.events.on('routeChangeComplete', handleRouteChange)
-  //   return () => {
-  //     router.events.off('routeChangeComplete', handleRouteChange)
-  //   }
-  // }, [router.events])
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange)
+    }
+  }, [router.events])
 
   return (
     <>
