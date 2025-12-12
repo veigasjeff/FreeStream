@@ -423,7 +423,6 @@ export default function PlayerPage({ show }) {
       display: "flex",
       flexDirection: "column",
       overflow: "hidden",
-      
       position: "relative",
     },
     header: {
@@ -725,9 +724,9 @@ export default function PlayerPage({ show }) {
           )}
         </header>
 <h2 className="text-bg font-bold text-light mb-6 text-center flex items-center justify-center gap-2">
-  🔊
+  
   <span className="gradient-text">
-    Unmute the player inside the player at the bottom section, not at the top. 
+    For Moile User: Unmute the player inside the player at the bottom section 🔊  Not at the Top. 
   </span>
   
 </h2>
@@ -790,9 +789,9 @@ export default function PlayerPage({ show }) {
         </div>
       
 <h2 className="text-bg font-bold text-light mb-6 text-center flex items-center justify-center gap-2">
-  🔊
+  
   <span className="gradient-text">
-    Unmute the player inside the player at the bottom section, not at the top. 
+    For Moile User: Unmute the player inside the player at the bottom section 🔊  Not at the Top. 
   </span>
   
 </h2>
