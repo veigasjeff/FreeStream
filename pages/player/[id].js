@@ -423,6 +423,7 @@ export default function PlayerPage({ show }) {
       display: "flex",
       flexDirection: "column",
       overflow: "hidden",
+      
       position: "relative",
     },
     header: {
@@ -435,6 +436,7 @@ export default function PlayerPage({ show }) {
       background: "rgba(0,0,0,0.9)",
       borderBottom: "1px solid rgba(255,255,255,0.15)",
       gap: isMobile ? "8px" : "12px",
+       marginTop: "50px",
       flexWrap: "wrap",
       position: "relative",
       zIndex: 100,
@@ -727,7 +729,7 @@ export default function PlayerPage({ show }) {
   <span className="gradient-text">
     Unmute the player inside the player at the bottom section, not at the top. 
   </span>
-  🔇  
+  
 </h2>
 
         <div ref={containerRef} style={styles.playerWrap} onDoubleClick={toggleFullscreen}>
@@ -750,11 +752,6 @@ export default function PlayerPage({ show }) {
             {/* Show iframe for daddyhd.com and other non-video URLs */}
             {useIframe ? (
               <>
-                {/* {!iframeLoaded && (
-                  <div style={styles.iframeLoading}>
-                    Loading player from {isDaddyHD ? "DaddyHD" : "external source"}...
-                  </div>
-                )} */}
                 
                 <iframe 
                   ref={iframeRef}
@@ -769,20 +766,6 @@ export default function PlayerPage({ show }) {
                   frameBorder="0"
                   marginWidth="0"
                   marginHeight="0"
-                  referrerPolicy="no-referrer"
-
-                // ref={iframeRef}
-                // src={cleaned}
-                // style={styles.iframe}
-                // allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                // allowFullScreen
-                // title={show?.title || "player-iframe"}
-                // key={currentStreamUrl}
-                // onLoad={handleIframeLoad}
-                // scrolling="no"
-                // frameBorder="0"
-                // // sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                // referrerPolicy="no-referrer"
                 />
               </>
             ) : (
@@ -805,17 +788,13 @@ export default function PlayerPage({ show }) {
             ← {isMobile ? "Back to Schedule" : "Back to Full Schedule"}
           </Link>
         </div>
-        {/* <h2 className="text-bg font-bold text-light mb-6 flex flex-col items-center justify-center text-center gap-2">
-         <span className="gradient-text">
-            Unmute it from inside the player section at the bottom section 🔊.
-         </span>
-        </h2> */}
+      
 <h2 className="text-bg font-bold text-light mb-6 text-center flex items-center justify-center gap-2">
   🔊
   <span className="gradient-text">
     Unmute the player inside the player at the bottom section, not at the top. 
   </span>
-  🔇  
+  
 </h2>
 
       </div>
@@ -848,6 +827,17 @@ export async function getStaticProps({ params }) {
   if (!show) return { notFound: true };
   return { props: { show }, revalidate: 30 };
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
