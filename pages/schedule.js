@@ -14,7 +14,7 @@ export default function SchedulePage() {
   const [intendedAction, setIntendedAction] = useState(null);
   
   // Load More Feature States
-  const [visibleShowsCount, setVisibleShowsCount] = useState(12);
+  const [visibleShowsCount, setVisibleShowsCount] = useState(25);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [allShows, setAllShows] = useState([]);
 
@@ -96,7 +96,7 @@ export default function SchedulePage() {
     // Simulate loading delay for 2-3 seconds
     setTimeout(() => {
       setVisibleShowsCount(prevCount => {
-        const newCount = prevCount + 12;
+        const newCount = prevCount + 25;
         // Don't exceed total shows count
         return Math.min(newCount, allShows.length);
       });
@@ -273,7 +273,7 @@ export default function SchedulePage() {
             
             {/* Show count indicator */}
             <div className="mt-4 text-gray-400 text-3xl">
-              Showing {visibleShows.length} of {allShows.length} Movies, Tv Show & Sports Events. 
+              Showing {visibleShows.length} of {allShows.length} - Movies, Tv Show & Sports Events. 
             </div>
             
             {/* FAQ Section for SEO */}
