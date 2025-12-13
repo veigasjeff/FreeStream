@@ -391,7 +391,7 @@ export default function RequestMoviePage() {
               Don't use Telegram? You can also email requests to: 
               <br />
               <a href="mailto:requests@freestreamcinema.com" className="alternative-link">
-                officialcapitalroot@gmail.com
+                contactfreestreaming@protonmail.com
               </a>
             </p>
             <p style={{marginTop: '15px', fontSize: '14px'}}>
