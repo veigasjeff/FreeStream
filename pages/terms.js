@@ -289,7 +289,7 @@ export default function TermsOfServicePage() {
               </ul>
               
               <div className="info-box">
-                <p><strong>Copyright Claims:</strong> If you believe your copyright has been infringed, contact us at copyright@freestreamcinema.com with detailed information.</p>
+                <p><strong>Copyright Claims:</strong> If you believe your copyright has been infringed, contact us at contactfreestreaming@protonmail.com with detailed information.</p>
               </div>
             </div>
           </div>

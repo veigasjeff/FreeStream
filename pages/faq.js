@@ -6,7 +6,7 @@ export default function FAQPage() {
   const faqItems = [
     {
       question: "What is Free Streaming?",
-      answer: "Free Streaming is a free online streaming platform that broadcasts movies at scheduled times, similar to traditional television. We offer 3 daily shows at fixed times: 10:00 AM, 3:00 PM, and 8:00 PM."
+      answer: "Free Streaming is a free online streaming platform that broadcasts movies at scheduled times, similar to traditional television. We offer 3 daily shows at fixed GMT times"
     },
     {
       question: "Is it really free? No hidden charges?",

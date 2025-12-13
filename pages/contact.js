@@ -373,7 +373,7 @@ export default function ContactPage() {
                     </div>
                     <div className="info-content">
                       <h4>Email & Business Enquiry For Advertisement.</h4>
-                      <p>officialcapitalroot@gmail.com</p>
+                      <p>contactfreestreaming@protonmail.com</p>
                       <p className="small-text">We Will Response within 24 hours</p>
                     </div>
                   </div>

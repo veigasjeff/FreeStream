@@ -298,7 +298,7 @@ export default function PrivacyPolicyPage() {
               <h3>Exercising Your Rights</h3>
               <p>To exercise your privacy rights, contact us at:</p>
               <div className="contact-info-box">
-                <p><strong>Email:</strong> privacy@freestreamcinema.com</p>
+                <p><strong>Email : </strong> contactfreestreaming@protonmail.com</p>
                 <p><strong>Response Time:</strong> We aim to respond within 30 days</p>
               </div>
             </div>

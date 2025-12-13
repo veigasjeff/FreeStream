@@ -341,8 +341,8 @@ export default function LegalDisclaimerPage() {
               <h3>Legal Inquiries</h3>
               <p>For legal matters, contact:</p>
               <div className="info-box">
-                <p><strong>Email:</strong> legal@freestreamcinema.com</p>
-                <p><strong>Mail:</strong> Free Streaming Legal Department, Los Angeles, CA</p>
+                <p><strong>Email:</strong> contactfreestreaming@protonmail.com</p>
+                <p><strong>Mail:</strong> Free Streaming Legal Department</p>
                 <p><strong>Response Time:</strong> We aim to respond within 30 business days</p>
               </div>
               
@@ -366,7 +366,7 @@ export default function LegalDisclaimerPage() {
             </Link>
           </div>
         </div>
-      </section>
+      </section>  
     </>
   );
 }
