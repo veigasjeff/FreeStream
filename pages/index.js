@@ -1732,7 +1732,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="glass-card p-12 text-center max-w-4xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-display font-bold mb-6">
-              Ready for <span className="gradient-text">Live Cinema?</span>
+              Ready for <span className="gradient-text">Live Cinema Tv Show & Sports?</span>
             </h2>
             <p className="text-xl text-light/70 mb-8 max-w-2xl mx-auto">
               Go to the player page during scheduled times to watch live streaming
