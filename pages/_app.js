@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { useEffect } from 'react'
+import Script from "next/script";
 import { useRouter } from 'next/router'
 
 export default function App({ Component, pageProps }) {
@@ -57,6 +58,12 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <div className="min-h-screen flex flex-col">
+       <Script
+        async
+        data-id="101498157"
+        src="/759258172094a95bf.js"
+        strategy="afterInteractive"
+      />
         <Header />
         <main className="flex-grow">
           <Component {...pageProps} />
