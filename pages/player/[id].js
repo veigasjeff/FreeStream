@@ -776,7 +776,7 @@ export default function PlayerPage({ show }) {
       <Script
         async
         data-id="101498160"
-        src="/e18f05a9ad.js"
+        src="//static.getclicky.com/js"
         strategy="afterInteractive"
       />
       <div style={styles.page}>
