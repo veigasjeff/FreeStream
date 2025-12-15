@@ -324,7 +324,7 @@ export default function ShowPage({ show }) {
 
   // Helper function to convert duration to ISO 8601 format
   const convertDurationToISO = (durationStr) => {
-    if (!durationStr) return "PT2H";
+    if (!durationStr || durationStr === "Live") return "PT2H";
     const hoursMatch = durationStr.match(/(\d+)h/);
     const minutesMatch = durationStr.match(/(\d+)min/);
     const hours = hoursMatch ? parseInt(hoursMatch[1]) : 2;
@@ -336,7 +336,6 @@ export default function ShowPage({ show }) {
   const generateArticleSchema = () => {
     if (!show) return null;
 
-    // Use current date if show.date is invalid or in the future
     const publishedDate = show.date && !isNaN(new Date(show.date).getTime()) 
       ? new Date(show.date + "T12:00:00Z").toISOString()
       : new Date().toISOString();
@@ -350,7 +349,12 @@ export default function ShowPage({ show }) {
       },
       "headline": show.title,
       "description": show.description?.substring(0, 200) || "",
-      "image": `${baseUrl}/${show.image}`,
+      "image": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/${show.image}`,
+        "width": 1200,
+        "height": 630
+      },
       "author": {
         "@type": "Organization",
         "name": "Free Streaming",
@@ -374,8 +378,7 @@ export default function ShowPage({ show }) {
       "inLanguage": show.language || "English",
       "wordCount": show.description ? show.description.split(' ').length : 100,
       "timeRequired": convertDurationToISO(show.duration),
-      "url": currentUrl,
-      "thumbnailUrl": `${baseUrl}/${show.image}`
+      "url": currentUrl
     };
   };
 
@@ -383,35 +386,138 @@ export default function ShowPage({ show }) {
   const generateMovieSchema = () => {
     if (!show) return null;
 
-    const actors = Array.isArray(show.cast) 
-      ? show.cast.map(actor => ({ "@type": "Person", "name": actor }))
-      : [];
+    // Prepare actors array
+    const actors = [];
+    if (Array.isArray(show.cast) && show.cast.length > 0) {
+      show.cast.forEach(actorName => {
+        if (actorName && actorName.trim() !== '') {
+          actors.push({
+            "@type": "Person",
+            "name": actorName.trim()
+          });
+        }
+      });
+    }
 
-    const directors = Array.isArray(show.director)
-      ? show.director.map(dir => ({ "@type": "Person", "name": dir }))
-      : (show.director ? [{ "@type": "Person", "name": show.director }] : []);
+    // Prepare directors array
+    const directors = [];
+    if (Array.isArray(show.director)) {
+      show.director.forEach(dirName => {
+        if (dirName && dirName.trim() !== '') {
+          directors.push({
+            "@type": "Person",
+            "name": dirName.trim()
+          });
+        }
+      });
+    } else if (show.director && show.director.trim() !== '') {
+      directors.push({
+        "@type": "Person",
+        "name": show.director.trim()
+      });
+    }
 
-    return {
+    // Prepare movie schema
+    const movieSchema = {
       "@context": "https://schema.org",
       "@type": "Movie",
-      "name": show.title,
+      "name": show.title || "",
       "description": show.description || "",
       "image": `${baseUrl}/${show.image}`,
       "dateCreated": show.year || "2025",
-      "director": directors,
-      "actor": actors,
       "genre": show.genre || [],
       "duration": convertDurationToISO(show.duration),
       "inLanguage": show.language || "English",
-      "subtitleLanguage": show.subtitles || [],
       "contentRating": show.rating || "",
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": show.rating ? parseFloat(show.rating) || "4.5" : "4.5",
-        "ratingCount": "1000",
-        "bestRating": "10",
-        "worstRating": "1"
-      },
+      "url": currentUrl
+    };
+
+    // Add actors if available
+    if (actors.length > 0) {
+      movieSchema.actor = actors;
+    }
+
+    // Add directors if available
+    if (directors.length > 0) {
+      movieSchema.director = directors;
+    }
+
+    // Add subtitles if available
+    if (show.subtitles && Array.isArray(show.subtitles) && show.subtitles.length > 0) {
+      movieSchema.subtitleLanguage = show.subtitles;
+    }
+
+    // Add aggregate rating
+    if (show.rating) {
+      const ratingValue = parseFloat(show.rating);
+      if (!isNaN(ratingValue)) {
+        movieSchema.aggregateRating = {
+          "@type": "AggregateRating",
+          "ratingValue": ratingValue.toString(),
+          "ratingCount": "1000",
+          "bestRating": "10",
+          "worstRating": "1"
+        };
+      }
+    }
+
+    return movieSchema;
+  };
+
+  // Generate TVSeries Schema for TV shows
+  const generateTVSeriesSchema = () => {
+    if (!show) return null;
+    
+    // Check if it's a TV series (based on category or title containing "Season")
+    const isTVSeries = show.category === "TvSeries" || 
+                      show.title?.toLowerCase().includes("season") || 
+                      show.title?.toLowerCase().includes("s0");
+    
+    if (!isTVSeries) return null;
+
+    const actors = [];
+    if (Array.isArray(show.cast) && show.cast.length > 0) {
+      show.cast.forEach(actorName => {
+        if (actorName && actorName.trim() !== '') {
+          actors.push({
+            "@type": "Person",
+            "name": actorName.trim()
+          });
+        }
+      });
+    }
+
+    const directors = [];
+    if (Array.isArray(show.director)) {
+      show.director.forEach(dirName => {
+        if (dirName && dirName.trim() !== '') {
+          directors.push({
+            "@type": "Person",
+            "name": dirName.trim()
+          });
+        }
+      });
+    } else if (show.director && show.director.trim() !== '') {
+      directors.push({
+        "@type": "Person",
+        "name": show.director.trim()
+      });
+    }
+
+    return {
+      "@context": "https://schema.org",
+      "@type": "TVSeries",
+      "name": show.title || "",
+      "description": show.description || "",
+      "image": `${baseUrl}/${show.image}`,
+      "datePublished": show.date || "2025",
+      "numberOfSeasons": "1",
+      "numberOfEpisodes": "10",
+      "genre": show.genre || [],
+      "actor": actors,
+      "director": directors,
+      "inLanguage": show.language || "English",
+      "contentRating": show.rating || "",
       "url": currentUrl
     };
   };
@@ -448,6 +554,7 @@ export default function ShowPage({ show }) {
   // Generate all schema data
   const articleSchema = generateArticleSchema();
   const movieSchema = generateMovieSchema();
+  const tvSeriesSchema = generateTVSeriesSchema();
 
   // Format date for display
   const formatDate = (dateStr) => {
@@ -465,6 +572,9 @@ export default function ShowPage({ show }) {
   };
 
   const displayDate = formatDate(show.date);
+  const isTVSeries = show.category === "TvSeries" || 
+                     show.title?.toLowerCase().includes("season") || 
+                     show.title?.toLowerCase().includes("s0");
 
   return (
     <>
@@ -475,7 +585,7 @@ export default function ShowPage({ show }) {
         <link rel="canonical" href={currentUrl} />
 
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={`Watch ${show.title} - Live Movie Streaming | Free Streaming`} />
+        <meta property="og:title" content={`Watch ${show.title} - ${isTVSeries ? 'TV Series' : 'Movie'} Streaming | Free Streaming`} />
         <meta property="og:description" content={`${show.description?.substring(0, 200) || ''} Watch live at ${show.time} on ${displayDate}.`} />
         <meta property="og:image" content={`${baseUrl}/${show.image}`} />
         <meta property="og:url" content={currentUrl} />
@@ -499,8 +609,15 @@ export default function ShowPage({ show }) {
           />
         )}
 
-        {/* Movie Schema */}
-        {movieSchema && (
+        {/* Movie or TVSeries Schema */}
+        {isTVSeries && tvSeriesSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(tvSeriesSchema) }}
+          />
+        )}
+
+        {!isTVSeries && movieSchema && (
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(movieSchema) }}
@@ -565,7 +682,7 @@ export default function ShowPage({ show }) {
                     <p className="text-light/70">Streaming Time</p>
                   </div>
                   <div className="p-4 bg-white/5 rounded-lg">
-                    <p className="text-light mb-2">This {show.genre?.includes('Sports') ? 'sports event' : 'movie'} will be streamed live at:</p>
+                    <p className="text-light mb-2">This {show.genre?.includes('Sports') ? 'sports event' : isTVSeries ? 'TV series' : 'movie'} will be streamed live at:</p>
                     <p className="text-primary font-bold">{displayDate} • {show.time}</p>
                   </div>
                   <Link href={`/player/${show.id}`} className="btn-primary w-full py-3 flex items-center justify-center gap-2">
@@ -575,10 +692,10 @@ export default function ShowPage({ show }) {
                 </div>
               </div>
 
-              <div className="glass-card p-6 mb-8" itemScope itemType="https://schema.org/Movie">
+              <div className="glass-card p-6 mb-8" itemScope itemType={isTVSeries ? "https://schema.org/TVSeries" : "https://schema.org/Movie"}>
                 <h2 className="text-2xl font-bold text-light mb-6 flex items-center gap-2">
                   <FaFilm className="text-primary" />
-                  <span className="gradient-text">Details</span>
+                  <span className="gradient-text">{isTVSeries ? 'TV Series Details' : 'Movie Details'}</span>
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
@@ -609,7 +726,7 @@ export default function ShowPage({ show }) {
                       </div>
                     )}
                     <div className="grid grid-cols-2 gap-4">
-                      {show.duration && (
+                      {show.duration && show.duration !== "Live" && (
                         <div>
                           <h3 className="text-light/70 text-sm mb-2">Duration</h3>
                           <p className="text-light font-semibold" itemProp="duration">{show.duration}</p>
@@ -629,7 +746,7 @@ export default function ShowPage({ show }) {
                           <p className="text-light" itemProp="inLanguage">{show.language}</p>
                         </div>
                       )}
-                      {show.subtitles && show.subtitles.length > 0 && (
+                      {show.subtitles && show.subtitles.length > 0 && show.subtitles[0] !== "NA" && (
                         <div>
                           <h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaClosedCaptioning /> Subtitles</h3>
                           <p className="text-light">{show.subtitles.join(", ")}</p>
@@ -654,7 +771,7 @@ export default function ShowPage({ show }) {
 
             <aside className="space-y-6">
               <div className="glass-card p-6 text-center">
-                <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Share This {show.genre?.includes('Sports') ? 'Event' : 'Movie'}</span></h3>
+                <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Share This {show.genre?.includes('Sports') ? 'Event' : isTVSeries ? 'TV Series' : 'Movie'}</span></h3>
                 <div className="flex gap-3 justify-center items-center">
                   <FacebookShareButton url={shareUrl} quote={shareTitle}>
                     <FacebookIcon size={50} round />
