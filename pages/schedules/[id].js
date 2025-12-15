@@ -377,83 +377,71 @@ export default function ShowPage({ show }) {
     };
   };
 
-  // Generate Movie Schema with all required fields
+  // Generate Movie Schema with ALL required fields
   const generateMovieSchema = () => {
     if (!show) return null;
 
-    // Create actors array properly
-    const actors = [];
-    if (show.cast && Array.isArray(show.cast)) {
-      show.cast.forEach(actorName => {
-        if (actorName && actorName.trim() !== '') {
-          actors.push({
-            "@type": "Person",
-            "name": actorName.trim()
-          });
-        }
-      });
-    }
-
-    // Create directors array properly
-    const directors = [];
-    if (show.director) {
-      if (Array.isArray(show.director)) {
-        show.director.forEach(dirName => {
-          if (dirName && dirName.trim() !== '') {
-            directors.push({
-              "@type": "Person",
-              "name": dirName.trim()
-            });
-          }
-        });
-      } else if (show.director.trim() !== '') {
-        directors.push({
-          "@type": "Person",
-          "name": show.director.trim()
-        });
-      }
-    }
-
-    // Build the complete Movie schema
+    // Create movie schema with ALL REQUIRED FIELDS
     const movieSchema = {
       "@context": "https://schema.org",
       "@type": "Movie",
-      "name": show.title || "",
-      "image": `${baseUrl}/${show.image}`,
+      "name": show.title || "Movie",
       "description": show.description || "",
+      "image": `${baseUrl}/${show.image}`,
       "dateCreated": show.year || "2025",
       "genre": show.genre || [],
       "duration": convertDurationToISO(show.duration),
       "inLanguage": show.language || "English",
-      "contentRating": show.rating || "",
-      "url": currentUrl
+      "url": currentUrl,
+      "contentRating": show.rating || ""
     };
 
-    // Add actors if available
-    if (actors.length > 0) {
-      movieSchema.actor = actors;
+    // Add director with proper Person object
+    if (show.director) {
+      if (Array.isArray(show.director)) {
+        movieSchema.director = show.director.map(dir => ({
+          "@type": "Person",
+          "name": dir
+        }));
+      } else {
+        movieSchema.director = {
+          "@type": "Person",
+          "name": show.director
+        };
+      }
     }
 
-    // Add directors if available
-    if (directors.length > 0) {
-      movieSchema.director = directors;
+    // Add cast with individual Person objects
+    if (show.cast && Array.isArray(show.cast)) {
+      const actors = [];
+      for (let i = 0; i < show.cast.length; i++) {
+        if (show.cast[i] && show.cast[i].trim() !== '') {
+          actors.push({
+            "@type": "Person",
+            "name": show.cast[i].trim()
+          });
+        }
+      }
+      if (actors.length > 0) {
+        movieSchema.actor = actors;
+      }
     }
 
-    // Add subtitles if available and not "NA"
-    if (show.subtitles && Array.isArray(show.subtitles) && show.subtitles.length > 0) {
+    // Add subtitles if not "NA"
+    if (show.subtitles && Array.isArray(show.subtitles)) {
       const validSubtitles = show.subtitles.filter(sub => sub !== "NA");
       if (validSubtitles.length > 0) {
         movieSchema.subtitleLanguage = validSubtitles;
       }
     }
 
-    // Add aggregate rating
+    // Add rating if exists
     if (show.rating) {
-      const ratingValue = parseFloat(show.rating);
-      if (!isNaN(ratingValue)) {
+      const ratingNum = parseFloat(show.rating);
+      if (!isNaN(ratingNum)) {
         movieSchema.aggregateRating = {
           "@type": "AggregateRating",
-          "ratingValue": ratingValue.toString(),
+          "ratingValue": ratingNum.toString(),
           "ratingCount": "1000",
           "bestRating": "10",
           "worstRating": "1"
@@ -464,63 +452,61 @@ export default function ShowPage({ show }) {
     return movieSchema;
   };
 
-  // Generate TVSeries Schema for TV shows
+  // Generate TVSeries Schema
   const generateTVSeriesSchema = () => {
     if (!show) return null;
     
-    // Check if it's a TV series
     const isTVSeries = show.category === "TvSeries" || 
                       show.title?.toLowerCase().includes("season") || 
                       show.title?.toLowerCase().includes("s0");
     
     if (!isTVSeries) return null;
 
-    const actors = [];
-    if (show.cast && Array.isArray(show.cast)) {
-      show.cast.forEach(actorName => {
-        if (actorName && actorName.trim() !== '') {
-          actors.push({
-            "@type": "Person",
-            "name": actorName.trim()
-          });
-        }
-      });
-    }
+    const tvSchema = {
+      "@context": "https://schema.org",
+      "@type": "TVSeries",
+      "name": show.title || "TV Series",
+      "description": show.description || "",
+      "image": `${baseUrl}/${show.image}`,
+      "datePublished": show.date || "2025",
+      "genre": show.genre || [],
+      "inLanguage": show.language || "English",
+      "url": currentUrl,
+      "numberOfSeasons": "1"
+    };
 
-    const directors = [];
+    // Add director
     if (show.director) {
       if (Array.isArray(show.director)) {
-        show.director.forEach(dirName => {
-          if (dirName && dirName.trim() !== '') {
-            directors.push({
-              "@type": "Person",
-              "name": dirName.trim()
-            });
-          }
-        });
-      } else if (show.director.trim() !== '') {
-        directors.push({
+        tvSchema.director = show.director.map(dir => ({
           "@type": "Person",
-          "name": show.director.trim()
-        });
+          "name": dir
+        }));
+      } else {
+        tvSchema.director = {
+          "@type": "Person",
+          "name": show.director
+        };
       }
     }
 
-    return {
-      "@context": "https://schema.org",
-      "@type": "TVSeries",
-      "name": show.title || "",
-      "image": `${baseUrl}/${show.image}`,
-      "description": show.description || "",
-      "datePublished": show.date || "2025",
-      "numberOfSeasons": "1",
-      "genre": show.genre || [],
-      "actor": actors,
-      "director": directors,
-      "inLanguage": show.language || "English",
-      "contentRating": show.rating || "",
-      "url": currentUrl
-    };
+    // Add cast
+    if (show.cast && Array.isArray(show.cast)) {
+      const actors = [];
+      for (let i = 0; i < show.cast.length; i++) {
+        if (show.cast[i] && show.cast[i].trim() !== '') {
+          actors.push({
+            "@type": "Person",
+            "name": show.cast[i].trim()
+          });
+        }
+      }
+      if (actors.length > 0) {
+        tvSchema.actor = actors;
+      }
+    }
+
+    return tvSchema;
   };
 
   const pickRandomShows = () => {
@@ -552,15 +538,13 @@ export default function ShowPage({ show }) {
     );
   }
 
-  // Generate all schema data
+  // Generate schemas
   const articleSchema = generateArticleSchema();
-  const movieSchema = generateMovieSchema();
-  const tvSeriesSchema = generateTVSeriesSchema();
-
-  // Check if it's a TV series
   const isTVSeries = show.category === "TvSeries" || 
                      show.title?.toLowerCase().includes("season") || 
                      show.title?.toLowerCase().includes("s0");
+  
+  const mediaSchema = isTVSeries ? generateTVSeriesSchema() : generateMovieSchema();
 
   // Format date for display
   const formatDate = (dateStr) => {
@@ -613,17 +597,10 @@ export default function ShowPage({ show }) {
         )}
 
         {/* Movie or TVSeries Schema */}
-        {isTVSeries && tvSeriesSchema && (
+        {mediaSchema && (
           <script
             type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(tvSeriesSchema) }}
-          />
-        )}
-
-        {!isTVSeries && movieSchema && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(movieSchema) }}
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(mediaSchema) }}
           />
         )}
 
