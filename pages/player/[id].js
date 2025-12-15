@@ -775,11 +775,10 @@ export default function PlayerPage({ show }) {
       {/* Added Next.js Script component as requested */}
       <Script
         async
-        data-id="101498157"
-        src="/759258172094a95bf.js"
+        data-id="101498160"
+        src="/e18f05a9ad.js"
         strategy="afterInteractive"
       />
-
       <div style={styles.page}>
         <header style={styles.header}>
           <div style={styles.titleRow}>
