@@ -1,71 +1,70 @@
-import '../styles/globals.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { useEffect } from 'react'
+import "../styles/globals.css";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { useEffect } from "react";
 import Script from "next/script";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
-   const router = useRouter()
+  const router = useRouter();
 
-     useEffect(() => {
+  useEffect(() => {
     // Load ad scripts after page load to prevent blocking
     const loadAdScripts = () => {
       // Load first ad script
-      const adScript1 = document.createElement('script')
-      adScript1.innerHTML = `(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
-      document.head.appendChild(adScript1)
+      const adScript1 = document.createElement("script");
+      adScript1.innerHTML = `(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
+      document.head.appendChild(adScript1);
 
       // Load second ad script
-      const adScript2 = document.createElement('script')
-      adScript2.innerHTML = `(function(s){s.dataset.zone='10297166',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`
-      document.head.appendChild(adScript2)
-    }
-
+      const adScript2 = document.createElement("script");
+      adScript2.innerHTML = `(function(s){s.dataset.zone='10297166',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
+      document.head.appendChild(adScript2);
+    };
 
     // <script>(function(s){s.dataset.zone='10297166',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
     // <script>(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     // Load ads after page is fully loaded
-    if (document.readyState === 'complete') {
-      loadAdScripts()
+    if (document.readyState === "complete") {
+      loadAdScripts();
     } else {
-      window.addEventListener('load', loadAdScripts)
+      window.addEventListener("load", loadAdScripts);
     }
 
     return () => {
-      window.removeEventListener('load', loadAdScripts)
-    }
-  }, [])
+      window.removeEventListener("load", loadAdScripts);
+    };
+  }, []);
 
   // // Track page views for Google Analytics
   useEffect(() => {
     const handleRouteChange = (url) => {
       if (window.gtag) {
-        window.gtag('config', 'G-RTHH33WQWQ', {
+        window.gtag("config", "G-RTHH33WQWQ", {
           page_title: document.title,
-          page_location: url
-        })
+          page_location: url,
+        });
       }
-    }
+    };
 
-    router.events.on('routeChangeComplete', handleRouteChange)
+    router.events.on("routeChangeComplete", handleRouteChange);
     return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
     <>
       <div className="min-h-screen flex flex-col">
-       <Script
-        async
-        data-id="101498157"
-        src="/759258172094a95bf.js"
-        strategy="afterInteractive"
-      />
         <Header />
         <main className="flex-grow">
+          <Script
+            async
+            data-id="101498157"
+            src="/759258172094a95bf.js"
+            strategy="afterInteractive"
+          />
           <Component {...pageProps} />
         </main>
         <Footer />
@@ -73,4 +72,3 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
-
