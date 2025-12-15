@@ -1613,6 +1613,23 @@ export default function ShowPage({ show }) {
                   <YouTubePlayer videoId={show.youtubeid} title={show.title} />
                 </div>
               </article>
+   <div className="glass-card p-6 text-center">
+                <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Live Streaming Info</span></h3>
+                <div className="space-y-4">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-primary mb-2">{show.time}</div>
+                    <p className="text-light/70">Streaming Time GMT</p>
+                  </div>
+                  <div className="p-4 bg-white/5 rounded-lg">
+                    <p className="text-light mb-2">This movie will be streamed live at GMT Time :</p>
+                    <p className="text-primary font-bold">{show.date} • {show.time}</p>
+                  </div>
+                  <Link href={`/player/${show.id}`} className="btn-primary w-full py-3 flex items-center justify-center gap-2">
+                    <FaPlayCircle /> Go to Live Player
+                  </Link>
+                  <div className="text-light/50 text-sm"><p>Live stream available only at scheduled time</p></div>
+                </div>
+              </div>
 
               <div className="glass-card p-6 mb-8">
                 <h2 className="text-2xl font-bold text-light mb-6 flex items-center gap-2">
@@ -1673,7 +1690,7 @@ export default function ShowPage({ show }) {
                 </div>
               </div>
 
-              <div className="glass-card p-6 text-center">
+              {/* <div className="glass-card p-6 text-center">
                 <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Live Streaming Info</span></h3>
                 <div className="space-y-4">
                   <div className="text-center">
@@ -1689,7 +1706,7 @@ export default function ShowPage({ show }) {
                   </Link>
                   <div className="text-light/50 text-sm"><p>Live stream available only at scheduled time</p></div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Other Shows using Next/Image */}
               {randomShows.length > 0 && (
