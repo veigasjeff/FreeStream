@@ -332,7 +332,7 @@ export default function ShowPage({ show }) {
     return `PT${hours}H${minutes}M`;
   };
 
-  // Generate Article Schema (JSON-LD)
+  // Generate Article Schema (JSON-LD) - ONLY ONE
   const generateArticleSchema = () => {
     if (!show) return null;
 
@@ -377,17 +377,49 @@ export default function ShowPage({ show }) {
     };
   };
 
-  // Generate Movie Schema with ALL required fields
+  // Generate Movie Schema - ONLY ONE
   const generateMovieSchema = () => {
     if (!show) return null;
 
-    // Create movie schema with ALL REQUIRED FIELDS
+    // Prepare actors array - each actor as separate object
+    const actors = [];
+    if (show.cast && Array.isArray(show.cast)) {
+      show.cast.forEach(actorName => {
+        if (actorName && actorName.trim() !== '') {
+          actors.push({
+            "@type": "Person",
+            "name": actorName.trim()
+          });
+        }
+      });
+    }
+
+    // Prepare director
+    let director = null;
+    if (show.director) {
+      if (Array.isArray(show.director)) {
+        // If multiple directors, take the first one
+        if (show.director.length > 0 && show.director[0].trim() !== '') {
+          director = {
+            "@type": "Person",
+            "name": show.director[0].trim()
+          };
+        }
+      } else if (show.director.trim() !== '') {
+        director = {
+          "@type": "Person",
+          "name": show.director.trim()
+        };
+      }
+    }
+
+    // Create movie schema with all required fields
     const movieSchema = {
       "@context": "https://schema.org",
       "@type": "Movie",
-      "name": show.title || "Movie",
-      "description": show.description || "",
+      "name": show.title || "",
       "image": `${baseUrl}/${show.image}`,
+      "description": show.description || "",
       "dateCreated": show.year || "2025",
       "genre": show.genre || [],
       "duration": convertDurationToISO(show.duration),
@@ -396,52 +428,31 @@ export default function ShowPage({ show }) {
       "contentRating": show.rating || ""
     };
 
-    // Add director with proper Person object
-    if (show.director) {
-      if (Array.isArray(show.director)) {
-        movieSchema.director = show.director.map(dir => ({
-          "@type": "Person",
-          "name": dir
-        }));
-      } else {
-        movieSchema.director = {
-          "@type": "Person",
-          "name": show.director
-        };
-      }
+    // Add director if available
+    if (director) {
+      movieSchema.director = director;
     }
 
-    // Add cast with individual Person objects
-    if (show.cast && Array.isArray(show.cast)) {
-      const actors = [];
-      for (let i = 0; i < show.cast.length; i++) {
-        if (show.cast[i] && show.cast[i].trim() !== '') {
-          actors.push({
-            "@type": "Person",
-            "name": show.cast[i].trim()
-          });
-        }
-      }
-      if (actors.length > 0) {
-        movieSchema.actor = actors;
-      }
+    // Add actors if available
+    if (actors.length > 0) {
+      movieSchema.actor = actors;
     }
 
-    // Add subtitles if not "NA"
+    // Add subtitles if available and not "NA"
     if (show.subtitles && Array.isArray(show.subtitles)) {
-      const validSubtitles = show.subtitles.filter(sub => sub !== "NA");
+      const validSubtitles = show.subtitles.filter(sub => sub !== "NA" && sub.trim() !== '');
       if (validSubtitles.length > 0) {
         movieSchema.subtitleLanguage = validSubtitles;
       }
     }
 
-    // Add rating if exists
+    // Add aggregate rating if available
     if (show.rating) {
-      const ratingNum = parseFloat(show.rating);
-      if (!isNaN(ratingNum)) {
+      const ratingValue = parseFloat(show.rating);
+      if (!isNaN(ratingValue) && ratingValue > 0) {
         movieSchema.aggregateRating = {
           "@type": "AggregateRating",
-          "ratingValue": ratingNum.toString(),
+          "ratingValue": ratingValue.toString(),
           "ratingCount": "1000",
           "bestRating": "10",
           "worstRating": "1"
@@ -452,22 +463,52 @@ export default function ShowPage({ show }) {
     return movieSchema;
   };
 
-  // Generate TVSeries Schema
+  // Generate TVSeries Schema for TV shows
   const generateTVSeriesSchema = () => {
     if (!show) return null;
     
     const isTVSeries = show.category === "TvSeries" || 
-                      show.title?.toLowerCase().includes("season") || 
-                      show.title?.toLowerCase().includes("s0");
+                      (show.title?.toLowerCase().includes("season") && !show.title?.toLowerCase().includes("seasoning"));
     
     if (!isTVSeries) return null;
+
+    // Prepare actors array
+    const actors = [];
+    if (show.cast && Array.isArray(show.cast)) {
+      show.cast.forEach(actorName => {
+        if (actorName && actorName.trim() !== '') {
+          actors.push({
+            "@type": "Person",
+            "name": actorName.trim()
+          });
+        }
+      });
+    }
+
+    // Prepare director
+    let director = null;
+    if (show.director) {
+      if (Array.isArray(show.director)) {
+        if (show.director.length > 0 && show.director[0].trim() !== '') {
+          director = {
+            "@type": "Person",
+            "name": show.director[0].trim()
+          };
+        }
+      } else if (show.director.trim() !== '') {
+        director = {
+          "@type": "Person",
+          "name": show.director.trim()
+        };
+      }
+    }
 
     const tvSchema = {
       "@context": "https://schema.org",
       "@type": "TVSeries",
-      "name": show.title || "TV Series",
-      "description": show.description || "",
+      "name": show.title || "",
       "image": `${baseUrl}/${show.image}`,
+      "description": show.description || "",
       "datePublished": show.date || "2025",
       "genre": show.genre || [],
       "inLanguage": show.language || "English",
@@ -475,35 +516,14 @@ export default function ShowPage({ show }) {
       "numberOfSeasons": "1"
     };
 
-    // Add director
-    if (show.director) {
-      if (Array.isArray(show.director)) {
-        tvSchema.director = show.director.map(dir => ({
-          "@type": "Person",
-          "name": dir
-        }));
-      } else {
-        tvSchema.director = {
-          "@type": "Person",
-          "name": show.director
-        };
-      }
+    // Add director if available
+    if (director) {
+      tvSchema.director = director;
     }
 
-    // Add cast
-    if (show.cast && Array.isArray(show.cast)) {
-      const actors = [];
-      for (let i = 0; i < show.cast.length; i++) {
-        if (show.cast[i] && show.cast[i].trim() !== '') {
-          actors.push({
-            "@type": "Person",
-            "name": show.cast[i].trim()
-          });
-        }
-      }
-      if (actors.length > 0) {
-        tvSchema.actor = actors;
-      }
+    // Add actors if available
+    if (actors.length > 0) {
+      tvSchema.actor = actors;
     }
 
     return tvSchema;
@@ -538,11 +558,12 @@ export default function ShowPage({ show }) {
     );
   }
 
-  // Generate schemas
+  // Generate schemas - ONLY ONE OF EACH
   const articleSchema = generateArticleSchema();
+  
+  // Check if it's a TV series
   const isTVSeries = show.category === "TvSeries" || 
-                     show.title?.toLowerCase().includes("season") || 
-                     show.title?.toLowerCase().includes("s0");
+                     (show.title?.toLowerCase().includes("season") && !show.title?.toLowerCase().includes("seasoning"));
   
   const mediaSchema = isTVSeries ? generateTVSeriesSchema() : generateMovieSchema();
 
@@ -588,19 +609,21 @@ export default function ShowPage({ show }) {
         <meta name="twitter:image" content={`${baseUrl}/${show.image}`} />
         <meta name="twitter:site" content="@freestreaming" />
 
-        {/* Article Schema */}
+        {/* Article Schema - ONLY ONE */}
         {articleSchema && (
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+            key="article-schema"
           />
         )}
 
-        {/* Movie or TVSeries Schema */}
+        {/* Movie or TVSeries Schema - ONLY ONE */}
         {mediaSchema && (
           <script
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(mediaSchema) }}
+            key="media-schema"
           />
         )}
 
@@ -628,21 +651,16 @@ export default function ShowPage({ show }) {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <article className="glass-card overflow-hidden mb-8" itemScope itemType="https://schema.org/Article">
-                <meta itemProp="datePublished" content={articleSchema?.datePublished} />
-                <meta itemProp="dateModified" content={new Date().toISOString()} />
-                <meta itemProp="author" content="Free Streaming" />
-                <meta itemProp="publisher" content="Free Streaming" />
-                
+              <article className="glass-card overflow-hidden mb-8">
                 <header className="p-6 border-b border-white/10">
-                  <h1 className="text-3xl font-bold text-light mb-2" itemProp="headline">
+                  <h1 className="text-3xl font-bold text-light mb-2">
                     <span className="gradient-text">{show.title}</span>
                   </h1>
                   <div className="flex items-center gap-4 mt-2 text-light/70">
                     <span className="flex items-center gap-1"><FaClock /> {show.time}</span>
                     <span className="flex items-center gap-1"><FaCalendar /> {displayDate}</span>
                     {show.rating && (
-                      <span className="px-2 py-1 bg-primary/20 text-primary text-xs rounded" itemProp="contentRating">{show.rating}</span>
+                      <span className="px-2 py-1 bg-primary/20 text-primary text-xs rounded">{show.rating}</span>
                     )}
                     {show.duration && (
                       <span className="text-light/50">• {show.duration}</span>
@@ -672,7 +690,7 @@ export default function ShowPage({ show }) {
                 </div>
               </div>
 
-              <div className="glass-card p-6 mb-8" itemScope itemType={isTVSeries ? "https://schema.org/TVSeries" : "https://schema.org/Movie"}>
+              <div className="glass-card p-6 mb-8">
                 <h2 className="text-2xl font-bold text-light mb-6 flex items-center gap-2">
                   <FaFilm className="text-primary" />
                   <span className="gradient-text">{isTVSeries ? 'TV Series Details' : 'Movie Details'}</span>
@@ -680,12 +698,12 @@ export default function ShowPage({ show }) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <h3 className="text-light/70 text-sm mb-2">Description</h3>
-                    <p className="text-light leading-relaxed" itemProp="description">{show.description}</p>
+                    <p className="text-light leading-relaxed">{show.description}</p>
                     <div className="mt-6">
                       <h3 className="text-light/70 text-sm mb-2">Genre</h3>
                       <div className="flex flex-wrap gap-2">
                         {show.genre?.map((genre, idx) => (
-                          <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-sm text-light/80" itemProp="genre">{genre}</span>
+                          <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-sm text-light/80">{genre}</span>
                         ))}
                       </div>
                     </div>
@@ -694,7 +712,7 @@ export default function ShowPage({ show }) {
                     {show.director && (
                       <div>
                         <h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaUser /> Director</h3>
-                        <p className="text-light font-semibold" itemProp="director">
+                        <p className="text-light font-semibold">
                           {Array.isArray(show.director) ? show.director.join(", ") : show.director}
                         </p>
                       </div>
@@ -702,20 +720,20 @@ export default function ShowPage({ show }) {
                     {show.cast && show.cast.length > 0 && (
                       <div>
                         <h3 className="text-light/70 text-sm mb-2">Cast</h3>
-                        <p className="text-light" itemProp="actor">{show.cast.join(", ")}</p>
+                        <p className="text-light">{show.cast.join(", ")}</p>
                       </div>
                     )}
                     <div className="grid grid-cols-2 gap-4">
                       {show.duration && show.duration !== "Live" && (
                         <div>
                           <h3 className="text-light/70 text-sm mb-2">Duration</h3>
-                          <p className="text-light font-semibold" itemProp="duration">{show.duration}</p>
+                          <p className="text-light font-semibold">{show.duration}</p>
                         </div>
                       )}
                       {show.year && (
                         <div>
                           <h3 className="text-light/70 text-sm mb-2">Year</h3>
-                          <p className="text-light font-semibold" itemProp="dateCreated">{show.year}</p>
+                          <p className="text-light font-semibold">{show.year}</p>
                         </div>
                       )}
                     </div>
@@ -723,7 +741,7 @@ export default function ShowPage({ show }) {
                       {show.language && (
                         <div>
                           <h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaLanguage /> Language</h3>
-                          <p className="text-light" itemProp="inLanguage">{show.language}</p>
+                          <p className="text-light">{show.language}</p>
                         </div>
                       )}
                       {show.subtitles && show.subtitles.length > 0 && show.subtitles[0] !== "NA" && (
@@ -742,7 +760,7 @@ export default function ShowPage({ show }) {
                   <h3 className="text-lg font-bold text-light mb-4">Keywords</h3>
                   <div className="flex flex-wrap gap-2">
                     {show.keywords.split(", ").map((kw, idx) => (
-                      <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-sm text-light/80" itemProp="keywords">{kw}</span>
+                      <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-sm text-light/80">{kw}</span>
                     ))}
                   </div>
                 </div>
