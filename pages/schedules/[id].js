@@ -349,12 +349,7 @@ export default function ShowPage({ show }) {
       },
       "headline": show.title,
       "description": show.description?.substring(0, 200) || "",
-      "image": {
-        "@type": "ImageObject",
-        "url": `${baseUrl}/${show.image}`,
-        "width": 1200,
-        "height": 630
-      },
+      "image": `${baseUrl}/${show.image}`,
       "author": {
         "@type": "Organization",
         "name": "Free Streaming",
@@ -382,13 +377,13 @@ export default function ShowPage({ show }) {
     };
   };
 
-  // Generate Movie Schema
+  // Generate Movie Schema with all required fields
   const generateMovieSchema = () => {
     if (!show) return null;
 
-    // Prepare actors array
+    // Create actors array properly
     const actors = [];
-    if (Array.isArray(show.cast) && show.cast.length > 0) {
+    if (show.cast && Array.isArray(show.cast)) {
       show.cast.forEach(actorName => {
         if (actorName && actorName.trim() !== '') {
           actors.push({
@@ -399,31 +394,33 @@ export default function ShowPage({ show }) {
       });
     }
 
-    // Prepare directors array
+    // Create directors array properly
     const directors = [];
-    if (Array.isArray(show.director)) {
-      show.director.forEach(dirName => {
-        if (dirName && dirName.trim() !== '') {
-          directors.push({
-            "@type": "Person",
-            "name": dirName.trim()
-          });
-        }
-      });
-    } else if (show.director && show.director.trim() !== '') {
-      directors.push({
-        "@type": "Person",
-        "name": show.director.trim()
-      });
+    if (show.director) {
+      if (Array.isArray(show.director)) {
+        show.director.forEach(dirName => {
+          if (dirName && dirName.trim() !== '') {
+            directors.push({
+              "@type": "Person",
+              "name": dirName.trim()
+            });
+          }
+        });
+      } else if (show.director.trim() !== '') {
+        directors.push({
+          "@type": "Person",
+          "name": show.director.trim()
+        });
+      }
     }
 
-    // Prepare movie schema
+    // Build the complete Movie schema
     const movieSchema = {
       "@context": "https://schema.org",
       "@type": "Movie",
       "name": show.title || "",
-      "description": show.description || "",
       "image": `${baseUrl}/${show.image}`,
+      "description": show.description || "",
       "dateCreated": show.year || "2025",
       "genre": show.genre || [],
       "duration": convertDurationToISO(show.duration),
@@ -442,9 +439,12 @@ export default function ShowPage({ show }) {
       movieSchema.director = directors;
     }
 
-    // Add subtitles if available
+    // Add subtitles if available and not "NA"
     if (show.subtitles && Array.isArray(show.subtitles) && show.subtitles.length > 0) {
-      movieSchema.subtitleLanguage = show.subtitles;
+      const validSubtitles = show.subtitles.filter(sub => sub !== "NA");
+      if (validSubtitles.length > 0) {
+        movieSchema.subtitleLanguage = validSubtitles;
+      }
     }
 
     // Add aggregate rating
@@ -468,7 +468,7 @@ export default function ShowPage({ show }) {
   const generateTVSeriesSchema = () => {
     if (!show) return null;
     
-    // Check if it's a TV series (based on category or title containing "Season")
+    // Check if it's a TV series
     const isTVSeries = show.category === "TvSeries" || 
                       show.title?.toLowerCase().includes("season") || 
                       show.title?.toLowerCase().includes("s0");
@@ -476,7 +476,7 @@ export default function ShowPage({ show }) {
     if (!isTVSeries) return null;
 
     const actors = [];
-    if (Array.isArray(show.cast) && show.cast.length > 0) {
+    if (show.cast && Array.isArray(show.cast)) {
       show.cast.forEach(actorName => {
         if (actorName && actorName.trim() !== '') {
           actors.push({
@@ -488,31 +488,32 @@ export default function ShowPage({ show }) {
     }
 
     const directors = [];
-    if (Array.isArray(show.director)) {
-      show.director.forEach(dirName => {
-        if (dirName && dirName.trim() !== '') {
-          directors.push({
-            "@type": "Person",
-            "name": dirName.trim()
-          });
-        }
-      });
-    } else if (show.director && show.director.trim() !== '') {
-      directors.push({
-        "@type": "Person",
-        "name": show.director.trim()
-      });
+    if (show.director) {
+      if (Array.isArray(show.director)) {
+        show.director.forEach(dirName => {
+          if (dirName && dirName.trim() !== '') {
+            directors.push({
+              "@type": "Person",
+              "name": dirName.trim()
+            });
+          }
+        });
+      } else if (show.director.trim() !== '') {
+        directors.push({
+          "@type": "Person",
+          "name": show.director.trim()
+        });
+      }
     }
 
     return {
       "@context": "https://schema.org",
       "@type": "TVSeries",
       "name": show.title || "",
-      "description": show.description || "",
       "image": `${baseUrl}/${show.image}`,
+      "description": show.description || "",
       "datePublished": show.date || "2025",
       "numberOfSeasons": "1",
-      "numberOfEpisodes": "10",
       "genre": show.genre || [],
       "actor": actors,
       "director": directors,
@@ -556,6 +557,11 @@ export default function ShowPage({ show }) {
   const movieSchema = generateMovieSchema();
   const tvSeriesSchema = generateTVSeriesSchema();
 
+  // Check if it's a TV series
+  const isTVSeries = show.category === "TvSeries" || 
+                     show.title?.toLowerCase().includes("season") || 
+                     show.title?.toLowerCase().includes("s0");
+
   // Format date for display
   const formatDate = (dateStr) => {
     if (!dateStr) return "";
@@ -572,9 +578,6 @@ export default function ShowPage({ show }) {
   };
 
   const displayDate = formatDate(show.date);
-  const isTVSeries = show.category === "TvSeries" || 
-                     show.title?.toLowerCase().includes("season") || 
-                     show.title?.toLowerCase().includes("s0");
 
   return (
     <>
