@@ -1,825 +1,217 @@
-// import Head from 'next/head';
-// import { useRouter } from 'next/router';
-// import schedule from '../../data/schedules.json';
-// import YouTubePlayer from '../../components/YouTubePlayer';
-// import dynamic from 'next/dynamic';
-// import Image from 'next/image';
-// import { FaClock, FaCalendar, FaUser, FaStar, FaLanguage, FaClosedCaptioning, FaFilm, FaPlayCircle, FaLink } from 'react-icons/fa';
-// import Link from 'next/link';
-// import { useEffect, useState } from 'react';
-
-// // Dynamic import for react-share buttons to prevent SSR issues
-// const FacebookShareButton = dynamic(() => import('react-share').then(mod => mod.FacebookShareButton), { ssr: false });
-// const TwitterShareButton = dynamic(() => import('react-share').then(mod => mod.TwitterShareButton), { ssr: false });
-// const FacebookIcon = dynamic(() => import('react-share').then(mod => mod.FacebookIcon), { ssr: false });
-// const TwitterIcon = dynamic(() => import('react-share').then(mod => mod.TwitterIcon), { ssr: false });
-
-// export default function ShowPage({ show }) {
-//   const router = useRouter();
-//   const [randomShows, setRandomShows] = useState([]);
-
-//   const baseUrl = "https://freestreaming.vercel.app";
-//   const currentUrl = `${baseUrl}/schedules/${show?.id}`;
-//   const shareUrl = typeof window !== 'undefined' ? window.location.href : currentUrl;
-//   const shareTitle = `Watch "${show?.title}" on Free Streaming | Live Streaming`;
-
-//   const pickRandomShows = () => {
-//     const filteredShows = schedule.shows.filter(s => s.id !== show.id);
-//     const shuffled = filteredShows.sort(() => 0.5 - Math.random());
-//     setRandomShows(shuffled.slice(0, 3));
-//   };
-
-//   useEffect(() => {
-//     if (show) pickRandomShows();
-//     const interval = setInterval(() => { if (show) pickRandomShows(); }, 5000);
-//     return () => clearInterval(interval);
-//   }, [show]);
-
-//   const copyDirectLink = () => {
-//     navigator.clipboard.writeText(currentUrl).then(() => {
-//       alert("Direct link copied to clipboard!");
-//     });
-//   };
-
-//   if (!show) {
-//     return (
-//       <div className="min-h-screen flex items-center justify-center bg-dark">
-//         <div className="text-center">
-//           <h1 className="text-4xl font-bold text-light mb-4">Show not found</h1>
-//           <Link href="/schedule" className="btn-primary">← Back to Schedule</Link>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   return (
-//     <>
-//       <Head>
-//         <title>{show.title} - Watch on Free Streaming</title>
-//         <meta name="description" content={`${show.description.substring(0, 155)} Watch live streaming at ${show.time} on ${show.date}. Free HD quality on Free Streaming.`} />
-//         <meta name="keywords" content={`${show.keywords}, watch ${show.title} free, ${show.title} streaming, ${show.genre.join(' ')}, free movie streaming, live cinema`} />
-//         <link rel="canonical" href={currentUrl} />
-
-//         <meta property="og:title" content={`Watch ${show.title} - Live Movie Streaming | Free Streaming`} />
-//         <meta property="og:description" content={`${show.description.substring(0, 200)} Watch live at ${show.time} on ${show.date}.`} />
-//         <meta property="og:image" content={`${baseUrl}/${show.image}`} />
-//         <meta property="og:url" content={currentUrl} />
-//         <meta property="og:type" content="article" />
-//         <meta property="og:site_name" content="Free Streaming" />
-//         <meta property="og:published_time" content={show.date + "T10:00:00+00:00"} />
-//         <meta property="og:modified_time" content={new Date().toISOString()} />
-
-//         <meta name="twitter:card" content="summary_large_image" />
-//         <meta name="twitter:title" content={`Watch ${show.title} - Live Streaming`} />
-//         <meta name="twitter:description" content={`${show.description.substring(0, 200)} #FreeMovies #LiveStreaming`} />
-//         <meta name="twitter:image" content={`${baseUrl}/${show.image}`} />
-//       </Head>
-
-//       <div className="min-h-screen py-8 bg-dark">
-//         <div className="container mx-auto px-4">
-//           <nav className="mb-8" aria-label="Breadcrumb">
-//             <ol className="flex items-center space-x-2 text-light/70 text-sm flex-wrap">
-//               <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-//               <li>/</li>
-//               <li><Link href="/schedule" className="hover:text-primary transition-colors">Schedule</Link></li>
-//               <li>/</li>
-//               <li className="text-primary font-semibold truncate max-w-xs" aria-current="page">{show.title}</li>
-//             </ol>
-//           </nav>
-
-//           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-//             <div className="lg:col-span-2">
-//               <article className="glass-card overflow-hidden mb-8">
-//                 <header className="p-6 border-b border-white/10">
-//                   <h1 className="text-3xl font-bold text-light mb-2"><span className="gradient-text">{show.title}</span></h1>
-//                   <div className="flex items-center gap-4 mt-2 text-light/70">
-//                     <span className="flex items-center gap-1"><FaClock /> GMT {show.time}</span>
-//                     <span className="flex items-center gap-1"><FaCalendar /> {show.date}</span>
-//                     <span className="px-2 py-1 bg-primary/20 text-primary text-xs rounded">{show.rating}</span>
-//                     <span className="text-light/50">• {show.duration}</span>
-//                   </div>
-//                 </header>
-//                 <div className="p-6">
-//                   <YouTubePlayer videoId={show.youtubeid} title={show.title} />
-//                 </div>
-//               </article>
-//    <div className="glass-card p-6 text-center">
-//                 <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Live Streaming Info</span></h3>
-//                 <div className="space-y-4">
-//                   <div className="text-center">
-//                     <div className="text-4xl font-bold text-primary mb-2">{show.time}</div>
-//                     <p className="text-light/70">Streaming Time GMT</p>
-//                   </div>
-//                   <div className="p-4 bg-white/5 rounded-lg">
-//                     <p className="text-light mb-2">This movie will be streamed live at GMT Time :</p>
-//                     <p className="text-primary font-bold">{show.date} • {show.time}</p>
-//                   </div>
-//                   <Link href={`/player/${show.id}`} className="btn-primary w-full py-3 flex items-center justify-center gap-2">
-//                     <FaPlayCircle /> Go to Live Player
-//                   </Link>
-//                   <div className="text-light/50 text-sm"><p>Live stream available only at scheduled time</p></div>
-//                 </div>
-//               </div>
-
-//               <div className="glass-card p-6 mb-8">
-//                 <h2 className="text-2xl font-bold text-light mb-6 flex items-center gap-2">
-//                   <FaFilm className="text-primary" />
-//                   <span className="gradient-text">Movie Details</span>
-//                 </h2>
-//                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-//                   <div>
-//                     <h3 className="text-light/70 text-sm mb-2">Description</h3>
-//                     <p className="text-light leading-relaxed">{show.description}</p>
-//                     <div className="mt-6">
-//                       <h3 className="text-light/70 text-sm mb-2">Genre</h3>
-//                       <div className="flex flex-wrap gap-2">
-//                         {show.genre.map((genre, idx) => <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-sm text-light/80">{genre}</span>)}
-//                       </div>
-//                     </div>
-//                   </div>
-//                   <div className="space-y-6">
-//                     <div>
-//                       <h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaUser /> Director</h3>
-//                       <p className="text-light font-semibold">{show.director}</p>
-//                     </div>
-//                     <div>
-//                       <h3 className="text-light/70 text-sm mb-2">Cast</h3>
-//                       <p className="text-light">{show.cast.join(", ")}</p>
-//                     </div>
-//                     <div className="grid grid-cols-2 gap-4">
-//                       <div><h3 className="text-light/70 text-sm mb-2">Duration</h3><p className="text-light font-semibold">{show.duration}</p></div>
-//                       <div><h3 className="text-light/70 text-sm mb-2">Year</h3><p className="text-light font-semibold">{show.year}</p></div>
-//                     </div>
-//                     <div className="grid grid-cols-2 gap-4">
-//                       <div><h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaLanguage /> Language</h3><p className="text-light">{show.language}</p></div>
-//                       <div><h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaClosedCaptioning /> Subtitles</h3><p className="text-light">{show.subtitles.join(", ")}</p></div>
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-
-//               <div className="glass-card p-6">
-//                 <h3 className="text-lg font-bold text-light mb-4">Keywords</h3>
-//                 <div className="flex flex-wrap gap-2">{show.keywords.split(", ").map((kw, idx) => <span key={idx} title={kw}>{kw}</span>)}</div>
-//               </div>
-//             </div>
-
-//             <aside className="space-y-6">
-//               <div className="glass-card p-6 text-center">
-//                 <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Share This Movie</span></h3>
-//                 <div className="flex gap-3 justify-center items-center">
-//                   <FacebookShareButton url={shareUrl} quote={shareTitle}>
-//                     <FacebookIcon size={50} round />
-//                   </FacebookShareButton>
-//                   <TwitterShareButton url={shareUrl} title={shareTitle}>
-//                     <TwitterIcon size={50} round />
-//                   </TwitterShareButton>
-//                   <button onClick={copyDirectLink} className="bg-gray-700 hover:bg-gray-600 p-2 rounded-full flex items-center justify-center" title="Copy Direct Link">
-//                     <FaLink className="text-white" size={28} />
-//                   </button>
-//                 </div>
-//               </div>
-
-//               {/* <div className="glass-card p-6 text-center">
-//                 <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Live Streaming Info</span></h3>
-//                 <div className="space-y-4">
-//                   <div className="text-center">
-//                     <div className="text-4xl font-bold text-primary mb-2">{show.time}</div>
-//                     <p className="text-light/70">Streaming Time GMT</p>
-//                   </div>
-//                   <div className="p-4 bg-white/5 rounded-lg">
-//                     <p className="text-light mb-2">This movie will be streamed live at GMT Time :</p>
-//                     <p className="text-primary font-bold">{show.date} • {show.time}</p>
-//                   </div>
-//                   <Link href={`/player/${show.id}`} className="btn-primary w-full py-3 flex items-center justify-center gap-2">
-//                     <FaPlayCircle /> Go to Live Player
-//                   </Link>
-//                   <div className="text-light/50 text-sm"><p>Live stream available only at scheduled time</p></div>
-//                 </div>
-//               </div> */}
-
-//               {/* Other Shows using Next/Image */}
-//               {randomShows.length > 0 && (
-//                 <div className="glass-card p-6">
-//                   <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Other Shows</span></h3>
-//                   <div className="space-y-4">
-//                     {randomShows.map((rs) => (
-//                       <Link key={rs.id} href={`/schedules/${rs.id}`} className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
-//                         <div className="w-24 h-24 relative flex-shrink-0">
-//                           <Image
-//                             src={`${baseUrl}/${rs.image}`}
-//                             alt={rs.title}
-//                             fill
-//                             quality={90}
-//                             style={{
-//                             filter: 'brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)',
-//                             // objectFit: 'cover',
-//                              }}
-//                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-//                           />
-//                         </div>
-//                         <div className="flex-1 min-w-0">
-//                           <h4 className="font-semibold text-light group-hover:text-primary transition-colors truncate">{rs.title}</h4>
-//                           <p className="text-light/70 text-xs mt-1">{rs.time} • {rs.genre[0]}</p>
-//                         </div>
-//                       </Link>
-//                     ))}
-//                   </div>
-//                 </div>
-//               )}
-
-//                <div className="text-center mt-8 md:mt-12">
-//                  <Link 
-//                   href="/schedule" 
-//                   className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
-//                 >
-//                   <span className="gradient-text">← Back to Full Schedule</span>
-//                 </Link>
-//               </div> 
-//             </aside>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-// // Static Generation
-// export async function getStaticPaths() {
-//   const paths = schedule.shows.map((show) => ({ params: { id: show.id } }));
-//   return { paths, fallback: false };
-// }
-
-// export async function getStaticProps({ params }) {
-//   const show = schedule.shows.find((s) => s.id === params.id);
-//   if (!show) return { notFound: true };
-//   return { props: { show }, revalidate: 3600 };
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import schedule from '../../data/schedules.json';
-import YouTubePlayer from '../../components/YouTubePlayer';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import { FaClock, FaCalendar, FaUser, FaStar, FaLanguage, FaClosedCaptioning, FaFilm, FaPlayCircle, FaLink } from 'react-icons/fa';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-// Dynamic import for react-share buttons to prevent SSR issues
-const FacebookShareButton = dynamic(() => import('react-share').then(mod => mod.FacebookShareButton), { ssr: false });
-const TwitterShareButton = dynamic(() => import('react-share').then(mod => mod.TwitterShareButton), { ssr: false });
-const FacebookIcon = dynamic(() => import('react-share').then(mod => mod.FacebookIcon), { ssr: false });
-const TwitterIcon = dynamic(() => import('react-share').then(mod => mod.TwitterIcon), { ssr: false });
-
-export default function ShowPage({ show }) {
-  const router = useRouter();
-  const [randomShows, setRandomShows] = useState([]);
-
-  const baseUrl = "https://freestreaming.vercel.app";
-  const currentUrl = `${baseUrl}/schedules/${show?.id}`;
-  const shareUrl = typeof window !== 'undefined' ? window.location.href : currentUrl;
-  const shareTitle = `Watch "${show?.title}" on Free Streaming | Live Streaming`;
-
-  // Helper function to convert duration to ISO 8601 format
-  const convertDurationToISO = (durationStr) => {
-    if (!durationStr || durationStr === "Live") return "PT2H";
-    const hoursMatch = durationStr.match(/(\d+)h/);
-    const minutesMatch = durationStr.match(/(\d+)min/);
-    const hours = hoursMatch ? parseInt(hoursMatch[1]) : 2;
-    const minutes = minutesMatch ? parseInt(minutesMatch[1]) : 0;
-    return `PT${hours}H${minutes}M`;
-  };
-
-  // Generate Article Schema (JSON-LD) - ONLY ONE
-  const generateArticleSchema = () => {
-    if (!show) return null;
-
-    const publishedDate = show.date && !isNaN(new Date(show.date).getTime()) 
-      ? new Date(show.date + "T12:00:00Z").toISOString()
-      : new Date().toISOString();
-
-    return {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": currentUrl
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import schedule from "../../data/schedules.json";
+import postsData from "../../data/posts.json";
+import YouTubePlayer from "../../components/YouTubePlayer";
+import { FaClock, FaCalendar, FaPlayCircle, FaShareAlt } from "react-icons/fa";
+
+export default function ShowPage({ show, relatedPost }) {
+  const baseUrl = "https://freestreaming.vercel.app"; // CHANGE TO YOUR DOMAIN
+  const currentUrl = `${baseUrl}/schedules/${show.id}`;
+
+  // STRICT ARTICLE SCHEMA FOR GOOGLE INDEXING
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": currentUrl,
+    },
+    headline: `Watch ${show.title} Full Movie Online Free - Live Streaming`,
+    description: show.description,
+    image: `${baseUrl}/${show.image}`,
+    author: {
+      "@type": "Organization",
+      name: "Free Streaming",
+      url: baseUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Free Streaming",
+      logo: {
+        "@type": "ImageObject",
+        url: `${baseUrl}/logo.png`,
       },
-      "headline": show.title,
-      "description": show.description?.substring(0, 200) || "",
-      "image": `${baseUrl}/${show.image}`,
-      "author": {
-        "@type": "Organization",
-        "name": "Free Streaming",
-        "url": baseUrl
-      },
-      "publisher": {
-        "@type": "Organization",
-        "name": "Free Streaming",
-        "logo": {
-          "@type": "ImageObject",
-          "url": `${baseUrl}/logo.png`,
-          "width": 512,
-          "height": 512
-        }
-      },
-      "datePublished": publishedDate,
-      "dateModified": new Date().toISOString(),
-      "articleSection": "Movie Streaming",
-      "keywords": show.keywords || "",
-      "genre": show.genre?.join(", ") || "",
-      "inLanguage": show.language || "English",
-      "wordCount": show.description ? show.description.split(' ').length : 100,
-      "timeRequired": convertDurationToISO(show.duration),
-      "url": currentUrl
-    };
+    },
+    datePublished: show.date
+      ? new Date(show.date).toISOString()
+      : new Date().toISOString(),
+    dateModified: new Date().toISOString(),
+    articleBody: `${show.title} is a ${show.genre.join(
+      ", "
+    )} movie released in ${show.year}. ${show.description} Directed by ${
+      Array.isArray(show.director) ? show.director.join(", ") : show.director
+    }. Cast includes ${show.cast.join(", ")}. Watch it live on our platform.`,
+    keywords: show.keywords,
   };
-
-  // Generate Movie Schema - ONLY ONE
-  const generateMovieSchema = () => {
-    if (!show) return null;
-
-    // Prepare actors array - each actor as separate object
-    const actors = [];
-    if (show.cast && Array.isArray(show.cast)) {
-      show.cast.forEach(actorName => {
-        if (actorName && actorName.trim() !== '') {
-          actors.push({
-            "@type": "Person",
-            "name": actorName.trim()
-          });
-        }
-      });
-    }
-
-    // Prepare director
-    let director = null;
-    if (show.director) {
-      if (Array.isArray(show.director)) {
-        // If multiple directors, take the first one
-        if (show.director.length > 0 && show.director[0].trim() !== '') {
-          director = {
-            "@type": "Person",
-            "name": show.director[0].trim()
-          };
-        }
-      } else if (show.director.trim() !== '') {
-        director = {
-          "@type": "Person",
-          "name": show.director.trim()
-        };
-      }
-    }
-
-    // Create movie schema with all required fields
-    const movieSchema = {
-      "@context": "https://schema.org",
-      "@type": "Movie",
-      "name": show.title || "",
-      "image": `${baseUrl}/${show.image}`,
-      "description": show.description || "",
-      "dateCreated": show.year || "2025",
-      "genre": show.genre || [],
-      "duration": convertDurationToISO(show.duration),
-      "inLanguage": show.language || "English",
-      "url": currentUrl,
-      "contentRating": show.rating || ""
-    };
-
-    // Add director if available
-    if (director) {
-      movieSchema.director = director;
-    }
-
-    // Add actors if available
-    if (actors.length > 0) {
-      movieSchema.actor = actors;
-    }
-
-    // Add subtitles if available and not "NA"
-    if (show.subtitles && Array.isArray(show.subtitles)) {
-      const validSubtitles = show.subtitles.filter(sub => sub !== "NA" && sub.trim() !== '');
-      if (validSubtitles.length > 0) {
-        movieSchema.subtitleLanguage = validSubtitles;
-      }
-    }
-
-    // Add aggregate rating if available
-    if (show.rating) {
-      const ratingValue = parseFloat(show.rating);
-      if (!isNaN(ratingValue) && ratingValue > 0) {
-        movieSchema.aggregateRating = {
-          "@type": "AggregateRating",
-          "ratingValue": ratingValue.toString(),
-          "ratingCount": "1000",
-          "bestRating": "10",
-          "worstRating": "1"
-        };
-      }
-    }
-
-    return movieSchema;
-  };
-
-  // Generate TVSeries Schema for TV shows
-  const generateTVSeriesSchema = () => {
-    if (!show) return null;
-    
-    const isTVSeries = show.category === "TvSeries" || 
-                      (show.title?.toLowerCase().includes("season") && !show.title?.toLowerCase().includes("seasoning"));
-    
-    if (!isTVSeries) return null;
-
-    // Prepare actors array
-    const actors = [];
-    if (show.cast && Array.isArray(show.cast)) {
-      show.cast.forEach(actorName => {
-        if (actorName && actorName.trim() !== '') {
-          actors.push({
-            "@type": "Person",
-            "name": actorName.trim()
-          });
-        }
-      });
-    }
-
-    // Prepare director
-    let director = null;
-    if (show.director) {
-      if (Array.isArray(show.director)) {
-        if (show.director.length > 0 && show.director[0].trim() !== '') {
-          director = {
-            "@type": "Person",
-            "name": show.director[0].trim()
-          };
-        }
-      } else if (show.director.trim() !== '') {
-        director = {
-          "@type": "Person",
-          "name": show.director.trim()
-        };
-      }
-    }
-
-    const tvSchema = {
-      "@context": "https://schema.org",
-      "@type": "TVSeries",
-      "name": show.title || "",
-      "image": `${baseUrl}/${show.image}`,
-      "description": show.description || "",
-      "datePublished": show.date || "2025",
-      "genre": show.genre || [],
-      "inLanguage": show.language || "English",
-      "url": currentUrl,
-      "numberOfSeasons": "1"
-    };
-
-    // Add director if available
-    if (director) {
-      tvSchema.director = director;
-    }
-
-    // Add actors if available
-    if (actors.length > 0) {
-      tvSchema.actor = actors;
-    }
-
-    return tvSchema;
-  };
-
-  const pickRandomShows = () => {
-    const filteredShows = schedule.shows.filter(s => s.id !== show.id);
-    const shuffled = filteredShows.sort(() => 0.5 - Math.random());
-    setRandomShows(shuffled.slice(0, 3));
-  };
-
-  useEffect(() => {
-    if (show) pickRandomShows();
-    const interval = setInterval(() => { if (show) pickRandomShows(); }, 5000);
-    return () => clearInterval(interval);
-  }, [show]);
-
-  const copyDirectLink = () => {
-    navigator.clipboard.writeText(currentUrl).then(() => {
-      alert("Direct link copied to clipboard!");
-    });
-  };
-
-  if (!show) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-dark">
-        <div className="text-center">
-          <h1 className="text-4xl font-bold text-light mb-4">Show not found</h1>
-          <Link href="/schedule" className="btn-primary">← Back to Schedule</Link>
-        </div>
-      </div>
-    );
-  }
-
-  // Generate schemas - ONLY ONE OF EACH
-  const articleSchema = generateArticleSchema();
-  
-  // Check if it's a TV series
-  const isTVSeries = show.category === "TvSeries" || 
-                     (show.title?.toLowerCase().includes("season") && !show.title?.toLowerCase().includes("seasoning"));
-  
-  const mediaSchema = isTVSeries ? generateTVSeriesSchema() : generateMovieSchema();
-
-  // Format date for display
-  const formatDate = (dateStr) => {
-    if (!dateStr) return "";
-    try {
-      const date = new Date(dateStr);
-      return date.toLocaleDateString('en-US', { 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric' 
-      });
-    } catch (e) {
-      return dateStr;
-    }
-  };
-
-  const displayDate = formatDate(show.date);
 
   return (
     <>
       <Head>
-        <title>{show.title} - Watch on Free Streaming</title>
-        <meta name="description" content={`${show.description?.substring(0, 155) || ''} Watch live streaming at ${show.time} on ${displayDate}. Free HD quality on Free Streaming.`} />
-        <meta name="keywords" content={`${show.keywords || ''}, watch ${show.title} free, ${show.title} streaming, ${show.genre?.join(' ') || ''}, free movie streaming, live cinema`} />
+        <title>{`Watch ${show.title} (${show.year}) Online Free | Free Streaming`}</title>
+        <meta
+          name="description"
+          content={`Stream ${
+            show.title
+          } online for free. ${show.description.substring(
+            0,
+            100
+          )}... Watch in HD without registration.`}
+        />
         <link rel="canonical" href={currentUrl} />
-
-        {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={`Watch ${show.title} - ${isTVSeries ? 'TV Series' : 'Movie'} Streaming | Free Streaming`} />
-        <meta property="og:description" content={`${show.description?.substring(0, 200) || ''} Watch live at ${show.time} on ${displayDate}.`} />
+        <meta property="og:title" content={`Watch ${show.title} Free Online`} />
+        <meta property="og:description" content={show.description} />
         <meta property="og:image" content={`${baseUrl}/${show.image}`} />
-        <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
-        <meta property="og:site_name" content="Free Streaming" />
-        <meta property="og:published_time" content={articleSchema?.datePublished || new Date().toISOString()} />
-        <meta property="og:modified_time" content={new Date().toISOString()} />
-
-        {/* Twitter Card Meta Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`Watch ${show.title} - Live Streaming`} />
-        <meta name="twitter:description" content={`${show.description?.substring(0, 200) || ''} #FreeMovies #LiveStreaming`} />
-        <meta name="twitter:image" content={`${baseUrl}/${show.image}`} />
-        <meta name="twitter:site" content="@freestreaming" />
-
-        {/* Article Schema - ONLY ONE */}
-        {articleSchema && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-            key="article-schema"
-          />
-        )}
-
-        {/* Movie or TVSeries Schema - ONLY ONE */}
-        {mediaSchema && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(mediaSchema) }}
-            key="media-schema"
-          />
-        )}
-
-        {/* Additional SEO Meta Tags */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="author" content="Free Streaming" />
-        <meta property="article:published_time" content={articleSchema?.datePublished || new Date().toISOString()} />
-        <meta property="article:modified_time" content={new Date().toISOString()} />
-        <meta property="article:section" content="Entertainment" />
-        <meta property="article:tag" content={show.keywords || ''} />
-        <meta name="news_keywords" content={show.keywords || ''} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
       </Head>
 
-      <div className="min-h-screen py-8 bg-dark">
+      <div className="min-h-screen bg-black text-white pb-20">
+        {/* Breadcrumbs for SEO */}
+        <div className="container mx-auto px-4 py-4 text-sm text-gray-400">
+          <Link href="/" className="hover:text-primary">
+            Home
+          </Link>{" "}
+          &gt;
+          <Link href="/schedule" className="hover:text-primary mx-1">
+            Movies
+          </Link>{" "}
+          &gt;
+          <span className="text-white mx-1">{show.title}</span>
+        </div>
+
         <div className="container mx-auto px-4">
-          <nav className="mb-8" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-2 text-light/70 text-sm flex-wrap">
-              <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li>/</li>
-              <li><Link href="/schedule" className="hover:text-primary transition-colors">Schedule</Link></li>
-              <li>/</li>
-              <li className="text-primary font-semibold truncate max-w-xs" aria-current="page">{show.title}</li>
-            </ol>
-          </nav>
-
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content */}
             <div className="lg:col-span-2">
-              <article className="glass-card overflow-hidden mb-8">
-                <header className="p-6 border-b border-white/10">
-                  <h1 className="text-3xl font-bold text-light mb-2">
-                    <span className="gradient-text">{show.title}</span>
-                  </h1>
-                  <div className="flex items-center gap-4 mt-2 text-light/70">
-                    <span className="flex items-center gap-1"><FaClock /> {show.time}</span>
-                    <span className="flex items-center gap-1"><FaCalendar /> {displayDate}</span>
-                    {show.rating && (
-                      <span className="px-2 py-1 bg-primary/20 text-primary text-xs rounded">{show.rating}</span>
-                    )}
-                    {show.duration && (
-                      <span className="text-light/50">• {show.duration}</span>
-                    )}
-                  </div>
-                </header>
-                <div className="p-6">
-                  <YouTubePlayer videoId={show.youtubeid} title={show.title} />
-                </div>
-              </article>
-              
-              <div className="glass-card p-6 text-center">
-                <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Live Streaming Info</span></h3>
-                <div className="space-y-4">
-                  <div className="text-center">
-                    <div className="text-4xl font-bold text-primary mb-2">{show.time}</div>
-                    <p className="text-light/70">Streaming Time</p>
-                  </div>
-                  <div className="p-4 bg-white/5 rounded-lg">
-                    <p className="text-light mb-2">This {show.genre?.includes('Sports') ? 'sports event' : isTVSeries ? 'TV series' : 'movie'} will be streamed live at:</p>
-                    <p className="text-primary font-bold">{displayDate} • {show.time}</p>
-                  </div>
-                  <Link href={`/player/${show.id}`} className="btn-primary w-full py-3 flex items-center justify-center gap-2">
-                    <FaPlayCircle /> Go to Live Player
+              <h1 className="text-3xl md:text-5xl font-bold mb-4">
+                {show.title}
+              </h1>
+
+              <div className="relative aspect-video bg-gray-900 rounded-xl overflow-hidden mb-8 border border-gray-800 shadow-2xl">
+                <YouTubePlayer videoId={show.youtubeid} title={show.title} />
+              </div>
+
+              <div className="bg-gray-900/50 p-6 rounded-xl border border-gray-800">
+                <div className="flex flex-wrap gap-4 mb-6">
+                  <Link
+                    href={`/player/${show.id}`}
+                    className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 rounded-full font-bold flex items-center gap-2 transition-all transform hover:scale-105"
+                  >
+                    <FaPlayCircle size={20} /> WATCH LIVE STREAM
                   </Link>
-                  <div className="text-light/50 text-sm"><p>Live stream available only at scheduled time</p></div>
+                  <div className="flex items-center gap-2 text-gray-300 bg-gray-800 px-4 py-3 rounded-full">
+                    <FaClock className="text-primary" /> {show.time}
+                  </div>
                 </div>
-              </div>
 
-              <div className="glass-card p-6 mb-8">
-                <h2 className="text-2xl font-bold text-light mb-6 flex items-center gap-2">
-                  <FaFilm className="text-primary" />
-                  <span className="gradient-text">{isTVSeries ? 'TV Series Details' : 'Movie Details'}</span>
+                <h2 className="text-2xl font-bold mb-4 text-primary">
+                  Movie Synopsis
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <p className="text-gray-300 leading-relaxed text-lg mb-6">
+                  {show.description}
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
                   <div>
-                    <h3 className="text-light/70 text-sm mb-2">Description</h3>
-                    <p className="text-light leading-relaxed">{show.description}</p>
-                    <div className="mt-6">
-                      <h3 className="text-light/70 text-sm mb-2">Genre</h3>
-                      <div className="flex flex-wrap gap-2">
-                        {show.genre?.map((genre, idx) => (
-                          <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-sm text-light/80">{genre}</span>
-                        ))}
-                      </div>
-                    </div>
+                    <span className="text-gray-500 block mb-1">Director</span>
+                    <span className="text-white font-semibold">
+                      {Array.isArray(show.director)
+                        ? show.director.join(", ")
+                        : show.director}
+                    </span>
                   </div>
-                  <div className="space-y-6">
-                    {show.director && (
-                      <div>
-                        <h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaUser /> Director</h3>
-                        <p className="text-light font-semibold">
-                          {Array.isArray(show.director) ? show.director.join(", ") : show.director}
-                        </p>
-                      </div>
-                    )}
-                    {show.cast && show.cast.length > 0 && (
-                      <div>
-                        <h3 className="text-light/70 text-sm mb-2">Cast</h3>
-                        <p className="text-light">{show.cast.join(", ")}</p>
-                      </div>
-                    )}
-                    <div className="grid grid-cols-2 gap-4">
-                      {show.duration && show.duration !== "Live" && (
-                        <div>
-                          <h3 className="text-light/70 text-sm mb-2">Duration</h3>
-                          <p className="text-light font-semibold">{show.duration}</p>
-                        </div>
-                      )}
-                      {show.year && (
-                        <div>
-                          <h3 className="text-light/70 text-sm mb-2">Year</h3>
-                          <p className="text-light font-semibold">{show.year}</p>
-                        </div>
-                      )}
-                    </div>
-                    <div className="grid grid-cols-2 gap-4">
-                      {show.language && (
-                        <div>
-                          <h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaLanguage /> Language</h3>
-                          <p className="text-light">{show.language}</p>
-                        </div>
-                      )}
-                      {show.subtitles && show.subtitles.length > 0 && show.subtitles[0] !== "NA" && (
-                        <div>
-                          <h3 className="text-light/70 text-sm mb-2 flex items-center gap-2"><FaClosedCaptioning /> Subtitles</h3>
-                          <p className="text-light">{show.subtitles.join(", ")}</p>
-                        </div>
-                      )}
-                    </div>
+                  <div>
+                    <span className="text-gray-500 block mb-1">Cast</span>
+                    <span className="text-white font-semibold">
+                      {show.cast.join(", ")}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 block mb-1">Genre</span>
+                    <span className="text-white font-semibold">
+                      {show.genre.join(", ")}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-gray-500 block mb-1">
+                      Release Year
+                    </span>
+                    <span className="text-white font-semibold">
+                      {show.year}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {show.keywords && (
-                <div className="glass-card p-6">
-                  <h3 className="text-lg font-bold text-light mb-4">Keywords</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {show.keywords.split(", ").map((kw, idx) => (
-                      <span key={idx} className="px-3 py-1 bg-white/10 rounded-full text-sm text-light/80">{kw}</span>
-                    ))}
-                  </div>
+              {/* Related Blog Post Link - SEO Goldmine */}
+              {relatedPost && (
+                <div className="mt-8 bg-blue-900/20 border border-blue-500/30 p-6 rounded-xl">
+                  <h3 className="text-xl font-bold mb-2">
+                    Read More About This Movie
+                  </h3>
+                  <Link
+                    href={`/blog/${relatedPost.slug}`}
+                    className="text-blue-400 hover:text-blue-300 hover:underline text-lg"
+                  >
+                    {relatedPost.title} &rarr;
+                  </Link>
+                  <p className="text-gray-400 mt-2 text-sm">
+                    {relatedPost.excerpt}
+                  </p>
                 </div>
               )}
             </div>
 
-            <aside className="space-y-6">
-              <div className="glass-card p-6 text-center">
-                <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Share This {show.genre?.includes('Sports') ? 'Event' : isTVSeries ? 'TV Series' : 'Movie'}</span></h3>
-                <div className="flex gap-3 justify-center items-center">
-                  <FacebookShareButton url={shareUrl} quote={shareTitle}>
-                    <FacebookIcon size={50} round />
-                  </FacebookShareButton>
-                  <TwitterShareButton url={shareUrl} title={shareTitle}>
-                    <TwitterIcon size={50} round />
-                  </TwitterShareButton>
-                  <button onClick={copyDirectLink} className="bg-gray-700 hover:bg-gray-600 p-2 rounded-full flex items-center justify-center" title="Copy Direct Link">
-                    <FaLink className="text-white" size={28} />
-                  </button>
-                </div>
-              </div>
-
-              {randomShows.length > 0 && (
-                <div className="glass-card p-6">
-                  <h3 className="text-lg font-bold text-light mb-4"><span className="gradient-text">Other Shows</span></h3>
-                  <div className="space-y-4">
-                    {randomShows.map((rs) => (
-                      <Link key={rs.id} href={`/schedules/${rs.id}`} className="flex items-center gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
-                        <div className="w-24 h-24 relative flex-shrink-0">
-                          <Image
-                            src={`${baseUrl}/${rs.image}`}
-                            alt={rs.title}
-                            fill
-                            quality={90}
-                            style={{
-                              filter: 'brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)',
-                            }}
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-semibold text-light group-hover:text-primary transition-colors truncate">{rs.title}</h4>
-                          <p className="text-light/70 text-xs mt-1">{rs.time} • {rs.genre?.[0] || ''}</p>
-                        </div>
-                      </Link>
-                    ))}
+            {/* Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="bg-gray-900 p-6 rounded-xl sticky top-4">
+                <h3 className="text-xl font-bold mb-4 border-b border-gray-700 pb-2">
+                  Streaming Schedule
+                </h3>
+                <div className="space-y-4">
+                  <div className="p-4 bg-black/50 rounded-lg border-l-4 border-primary">
+                    <p className="text-sm text-gray-400">Stream Date</p>
+                    <p className="font-bold">{show.date}</p>
+                  </div>
+                  <div className="p-4 bg-black/50 rounded-lg border-l-4 border-green-500">
+                    <p className="text-sm text-gray-400">Stream Time</p>
+                    <p className="font-bold">{show.time}</p>
                   </div>
                 </div>
-              )}
 
-              <div className="text-center mt-8 md:mt-12">
-                <Link 
-                  href="/schedule" 
-                  className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
-                >
-                  <span className="gradient-text">← Back to Full Schedule</span>
-                </Link>
+                <div className="mt-8">
+                  <h3 className="text-xl font-bold mb-4">Tags</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {show.keywords
+                      .split(",")
+                      .slice(0, 10)
+                      .map((tag, i) => (
+                        <span
+                          key={i}
+                          className="text-xs bg-gray-800 text-gray-300 px-2 py-1 rounded"
+                        >
+                          {tag.trim()}
+                        </span>
+                      ))}
+                  </div>
+                </div>
+                <div className="text-center mt-8 md:mt-12">
+                  <Link
+                    href="/schedule"
+                    className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
+                  >
+                    <span className="gradient-text">
+                      ← Back to Full Schedule
+                    </span>
+                  </Link>
+                </div>
               </div>
-            </aside>
+            </div>
           </div>
         </div>
       </div>
@@ -827,7 +219,6 @@ export default function ShowPage({ show }) {
   );
 }
 
-// Static Generation
 export async function getStaticPaths() {
   const paths = schedule.shows.map((show) => ({ params: { id: show.id } }));
   return { paths, fallback: false };
@@ -835,12 +226,10 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const show = schedule.shows.find((s) => s.id === params.id);
-  if (!show) return { notFound: true };
+  // Find related blog post if exists
+  const relatedPost =
+    postsData.posts.find((p) => p.relatedMovieId === show?.id) || null;
 
-  return { 
-    props: { 
-      show
-    }, 
-    revalidate: 3600 
-  };
+  if (!show) return { notFound: true };
+  return { props: { show, relatedPost }, revalidate: 60 };
 }
