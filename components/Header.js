@@ -225,6 +225,9 @@ export default function Header() {
             <Link href="/schedule" className="nav-link">
               Schedule
             </Link>
+              <Link href="/blog" className="mobile-nav-link" onClick={toggleMobileMenu}>
+              Blog
+            </Link>
             <Link href="/player/bbc-news-channel-hd" className="nav-link">
               Live Player
             </Link>
@@ -248,7 +251,10 @@ export default function Header() {
             <Link href="/schedule" className="mobile-nav-link" onClick={toggleMobileMenu}>
               Schedule
             </Link>
-            <Link href="/player" className="mobile-nav-link" onClick={toggleMobileMenu}>
+             <Link href="blog/index" className="mobile-nav-link" onClick={toggleMobileMenu}>
+              Blog
+            </Link>
+            <Link href="/player/bbc-news-channel-hd" className="mobile-nav-link" onClick={toggleMobileMenu}>
               Live Player
             </Link>
             <Link href="/request" className="mobile-nav-link" onClick={toggleMobileMenu}>
