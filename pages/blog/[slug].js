@@ -1,121 +1,3 @@
-// import Head from 'next/head';
-// import Link from 'next/link';
-// import Image from 'next/image';
-// import postsData from '../../data/posts.json';
-// import schedule from '../../data/schedules.json';
-
-// export default function BlogPost({ post, relatedMovie }) {
-//   const baseUrl = "https://freestreaming.vercel.app"; // CHANGE THIS
-//   const currentUrl = `${baseUrl}/blog/${post.slug}`;
-
-//   const articleSchema = {
-//     "@context": "https://schema.org",
-//     "@type": "Article",
-//     "headline": post.title,
-//     "description": post.excerpt,
-//     "image": `${baseUrl}/${post.image}`,
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Free Streaming Team"
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Free Streaming",
-//       "logo": {
-//         "@type": "ImageObject",
-//         "url": `${baseUrl}/logo.png`
-//       }
-//     },
-//     "datePublished": post.date,
-//     "articleBody": post.content
-//   };
-
-//   return (
-//     <>
-//       <Head>
-//         <title>{post.title}</title>
-//         <meta name="description" content={post.excerpt} />
-//         <link rel="canonical" href={currentUrl} />
-//         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-//       </Head>
-
-//       <div className="min-h-screen bg-black text-white pt-24 pb-12">
-//         <article className="container mx-auto px-4 max-w-4xl">
-//           <div className="mb-8">
-//             <Link href="/blog" className="text-gray-400 hover:text-white mb-4 block">&larr; Back to Blog</Link>
-//             <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
-//             <p className="text-gray-400 border-b border-gray-800 pb-8">Published on {post.date}</p>
-//           </div>
-
-//           <div className="relative w-full h-64 md:h-96 mb-8 rounded-xl overflow-hidden">
-//              <Image 
-//                src={`/${post.image}`} 
-//                alt={post.title}
-//                fill
-//                className="object-cover"
-//                priority
-//                quality={90}
-//                style={{
-//                   filter: 'brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)',
-//                 }}
-             
-//              />
-//           </div>
-
-//           <div className="prose prose-invert prose-lg max-w-none mb-12">
-//             {/* Rendering content - split by newlines for basic paragraphs */}
-//             {post.content.split('\n').map((paragraph, idx) => (
-//               <p key={idx} className="mb-4 text-gray-300 leading-relaxed">
-//                 {paragraph}
-//               </p>
-//             ))}
-//           </div>
-
-//           {/* Call to Action - Link to the Movie Page */}
-//           {relatedMovie && (
-//             <div className="bg-gradient-to-r from-red-900 to-black border border-red-700 p-8 rounded-xl text-center my-12">
-//               <h3 className="text-2xl font-bold mb-4">Want to watch {relatedMovie.title} Click Below Now </h3>
-//               <p className="mb-6 text-gray-300">We are streaming this movie for free in HD quality. No sign-up required.</p>
-//               <Link 
-//                 href={`/player/${relatedMovie.id}`}
-//                 className="inline-block bg-red-600 hover:bg-red-500 text-white font-bold py-4 px-8 rounded-full transition-transform transform hover:scale-105"
-//               >
-//                 Watch {relatedMovie.title} Now
-//               </Link>
-//             </div>
-//           )}
-//         </article>
-//       </div>
-//     </>
-//   );
-// }
-
-// export async function getStaticPaths() {
-//   const paths = postsData.posts.map((post) => ({ params: { slug: post.slug } }));
-//   return { paths, fallback: false };
-// }
-
-// export async function getStaticProps({ params }) {
-//   const post = postsData.posts.find((p) => p.slug === params.slug);
-//   // Find the related movie data to link back
-//   const relatedMovie = post.relatedMovieId 
-//     ? schedule.shows.find(s => s.id === post.relatedMovieId) 
-//     : null;
-
-//   if (!post) return { notFound: true };
-//   return { props: { post, relatedMovie: relatedMovie || null }, revalidate: 60 };
-// }
-
-
-
-
-
-
-
-
-
-
-
 
 import Head from 'next/head';
 import Link from 'next/link';
@@ -168,11 +50,11 @@ export default function BlogPost({ post, relatedMovie }) {
       <div className="min-h-screen bg-black text-white pt-24 pb-12">
         <article className="container mx-auto px-4 max-w-4xl">
           {/* Breadcrumb Navigation */}
-          <nav className="mb-8 text-sm text-gray-400">
+          {/* <nav className="mb-8 text-sm text-gray-400">
             <Link href="/" className="hover:text-white">Home</Link> &gt; 
             <Link href="/blog" className="hover:text-white mx-1">Blog</Link> &gt; 
             <span className="text-white mx-1 truncate">{post.title}</span>
-          </nav>
+          </nav> */}
 
           <div className="mb-8">
             <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
