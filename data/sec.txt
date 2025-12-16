@@ -95,112 +95,11 @@
 
 
 
-
+    
     
 
 
 
-
-
-
-
-    
-
-
-
-
-
-
-
-    
-{
-      "id": "now-you-see-me-now-you-dont-2025-full-movie",
-      "title": "Now You See Me: Now You Don't (2025)", 
-      "date": "2025-12-12",
-       "youtubeid":"-E3lMRx7HRQ",
-      "description": "The Four Horsemen reunite and team up with a new generation of young illusionists to expose a diamond heiress's global money laundering scheme for criminals.",
-      "time": "Steaming Now",
-      "streamUrl": "https://vidsrc.cc/v2/embed/movie/425274",
-      "englishUrl": "https://vidsrc-embed.ru/embed/movie?tmdb=425274&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1",
-      "dubbedUrl": "https://short.icu/Bmm5KV2ms?thumbnail=https://freestreaming.vercel.app/Now_You_See_Me_Now_You_Dont_2025.jpg",
-      "duration": "2h 13m",
-      "genre": [ "Drama",  "Thriller"],
-      "director": "Ruben Fleischer",
-      "cast": ["Jesse Eisenberg", "Woody Harrelson", "Dave Franco"],
-      "rating": "6.2",
-      "year": "2025",
-      "image": "Now_You_See_Me_Now_You_Dont_2025.jpg", 
-      "trailerUrl": "https://www.youtube.com/watch?v=-E3lMRx7HRQ",
-      "language": "English",
-      "subtitles": ["English"],
-      "keywords": "now you see me now you don't, now you see me now you don't (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free"
-    },
-{
-      "id": "tell-me-softly-2025-full-movie",
-      "title": "Tell Me Softly (2025)", 
-      "date": "2025-12-12",
-       "youtubeid":"7DOrQDU6jcI",
-      "description": "Kamila's life turns upside down when the Di Bianco brothers return after 7 years. Thiago gave her first kiss, Taylor was her protector. Now she's changed, but they still have a way of getting through to her like no one else can.",
-      "time": "Steaming Now",
-      "streamUrl": "https://vidsrc.cc/v2/embed/movie/1379963",
-      "englishUrl": "https://vidsrc-embed.ru/embed/movie?tmdb=1379963&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1",
-      "dubbedUrl": "https://short.icu/newpuSqXv?thumbnail=https://freestreaming.vercel.app/Tell_Me_Softly_2025.jpg",
-      "duration": "2h 13m",
-      "genre": [ "Drama",  "Thriller"],
-      "director": "Denis Rovira van Boekholt",
-      "cast": ["Alícia Falcó", "Fernando Lindez", "Diego Vidales"],
-      "rating": "4.7",
-      "year": "2025",
-      "image": "Tell_Me_Softly_2025.jpg", 
-      "trailerUrl": "https://www.youtube.com/watch?v=7DOrQDU6jcI",
-      "language": "English",
-      "subtitles": ["English"],
-      "keywords": "tell me softly, tell me softly (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free"
-    },
-{
-      "id": "the-great-shamsuddin-family-2025-full-movie",
-      "title": "The Great Shamsuddin Family (2025)", 
-      "date": "2025-12-12",
-      "youtubeid":"CwcOfPLBxWc",
-      "description": "A writer faces her most important deadline while her house erupts in family chaos, forcing her to juggle a 12-hour writing sprint with an unfolding domestic emergency.",
-      "time": "Steaming Now",
-      "streamUrl": "https://vidsrc.cc/v2/embed/movie/1591399",
-      "englishUrl": "https://vidsrc-embed.ru/embed/movie?tmdb=1591399&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1",
-      "dubbedUrl": "https://short.icu/vJxpz8GLu?thumbnail=https://freestreaming.vercel.app/The_Great_Shamsuddin_Family_2025.jpg",
-      "duration": "2h 13m",
-      "genre": ["Comedy", "Drama"],
-      "director": "Anusha Rizvi",
-      "cast": ["Shreya Dhanwanthary", "Kritika Kamra", "Sheeba Chaddha"],
-      "rating": "7.3",
-      "year": "2025",
-      "image": "The_Great_Shamsuddin_Family_2025.jpg", 
-      "trailerUrl": "https://www.youtube.com/watch?v=CwcOfPLBxWc",
-      "language": "Hindi",
-      "subtitles": ["Hindi"],
-      "keywords": "the great shamsuddin family, the great shamsuddin family (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free"
-    },
-{
-      "id": "dhurandhar-2025-full-movie",
-      "title": "Dhurandhar (2025)", 
-      "date": "2025-12-12",
-      "youtubeid":"BKOVzHcjEIo",
-      "description": "A star-studded saga inspired by incredible true events set in the gritty criminal vein of underworld with a backdrop of Indian patriotism, featuring action sequences, Shakespearean betrayals, and tradecrafts of espionage.",
-      "time": "Steaming Now",
-      "streamUrl": "https://short.icu/1aDknZint?thumbnail=https://freestreaming.vercel.app/Dhurandhar_2025.jpg",
-      "englishUrl": "",
-      "dubbedUrl": "",
-      "duration": "2h 13m",
-      "genre": ["Action", "Gangster", "Drama"],
-      "director": "Aditya Dhar",
-      "cast": ["Ranveer Singh", "Akshaye Khanna", "Sanjay Dutt"],
-      "rating": "7.4",
-      "year": "2025",
-      "image": "Dhurandhar_2025.jpg", 
-      "trailerUrl": "https://www.youtube.com/watch?v=BKOVzHcjEIo",
-      "language": "Hindi",
-      "subtitles": ["Hindi"],
-      "keywords": "dhurandhar, dhurandhar (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free"
-    },    
 {
       "id": "mayumi-2025-full-movie",
       "title": "Mayumi (2025)",
@@ -552,6 +451,7 @@
       "streamUrl": "https://vidsrc.cc/v2/embed/tv/66732",
       "englishUrl": "https://vidsrc-embed.ru/embed/tv?tmdb=66732&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1",
       "dubbedUrl": "https://short.icu/4oOmWfC1F?thumbnail=https://freestreaming.vercel.app/Stranger_Things_S5_2025.jpg",
+
       "duration": "2h 5m",
       "genre": ["Horror", "Drama", "Thriller"],
       "director": "Christopher Novabos",
@@ -669,6 +569,72 @@
       "subtitles": ["NA"],
      "keywords": "safe house, safe house (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free"
     },
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
