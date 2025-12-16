@@ -100,7 +100,11 @@ const generateSitemap = () => {
 
   // 5. Start XML Construction
   let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">`;
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`;
 
   // --- SECTION A: STATIC PAGES ---
   staticRoutes.forEach(page => {
@@ -143,8 +147,8 @@ const generateSitemap = () => {
   <url>
     <loc>${BASE_URL}/blog/${post.slug}</loc>
     <lastmod>${postDate}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
   </url>`;
   });
 
