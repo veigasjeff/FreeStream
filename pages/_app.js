@@ -22,9 +22,9 @@ export default function App({ Component, pageProps }) {
       document.head.appendChild(adScript2);
 
          // Load third ad script
-      const adScript3 = document.createElement("script");
-      adScript3.innerHTML = `(function(s){s.dataset.zone='10333088',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
-      document.head.appendChild(adScript3);
+      // const adScript3 = document.createElement("script");
+      // adScript3.innerHTML = `(function(s){s.dataset.zone='10333088',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))`;
+      // document.head.appendChild(adScript3);
     };
 
     // <script>(function(s){s.dataset.zone='10333130',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
