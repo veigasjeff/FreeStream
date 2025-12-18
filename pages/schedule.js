@@ -799,9 +799,9 @@
 
 import Head from 'next/head';
 import schedule from '../data/schedules.json';
-import { FaCalendarAlt, FaClock, FaFilm, FaExclamationTriangle, FaSpinner, FaArrowDown } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock, FaFilm, FaExclamationTriangle, FaSpinner } from 'react-icons/fa';
 import Link from 'next/link';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 export default function SchedulePage() {
@@ -814,100 +814,66 @@ export default function SchedulePage() {
   const [selectedShow, setSelectedShow] = useState(null);
   const [intendedAction, setIntendedAction] = useState(null);
   
-  // --- INFINITE SCROLL STATE ---
-  const [visibleShows, setVisibleShows] = useState([]); 
+  // --- NEW SIMPLE LOADING STATE ---
+  const [visibleShows, setVisibleShows] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   
-  const pageRef = useRef(1);
-  const loadingRef = useRef(false);
-  const scrollContainerRef = useRef(null);
-
-  const ITEMS_PER_PAGE = 15;
+  const currentIndexRef = useRef(0);
   const allShows = schedule.shows;
+  const BATCH_SIZE = 10; // Smaller batch for mobile compatibility
 
-  // --- DETECT MOBILE ---
+  // --- INITIAL DATA LOAD (Mobile Compatible) ---
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  // --- INITIAL DATA LOAD ---
-  useEffect(() => {
-    const initialData = allShows.slice(0, ITEMS_PER_PAGE);
+    // Simple initial load - no complex calculations
+    const initialData = allShows.slice(0, BATCH_SIZE);
     setVisibleShows(initialData);
+    currentIndexRef.current = BATCH_SIZE;
     
-    if (allShows.length <= ITEMS_PER_PAGE) {
+    if (allShows.length <= BATCH_SIZE) {
       setHasMore(false);
     }
   }, []);
 
-  // --- LOAD MORE FUNCTION ---
-  const loadMoreItems = useCallback(() => {
-    if (loadingRef.current || !hasMore) return;
+  // --- SIMPLE LOAD MORE FUNCTION ---
+  const loadMoreItems = () => {
+    if (!hasMore || isLoading) return;
     
-    loadingRef.current = true;
     setIsLoading(true);
     
+    // Simple timeout to show loading state
     setTimeout(() => {
-      const nextPage = pageRef.current + 1;
-      const startIndex = pageRef.current * ITEMS_PER_PAGE;
-      const endIndex = nextPage * ITEMS_PER_PAGE;
+      const currentIndex = currentIndexRef.current;
+      const nextIndex = currentIndex + BATCH_SIZE;
       
-      const nextBatch = allShows.slice(startIndex, endIndex);
+      // Get next batch of shows
+      const nextBatch = allShows.slice(currentIndex, nextIndex);
       
       if (nextBatch.length > 0) {
+        // Simple array concatenation
         setVisibleShows(prev => [...prev, ...nextBatch]);
-        pageRef.current = nextPage;
+        currentIndexRef.current = nextIndex;
       }
       
-      if (endIndex >= allShows.length) {
+      // Check if we've loaded all shows
+      if (nextIndex >= allShows.length) {
         setHasMore(false);
       }
       
-      loadingRef.current = false;
       setIsLoading(false);
-    }, 500);
-  }, [hasMore]);
+    }, 300);
+  };
 
-  // --- SCROLL HANDLER FOR MOBILE ---
-  useEffect(() => {
-    if (!isMobile) return;
-    
-    const handleScroll = () => {
-      if (loadingRef.current || !hasMore) return;
-      
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const pageHeight = document.documentElement.scrollHeight;
-      
-      // If user is within 300px of bottom on mobile
-      if (pageHeight - scrollPosition < 300) {
-        loadMoreItems();
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile, hasMore, loadMoreItems]);
-
-  // --- GROUP DATA BY DATE ---
-  const showsByDate = visibleShows.reduce((acc, show) => {
-    if (!acc[show.date]) {
-      acc[show.date] = [];
+  // --- GROUP DATA BY DATE (Simple approach) ---
+  const showsByDate = {};
+  visibleShows.forEach(show => {
+    if (!showsByDate[show.date]) {
+      showsByDate[show.date] = [];
     }
-    acc[show.date].push(show);
-    return acc;
-  }, {});
+    showsByDate[show.date].push(show);
+  });
 
-  // --- IMAGE PATH FIXER ---
+  // --- SIMPLE IMAGE URL HANDLER ---
   const getImageUrl = (imagePath) => {
     if (!imagePath) return '/images/default-movie.jpg';
     if (imagePath.startsWith('http')) return imagePath;
@@ -960,13 +926,6 @@ export default function SchedulePage() {
     setTimeout(() => {
       setShowWarning(false);
     }, 3000);
-  };
-
-  // --- MANUAL LOAD MORE BUTTON ---
-  const handleLoadMoreClick = () => {
-    if (!loadingRef.current && hasMore) {
-      loadMoreItems();
-    }
   };
 
   // --- RENDER AGE VERIFICATION MODAL ---
@@ -1045,15 +1004,7 @@ export default function SchedulePage() {
         "name": "What is Free Streaming?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Free Streaming is an online platform that streams movies live at scheduled times, similar to a traditional cinema. We offer 3 shows daily at fixed times"
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How does the schedule work?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Movies stream at exact scheduled times shown on our schedule page. Each movie plays at its designated time slot, and you can join the live stream when it's playing."
+          "text": "Free Streaming is an online platform that streams movies live at scheduled times, similar to a traditional cinema."
         }
       }
     ]
@@ -1064,33 +1015,26 @@ export default function SchedulePage() {
       <Head>
         <title>Free Streaming - Daily Show Times & Streaming Schedule</title>
         <meta name="description" content="View daily movie schedule with fixed streaming times. Watch movies at scheduled times like a real cinema." />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <link rel="canonical" href={`${baseUrl}/schedule`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </Head>
 
-      <div 
-        ref={scrollContainerRef}
-        className="min-h-screen bg-gradient-to-b from-dark to-black"
-      >
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
         <div className="container mx-auto px-4 py-8">
-          {/* HEADER - NO LOAD BUTTON HERE */}
+          {/* HEADER */}
           <div className="text-center mb-10">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Daily <span className="text-blue-400">Movie Schedule</span>
+              Daily Movie Schedule
             </h1>
             <p className="text-gray-300 mb-2">
-              Watch movies at fixed times like a real cinema
-            </p>
-            <p className="text-gray-400 text-sm">
               Showing {visibleShows.length} of {allShows.length} shows
             </p>
           </div>
 
           {/* SCHEDULE CONTENT */}
           <div className="space-y-8">
-            {Object.entries(showsByDate).map(([date, shows]) => (
-              <div key={date} className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-4 border border-gray-700">
+            {Object.keys(showsByDate).map(date => (
+              <div key={date} className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
                 <div className="mb-6">
                   <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                     <FaCalendarAlt className="text-blue-400" />
@@ -1101,34 +1045,27 @@ export default function SchedulePage() {
                       day: 'numeric'
                     })}
                   </h2>
-                  <p className="text-gray-400 text-sm">
-                    {shows.length} shows scheduled
-                  </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {shows.map((show) => (
-                    <div 
-                      key={show.id} 
-                      className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300"
-                    >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {showsByDate[date].map(show => (
+                    <div key={show.id} className="bg-gray-900 rounded-lg overflow-hidden border border-gray-700">
                       {/* IMAGE SECTION */}
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative h-48">
                         <img 
                           src={getImageUrl(show.image)}
                           alt={show.title}
                           className="w-full h-full object-cover"
-                          loading="lazy"
                           onError={(e) => {
                             e.target.onerror = null;
                             e.target.src = '/images/default-movie.jpg';
                           }}
                         />
-                        <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-md font-bold text-sm">
+                        <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded text-sm font-bold">
                           {show.time}
                         </div>
                         {show.category === 'Adult' && (
-                          <div className="absolute top-3 right-3 bg-red-600 text-white px-3 py-1 rounded-md font-bold text-sm flex items-center gap-1">
+                          <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-sm font-bold flex items-center gap-1">
                             <FaExclamationTriangle /> 18+
                           </div>
                         )}
@@ -1136,54 +1073,53 @@ export default function SchedulePage() {
                       
                       {/* CONTENT SECTION */}
                       <div className="p-4">
-                        <h3 className="text-lg font-bold text-white mb-2 line-clamp-1">
+                        <h3 className="text-lg font-bold text-white mb-2">
                           {show.title}
                         </h3>
                         
-                        <div className="flex items-center gap-4 mb-3 text-sm text-gray-400">
+                        <div className="flex flex-col gap-2 mb-3 text-sm text-gray-400">
                           <div className="flex items-center gap-1">
                             <FaClock className="text-blue-400" />
                             <span>{show.time} GMT</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <FaFilm className="text-green-400" />
-                            <span className="line-clamp-1">
+                            <span>
                               {Array.isArray(show.genre) ? show.genre.join(", ") : show.genre}
                             </span>
                           </div>
                         </div>
                         
-                        <p className="text-gray-300 text-sm mb-4 line-clamp-2">
-                          {show.description || "Join us for this exciting movie experience."}
+                        <p className="text-gray-300 text-sm mb-4">
+                          {show.description || "Watch this exciting movie."}
                         </p>
                         
-                        {/* STATUS INDICATOR */}
                         <div className="mb-4">
                           {show.isLive ? (
                             <div className="flex items-center gap-2 text-red-400 font-medium">
-                              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                               LIVE NOW
                             </div>
                           ) : (
                             <div className="text-gray-400 text-sm">
-                              Streams at <span className="text-blue-400 font-medium">{show.time} GMT</span>
+                              Streams at {show.time} GMT
                             </div>
                           )}
                         </div>
                         
                         {/* ACTION BUTTONS */}
-                        <div className="flex flex-col sm:flex-row gap-3">
+                        <div className="flex flex-col gap-2">
                           {show.category === 'Adult' ? (
                             <>
                               <button 
                                 onClick={() => handleAdultClick(show, 'details')}
-                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium text-sm transition-colors"
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm font-medium"
                               >
                                 View Details
                               </button>
                               <button 
                                 onClick={() => handleAdultClick(show, 'player')}
-                                className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors ${
+                                className={`w-full py-2 rounded text-sm font-medium ${
                                   show.isLive 
                                     ? 'bg-red-600 hover:bg-red-700 text-white' 
                                     : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
@@ -1196,13 +1132,13 @@ export default function SchedulePage() {
                             <>
                               <Link 
                                 href={`/schedules/${show.id}`}
-                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium text-sm transition-colors text-center"
+                                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded text-sm font-medium text-center"
                               >
                                 View Details
                               </Link>
                               <Link 
                                 href={`/player/${show.id}`}
-                                className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors text-center ${
+                                className={`w-full py-2 rounded text-sm font-medium text-center ${
                                   show.isLive 
                                     ? 'bg-red-600 hover:bg-red-700 text-white' 
                                     : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
@@ -1221,106 +1157,44 @@ export default function SchedulePage() {
             ))}
           </div>
 
-          {/* LOAD MORE BUTTON SECTION - AT THE BOTTOM WHERE IT BELONGS */}
-          <div className="mt-12 pt-8 border-t border-gray-800">
-            {hasMore ? (
-              <div className="flex flex-col items-center justify-center space-y-4">
-                {isLoading ? (
-                  <div className="flex flex-col items-center gap-4">
-                    <FaSpinner className="animate-spin text-3xl text-blue-500" />
-                    <p className="text-gray-400">Loading more shows...</p>
-                    <div className="w-64 h-1 bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-blue-500 rounded-full transition-all duration-500"
-                        style={{ width: `${(visibleShows.length / allShows.length) * 100}%` }}
-                      ></div>
-                    </div>
-                  </div>
-                ) : (
-                  <>
-                    <button
-                      onClick={handleLoadMoreClick}
-                      className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl min-w-[250px]"
-                    >
-                      <div className="relative z-10 flex items-center justify-center gap-3">
-                        <FaArrowDown className="text-lg" />
-                        <span className="text-lg">Load More Shows</span>
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                    </button>
-                    
-                    <p className="text-gray-400 text-sm text-center">
-                      {visibleShows.length} of {allShows.length} shows loaded • {allShows.length - visibleShows.length} more available
-                    </p>
-                    
-                    {isMobile && (
-                      <p className="text-gray-500 text-xs text-center">
-                        Scroll down for auto-load or tap button above
-                      </p>
-                    )}
-                  </>
-                )}
-              </div>
-            ) : visibleShows.length > 0 ? (
-              <div className="text-center p-6 bg-gradient-to-r from-green-900/20 to-emerald-900/20 rounded-xl border border-green-700/30">
-                <div className="text-4xl mb-3">🎬</div>
-                <h3 className="text-green-400 font-bold text-xl mb-2">All Shows Loaded!</h3>
-                <p className="text-gray-300">
-                  You've viewed all {allShows.length} shows in our schedule
-                </p>
-                <p className="text-gray-400 text-sm mt-2">
-                  Check back daily for new movie schedules and live events
-                </p>
-              </div>
-            ) : null}
+          {/* SIMPLE LOAD MORE BUTTON AT BOTTOM */}
+          <div className="mt-12 pt-8 border-t border-gray-700">
+            <div className="flex flex-col items-center justify-center gap-4">
+              {isLoading ? (
+                <div className="flex flex-col items-center gap-2">
+                  <FaSpinner className="animate-spin text-3xl text-blue-500" />
+                  <p className="text-gray-400">Loading more shows...</p>
+                </div>
+              ) : hasMore ? (
+                <>
+                  <button
+                    onClick={loadMoreItems}
+                    className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded text-lg"
+                  >
+                    Load More Shows
+                  </button>
+                  <p className="text-gray-400 text-sm text-center">
+                    Showing {visibleShows.length} of {allShows.length} shows
+                  </p>
+                </>
+              ) : (
+                <div className="text-center p-4 bg-gray-800/50 rounded border border-gray-700">
+                  <h3 className="text-green-400 font-bold text-lg mb-1">All Shows Loaded</h3>
+                  <p className="text-gray-300">You've viewed all {allShows.length} shows</p>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* BACK TO HOME BUTTON */}
-          <div className="mt-10 pt-8 border-t border-gray-800 text-center">
+          <div className="mt-10 pt-8 border-t border-gray-700 text-center">
             <Link 
               href="/" 
-              className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded"
             >
-              ← Back to Home Page
+              ← Back to Home
             </Link>
           </div>
-
-          {/* MOBILE FLOATING PROGRESS INDICATOR (Optional) */}
-          {isMobile && hasMore && (
-            <div className="fixed bottom-4 left-4 right-4 z-30">
-              <div className="bg-gray-900/90 backdrop-blur-sm rounded-lg p-3 shadow-xl border border-gray-700">
-                <div className="flex items-center justify-between">
-                  <div className="text-white text-sm">
-                    <span className="font-medium">{visibleShows.length}</span> / {allShows.length} shows
-                  </div>
-                  <button
-                    onClick={handleLoadMoreClick}
-                    disabled={isLoading}
-                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                      isLoading 
-                        ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
-                        : 'bg-blue-600 hover:bg-blue-700 text-white'
-                    }`}
-                  >
-                    {isLoading ? (
-                      <span className="flex items-center gap-2">
-                        <FaSpinner className="animate-spin" />
-                        Loading
-                      </span>
-                    ) : (
-                      'Load More'
-                    )}
-                  </button>
-                </div>
-                <div className="mt-2 w-full h-1 bg-gray-700 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-blue-500 rounded-full transition-all duration-300"
-                    style={{ width: `${(visibleShows.length / allShows.length) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>
