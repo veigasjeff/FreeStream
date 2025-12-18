@@ -69,7 +69,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         {/* Google Analytics Tag */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ"></script>
+        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -79,13 +79,20 @@ export default function Document() {
               gtag('config', 'G-RTHH33WQWQ');
             `
           }}
-        />
+        /> */}
+        
+        {/* Meta tags */}
+        <meta charSet="UTF-8" />
         <meta name="description" content="TV, shows, news, and movies for free with Free Streaming. Access thousands of movies + live news, entertainment, weather and more. Watch now." />
         <meta name="keywords" content="free movies, free streaming, watch online, TV shows, no subscription, free movie streaming, live cinema online, watch movies free, scheduled movie times, streaming, HD movies online, live movie streaming, free cinema, online movie theater, news, news online" />
+        
+        {/* Fonts */}
         <link 
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" 
           rel="stylesheet"
         />
+        
+        {/* Basic SEO */}
         <meta name="robots" content="index, follow, max-image-preview:large" />
         <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
@@ -93,6 +100,8 @@ export default function Document() {
         <meta name="copyright" content="Free Streaming" />
         <meta name="distribution" content="global" />
         <meta name="rating" content="general" />
+        
+        {/* Open Graph */}
         <meta property="og:title" content="Free Streaming - Watch Movies, TV Shows, Live Sports & News Online" />
         <meta property="og:description" content="TV, shows, news, sports and movies for free with Free Streaming. Access thousands of movies + live news, entertainment, weather and more. Watch now." />
         <meta property="og:type" content="website" />
@@ -104,14 +113,16 @@ export default function Document() {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-
+        
+        {/* Verification tags */}
         <meta name="google-site-verification" content="BZNZaUyoS1nXyRfa99f4VJ3ABKZUZhkKB0pZ3DU3L8s" />
         <meta name="yandex-verification" content="36e10a0828a7c53f" />
-        <meta name="facebook-domain-verification" content="https://www.facebook.com/profile.php?id=61583910555206" />
+        <meta name="facebook-domain-verification" content="61583910555206" />
         
-        {/* Important: DO NOT set title here - set it in individual pages */}
+        {/* Viewport - IMPORTANT FOR MOBILE */}
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
       </Head>
-      <body className="antialiased">
+      <body>
         <Main />
         <NextScript />
       </body>
