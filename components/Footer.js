@@ -88,12 +88,9 @@ export default function Footer() {
         <div className="border-t border-white/10 mt-8 pt-8 text-center">
           <p className="text-light/50 text-sm">
             © {currentYear} FreeStream. All content is publicly available and streamed under fair use. 
-            This is a demonstration website for educational purposes.
+           
           </p>
-          <p className="text-light/30 text-xs mt-2">
-            Made with ❤️ for movie lovers worldwide
-          </p>
-        </div>
+       </div>
       </div>
     </footer>
   );
