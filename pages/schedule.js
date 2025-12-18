@@ -1566,7 +1566,7 @@ export default function SchedulePage() {
           {/* HEADER */}
           <div className="text-center mb-10">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Daily <span className="text-blue-400">Movie Schedule</span>
+              Daily Movie Schedule
             </h1>
             <p className="text-gray-300 mb-2">
               Watch movies at fixed times like a real cinema
@@ -1579,7 +1579,7 @@ export default function SchedulePage() {
           {/* SCHEDULE CONTENT */}
           <div className="space-y-8">
             {Object.entries(showsByDate).map(([date, shows]) => (
-              <div key={date} className="bg-gray-800/30 backdrop-blur-sm rounded-xl p-4 border border-gray-700">
+              <div key={date} className="bg-gray-800/30 rounded-xl p-4 border border-gray-700">
                 <div className="mb-6">
                   <h2 className="text-xl font-bold text-white mb-2 flex items-center gap-2">
                     <FaCalendarAlt className="text-blue-400" />
@@ -1599,7 +1599,7 @@ export default function SchedulePage() {
                   {shows.map((show) => (
                     <div 
                       key={show.id} 
-                      className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-500 transition-all duration-300"
+                      className="bg-gray-900/50 rounded-xl overflow-hidden border border-gray-700"
                     >
                       {/* IMAGE SECTION */}
                       <div className="relative h-48 overflow-hidden">
@@ -1625,7 +1625,7 @@ export default function SchedulePage() {
                       
                       {/* CONTENT SECTION */}
                       <div className="p-4">
-                        <h3 className="text-lg font-bold text-white mb-2 line-clamp-1">
+                        <h3 className="text-lg font-bold text-white mb-2">
                           {show.title}
                         </h3>
                         
@@ -1636,13 +1636,13 @@ export default function SchedulePage() {
                           </div>
                           <div className="flex items-center gap-1">
                             <FaFilm className="text-green-400" />
-                            <span className="line-clamp-1">
+                            <span>
                               {Array.isArray(show.genre) ? show.genre.join(", ") : show.genre}
                             </span>
                           </div>
                         </div>
                         
-                        <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+                        <p className="text-gray-300 text-sm mb-4">
                           {show.description || "Join us for this exciting movie experience."}
                         </p>
                         
@@ -1650,7 +1650,7 @@ export default function SchedulePage() {
                         <div className="mb-4">
                           {show.isLive ? (
                             <div className="flex items-center gap-2 text-red-400 font-medium">
-                              <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                              <div className="w-2 h-2 bg-red-500 rounded-full"></div>
                               LIVE NOW
                             </div>
                           ) : (
@@ -1666,13 +1666,13 @@ export default function SchedulePage() {
                             <>
                               <button 
                                 onClick={() => handleAdultClick(show, 'details')}
-                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium text-sm transition-colors"
+                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium text-sm"
                               >
                                 View Details
                               </button>
                               <button 
                                 onClick={() => handleAdultClick(show, 'player')}
-                                className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors ${
+                                className={`flex-1 py-2 rounded-lg font-medium text-sm ${
                                   show.isLive 
                                     ? 'bg-red-600 hover:bg-red-700 text-white' 
                                     : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
@@ -1685,13 +1685,13 @@ export default function SchedulePage() {
                             <>
                               <Link 
                                 href={`/schedules/${show.id}`}
-                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium text-sm transition-colors text-center"
+                                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium text-sm text-center"
                               >
                                 View Details
                               </Link>
                               <Link 
                                 href={`/player/${show.id}`}
-                                className={`flex-1 py-2 rounded-lg font-medium text-sm transition-colors text-center ${
+                                className={`flex-1 py-2 rounded-lg font-medium text-sm text-center ${
                                   show.isLive 
                                     ? 'bg-red-600 hover:bg-red-700 text-white' 
                                     : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
@@ -1710,7 +1710,7 @@ export default function SchedulePage() {
             ))}
           </div>
 
-          {/* SINGLE LOAD MORE BUTTON AT THE BOTTOM - NO FLOATING BUTTON */}
+          {/* LOAD MORE BUTTON */}
           <div className="mt-12 pt-8 border-t border-gray-800">
             {hasMore ? (
               <div className="flex flex-col items-center justify-center space-y-4">
@@ -1718,20 +1718,14 @@ export default function SchedulePage() {
                   <div className="flex flex-col items-center gap-4">
                     <FaSpinner className="animate-spin text-3xl text-blue-500" />
                     <p className="text-gray-400">Loading more shows...</p>
-                    <div className="w-64 h-1 bg-gray-700 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-blue-500 rounded-full transition-all duration-500"
-                        style={{ width: `${(visibleShows.length / allShows.length) * 100}%` }}
-                      ></div>
-                    </div>
                   </div>
                 ) : (
                   <>
                     <button
                       onClick={loadMoreItems}
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl min-w-[250px]"
+                      className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-lg min-w-[250px]"
                     >
-                      <span className="text-lg">Load More Shows</span>
+                      Load More Shows
                     </button>
                     
                     <p className="text-gray-400 text-sm text-center">
@@ -1741,14 +1735,10 @@ export default function SchedulePage() {
                 )}
               </div>
             ) : visibleShows.length > 0 ? (
-              <div className="text-center p-6 bg-gradient-to-r from-green-900/20 to-emerald-900/20 rounded-xl border border-green-700/30">
-                <div className="text-4xl mb-3">🎬</div>
-                <h3 className="text-green-400 font-bold text-xl mb-2">All Shows Loaded!</h3>
+              <div className="text-center p-6 bg-gray-800/50 rounded-lg border border-gray-700">
+                <h3 className="text-green-400 font-bold text-xl mb-2">All Shows Loaded</h3>
                 <p className="text-gray-300">
                   You've viewed all {allShows.length} shows in our schedule
-                </p>
-                <p className="text-gray-400 text-sm mt-2">
-                  Check back daily for new movie schedules and live events
                 </p>
               </div>
             ) : null}
@@ -1758,7 +1748,7 @@ export default function SchedulePage() {
           <div className="mt-10 pt-8 border-t border-gray-800 text-center">
             <Link 
               href="/" 
-              className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg"
             >
               ← Back to Home Page
             </Link>
