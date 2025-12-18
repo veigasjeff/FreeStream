@@ -1334,9 +1334,9 @@
 
 import Head from 'next/head';
 import schedule from '../data/schedules.json';
-import { FaCalendarAlt, FaClock, FaFilm, FaExclamationTriangle, FaSpinner, FaArrowDown } from 'react-icons/fa';
+import { FaCalendarAlt, FaClock, FaFilm, FaExclamationTriangle, FaSpinner } from 'react-icons/fa';
 import Link from 'next/link';
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 
 export default function SchedulePage() {
@@ -1353,26 +1353,12 @@ export default function SchedulePage() {
   const [visibleShows, setVisibleShows] = useState([]); 
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   
   const pageRef = useRef(1);
   const loadingRef = useRef(false);
-  const scrollContainerRef = useRef(null);
 
   const ITEMS_PER_PAGE = 15;
   const allShows = schedule.shows;
-
-  // --- DETECT MOBILE ---
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // --- INITIAL DATA LOAD ---
   useEffect(() => {
@@ -1385,7 +1371,7 @@ export default function SchedulePage() {
   }, []);
 
   // --- LOAD MORE FUNCTION ---
-  const loadMoreItems = useCallback(() => {
+  const loadMoreItems = () => {
     if (loadingRef.current || !hasMore) return;
     
     loadingRef.current = true;
@@ -1410,28 +1396,7 @@ export default function SchedulePage() {
       loadingRef.current = false;
       setIsLoading(false);
     }, 500);
-  }, [hasMore]);
-
-  // --- SCROLL HANDLER FOR MOBILE ---
-  useEffect(() => {
-    if (!isMobile) return;
-    
-    const handleScroll = () => {
-      if (loadingRef.current || !hasMore) return;
-      
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const pageHeight = document.documentElement.scrollHeight;
-      
-      // If user is within 300px of bottom on mobile
-      if (pageHeight - scrollPosition < 300) {
-        loadMoreItems();
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isMobile, hasMore, loadMoreItems]);
+  };
 
   // --- GROUP DATA BY DATE ---
   const showsByDate = visibleShows.reduce((acc, show) => {
@@ -1495,13 +1460,6 @@ export default function SchedulePage() {
     setTimeout(() => {
       setShowWarning(false);
     }, 3000);
-  };
-
-  // --- MANUAL LOAD MORE BUTTON ---
-  const handleLoadMoreClick = () => {
-    if (!loadingRef.current && hasMore) {
-      loadMoreItems();
-    }
   };
 
   // --- RENDER AGE VERIFICATION MODAL ---
@@ -1580,7 +1538,7 @@ export default function SchedulePage() {
         "name": "What is Free Streaming?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Free Streaming is an online platform that streams movies live at scheduled times, similar to a traditional cinema. We offer 3 shows daily at fixed times"
+          "text": "Free Streaming is an online platform that streams movies live at scheduled times, similar to a traditional cinema."
         }
       },
       {
@@ -1588,7 +1546,7 @@ export default function SchedulePage() {
         "name": "How does the schedule work?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Movies stream at exact scheduled times shown on our schedule page. Each movie plays at its designated time slot, and you can join the live stream when it's playing."
+          "text": "Movies stream at exact scheduled times shown on our schedule page. Each movie plays at its designated time slot."
         }
       }
     ]
@@ -1599,17 +1557,13 @@ export default function SchedulePage() {
       <Head>
         <title>Free Streaming - Daily Show Times & Streaming Schedule</title>
         <meta name="description" content="View daily movie schedule with fixed streaming times. Watch movies at scheduled times like a real cinema." />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <link rel="canonical" href={`${baseUrl}/schedule`} />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       </Head>
 
-      <div 
-        ref={scrollContainerRef}
-        className="min-h-screen bg-gradient-to-b from-dark to-black"
-      >
+      <div className="min-h-screen bg-gradient-to-b from-dark to-black">
         <div className="container mx-auto px-4 py-8">
-          {/* HEADER - NO LOAD BUTTON HERE */}
+          {/* HEADER */}
           <div className="text-center mb-10">
             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Daily <span className="text-blue-400">Movie Schedule</span>
@@ -1756,7 +1710,7 @@ export default function SchedulePage() {
             ))}
           </div>
 
-          {/* LOAD MORE BUTTON SECTION - AT THE BOTTOM WHERE IT BELONGS */}
+          {/* SINGLE LOAD MORE BUTTON AT THE BOTTOM - NO FLOATING BUTTON */}
           <div className="mt-12 pt-8 border-t border-gray-800">
             {hasMore ? (
               <div className="flex flex-col items-center justify-center space-y-4">
@@ -1774,25 +1728,15 @@ export default function SchedulePage() {
                 ) : (
                   <>
                     <button
-                      onClick={handleLoadMoreClick}
-                      className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl min-w-[250px]"
+                      onClick={loadMoreItems}
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl min-w-[250px]"
                     >
-                      <div className="relative z-10 flex items-center justify-center gap-3">
-                        <FaArrowDown className="text-lg" />
-                        <span className="text-lg">Load More Shows</span>
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-r from-blue-700 to-purple-700 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
+                      <span className="text-lg">Load More Shows</span>
                     </button>
                     
                     <p className="text-gray-400 text-sm text-center">
                       {visibleShows.length} of {allShows.length} shows loaded • {allShows.length - visibleShows.length} more available
                     </p>
-                    
-                    {isMobile && (
-                      <p className="text-gray-500 text-xs text-center">
-                        Scroll down for auto-load or tap button above
-                      </p>
-                    )}
                   </>
                 )}
               </div>
@@ -1819,43 +1763,6 @@ export default function SchedulePage() {
               ← Back to Home Page
             </Link>
           </div>
-
-          {/* MOBILE FLOATING PROGRESS INDICATOR (Optional) */}
-          {isMobile && hasMore && (
-            <div className="fixed bottom-4 left-4 right-4 z-30">
-              <div className="bg-gray-900/90 backdrop-blur-sm rounded-lg p-3 shadow-xl border border-gray-700">
-                <div className="flex items-center justify-between">
-                  <div className="text-white text-sm">
-                    <span className="font-medium">{visibleShows.length}</span> / {allShows.length} shows
-                  </div>
-                  <button
-                    onClick={handleLoadMoreClick}
-                    disabled={isLoading}
-                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                      isLoading 
-                        ? 'bg-gray-700 text-gray-400 cursor-not-allowed' 
-                        : 'bg-blue-600 hover:bg-blue-700 text-white'
-                    }`}
-                  >
-                    {isLoading ? (
-                      <span className="flex items-center gap-2">
-                        <FaSpinner className="animate-spin" />
-                        Loading
-                      </span>
-                    ) : (
-                      'Load More'
-                    )}
-                  </button>
-                </div>
-                <div className="mt-2 w-full h-1 bg-gray-700 rounded-full overflow-hidden">
-                  <div 
-                    className="h-full bg-blue-500 rounded-full transition-all duration-300"
-                    style={{ width: `${(visibleShows.length / allShows.length) * 100}%` }}
-                  ></div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </>
