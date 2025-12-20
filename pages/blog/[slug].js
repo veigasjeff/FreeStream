@@ -12,18 +12,55 @@ import {
   FaArrowLeft,
   FaShareAlt,
   FaBookOpen,
+  FaFacebook,
+  FaTwitter,
+  FaWhatsapp,
+  FaTelegram,
+  FaLink
 } from "react-icons/fa";
+
+// React Share Components
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  TelegramShareButton,
+  TelegramIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  RedditShareButton,
+  RedditIcon
+} from 'react-share';
+import { useState } from 'react';
 
 export default function BlogPost({ post, relatedMovie, recentPosts }) {
   const router = useRouter();
   const baseUrl = "https://freestreaming.vercel.app";
   const currentUrl = `${baseUrl}/blog/${post.slug}`;
+  
+  // Share state
+  const [showShareModal, setShowShareModal] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   // Format dates properly for SEO
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toISOString();
   };
+
+  // Share functions
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(currentUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const shareText = `${post.title} - Read this article on Free Streaming Blog`;
+  const shareTitle = `${post.title} | Free Streaming Blog`;
+  const imageUrl = `${baseUrl}/${post.image}`;
 
   // Article Schema for Google
   const articleSchema = {
@@ -99,6 +136,8 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
         text: post.excerpt,
         url: currentUrl,
       });
+    } else {
+      setShowShareModal(true);
     }
   };
 
@@ -156,6 +195,109 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
       </Head>
+
+      {/* Share Modal */}
+      {showShareModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-800 rounded-xl p-6 max-w-md w-full">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-2xl font-bold text-white">Share This Article</h3>
+              <button 
+                onClick={() => setShowShareModal(false)}
+                className="text-gray-400 hover:text-white text-2xl"
+              >
+                &times;
+              </button>
+            </div>
+            
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="flex items-center gap-3">
+                <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
+                  <Image
+                    src={`/${post.image}`}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-bold text-white">{post.title}</h4>
+                  <p className="text-gray-400 text-sm">Share with your friends</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-2 bg-gray-700 rounded-lg p-3">
+                <input
+                  type="text"
+                  readOnly
+                  value={currentUrl}
+                  className="flex-1 bg-transparent text-white text-sm truncate"
+                />
+                <button
+                  onClick={handleCopyLink}
+                  className={`px-3 py-2 rounded-md text-sm font-medium ${
+                    copied ? 'bg-green-600 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'
+                  }`}
+                >
+                  {copied ? 'Copied!' : 'Copy'}
+                </button>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-5 gap-3">
+              <FacebookShareButton 
+                url={currentUrl} 
+                quote={shareText}
+                hashtag="#FreeStreamingBlog"
+                className="flex flex-col items-center gap-2"
+              >
+                <FacebookIcon size={48} round />
+                <span className="text-xs text-gray-300">Facebook</span>
+              </FacebookShareButton>
+              
+              <TwitterShareButton 
+                url={currentUrl}
+                title={shareText}
+                hashtags={["FreeStreaming", "Blog"]}
+                className="flex flex-col items-center gap-2"
+              >
+                <TwitterIcon size={48} round />
+                <span className="text-xs text-gray-300">Twitter</span>
+              </TwitterShareButton>
+              
+              <WhatsappShareButton 
+                url={currentUrl}
+                title={shareText}
+                separator=" - "
+                className="flex flex-col items-center gap-2"
+              >
+                <WhatsappIcon size={48} round />
+                <span className="text-xs text-gray-300">WhatsApp</span>
+              </WhatsappShareButton>
+              
+              <TelegramShareButton 
+                url={currentUrl}
+                title={shareText}
+                className="flex flex-col items-center gap-2"
+              >
+                <TelegramIcon size={48} round />
+                <span className="text-xs text-gray-300">Telegram</span>
+              </TelegramShareButton>
+              
+              <LinkedinShareButton 
+                url={currentUrl}
+                title={shareText}
+                summary={post.excerpt}
+                source="Free Streaming"
+                className="flex flex-col items-center gap-2"
+              >
+                <LinkedinIcon size={48} round />
+                <span className="text-xs text-gray-300">LinkedIn</span>
+              </LinkedinShareButton>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
         {/* Breadcrumb */}
@@ -236,7 +378,6 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                   style={{
                     filter:
                       "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)",
-                 
                   }}
                   className="object-cover"
                   priority
@@ -275,6 +416,62 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                 </div>
               )}
 
+              {/* Quick Share Section */}
+              <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6 mb-8">
+                <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                  <FaShareAlt /> Share This Article
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  <FacebookShareButton 
+                    url={currentUrl} 
+                    quote={shareText}
+                    hashtag="#FreeStreamingBlog"
+                    className="transition-transform hover:scale-110"
+                  >
+                    <FacebookIcon size={40} round />
+                  </FacebookShareButton>
+                  
+                  <TwitterShareButton 
+                    url={currentUrl}
+                    title={shareText}
+                    hashtags={["FreeStreaming", "Blog"]}
+                    className="transition-transform hover:scale-110"
+                  >
+                    <TwitterIcon size={40} round />
+                  </TwitterShareButton>
+                  
+                  <WhatsappShareButton 
+                    url={currentUrl}
+                    title={shareText}
+                    separator=" - "
+                    className="transition-transform hover:scale-110"
+                  >
+                    <WhatsappIcon size={40} round />
+                  </WhatsappShareButton>
+                  
+                  <TelegramShareButton 
+                    url={currentUrl}
+                    title={shareText}
+                    className="transition-transform hover:scale-110"
+                  >
+                    <TelegramIcon size={40} round />
+                  </TelegramShareButton>
+                  
+                  <button
+                    onClick={handleCopyLink}
+                    className="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-full transition-all hover:scale-110"
+                    title="Copy link"
+                  >
+                    <FaLink className="text-white" />
+                  </button>
+                </div>
+                {copied && (
+                  <div className="mt-2 text-sm text-green-400 animate-pulse">
+                    ✓ Link copied to clipboard!
+                  </div>
+                )}
+              </div>
+
               {/* Navigation */}
               <div className="flex justify-between items-center py-8 border-t border-gray-800">
                 <Link
@@ -309,6 +506,78 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                   >
                     Visit Homepage →
                   </Link>
+                </div>
+
+                {/* Social Share Widget */}
+                <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
+                  <h3 className="text-xl font-bold mb-4">Share This Article</h3>
+                  <div className="grid grid-cols-3 gap-3">
+                    <FacebookShareButton 
+                      url={currentUrl} 
+                      quote={shareText}
+                      hashtag="#FreeStreamingBlog"
+                      className="flex flex-col items-center gap-2 hover:scale-105 transition-transform"
+                    >
+                      <FacebookIcon size={40} round />
+                      <span className="text-xs text-gray-300">Facebook</span>
+                    </FacebookShareButton>
+                    
+                    <TwitterShareButton 
+                      url={currentUrl}
+                      title={shareText}
+                      hashtags={["FreeStreaming", "Blog"]}
+                      className="flex flex-col items-center gap-2 hover:scale-105 transition-transform"
+                    >
+                      <TwitterIcon size={40} round />
+                      <span className="text-xs text-gray-300">Twitter</span>
+                    </TwitterShareButton>
+                    
+                    <WhatsappShareButton 
+                      url={currentUrl}
+                      title={shareText}
+                      separator=" - "
+                      className="flex flex-col items-center gap-2 hover:scale-105 transition-transform"
+                    >
+                      <WhatsappIcon size={40} round />
+                      <span className="text-xs text-gray-300">WhatsApp</span>
+                    </WhatsappShareButton>
+                    
+                    <TelegramShareButton 
+                      url={currentUrl}
+                      title={shareText}
+                      className="flex flex-col items-center gap-2 hover:scale-105 transition-transform"
+                    >
+                      <TelegramIcon size={40} round />
+                      <span className="text-xs text-gray-300">Telegram</span>
+                    </TelegramShareButton>
+                    
+                    <LinkedinShareButton 
+                      url={currentUrl}
+                      title={shareText}
+                      summary={post.excerpt}
+                      source="Free Streaming"
+                      className="flex flex-col items-center gap-2 hover:scale-105 transition-transform"
+                    >
+                      <LinkedinIcon size={40} round />
+                      <span className="text-xs text-gray-300">LinkedIn</span>
+                    </LinkedinShareButton>
+                    
+                    <button
+                      onClick={handleCopyLink}
+                      className="flex flex-col items-center gap-2 hover:scale-105 transition-transform"
+                      title="Copy link"
+                    >
+                      <div className="w-10 h-10 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-full">
+                        <FaLink className="text-white" />
+                      </div>
+                      <span className="text-xs text-gray-300">Copy Link</span>
+                    </button>
+                  </div>
+                  {copied && (
+                    <div className="mt-3 text-center text-sm text-green-400 animate-pulse">
+                      ✓ Link copied to clipboard!
+                    </div>
+                  )}
                 </div>
 
                 {/* Recent Posts */}
