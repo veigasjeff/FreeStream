@@ -421,6 +421,11 @@ export default function Home({ todaysShows, latestPosts }) {
                         src={getImageUrl(post.image)}
                         alt={post.title}
                         fill
+                        quality={90}
+                        style={{
+                          filter:
+                            "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)",
+                        }}
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
