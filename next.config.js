@@ -87,58 +87,132 @@
 
 
 
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   // Disabling strict mode prevents double-rendering during development
+//   reactStrictMode: false,
+  
+//   // Uses the Rust compiler for faster builds and better minification
+//   swcMinify: true,
+
+//   // CRITICAL FOR SEO: Forces URLs to end with a slash (e.g., /schedule/)
+//   trailingSlash: true,
+
+//   images: {
+//     // CRITICAL FOR PUBLIC FOLDER: 
+//     // Tells Next.js to serve images as-is without processing. 
+//     // This fixes 404 errors for local files on many hosting platforms.
+//     unoptimized: true,
+    
+//     // Allow external images if your JSON ever uses them
+//     remotePatterns: [
+//       {
+//         protocol: 'https',
+//         hostname: '**',
+//       },
+//       {
+//         protocol: 'http',
+//         hostname: '**',
+//       },
+//     ],
+//   },
+
+//   // Security Headers
+//   async headers() {
+//     return [
+//       {
+//         source: '/:path*',
+//         headers: [
+//           {
+//             key: 'X-DNS-Prefetch-Control',
+//             value: 'on'
+//           },
+//           {
+//             key: 'X-Content-Type-Options',
+//             value: 'nosniff'
+//           },
+//           {
+//             key: 'Referrer-Policy',
+//             value: 'origin-when-cross-origin'
+//           }
+//         ]
+//       }
+//     ]
+//   }
+// }
+
+// module.exports = nextConfig
+
+
+
+
+
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   reactStrictMode: true,
+//   images: {
+//     domains: ['freestreaming.vercel.app', 'localhost'],
+//     unoptimized: false, // Enable image optimization
+//     formats: ['image/webp'], // Serve WebP for better performance
+//   },
+//   // Enable static exports
+//   output: 'standalone',
+//   // Enable compression
+//   compress: true,
+//   // Improve SEO with trailing slashes
+//   trailingSlash: false,
+//   // Enable strict mode for better React practices
+//   swcMinify: true,
+// }
+
+// module.exports = nextConfig
+
+
+
+
+
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Disabling strict mode prevents double-rendering during development
-  reactStrictMode: false,
-  
-  // Uses the Rust compiler for faster builds and better minification
-  swcMinify: true,
-
-  // CRITICAL FOR SEO: Forces URLs to end with a slash (e.g., /schedule/)
-  trailingSlash: true,
-
+  reactStrictMode: true,
   images: {
-    // CRITICAL FOR PUBLIC FOLDER: 
-    // Tells Next.js to serve images as-is without processing. 
-    // This fixes 404 errors for local files on many hosting platforms.
-    unoptimized: true,
-    
-    // Allow external images if your JSON ever uses them
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-      {
-        protocol: 'http',
-        hostname: '**',
-      },
+    // Add ALL domains that your images come from
+    domains: [
+      'freestreaming.vercel.app', 
+      'localhost',
+      'i.ytimg.com', // YouTube thumbnails
+      'img.youtube.com', // YouTube images
+      'yt3.ggpht.com', // YouTube profile images
+      'lh3.googleusercontent.com', // Google hosted images
+      // Add any other domains your movie images come from
     ],
+    // Allow unoptimized images for external sources
+    unoptimized: true, // Changed from false to true
+    formats: ['image/webp', 'image/avif', 'image/jpeg', 'image/png'],
+    // Increase image optimization quality
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
-
-  // Security Headers
-  async headers() {
-    return [
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'X-DNS-Prefetch-Control',
-            value: 'on'
-          },
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff'
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin'
-          }
-        ]
-      }
-    ]
-  }
+  // Enable static exports
+  output: 'standalone',
+  // Enable compression
+  compress: true,
+  // Improve SEO with trailing slashes
+  trailingSlash: true, // Changed to true for better SEO
+  // Enable strict mode for better React practices
+  swcMinify: true,
+  // Enable external image optimization
+  experimental: {
+    images: {
+      allowFutureImage: true,
+      remotePatterns: [
+        {
+          protocol: 'https',
+          hostname: '**', // Allow all HTTPS domains
+        },
+      ],
+    },
+  },
 }
 
 module.exports = nextConfig

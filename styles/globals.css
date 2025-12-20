@@ -157,26 +157,3 @@ input[type="range"] {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
 }
-/* @import 'video.js/dist/video-js.css';
-
-.video-js {
-  width: 100%;
-  min-height: 400px;
-}
-
-.vjs-big-play-button {
-  background-color: rgba(59, 130, 246, 0.8) !important;
-  border-radius: 50% !important;
-  width: 80px !important;
-  height: 80px !important;
-  line-height: 80px !important;
-  border: none !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%);
-}
-
-.vjs-big-play-button .vjs-icon-placeholder:before {
-  font-size: 3em !important;
-  line-height: 80px !important;
-} */

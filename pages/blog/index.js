@@ -1,196 +1,66 @@
-// import Head from 'next/head';
-// import Link from 'next/link';
-// import postsData from '../../data/posts.json';
-// import Image from 'next/image';
-
-// export default function BlogIndex() {
-//   const baseUrl = "https://freestreaming.vercel.app"; // CHANGE THIS
-
-//   // Helper to fix image paths
-//   const getImageUrl = (imagePath) => {
-//     if (!imagePath) return '/images/default-movie.jpg';
-//     if (imagePath.startsWith('http')) return imagePath;
-//     return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-//   };
-
-//   // Schema for the blog collection
-//   const collectionSchema = {
-//     "@context": "https://schema.org",
-//     "@type": "CollectionPage",
-//     "headline": "Movie News & Streaming Guides",
-//     "description": "Read the latest news, updates, and streaming guides for movies and TV shows.",
-//     "url": `${baseUrl}/blog`,
-//     "mainEntity": {
-//       "@type": "ItemList",
-//       "itemListElement": postsData.posts.map((post, index) => ({
-//         "@type": "ListItem",
-//         "position": index + 1,
-//         "url": `${baseUrl}/blog/${post.slug}`,
-//         "name": post.title
-//       }))
-//     }
-//   };
-
-//   return (
-//     <>
-//       <Head>
-//         <title>Movie Streaming Guides & News | Free Streaming Blog</title>
-//         <meta name="description" content="Latest updates, how-to guides, and news about free movie streaming online. Read our articles to find out how to watch your favorite films." />
-//         <link rel="canonical" href={`${baseUrl}/blog`} />
-//         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
-//       </Head>
-
-//       <div className="min-h-screen bg-black text-white py-12">
-//         <div className="container mx-auto px-4">
-//           <div className="text-center mb-16 pt-10">
-//             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-purple-600">
-//               Streaming Guides & News
-//             </h1>
-//             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-//               Tips, tricks, and guides on how to watch the latest movies online for free.
-//             </p>
-//           </div>
-
-//           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-//             {postsData.posts.map((post) => (
-//               <article key={post.slug} className="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300 flex flex-col h-full group">
-//                 <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
-//                   <div className="relative h-56 w-full bg-gray-800 overflow-hidden">
-//                      <Image 
-//                        src={getImageUrl(post.image)} 
-//                        alt={post.title}
-//                        fill
-//                        className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-//                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-//                      />
-//                   </div>
-//                   <div className="p-6 flex flex-col flex-grow">
-//                     <div className="flex justify-between items-center mb-3">
-//                       <span className="text-xs text-red-500 font-bold uppercase tracking-wider">Guide</span>
-//                       <span className="text-xs text-gray-500">{post.date}</span>
-//                     </div>
-//                     <h2 className="text-xl font-bold mb-3 line-clamp-2 group-hover:text-red-500 transition-colors">
-//                       {post.title}
-//                     </h2>
-//                     <p className="text-gray-400 text-sm line-clamp-3 mb-4 flex-grow">
-//                       {post.excerpt}
-//                     </p>
-//                     <span className="text-white font-bold text-sm uppercase tracking-wide flex items-center mt-auto group-hover:underline">
-//                       Read Article <span className="ml-2 text-red-500">&rarr;</span>
-//                     </span>
-//                   </div>
-//                 </Link>
-//               </article>
-//             ))}
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
-
-
-
-
-
-
-
-
-
-
 import Head from 'next/head';
 import Link from 'next/link';
-import postsData from '../../data/posts.json';
 import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react';
-import { FaSpinner } from 'react-icons/fa';
+import postsData from '../../data/posts.json';
+import { FaCalendarAlt, FaUser, FaTag } from 'react-icons/fa';
 
-export default function BlogIndex() {
-  const baseUrl = "https://freestreaming.vercel.app"; // CHANGE THIS
+export default function BlogIndex({ posts }) {
+  const baseUrl = "https://freestreaming.vercel.app";
 
-  // --- INFINITE SCROLL STATE ---
-  const [displayedPosts, setDisplayedPosts] = useState([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const loaderRef = useRef(null);
-  
-  const POSTS_PER_PAGE = 6; // Load 6 posts at a time
-
-  // --- INITIAL LOAD ---
-  useEffect(() => {
-    // Load first batch immediately
-    setDisplayedPosts(postsData.posts.slice(0, POSTS_PER_PAGE));
-    if (postsData.posts.length <= POSTS_PER_PAGE) {
-      setHasMore(false);
-    }
-  }, []);
-
-  // --- SCROLL HANDLER ---
-  const loadMorePosts = () => {
-    if (isLoading || !hasMore) return;
-
-    setIsLoading(true);
-
-    // Simulate network delay for smooth UX (optional, remove setTimeout for instant load)
-    setTimeout(() => {
-      const currentLength = displayedPosts.length;
-      const nextBatch = postsData.posts.slice(currentLength, currentLength + POSTS_PER_PAGE);
-      
-      if (nextBatch.length > 0) {
-        setDisplayedPosts(prev => [...prev, ...nextBatch]);
-      }
-
-      if (currentLength + nextBatch.length >= postsData.posts.length) {
-        setHasMore(false);
-      }
-      
-      setIsLoading(false);
-    }, 800); 
-  };
-
-  // --- INTERSECTION OBSERVER FOR SCROLL TRIGGER ---
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasMore) {
-          loadMorePosts();
-        }
-      },
-      { threshold: 1.0 } // Trigger when loader is fully visible
-    );
-
-    if (loaderRef.current) {
-      observer.observe(loaderRef.current);
-    }
-
-    return () => {
-      if (loaderRef.current) observer.unobserve(loaderRef.current);
-    };
-  }, [displayedPosts, hasMore, isLoading]);
-
-  // Helper to fix image paths
-  const getImageUrl = (imagePath) => {
-    if (!imagePath) return '/images/default-movie.jpg';
-    if (imagePath.startsWith('http')) return imagePath;
-    return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
-  };
-
-  // Schema for the blog collection
+  // Blog collection schema for SEO
   const collectionSchema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "headline": "Movie News & Streaming Guides",
-    "description": "Read the latest news, updates, and streaming guides for movies and TV shows.",
+    "@id": `${baseUrl}/blog/#collectionpage`,
     "url": `${baseUrl}/blog`,
+    "name": "Movie Streaming Guides & News",
+    "description": "Latest updates, how-to guides, and news about free movie streaming online.",
     "mainEntity": {
       "@type": "ItemList",
-      "itemListElement": postsData.posts.map((post, index) => ({
+      "itemListElement": posts.map((post, index) => ({
         "@type": "ListItem",
         "position": index + 1,
-        "url": `${baseUrl}/blog/${post.slug}`,
-        "name": post.title
+        "item": {
+          "@type": "Article",
+          "@id": `${baseUrl}/blog/${post.slug}`,
+          "headline": post.title,
+          "description": post.excerpt,
+          "datePublished": post.date,
+          "author": {
+            "@type": "Organization",
+            "name": "Free Streaming"
+          }
+        }
       }))
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Free Streaming",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`
+      }
     }
+  };
+
+  // Breadcrumb schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": baseUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": `${baseUrl}/blog`
+      }
+    ]
   };
 
   return (
@@ -198,70 +68,162 @@ export default function BlogIndex() {
       <Head>
         <title>Movie Streaming Guides & News | Free Streaming Blog</title>
         <meta name="description" content="Latest updates, how-to guides, and news about free movie streaming online. Read our articles to find out how to watch your favorite films." />
+        <meta name="keywords" content="movie guides, streaming news, watch movies online, free streaming tips, movie reviews, streaming updates" />
         <link rel="canonical" href={`${baseUrl}/blog`} />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Movie Streaming Guides & News | Free Streaming Blog" />
+        <meta property="og:description" content="Latest updates, how-to guides, and news about free movie streaming online." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${baseUrl}/blog`} />
+        <meta property="og:image" content={`${baseUrl}/og-image.jpg`} />
+        
+        {/* Twitter */}
+        <meta name="twitter:title" content="Movie Streaming Guides & News | Free Streaming Blog" />
+        <meta name="twitter:description" content="Latest updates, how-to guides, and news about free movie streaming online." />
+        <meta name="twitter:image" content={`${baseUrl}/twitter-image.jpg`} />
+        
+        {/* Structured Data */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       </Head>
 
-      <div className="min-h-screen bg-black text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16 pt-10">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-purple-600">
-              Streaming Guides & News
-            </h1>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Tips, tricks, and guides on how to watch the latest movies online for free.
-            </p>
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+        {/* Breadcrumb Navigation */}
+        <nav className="container mx-auto px-4 py-4">
+          <div className="flex items-center space-x-2 text-sm text-gray-400">
+            <Link href="/" className="hover:text-blue-400 transition-colors">
+              Home
+            </Link>
+            <span className="text-gray-600">/</span>
+            <span className="text-white">Blog</span>
           </div>
+        </nav>
 
+        {/* Header */}
+        <header className="container mx-auto px-4 py-12 text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
+            Streaming Guides & News
+          </h1>
+          <p className="text-gray-300 text-lg md:text-xl max-w-3xl mx-auto mb-8">
+            Expert tips, latest updates, and comprehensive guides to help you enjoy free streaming
+          </p>
+          <div className="flex flex-wrap justify-center gap-3 mb-8">
+            <span className="px-4 py-2 bg-blue-900/50 border border-blue-700 rounded-full text-sm flex items-center gap-2">
+              <FaTag /> Streaming Tips
+            </span>
+            <span className="px-4 py-2 bg-purple-900/50 border border-purple-700 rounded-full text-sm flex items-center gap-2">
+              <FaTag /> Movie Reviews
+            </span>
+            <span className="px-4 py-2 bg-red-900/50 border border-red-700 rounded-full text-sm flex items-center gap-2">
+              <FaTag /> How-To Guides
+            </span>
+          </div>
+        </header>
+
+        {/* Blog Posts Grid */}
+        <main className="container mx-auto px-4 pb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayedPosts.map((post) => (
-              <article key={post.slug} className="bg-gray-900 rounded-xl overflow-hidden border border-gray-800 hover:border-gray-600 transition-all duration-300 flex flex-col h-full group animate-fadeIn">
-                <Link href={`/blog/${post.slug}`} className="flex flex-col h-full">
-                  <div className="relative h-56 w-full bg-gray-800 overflow-hidden">
-                     <Image 
-                       src={getImageUrl(post.image)} 
-                       alt={post.title}
-                       fill
-                       className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
-                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                     />
+            {posts.map((post) => (
+              <article 
+                key={post.slug}
+                className="bg-gray-800/50 border border-gray-700 rounded-xl overflow-hidden hover:border-blue-500 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-900/20 group"
+              >
+                <Link href={`/blog/${post.slug}`} className="block h-full">
+                  {/* Image */}
+                  <div className="relative h-56 w-full overflow-hidden">
+                    <Image
+                      src={`/${post.image}`}
+                      alt={post.title}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                    {post.category && (
+                      <div className="absolute top-3 left-3 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-bold">
+                        {post.category}
+                      </div>
+                    )}
                   </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="text-xs text-red-500 font-bold uppercase tracking-wider">Guide</span>
-                      <span className="text-xs text-gray-500">{post.date}</span>
+
+                  {/* Content */}
+                  <div className="p-6">
+                    <div className="flex items-center gap-4 text-sm text-gray-400 mb-3">
+                      <span className="flex items-center gap-1">
+                        <FaCalendarAlt /> {post.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <FaUser /> Free Streaming Team
+                      </span>
                     </div>
-                    <h2 className="text-xl font-bold mb-3 line-clamp-2 group-hover:text-red-500 transition-colors">
+
+                    <h2 className="text-xl font-bold mb-3 group-hover:text-blue-400 transition-colors line-clamp-2">
                       {post.title}
                     </h2>
-                    <p className="text-gray-400 text-sm line-clamp-3 mb-4 flex-grow">
+
+                    <p className="text-gray-300 mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
-                    <span className="text-white font-bold text-sm uppercase tracking-wide flex items-center mt-auto group-hover:underline">
-                      Read Article <span className="ml-2 text-red-500">&rarr;</span>
-                    </span>
+
+                    {/* Keywords */}
+                    {post.keywords && (
+                      <div className="mb-4">
+                        <div className="flex flex-wrap gap-2">
+                          {post.keywords.split(',').slice(0, 3).map((keyword, idx) => (
+                            <span key={idx} className="text-xs bg-gray-700 text-gray-300 px-2 py-1 rounded">
+                              {keyword.trim()}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Read More */}
+                    <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-700">
+                      <span className="text-blue-400 font-medium group-hover:underline">
+                        Read Full Article
+                      </span>
+                      <span className="text-gray-400 text-sm">
+                        {post.content.split(' ').length / 200} min read
+                      </span>
+                    </div>
                   </div>
                 </Link>
               </article>
             ))}
           </div>
 
-          {/* --- LOADING INDICATOR & TRIGGER --- */}
-          <div ref={loaderRef} className="py-12 text-center">
-            {isLoading && (
-              <div className="flex flex-col items-center justify-center gap-3">
-                <FaSpinner className="animate-spin text-4xl text-red-600" />
-                <p className="text-gray-400 text-sm animate-pulse">Loading more articles...</p>
-              </div>
-            )}
-            
-            {!hasMore && displayedPosts.length > 0 && (
-              <p className="text-gray-600 text-sm mt-8">You've reached the end of the list.</p>
-            )}
+          {/* Pagination Info */}
+          <div className="mt-12 text-center">
+            <p className="text-gray-400">
+              Showing {posts.length} of {postsData.posts.length} articles
+            </p>
+            <Link 
+              href="/" 
+              className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg mt-6 transition-colors"
+            >
+              ← Back to Home
+            </Link>
           </div>
-
-        </div>
+        </main>
       </div>
     </>
   );
+}
+
+// IMPORTANT: This pre-renders the page at build time
+export async function getStaticProps() {
+  // Sort posts by date, newest first
+  const sortedPosts = [...postsData.posts].sort((a, b) => 
+    new Date(b.date) - new Date(a.date)
+  );
+
+  return {
+    props: {
+      posts: sortedPosts,
+    },
+    // Re-generate page every hour
+    revalidate: 3600,
+  };
 }

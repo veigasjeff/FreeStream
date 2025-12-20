@@ -1,183 +1,42 @@
-
-// import Head from 'next/head';
-// import Link from 'next/link';
-// import Image from 'next/image';
-// import postsData from '../../data/posts.json';
-// import schedule from '../../data/schedules.json';
-
-// export default function BlogPost({ post, relatedMovie }) {
-//   const baseUrl = "https://freestreaming.vercel.app"; // CHANGE THIS
-//   const currentUrl = `${baseUrl}/blog/${post.slug}`;
-
-//   // Robust Article Schema for Google
-//   const articleSchema = {
-//     "@context": "https://schema.org",
-//     "@type": "Article",
-//     "headline": post.title,
-//     "description": post.excerpt,
-//     "image": `${baseUrl}/${post.image}`,
-//     "author": {
-//       "@type": "Organization",
-//       "name": "Free Streaming Team",
-//       "url": baseUrl
-//     },
-//     "publisher": {
-//       "@type": "Organization",
-//       "name": "Free Streaming",
-//       "logo": {
-//         "@type": "ImageObject",
-//         "url": `${baseUrl}/logo.png`
-//       }
-//     },
-//     "datePublished": post.date,
-//     "dateModified": new Date().toISOString(), // Always shows fresh content
-//     "mainEntityOfPage": {
-//       "@type": "WebPage",
-//       "@id": currentUrl
-//     },
-//     "articleBody": post.content
-//   };
-
-//   return (
-//     <>
-//       <Head>
-//         <title>{post.title}</title>
-//         <meta name="description" content={post.excerpt} />
-//         <link rel="canonical" href={currentUrl} />
-//         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-//       </Head>
-
-//       <div className="min-h-screen bg-black text-white pt-24 pb-12">
-//         <article className="container mx-auto px-4 max-w-4xl">
-     
-//           <div className="mb-8">
-//             <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
-//             <p className="text-gray-400 border-b border-gray-800 pb-8">Published on {post.date}</p>
-//           </div>
-
-//           <div className="relative w-full h-64 md:h-96 mb-8 rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-//              <Image 
-//                src={`/${post.image}`} 
-//                alt={post.title}
-//                fill
-//                className="object-cover"
-//                priority
-//                quality={90}
-//                style={{
-//                   filter: 'brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)',
-//                 }}
-//              />
-//           </div>
-
-//           <div className="prose prose-invert prose-lg max-w-none mb-12">
-//             {/* Rendering content - split by newlines for basic paragraphs */}
-//             {post.content.split('\n').map((paragraph, idx) => (
-//               <p key={idx} className="mb-4 text-gray-300 leading-relaxed text-lg">
-//                 {paragraph}
-//               </p>
-//             ))}
-//           </div>
-
-//     <div className="text-center mt-8 md:mt-12">
-//                   <Link
-//                     href="/blog"
-//                     className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
-//                   >
-//                     <span className="gradient-text">
-//                       ← Back to Blog
-//                     </span>
-//                   </Link>
-//                 </div>
-//           {/* DYNAMIC CALL TO ACTION - LINKS TO PLAYER */}
-//           {relatedMovie && (
-//             <div className="bg-gradient-to-br from-red-900/40 to-black border border-red-600/50 p-8 rounded-2xl text-center my-12 shadow-red-900/20 shadow-lg transform transition-all hover:scale-[1.01]">
-//               <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white">
-//                 <span className="gradient-text"> Want to watch {relatedMovie.title} ? </span> 
-//               </h3>
-//               <p className="mb-8 text-gray-300 text-lg">
-//                 Click Below Now. We are streaming this movie for free in HD quality. No sign-up required.
-//               </p>
-              
-//               <Link 
-//                 href={`/schedules/${relatedMovie.id}`}
-//                 className="inline-flex items-center justify-center bg-red-600 hover:bg-red-500 text-white font-bold text-lg py-4 px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-red-600/50 group"
-//               >
-//                 <span>Watch {relatedMovie.title} Now</span>
-//                 <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-//               </Link>
-//             </div>
-//           )}
-//         </article>
-//       </div>
-//     </>
-//   );
-// }
-
-// export async function getStaticPaths() {
-//   const paths = postsData.posts.map((post) => ({ params: { slug: post.slug } }));
-//   return { paths, fallback: false };
-// }
-
-// export async function getStaticProps({ params }) {
-//   const post = postsData.posts.find((p) => p.slug === params.slug);
-  
-//   // Find the related movie data to link back
-//   // This logic is crucial: it looks for the ID in schedules.json that matches relatedMovieId in posts.json
-//   const relatedMovie = post && post.relatedMovieId 
-//     ? schedule.shows.find(s => s.id === post.relatedMovieId) 
-//     : null;
-
-//   if (!post) return { notFound: true };
-  
-//   return { 
-//     props: { 
-//       post, 
-//       relatedMovie: relatedMovie || null 
-//     }, 
-//     revalidate: 60 
-//   };
-// }
-
-
-
-
-
-
-
-
-
-
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import postsData from '../../data/posts.json';
 import schedule from '../../data/schedules.json';
+import { FaCalendarAlt, FaUser, FaClock, FaTag, FaArrowLeft, FaShareAlt, FaBookOpen } from 'react-icons/fa';
 
-export default function BlogPost({ post, relatedMovie }) {
+export default function BlogPost({ post, relatedMovie, recentPosts }) {
+  const router = useRouter();
   const baseUrl = "https://freestreaming.vercel.app";
   const currentUrl = `${baseUrl}/blog/${post.slug}`;
 
-  // Format dates to ISO 8601 with timezone
-  const formatDateToISO = (dateString) => {
+  // Format dates properly for SEO
+  const formatDate = (dateString) => {
     const date = new Date(dateString);
-    // Ensure timezone offset is included (Z for UTC or +/-HH:MM for local)
-    return date.toISOString(); // This includes timezone
+    return date.toISOString();
   };
 
-  // Get current date in ISO format for dateModified
-  const currentDateISO = new Date().toISOString();
-
-  // Robust Article Schema for Google
+  // Article Schema for Google
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
+    "@id": `${currentUrl}#article`,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": currentUrl
+    },
     "headline": post.title,
     "description": post.excerpt,
     "image": `${baseUrl}/${post.image}`,
     "author": {
       "@type": "Organization",
-      "name": "Free Streaming Team",
-      "url": baseUrl
+      "name": "Free Streaming",
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/logo.png`
+      }
     },
     "publisher": {
       "@type": "Organization",
@@ -187,144 +46,322 @@ export default function BlogPost({ post, relatedMovie }) {
         "url": `${baseUrl}/logo.png`
       }
     },
-    "datePublished": formatDateToISO(post.date),
-    "dateModified": currentDateISO,
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": currentUrl
-    },
-    "articleBody": post.content
+    "datePublished": formatDate(post.date),
+    "dateModified": formatDate(post.date),
+    "articleBody": post.content,
+    "articleSection": post.category || "Streaming Guides",
+    "keywords": post.keywords,
+    "wordCount": post.content.split(' ').length,
+    "timeRequired": `PT${Math.ceil(post.content.split(' ').length / 200)}M`,
+    "thumbnailUrl": `${baseUrl}/${post.image}`,
+    "inLanguage": "en-US"
   };
 
-  // Format date for display
-  const formatDisplayDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      timeZone: 'UTC'
-    });
+  // Breadcrumb Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": baseUrl
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": `${baseUrl}/blog`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": post.title,
+        "item": currentUrl
+      }
+    ]
+  };
+
+  // Share article
+  const shareArticle = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: post.title,
+        text: post.excerpt,
+        url: currentUrl,
+      });
+    }
   };
 
   return (
     <>
       <Head>
-        <title>{post.title}</title>
+        <title>{post.title} | Free Streaming Blog</title>
         <meta name="description" content={post.excerpt} />
+        <meta name="keywords" content={post.keywords} />
         <link rel="canonical" href={currentUrl} />
+        
+        {/* Open Graph */}
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
-        <meta property="og:image" content={`${baseUrl}/${post.image}`} />
-        <meta property="og:url" content={currentUrl} />
         <meta property="og:type" content="article" />
-        <meta property="article:published_time" content={formatDateToISO(post.date)} />
-        <meta property="article:modified_time" content={currentDateISO} />
-        <script 
-          type="application/ld+json" 
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} 
-        />
+        <meta property="og:url" content={currentUrl} />
+        <meta property="og:image" content={`${baseUrl}/${post.image}`} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="Free Streaming" />
+        <meta property="og:locale" content="en_US" />
+        <meta property="article:published_time" content={formatDate(post.date)} />
+        <meta property="article:modified_time" content={formatDate(post.date)} />
+        <meta property="article:author" content="Free Streaming" />
+        <meta property="article:section" content={post.category || "Streaming Guides"} />
+        {post.keywords && post.keywords.split(',').map((tag, idx) => (
+          <meta key={idx} property="article:tag" content={tag.trim()} />
+        ))}
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={post.title} />
+        <meta name="twitter:description" content={post.excerpt} />
+        <meta name="twitter:image" content={`${baseUrl}/${post.image}`} />
+        
+        {/* Structured Data */}
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
       </Head>
 
-      <div className="min-h-screen bg-black text-white pt-24 pb-12">
-        <article className="container mx-auto px-4 max-w-4xl">
-     
-          <div className="mb-8">
-            <h1 className="text-3xl md:text-5xl font-bold mb-4 leading-tight">{post.title}</h1>
-            <p className="text-gray-400 border-b border-gray-800 pb-8">
-              Published on {formatDisplayDate(post.date)}
-            </p>
-          </div>
-
-          <div className="relative w-full h-64 md:h-96 mb-8 rounded-xl overflow-hidden shadow-2xl border border-gray-800">
-            <Image 
-              src={`/${post.image}`} 
-              alt={post.title}
-              fill
-              className="object-cover"
-              priority
-              quality={90}
-              sizes="(max-width: 768px) 100vw, 768px"
-              style={{
-                filter: 'brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)',
-              }}
-            />
-          </div>
-
-          <div className="prose prose-invert prose-lg max-w-none mb-12">
-            {post.content.split('\n').map((paragraph, idx) => (
-              paragraph.trim() && (
-                <p key={idx} className="mb-4 text-gray-300 leading-relaxed text-lg">
-                  {paragraph}
-                </p>
-              )
-            ))}
-          </div>
-
-          <div className="text-center mt-8 md:mt-12">
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition-colors"
-            >
-              <span className="gradient-text">
-                ← Back to Blog
-              </span>
+      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+        {/* Breadcrumb */}
+        <nav className="container mx-auto px-4 py-6">
+          <div className="flex items-center space-x-2 text-sm">
+            <Link href="/" className="text-gray-400 hover:text-blue-400 transition-colors">
+              Home
             </Link>
+            <span className="text-gray-600">/</span>
+            <Link href="/blog" className="text-gray-400 hover:text-blue-400 transition-colors">
+              Blog
+            </Link>
+            <span className="text-gray-600">/</span>
+            <span className="text-white truncate max-w-xs md:max-w-md">{post.title}</span>
           </div>
+        </nav>
 
-          {relatedMovie && (
-            <div className="bg-gradient-to-br from-red-900/40 to-black border border-red-600/50 p-8 rounded-2xl text-center my-12 shadow-red-900/20 shadow-lg transform transition-all hover:scale-[1.01]">
-              <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white">
-                <span className="gradient-text">Want to watch {relatedMovie.title}?</span> 
-              </h3>
-              <p className="mb-8 text-gray-300 text-lg">
-                Click Below Now. We are streaming this movie for free in HD quality. No sign-up required.
-              </p>
-              
-              <Link 
-                href={`/schedules/${relatedMovie.id}`}
-                className="inline-flex items-center justify-center bg-red-600 hover:bg-red-500 text-white font-bold text-lg py-4 px-10 rounded-full transition-all duration-300 shadow-lg hover:shadow-red-600/50 group"
-              >
-                <span>Watch {relatedMovie.title} Now</span>
-                <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </Link>
-            </div>
-          )}
-        </article>
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <article className="lg:col-span-2">
+              {/* Article Header */}
+              <header className="mb-8">
+                {post.category && (
+                  <span className="inline-block bg-red-600 text-white px-4 py-1 rounded-full text-sm font-bold mb-4">
+                    {post.category}
+                  </span>
+                )}
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+                  {post.title}
+                </h1>
+                
+                <div className="flex flex-wrap items-center gap-4 text-gray-400 mb-8">
+                  <div className="flex items-center gap-2">
+                    <FaCalendarAlt />
+                    <time dateTime={formatDate(post.date)}>
+                      {new Date(post.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </time>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <FaUser />
+                    <span>Free Streaming Team</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <FaClock />
+                    <span>{Math.ceil(post.content.split(' ').length / 200)} min read</span>
+                  </div>
+                  <button
+                    onClick={shareArticle}
+                    className="flex items-center gap-2 text-blue-400 hover:text-blue-300"
+                  >
+                    <FaShareAlt /> Share
+                  </button>
+                </div>
+              </header>
+
+              {/* Featured Image */}
+              <div className="relative h-64 md:h-80 lg:h-96 rounded-xl overflow-hidden mb-8 border border-gray-700">
+                <Image
+                  src={`/${post.image}`}
+                  alt={post.title}
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 66vw"
+                />
+              </div>
+
+              {/* Article Content */}
+              <div className="prose prose-lg prose-invert max-w-none mb-12">
+                {post.content.split('\n\n').map((paragraph, idx) => (
+                  <div key={idx} className="mb-6">
+                    <p className="text-gray-300 leading-relaxed text-lg">
+                      {paragraph}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Related Movie CTA */}
+              {relatedMovie && (
+                <div className="bg-gradient-to-r from-blue-900/30 to-purple-900/30 border border-blue-500/30 rounded-xl p-6 mb-8">
+                  <h3 className="text-2xl font-bold mb-4 flex items-center gap-2">
+                    <FaBookOpen /> Want to Watch This Movie?
+                  </h3>
+                  <p className="text-gray-300 mb-6">
+                    We're streaming <strong>{relatedMovie.title}</strong> for free in HD quality. 
+                    No registration or subscription required.
+                  </p>
+                  <Link
+                    href={`/schedules/${relatedMovie.id}`}
+                    className="inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg transition-colors"
+                  >
+                    Watch {relatedMovie.title} Now
+                  </Link>
+                </div>
+              )}
+
+              {/* Navigation */}
+              <div className="flex justify-between items-center py-8 border-t border-gray-800">
+                <Link
+                  href="/blog"
+                  className="flex items-center gap-2 text-blue-400 hover:text-blue-300"
+                >
+                  <FaArrowLeft /> Back to Blog
+                </Link>
+                <button
+                  onClick={shareArticle}
+                  className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg"
+                >
+                  <FaShareAlt /> Share Article
+                </button>
+              </div>
+            </article>
+
+            {/* Sidebar */}
+            <aside className="lg:col-span-1">
+              <div className="sticky top-6 space-y-8">
+                {/* About */}
+                <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
+                  <h3 className="text-xl font-bold mb-4">About This Blog</h3>
+                  <p className="text-gray-300 mb-4">
+                    We provide expert guides and latest updates on free movie streaming. 
+                    Learn how to watch your favorite films legally and in HD quality.
+                  </p>
+                  <Link
+                    href="/"
+                    className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
+                  >
+                    Visit Homepage →
+                  </Link>
+                </div>
+
+                {/* Recent Posts */}
+                <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
+                  <h3 className="text-xl font-bold mb-4">Recent Articles</h3>
+                  <div className="space-y-4">
+                    {recentPosts.map((recentPost) => (
+                      <Link
+                        key={recentPost.slug}
+                        href={`/blog/${recentPost.slug}`}
+                        className="block group"
+                      >
+                        <div className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-700/50 transition-colors">
+                          <div className="flex-1">
+                            <h4 className="font-medium group-hover:text-blue-400 transition-colors line-clamp-2">
+                              {recentPost.title}
+                            </h4>
+                            <p className="text-gray-400 text-sm mt-1">
+                              {new Date(recentPost.date).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric'
+                              })}
+                            </p>
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Keywords */}
+                {post.keywords && (
+                  <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
+                    <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
+                      <FaTag /> Article Tags
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {post.keywords.split(',').slice(0, 10).map((keyword, idx) => (
+                        <span
+                          key={idx}
+                          className="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer"
+                        >
+                          {keyword.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </aside>
+          </div>
+        </div>
       </div>
     </>
   );
 }
 
+// Generate all static paths for blog posts
 export async function getStaticPaths() {
-  const paths = postsData.posts.map((post) => ({ params: { slug: post.slug } }));
-  return { paths, fallback: false };
+  const paths = postsData.posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
+
+  return {
+    paths,
+    fallback: 'blocking', // Better for SEO than 'false'
+  };
 }
 
+// Pre-render each blog post at build time
 export async function getStaticProps({ params }) {
   const post = postsData.posts.find((p) => p.slug === params.slug);
   
-  if (!post) return { notFound: true };
-
-  // Validate and format post date
-  const postDate = new Date(post.date);
-  if (isNaN(postDate.getTime())) {
-    console.error(`Invalid date format for post: ${post.slug}`);
+  if (!post) {
+    return {
+      notFound: true,
+    };
   }
 
-  // Find the related movie data
-  const relatedMovie = post && post.relatedMovieId 
-    ? schedule.shows.find(s => s.id === post.relatedMovieId) 
+  // Get related movie
+  const relatedMovie = post.relatedMovieId
+    ? schedule.shows.find((s) => s.id === post.relatedMovieId)
     : null;
 
-  return { 
-    props: { 
-      post, 
-      relatedMovie: relatedMovie || null 
-    }, 
-    revalidate: 60 
+  // Get recent posts (excluding current)
+  const recentPosts = postsData.posts
+    .filter((p) => p.slug !== post.slug)
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, 5);
+
+  return {
+    props: {
+      post,
+      relatedMovie,
+      recentPosts,
+    },
+    // Re-generate page every hour
+    revalidate: 3600,
   };
 }
