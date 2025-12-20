@@ -1,17 +1,28 @@
 
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import schedule from '../../data/schedules.json';
-import postsData from '../../data/posts.json';
-import YouTubePlayer from '../../components/YouTubePlayer';
-import { 
-  FaClock, FaCalendar, FaPlayCircle, FaShareAlt, FaStar, 
-  FaLanguage, FaClosedCaptioning, FaCalendarAlt, FaTags,
-  FaArrowLeft, FaUserFriends, FaVideo, FaFilm, FaExclamationTriangle
-} from 'react-icons/fa';
-import { useState, useEffect, useCallback } from 'react';
-import { useRouter } from 'next/router';
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import schedule from "../../data/schedules.json";
+import postsData from "../../data/posts.json";
+import YouTubePlayer from "../../components/YouTubePlayer";
+import {
+  FaClock,
+  FaCalendar,
+  FaPlayCircle,
+  FaShareAlt,
+  FaStar,
+  FaLanguage,
+  FaClosedCaptioning,
+  FaCalendarAlt,
+  FaTags,
+  FaArrowLeft,
+  FaUserFriends,
+  FaVideo,
+  FaFilm,
+  FaExclamationTriangle,
+} from "react-icons/fa";
+import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/router";
 
 // React Share Components
 import {
@@ -26,32 +37,32 @@ import {
   LinkedinShareButton,
   LinkedinIcon,
   RedditShareButton,
-  RedditIcon
-} from 'react-share';
+  RedditIcon,
+} from "react-share";
 
 export default function ShowPage({ show, relatedPost, similarShows }) {
   const router = useRouter();
   const baseUrl = "https://freestreaming.vercel.app";
   const currentUrl = `${baseUrl}/schedules/${show.id}`;
-  
+
   // State for random similar movies that change every 5 seconds
   const [randomSimilarMovies, setRandomSimilarMovies] = useState([]);
-  
+
   // Adult content warning state
   const [showAdultWarning, setShowAdultWarning] = useState(false);
   const [selectedAdultShow, setSelectedAdultShow] = useState(null);
   const [intendedAction, setIntendedAction] = useState(null);
-  
+
   // Share state
   const [showShareModal, setShowShareModal] = useState(false);
   const [copied, setCopied] = useState(false);
-  
+
   // Check if main show is adult content
-  const isAdult = show.category === 'Adult';
+  const isAdult = show.category === "Adult";
 
   // Function to get 4 random movies from all available movies (excluding current one)
   const getRandomMovies = useCallback(() => {
-    const allMovies = schedule.shows.filter(movie => movie.id !== show.id);
+    const allMovies = schedule.shows.filter((movie) => movie.id !== show.id);
     const shuffled = [...allMovies].sort(() => 0.5 - Math.random());
     return shuffled.slice(0, 4);
   }, [show.id]);
@@ -60,7 +71,7 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
   useEffect(() => {
     // Set initial random movies
     setRandomSimilarMovies(getRandomMovies());
-    
+
     // Change movies every 5 seconds
     const interval = setInterval(() => {
       setRandomSimilarMovies(getRandomMovies());
@@ -71,7 +82,7 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
 
   // Handle Adult content click for similar movies
   const handleAdultClick = (movie, action, e) => {
-    if (movie.category === 'Adult') {
+    if (movie.category === "Adult") {
       e.preventDefault();
       e.stopPropagation();
       setSelectedAdultShow(movie);
@@ -97,12 +108,12 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
   // Handle age verification
   const handleAgeVerification = () => {
     setShowAdultWarning(false);
-    
+
     // Proceed with intended action using router
     if (selectedAdultShow && intendedAction) {
-      if (intendedAction === 'watch') {
+      if (intendedAction === "watch") {
         router.push(`/player/${selectedAdultShow.id}`);
-      } else if (intendedAction === 'details') {
+      } else if (intendedAction === "details") {
         router.push(`/schedules/${selectedAdultShow.id}`);
       }
     }
@@ -128,21 +139,23 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
 
   // Helper function to get correct image URL
   const getImageUrl = (imagePath) => {
-    if (!imagePath) return '/images/fallback-movie.jpg';
-    
+    if (!imagePath) return "/images/fallback-movie.jpg";
+
     // If image path already starts with http or https, return as is
-    if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
       return imagePath;
     }
-    
+
     // Check if it's a YouTube thumbnail
-    if (imagePath.includes('youtube.com') || imagePath.includes('ytimg.com')) {
+    if (imagePath.includes("youtube.com") || imagePath.includes("ytimg.com")) {
       return imagePath;
     }
-    
+
     // Remove leading slash if present to avoid double slashes
-    const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-    
+    const cleanPath = imagePath.startsWith("/")
+      ? imagePath.slice(1)
+      : imagePath;
+
     // For local images
     return `/${cleanPath}`;
   };
@@ -150,7 +163,7 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
   // Helper function to get full image URL for metadata
   const getFullImageUrl = (imagePath) => {
     const cleanPath = getImageUrl(imagePath);
-    if (cleanPath.startsWith('http')) {
+    if (cleanPath.startsWith("http")) {
       return cleanPath;
     }
     return `${baseUrl}${cleanPath}`;
@@ -167,121 +180,183 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
     "@context": "https://schema.org",
     "@type": "Article",
     "@id": `${currentUrl}#article`,
-    "mainEntityOfPage": {
+    mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": currentUrl
+      "@id": currentUrl,
     },
-    "headline": `Watch ${show.title} (${show.year}) Full Movie Online Free - Live Streaming`,
-    "description": show.description?.substring(0, 160) || `Watch ${show.title} online for free`,
-    "image": getFullImageUrl(show.image),
-    "author": {
+    headline: `Watch ${show.title} (${show.year}) Full Movie Online Free - Live Streaming`,
+    description:
+      show.description?.substring(0, 160) ||
+      `Watch ${show.title} online for free`,
+    image: getFullImageUrl(show.image),
+    author: {
       "@type": "Organization",
-      "name": "Free Streaming",
-      "url": baseUrl,
-      "logo": {
+      name: "Free Streaming",
+      url: baseUrl,
+      logo: {
         "@type": "ImageObject",
-        "url": `${baseUrl}/logo.png`
-      }
+        url: `${baseUrl}/logo.png`,
+      },
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "Free Streaming",
-      "logo": {
+      name: "Free Streaming",
+      logo: {
         "@type": "ImageObject",
-        "url": `${baseUrl}/logo.png`
-      }
+        url: `${baseUrl}/logo.png`,
+      },
     },
-    "datePublished": show.date ? formatDate(show.date) : new Date().toISOString(),
-    "dateModified": new Date().toISOString(),
-    "articleBody": `${show.title} is a ${Array.isArray(show.genre) ? show.genre.join(", ") : show.genre || "movie"} ${show.year ? show.year + " " : ""}movie. ${show.description || ""} Directed by ${Array.isArray(show.director) ? show.director.join(", ") : show.director || "N/A"}. Starring ${show.cast?.join(", ") || "N/A"}. Watch it live on our platform.`,
-    "keywords": show.keywords || `${show.title} movie`,
-    "articleSection": "Movies",
-    "wordCount": (show.description?.split(' ').length || 0) + 50,
-    "thumbnailUrl": getFullImageUrl(show.image),
-    "inLanguage": show.language || "English"
+    datePublished: show.date ? formatDate(show.date) : new Date().toISOString(),
+    dateModified: new Date().toISOString(),
+    articleBody: `${show.title} is a ${
+      Array.isArray(show.genre) ? show.genre.join(", ") : show.genre || "movie"
+    } ${show.year ? show.year + " " : ""}movie. ${
+      show.description || ""
+    } Directed by ${
+      Array.isArray(show.director)
+        ? show.director.join(", ")
+        : show.director || "N/A"
+    }. Starring ${
+      show.cast?.join(", ") || "N/A"
+    }. Watch it live on our platform.`,
+    keywords: show.keywords || `${show.title} movie`,
+    articleSection: "Movies",
+    wordCount: (show.description?.split(" ").length || 0) + 50,
+    thumbnailUrl: getFullImageUrl(show.image),
+    inLanguage: show.language || "English",
   };
 
   // Breadcrumb Schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": baseUrl
+        position: 1,
+        name: "Home",
+        item: baseUrl,
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Movies Schedule",
-        "item": `${baseUrl}/schedule`
+        position: 2,
+        name: "Movies Schedule",
+        item: `${baseUrl}/schedule`,
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": show.title,
-        "item": currentUrl
-      }
-    ]
+        position: 3,
+        name: show.title,
+        item: currentUrl,
+      },
+    ],
   };
 
   // VideoObject Schema for embedded player
   const videoSchema = {
     "@context": "https://schema.org",
     "@type": "VideoObject",
-    "name": show.title,
-    "description": show.description || `Watch ${show.title} online`,
-    "thumbnailUrl": getFullImageUrl(show.image),
-    "uploadDate": show.date ? formatDate(show.date) : new Date().toISOString(),
-    "duration": show.duration || "PT2H",
-    "contentUrl": show.streamUrl || `${baseUrl}/player/${show.id}`,
-    "embedUrl": `https://www.youtube.com/embed/${show.youtubeid}`,
-    "genre": Array.isArray(show.genre) ? show.genre.join(", ") : show.genre || "Movie",
-    "actor": show.cast?.map(actor => ({ "@type": "Person", "name": actor })) || [],
-    "director": Array.isArray(show.director) 
-      ? show.director.map(director => ({ "@type": "Person", "name": director }))
-      : { "@type": "Person", "name": show.director || "N/A" }
+    name: show.title,
+    description: show.description || `Watch ${show.title} online`,
+    thumbnailUrl: getFullImageUrl(show.image),
+    uploadDate: show.date ? formatDate(show.date) : new Date().toISOString(),
+    duration: show.duration || "PT2H",
+    contentUrl: show.streamUrl || `${baseUrl}/player/${show.id}`,
+    embedUrl: `https://www.youtube.com/embed/${show.youtubeid}`,
+    genre: Array.isArray(show.genre)
+      ? show.genre.join(", ")
+      : show.genre || "Movie",
+    actor:
+      show.cast?.map((actor) => ({ "@type": "Person", name: actor })) || [],
+    director: Array.isArray(show.director)
+      ? show.director.map((director) => ({ "@type": "Person", name: director }))
+      : { "@type": "Person", name: show.director || "N/A" },
   };
 
   // Hidden main movie image for SEO
-  const mainMovieImage = show.image ? getImageUrl(show.image) : '/images/fallback-movie.jpg';
+  const mainMovieImage = show.image
+    ? getImageUrl(show.image)
+    : "/images/fallback-movie.jpg";
 
   return (
     <>
       <Head>
         <title>{`Watch ${show.title} (${show.year}) Online Free | Free Streaming`}</title>
-        <meta name="description" content={`Stream ${show.title} online for free. ${show.description?.substring(0, 155) || `Watch ${show.title} in HD`}... Watch in HD without registration.`} />
-        <meta name="keywords" content={`${show.title}, watch ${show.title} online, free ${show.title} streaming, ${Array.isArray(show.genre) ? show.genre.join(", ") : show.genre || "movie"}, ${show.year} movie, ${show.cast?.slice(0, 3).join(", ") || show.title}`} />
+        <meta
+          name="description"
+          content={`Stream ${show.title} online for free. ${
+            show.description?.substring(0, 155) || `Watch ${show.title} in HD`
+          }... Watch in HD without registration.`}
+        />
+        <meta
+          name="keywords"
+          content={`${show.title}, watch ${show.title} online, free ${
+            show.title
+          } streaming, ${
+            Array.isArray(show.genre)
+              ? show.genre.join(", ")
+              : show.genre || "movie"
+          }, ${show.year} movie, ${
+            show.cast?.slice(0, 3).join(", ") || show.title
+          }`}
+        />
         <link rel="canonical" href={currentUrl} />
-        
+
         {/* Open Graph */}
-        <meta property="og:title" content={`Watch ${show.title} (${show.year}) Free Online`} />
-        <meta property="og:description" content={show.description || `Watch ${show.title} online free`} />
+        <meta
+          property="og:title"
+          content={`Watch ${show.title} (${show.year}) Free Online`}
+        />
+        <meta
+          property="og:description"
+          content={show.description || `Watch ${show.title} online free`}
+        />
         <meta property="og:image" content={getFullImageUrl(show.image)} />
         <meta property="og:type" content="video.movie" />
         <meta property="og:url" content={currentUrl} />
         <meta property="og:site_name" content="Free Streaming" />
-        <meta property="og:video" content={`https://www.youtube.com/embed/${show.youtubeid}`} />
+        <meta
+          property="og:video"
+          content={`https://www.youtube.com/embed/${show.youtubeid}`}
+        />
         <meta property="og:video:type" content="text/html" />
         <meta property="og:video:width" content="1280" />
         <meta property="og:video:height" content="720" />
-        
+
         {/* Twitter */}
         <meta name="twitter:card" content="player" />
-        <meta name="twitter:title" content={`Watch ${show.title} (${show.year}) Free Online`} />
-        <meta name="twitter:description" content={show.description?.substring(0, 200) || `Watch ${show.title} online`} />
+        <meta
+          name="twitter:title"
+          content={`Watch ${show.title} (${show.year}) Free Online`}
+        />
+        <meta
+          name="twitter:description"
+          content={
+            show.description?.substring(0, 200) || `Watch ${show.title} online`
+          }
+        />
         <meta name="twitter:image" content={getFullImageUrl(show.image)} />
-        <meta name="twitter:player" content={`https://www.youtube.com/embed/${show.youtubeid}`} />
+        <meta
+          name="twitter:player"
+          content={`https://www.youtube.com/embed/${show.youtubeid}`}
+        />
         <meta name="twitter:player:width" content="1280" />
         <meta name="twitter:player:height" content="720" />
-        
+
         {/* Structured Data */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }} />
-        
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+        />
+
         {/* Hidden image for SEO */}
         <link rel="preload" as="image" href={mainMovieImage} />
       </Head>
@@ -295,20 +370,24 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
               <h3 className="text-2xl font-bold">Adult Content Warning</h3>
             </div>
             <p className="text-gray-300 mb-4">
-              <strong>This content is rated ADULT and is restricted to viewers 18 years or older.</strong>
+              <strong>
+                This content is rated ADULT and is restricted to viewers 18
+                years or older.
+              </strong>
             </p>
             <p className="text-gray-400 mb-6">
-              This content is restricted to viewers 18+. Contains explicit adult material. By clicking "Continue", you confirm that you are 
-              at least 18 years old and agree to view adult content.
+              This content is restricted to viewers 18+. Contains explicit adult
+              material. By clicking "Continue", you confirm that you are at
+              least 18 years old and agree to view adult content.
             </p>
             <div className="flex gap-3">
-              <button 
+              <button
                 onClick={handleCancel}
                 className="flex-1 bg-gray-700 hover:bg-gray-600 text-white py-3 rounded-lg font-bold transition-colors"
               >
                 Cancel
               </button>
-              <button 
+              <button
                 onClick={handleAgeVerification}
                 className="flex-1 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white py-3 rounded-lg font-bold transition-colors"
               >
@@ -324,15 +403,17 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
         <div className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center p-4">
           <div className="bg-gray-800 rounded-xl p-6 max-w-md w-full">
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-white">Share This Movie</h3>
-              <button 
+              <h3 className="text-2xl font-bold text-white">
+                Share This Movie
+              </h3>
+              <button
                 onClick={() => setShowShareModal(false)}
                 className="text-gray-400 hover:text-white text-2xl"
               >
                 &times;
               </button>
             </div>
-            
+
             <div className="flex flex-col gap-4 mb-6">
               <div className="flex items-center gap-3">
                 <div className="relative w-16 h-16 rounded-lg overflow-hidden flex-shrink-0">
@@ -345,10 +426,12 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 </div>
                 <div>
                   <h4 className="font-bold text-white">{show.title}</h4>
-                  <p className="text-gray-400 text-sm">Share with your friends</p>
+                  <p className="text-gray-400 text-sm">
+                    Share with your friends
+                  </p>
                 </div>
               </div>
-              
+
               <div className="flex items-center gap-2 bg-gray-700 rounded-lg p-3">
                 <input
                   type="text"
@@ -359,17 +442,19 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 <button
                   onClick={handleCopyLink}
                   className={`px-3 py-2 rounded-md text-sm font-medium ${
-                    copied ? 'bg-green-600 text-white' : 'bg-blue-600 hover:bg-blue-700 text-white'
+                    copied
+                      ? "bg-green-600 text-white"
+                      : "bg-blue-600 hover:bg-blue-700 text-white"
                   }`}
                 >
-                  {copied ? 'Copied!' : 'Copy'}
+                  {copied ? "Copied!" : "Copy"}
                 </button>
               </div>
             </div>
-            
+
             <div className="grid grid-cols-5 gap-3">
-              <FacebookShareButton 
-                url={currentUrl} 
+              <FacebookShareButton
+                url={currentUrl}
                 quote={shareText}
                 hashtag="#FreeStreaming"
                 className="flex flex-col items-center gap-2"
@@ -377,8 +462,8 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 <FacebookIcon size={48} round />
                 <span className="text-xs text-gray-300">Facebook</span>
               </FacebookShareButton>
-              
-              <TwitterShareButton 
+
+              <TwitterShareButton
                 url={currentUrl}
                 title={shareText}
                 hashtags={["FreeStreaming", "FreeMovies"]}
@@ -387,8 +472,8 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 <TwitterIcon size={48} round />
                 <span className="text-xs text-gray-300">Twitter</span>
               </TwitterShareButton>
-              
-              <WhatsappShareButton 
+
+              <WhatsappShareButton
                 url={currentUrl}
                 title={shareText}
                 separator=" - "
@@ -397,8 +482,8 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 <WhatsappIcon size={48} round />
                 <span className="text-xs text-gray-300">WhatsApp</span>
               </WhatsappShareButton>
-              
-              <TelegramShareButton 
+
+              <TelegramShareButton
                 url={currentUrl}
                 title={shareText}
                 className="flex flex-col items-center gap-2"
@@ -406,8 +491,8 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 <TelegramIcon size={48} round />
                 <span className="text-xs text-gray-300">Telegram</span>
               </TelegramShareButton>
-              
-              <RedditShareButton 
+
+              <RedditShareButton
                 url={currentUrl}
                 title={shareText}
                 windowWidth={660}
@@ -423,7 +508,14 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
       )}
 
       {/* Hidden SEO image */}
-      <div style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden' }}>
+      <div
+        style={{
+          position: "absolute",
+          width: 1,
+          height: 1,
+          overflow: "hidden",
+        }}
+      >
         <Image
           src={mainMovieImage}
           alt={`${show.title} movie poster`}
@@ -431,6 +523,10 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
           height={630}
           priority={true}
           quality={100}
+          style={{
+            filter:
+              "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)",
+          }}
         />
       </div>
 
@@ -438,15 +534,23 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
         {/* Breadcrumb Navigation */}
         <nav className="container mx-auto px-4 py-4">
           <div className="flex items-center space-x-2 text-sm">
-            <Link href="/" className="text-gray-400 hover:text-blue-400 transition-colors">
+            <Link
+              href="/"
+              className="text-gray-400 hover:text-blue-400 transition-colors"
+            >
               Home
             </Link>
             <span className="text-gray-600">/</span>
-            <Link href="/schedule" className="text-gray-400 hover:text-blue-400 transition-colors">
+            <Link
+              href="/schedule"
+              className="text-gray-400 hover:text-blue-400 transition-colors"
+            >
               Movies
             </Link>
             <span className="text-gray-600">/</span>
-            <span className="text-white truncate max-w-xs md:max-w-lg">{show.title}</span>
+            <span className="text-white truncate max-w-xs md:max-w-lg">
+              {show.title}
+            </span>
           </div>
         </nav>
 
@@ -458,8 +562,8 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 <div className="flex items-center justify-between flex-wrap gap-3">
                   <div>
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 leading-tight">
-                      {show.title} 
-                      {show.year && <span className="text-gray-400"> ({show.year})</span>}
+                      {show.title}
+                      {/* {show.year && <span className="text-gray-400"> ({show.year})</span>} */}
                     </h1>
                     {isAdult && (
                       <div className="inline-flex items-center text-white px-3 py-1 rounded-md text-sm font-bold mb-4">
@@ -467,7 +571,7 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                       </div>
                     )}
                   </div>
-                  
+
                   <button
                     onClick={() => setShowShareModal(true)}
                     className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors"
@@ -475,7 +579,7 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                     <FaShareAlt /> Share
                   </button>
                 </div>
-                
+
                 <div className="flex flex-wrap items-center gap-4 text-gray-400 mb-6">
                   {show.rating && (
                     <div className="flex items-center gap-2">
@@ -514,7 +618,7 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 <div className="flex flex-wrap gap-4 mb-8">
                   {isAdult ? (
                     <button
-                      onClick={(e) => handleMainAdultClick('watch', e)}
+                      onClick={(e) => handleMainAdultClick("watch", e)}
                       className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 transition-all transform hover:scale-105 shadow-lg hover:shadow-red-600/30"
                     >
                       <FaPlayCircle size={24} /> WATCH LIVE STREAM
@@ -529,10 +633,12 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                   )}
                   {show.time && (
                     <div className="flex items-center gap-3 text-gray-300 bg-gray-700/50 px-6 py-4 rounded-xl">
-                      <FaClock className="text-blue-400" /> 
+                      <FaClock className="text-blue-400" />
                       <div>
                         <div className="font-bold text-lg">{show.time}</div>
-                        <div className="text-sm text-gray-400">Stream Time (GMT)</div>
+                        <div className="text-sm text-gray-400">
+                          Stream Time (GMT)
+                        </div>
                       </div>
                     </div>
                   )}
@@ -542,22 +648,29 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                   Movie Synopsis
                 </h2>
                 <p className="text-gray-300 leading-relaxed text-lg mb-8">
-                  {show.description || `Watch ${show.title} online for free. Stream ${show.title} in HD quality.`}
+                  {show.description ||
+                    `Watch ${show.title} online for free. Stream ${show.title} in HD quality.`}
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     {show.director && (
                       <div>
-                        <span className="text-gray-500 block mb-1 text-sm">Director</span>
+                        <span className="text-gray-500 block mb-1 text-sm">
+                          Director
+                        </span>
                         <span className="text-white font-semibold text-lg">
-                          {Array.isArray(show.director) ? show.director.join(", ") : show.director}
+                          {Array.isArray(show.director)
+                            ? show.director.join(", ")
+                            : show.director}
                         </span>
                       </div>
                     )}
                     {show.cast && show.cast.length > 0 && (
                       <div>
-                        <span className="text-gray-500 block mb-1 text-sm">Cast</span>
+                        <span className="text-gray-500 block mb-1 text-sm">
+                          Cast
+                        </span>
                         <span className="text-white font-semibold text-lg">
                           {show.cast.join(", ")}
                         </span>
@@ -567,13 +680,20 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                   <div className="space-y-4">
                     {show.genre && (
                       <div>
-                        <span className="text-gray-500 block mb-1 text-sm">Genre</span>
+                        <span className="text-gray-500 block mb-1 text-sm">
+                          Genre
+                        </span>
                         <div className="flex flex-wrap gap-2">
-                          {Array.isArray(show.genre) ? show.genre.map((genre, idx) => (
-                            <span key={idx} className="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">
-                              {genre}
-                            </span>
-                          )) : (
+                          {Array.isArray(show.genre) ? (
+                            show.genre.map((genre, idx) => (
+                              <span
+                                key={idx}
+                                className="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                              >
+                                {genre}
+                              </span>
+                            ))
+                          ) : (
                             <span className="bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm">
                               {show.genre}
                             </span>
@@ -583,7 +703,9 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                     )}
                     {show.year && (
                       <div>
-                        <span className="text-gray-500 block mb-1 text-sm">Release Year</span>
+                        <span className="text-gray-500 block mb-1 text-sm">
+                          Release Year
+                        </span>
                         <span className="text-white font-semibold text-lg">
                           {show.year}
                         </span>
@@ -606,9 +728,7 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                     <h4 className="text-xl font-bold text-blue-400 hover:text-blue-300 mb-2 transition-colors">
                       {relatedPost.title} →
                     </h4>
-                    <p className="text-gray-300 mb-4">
-                      {relatedPost.excerpt}
-                    </p>
+                    <p className="text-gray-300 mb-4">{relatedPost.excerpt}</p>
                     <div className="flex items-center gap-2 text-gray-400 text-sm">
                       <FaCalendarAlt /> {relatedPost.date}
                     </div>
@@ -623,15 +743,15 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {randomSimilarMovies.map((movie) => {
-                    const isMovieAdult = movie.category === 'Adult';
+                    const isMovieAdult = movie.category === "Adult";
                     const movieImage = getImageUrl(movie.image);
                     const movieTitle = movie.title || "Unknown Movie";
-                    
+
                     if (isMovieAdult) {
                       return (
                         <button
                           key={movie.id}
-                          onClick={(e) => handleAdultClick(movie, 'details', e)}
+                          onClick={(e) => handleAdultClick(movie, "details", e)}
                           className="bg-gray-800/30 hover:bg-gray-700/50 rounded-xl p-4 border border-gray-700 hover:border-blue-500 transition-all group cursor-pointer w-full text-left"
                         >
                           <div className="flex items-center gap-4">
@@ -643,6 +763,11 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                                 className="object-cover group-hover:scale-110 transition-transform"
                                 sizes="80px"
                                 loading="lazy"
+                                quality={90}
+                                style={{
+                                  filter:
+                                    "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)",
+                                }}
                               />
                               <div className="absolute top-1 right-1 bg-red-600 text-white px-1 py-0.5 rounded text-xs font-bold z-10">
                                 18+
@@ -651,12 +776,16 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                             <div>
                               <h4 className="font-bold text-white group-hover:text-blue-400 transition-colors">
                                 {movieTitle}
-                                <span className="ml-2 text-red-400 text-xs font-bold">[ADULT]</span>
+                                <span className="ml-2 text-red-400 text-xs font-bold">
+                                  [ADULT]
+                                </span>
                               </h4>
                               <div className="flex items-center gap-3 text-sm text-gray-400 mt-1">
                                 {movie.year && <span>{movie.year}</span>}
                                 {movie.year && movie.duration && <span>•</span>}
-                                {movie.duration && <span>{movie.duration}</span>}
+                                {movie.duration && (
+                                  <span>{movie.duration}</span>
+                                )}
                               </div>
                               <div className="text-blue-400 text-sm mt-2">
                                 Watch Now →
@@ -681,6 +810,11 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                                 className="object-cover group-hover:scale-110 transition-transform"
                                 sizes="80px"
                                 loading="lazy"
+                                quality={90}
+                                style={{
+                                  filter:
+                                    "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)",
+                                }}
                               />
                             </div>
                             <div>
@@ -690,7 +824,9 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                               <div className="flex items-center gap-3 text-sm text-gray-400 mt-1">
                                 {movie.year && <span>{movie.year}</span>}
                                 {movie.year && movie.duration && <span>•</span>}
-                                {movie.duration && <span>{movie.duration}</span>}
+                                {movie.duration && (
+                                  <span>{movie.duration}</span>
+                                )}
                               </div>
                               <div className="text-blue-400 text-sm mt-2">
                                 Watch Now →
@@ -737,16 +873,16 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                     <FaShareAlt /> Share This Movie
                   </h3>
                   <div className="flex flex-wrap gap-3">
-                    <FacebookShareButton 
-                      url={currentUrl} 
+                    <FacebookShareButton
+                      url={currentUrl}
                       quote={shareText}
                       hashtag="#FreeStreaming"
                       className="transition-transform hover:scale-110"
                     >
                       <FacebookIcon size={36} round />
                     </FacebookShareButton>
-                    
-                    <TwitterShareButton 
+
+                    <TwitterShareButton
                       url={currentUrl}
                       title={shareText}
                       hashtags={["FreeStreaming", "FreeMovies"]}
@@ -754,8 +890,8 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                     >
                       <TwitterIcon size={36} round />
                     </TwitterShareButton>
-                    
-                    <WhatsappShareButton 
+
+                    <WhatsappShareButton
                       url={currentUrl}
                       title={shareText}
                       separator=" - "
@@ -763,22 +899,33 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
                     >
                       <WhatsappIcon size={36} round />
                     </WhatsappShareButton>
-                    
-                    <TelegramShareButton 
+
+                    <TelegramShareButton
                       url={currentUrl}
                       title={shareText}
                       className="transition-transform hover:scale-110"
                     >
                       <TelegramIcon size={36} round />
                     </TelegramShareButton>
-                    
+
                     <button
                       onClick={handleCopyLink}
                       className="w-9 h-9 flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-full transition-all hover:scale-110"
                       title="Copy link"
                     >
-                      <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      <svg
+                        className="w-5 h-5 text-white"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                        />
                       </svg>
                     </button>
                   </div>
@@ -829,19 +976,19 @@ export default function ShowPage({ show, relatedPost, similarShows }) {
 }
 
 export async function getStaticPaths() {
-  const paths = schedule.shows.map((show) => ({ 
-    params: { id: show.id } 
+  const paths = schedule.shows.map((show) => ({
+    params: { id: show.id },
   }));
 
-  return { 
-    paths, 
-    fallback: 'blocking'
+  return {
+    paths,
+    fallback: "blocking",
   };
 }
 
 export async function getStaticProps({ params }) {
   const show = schedule.shows.find((s) => s.id === params.id);
-  
+
   if (!show) {
     return {
       notFound: true,
@@ -849,7 +996,8 @@ export async function getStaticProps({ params }) {
   }
 
   // Find related blog post
-  const relatedPost = postsData.posts.find((p) => p.relatedMovieId === show.id) || null;
+  const relatedPost =
+    postsData.posts.find((p) => p.relatedMovieId === show.id) || null;
 
   // We keep similarShows in props but it won't be used (maintaining backward compatibility)
   const similarShows = [];
