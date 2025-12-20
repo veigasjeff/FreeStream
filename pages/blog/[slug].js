@@ -1,10 +1,18 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-import postsData from '../../data/posts.json';
-import schedule from '../../data/schedules.json';
-import { FaCalendarAlt, FaUser, FaClock, FaTag, FaArrowLeft, FaShareAlt, FaBookOpen } from 'react-icons/fa';
+import Head from "next/head";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import postsData from "../../data/posts.json";
+import schedule from "../../data/schedules.json";
+import {
+  FaCalendarAlt,
+  FaUser,
+  FaClock,
+  FaTag,
+  FaArrowLeft,
+  FaShareAlt,
+  FaBookOpen,
+} from "react-icons/fa";
 
 export default function BlogPost({ post, relatedMovie, recentPosts }) {
   const router = useRouter();
@@ -22,65 +30,65 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
     "@context": "https://schema.org",
     "@type": "Article",
     "@id": `${currentUrl}#article`,
-    "mainEntityOfPage": {
+    mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": currentUrl
+      "@id": currentUrl,
     },
-    "headline": post.title,
-    "description": post.excerpt,
-    "image": `${baseUrl}/${post.image}`,
-    "author": {
+    headline: post.title,
+    description: post.excerpt,
+    image: `${baseUrl}/${post.image}`,
+    author: {
       "@type": "Organization",
-      "name": "Free Streaming",
-      "url": baseUrl,
-      "logo": {
+      name: "Free Streaming",
+      url: baseUrl,
+      logo: {
         "@type": "ImageObject",
-        "url": `${baseUrl}/logo.png`
-      }
+        url: `${baseUrl}/logo.png`,
+      },
     },
-    "publisher": {
+    publisher: {
       "@type": "Organization",
-      "name": "Free Streaming",
-      "logo": {
+      name: "Free Streaming",
+      logo: {
         "@type": "ImageObject",
-        "url": `${baseUrl}/logo.png`
-      }
+        url: `${baseUrl}/logo.png`,
+      },
     },
-    "datePublished": formatDate(post.date),
-    "dateModified": formatDate(post.date),
-    "articleBody": post.content,
-    "articleSection": post.category || "Streaming Guides",
-    "keywords": post.keywords,
-    "wordCount": post.content.split(' ').length,
-    "timeRequired": `PT${Math.ceil(post.content.split(' ').length / 200)}M`,
-    "thumbnailUrl": `${baseUrl}/${post.image}`,
-    "inLanguage": "en-US"
+    datePublished: formatDate(post.date),
+    dateModified: formatDate(post.date),
+    articleBody: post.content,
+    articleSection: post.category || "Streaming Guides",
+    keywords: post.keywords,
+    wordCount: post.content.split(" ").length,
+    timeRequired: `PT${Math.ceil(post.content.split(" ").length / 200)}M`,
+    thumbnailUrl: `${baseUrl}/${post.image}`,
+    inLanguage: "en-US",
   };
 
   // Breadcrumb Schema
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "itemListElement": [
+    itemListElement: [
       {
         "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": baseUrl
+        position: 1,
+        name: "Home",
+        item: baseUrl,
       },
       {
         "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": `${baseUrl}/blog`
+        position: 2,
+        name: "Blog",
+        item: `${baseUrl}/blog`,
       },
       {
         "@type": "ListItem",
-        "position": 3,
-        "name": post.title,
-        "item": currentUrl
-      }
-    ]
+        position: 3,
+        name: post.title,
+        item: currentUrl,
+      },
+    ],
   };
 
   // Share article
@@ -101,7 +109,7 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
         <meta name="description" content={post.excerpt} />
         <meta name="keywords" content={post.keywords} />
         <link rel="canonical" href={currentUrl} />
-        
+
         {/* Open Graph */}
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={post.excerpt} />
@@ -112,38 +120,64 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
         <meta property="og:image:height" content="630" />
         <meta property="og:site_name" content="Free Streaming" />
         <meta property="og:locale" content="en_US" />
-        <meta property="article:published_time" content={formatDate(post.date)} />
-        <meta property="article:modified_time" content={formatDate(post.date)} />
+        <meta
+          property="article:published_time"
+          content={formatDate(post.date)}
+        />
+        <meta
+          property="article:modified_time"
+          content={formatDate(post.date)}
+        />
         <meta property="article:author" content="Free Streaming" />
-        <meta property="article:section" content={post.category || "Streaming Guides"} />
-        {post.keywords && post.keywords.split(',').map((tag, idx) => (
-          <meta key={idx} property="article:tag" content={tag.trim()} />
-        ))}
-        
+        <meta
+          property="article:section"
+          content={post.category || "Streaming Guides"}
+        />
+        {post.keywords &&
+          post.keywords
+            .split(",")
+            .map((tag, idx) => (
+              <meta key={idx} property="article:tag" content={tag.trim()} />
+            ))}
+
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={post.title} />
         <meta name="twitter:description" content={post.excerpt} />
         <meta name="twitter:image" content={`${baseUrl}/${post.image}`} />
-        
+
         {/* Structured Data */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
       </Head>
 
       <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
         {/* Breadcrumb */}
         <nav className="container mx-auto px-4 py-6">
           <div className="flex items-center space-x-2 text-sm">
-            <Link href="/" className="text-gray-400 hover:text-blue-400 transition-colors">
+            <Link
+              href="/"
+              className="text-gray-400 hover:text-blue-400 transition-colors"
+            >
               Home
             </Link>
             <span className="text-gray-600">/</span>
-            <Link href="/blog" className="text-gray-400 hover:text-blue-400 transition-colors">
+            <Link
+              href="/blog"
+              className="text-gray-400 hover:text-blue-400 transition-colors"
+            >
               Blog
             </Link>
             <span className="text-gray-600">/</span>
-            <span className="text-white truncate max-w-xs md:max-w-md">{post.title}</span>
+            <span className="text-white truncate max-w-xs md:max-w-md">
+              {post.title}
+            </span>
           </div>
         </nav>
 
@@ -161,15 +195,15 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                 <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
                   {post.title}
                 </h1>
-                
+
                 <div className="flex flex-wrap items-center gap-4 text-gray-400 mb-8">
                   <div className="flex items-center gap-2">
                     <FaCalendarAlt />
                     <time dateTime={formatDate(post.date)}>
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric'
+                      {new Date(post.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
                       })}
                     </time>
                   </div>
@@ -179,7 +213,9 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                   </div>
                   <div className="flex items-center gap-2">
                     <FaClock />
-                    <span>{Math.ceil(post.content.split(' ').length / 200)} min read</span>
+                    <span>
+                      {Math.ceil(post.content.split(" ").length / 200)} min read
+                    </span>
                   </div>
                   <button
                     onClick={shareArticle}
@@ -196,6 +232,12 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                   src={`/${post.image}`}
                   alt={post.title}
                   fill
+                  quality={90}
+                  style={{
+                    filter:
+                      "brightness(1.05) contrast(1.15) saturate(1.12) hue-rotate(1deg)",
+                 
+                  }}
                   className="object-cover"
                   priority
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 66vw"
@@ -204,7 +246,7 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
 
               {/* Article Content */}
               <div className="prose prose-lg prose-invert max-w-none mb-12">
-                {post.content.split('\n\n').map((paragraph, idx) => (
+                {post.content.split("\n\n").map((paragraph, idx) => (
                   <div key={idx} className="mb-6">
                     <p className="text-gray-300 leading-relaxed text-lg">
                       {paragraph}
@@ -220,8 +262,9 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                     <FaBookOpen /> Want to Watch This Movie?
                   </h3>
                   <p className="text-gray-300 mb-6">
-                    We're streaming <strong>{relatedMovie.title}</strong> for free in HD quality. 
-                    No registration or subscription required.
+                    We're streaming <strong>{relatedMovie.title}</strong> for
+                    free in HD quality. No registration or subscription
+                    required.
                   </p>
                   <Link
                     href={`/schedules/${relatedMovie.id}`}
@@ -256,8 +299,9 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                 <div className="bg-gray-800/50 border border-gray-700 rounded-xl p-6">
                   <h3 className="text-xl font-bold mb-4">About This Blog</h3>
                   <p className="text-gray-300 mb-4">
-                    We provide expert guides and latest updates on free movie streaming. 
-                    Learn how to watch your favorite films legally and in HD quality.
+                    We provide expert guides and latest updates on free movie
+                    streaming. Learn how to watch your favorite films legally
+                    and in HD quality.
                   </p>
                   <Link
                     href="/"
@@ -283,10 +327,13 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                               {recentPost.title}
                             </h4>
                             <p className="text-gray-400 text-sm mt-1">
-                              {new Date(recentPost.date).toLocaleDateString('en-US', {
-                                month: 'short',
-                                day: 'numeric'
-                              })}
+                              {new Date(recentPost.date).toLocaleDateString(
+                                "en-US",
+                                {
+                                  month: "short",
+                                  day: "numeric",
+                                }
+                              )}
                             </p>
                           </div>
                         </div>
@@ -302,14 +349,17 @@ export default function BlogPost({ post, relatedMovie, recentPosts }) {
                       <FaTag /> Article Tags
                     </h3>
                     <div className="flex flex-wrap gap-2">
-                      {post.keywords.split(',').slice(0, 10).map((keyword, idx) => (
-                        <span
-                          key={idx}
-                          className="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer"
-                        >
-                          {keyword.trim()}
-                        </span>
-                      ))}
+                      {post.keywords
+                        .split(",")
+                        .slice(0, 10)
+                        .map((keyword, idx) => (
+                          <span
+                            key={idx}
+                            className="text-sm bg-gray-700 text-gray-300 px-3 py-1 rounded-lg hover:bg-gray-600 transition-colors cursor-pointer"
+                          >
+                            {keyword.trim()}
+                          </span>
+                        ))}
                     </div>
                   </div>
                 )}
@@ -330,14 +380,14 @@ export async function getStaticPaths() {
 
   return {
     paths,
-    fallback: 'blocking', // Better for SEO than 'false'
+    fallback: "blocking", // Better for SEO than 'false'
   };
 }
 
 // Pre-render each blog post at build time
 export async function getStaticProps({ params }) {
   const post = postsData.posts.find((p) => p.slug === params.slug);
-  
+
   if (!post) {
     return {
       notFound: true,
