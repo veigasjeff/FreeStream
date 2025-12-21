@@ -1100,7 +1100,7 @@ export default function SchedulePage() {
               </div>
               
               <div className="text-gray-400">
-                Showing {visibleShows.length} of {filteredShows.length} movies
+                Showing {visibleShows.length} of {filteredShows.length} movies & tv shows.
               </div>
             </div>
           </div>
