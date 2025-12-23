@@ -1,55 +1,195 @@
+// import { Html, Head, Main, NextScript } from 'next/document';
+
+// export default function Document() {
+//   return (
+//     <Html lang="en" prefix="og: https://ogp.me/ns#">
+//       <Head>
+//         {/* Core Meta Tags */}
+//         <meta charSet="UTF-8" />
+//         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        
+//         {/* Primary Meta Tags */}
+//         <meta name="description" content="Watch free movies, TV shows, live sports & news online. Stream thousands of movies in HD quality without registration or subscription." />
+//         <meta name="keywords" content="free movies, free streaming, watch movies online, HD movies, TV shows, live sports, news streaming, free cinema, online movies" />
+        
+//         {/* Robots & SEO */}
+//         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+//         <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+//         <meta name="bingbot" content="index, follow" />
+//         <meta name="author" content="Free Streaming" />
+//         <meta name="copyright" content="Free Streaming" />
+//         <meta name="rating" content="general" />
+//         <meta name="distribution" content="global" />
+//         <meta name="language" content="English" />
+//         <meta name="coverage" content="Worldwide" />
+        
+//         {/* Open Graph */}
+//         <meta property="og:site_name" content="Free Streaming" />
+//         <meta property="og:locale" content="en_US" />
+//         <meta property="og:type" content="website" />
+        
+//         {/* Twitter */}
+//         <meta name="twitter:card" content="summary_large_image" />
+//         <meta name="twitter:creator" content="@freestreaming" />
+        
+//         {/* Verification */}
+//         <meta name="google-site-verification" content="BZNZaUyoS1nXyRfa99f4VJ3ABKZUZhkKB0pZ3DU3L8s" />
+//         <meta name="yandex-verification" content="36e10a0828a7c53f" />
+        
+//         {/* Icons */}
+//         <link rel="icon" href="/favicon.ico" />
+//         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+//         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+//         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+//         <link rel="manifest" href="/site.webmanifest" />
+//         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+//         <meta name="msapplication-TileColor" content="#da532c" />
+//         <meta name="theme-color" content="#000000" />
+        
+//         {/* Preconnect for performance */}
+//         <link rel="preconnect" href="https://fonts.googleapis.com" />
+//         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+//         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet" />
+//       </Head>
+//       <body>
+//         <Main />
+//         <NextScript />
+//       </body>
+//     </Html>
+//   );
+// }
+
+
+
+
+
+
+
+
+
+// import { Html, Head, Main, NextScript } from 'next/document';
+
+// export default function Document() {
+//       // const baseUrl = 'https://freestreamcinema.com'
+
+//   return (
+//     <Html lang="en">
+//       <Head>
+//            {/* Google Analytics Tag */}
+//         <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ"></script>
+//         <script
+//           dangerouslySetInnerHTML={{
+//             __html: `
+//               window.dataLayer = window.dataLayer || [];
+//               function gtag(){dataLayer.push(arguments);}
+//               gtag('js', new Date());
+//               gtag('config', 'G-RTHH33WQWQ');
+//             `
+//           }}
+//         />
+//         <meta name="description" content="TV, shows, news, and movies for free with Free Streaming. Access thousands of movies + live news, entertainment, weather and more. Watch now." />
+//         <meta name="keywords" content="free movies, free streaming, watch online, TV shows, no subscription, free movie streaming, live cinema online, watch movies free, scheduled movie times, streaming, HD movies online, live movie streaming, free cinema, online movie theater, news, news online" />
+//         <link 
+//           href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" 
+//           rel="stylesheet"
+//         />
+//         <meta name="robots" content="index, follow, max-image-preview:large" />
+//         <meta name="googlebot" content="index, follow" />
+//         <meta name="bingbot" content="index, follow" />
+//         <meta name="author" content="Free Streaming" />
+//         <meta name="copyright" content="Free Streaming" />
+//         <meta name="distribution" content="global" />
+//         <meta name="rating" content="general" />
+//         <meta property="og:title" content="Free Streaming - Watch Movies, TV Shows, Live Sports & News Online.." />
+//         <meta property="og:description" content="TV, shows, news, sports and movies for free with Free Streaming. Access thousands of movies + live news, entertainment, weather and more. Watch now." />
+//         <meta property="og:type" content="website" />
+//         <meta property="og:site_name" content="Free Streaming - Watch Movies, TV Shows, Live Sports & News Online.." />
+//            {/* Favicon */}
+//         <link rel="icon" href="/favicon.ico" />
+//         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+//         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+//         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+//         <link rel="manifest" href="/site.webmanifest" />
+
+//        <meta name="google-site-verification" content="BZNZaUyoS1nXyRfa99f4VJ3ABKZUZhkKB0pZ3DU3L8s" />
+//        <meta name="yandex-verification" content="36e10a0828a7c53f" />
+//         <meta name="facebook-domain-verification" content="https://www.facebook.com/profile.php?id=61583910555206" />
+
+//         </Head>
+//       <body className="antialiased">
+//         <Main />
+//         <NextScript />
+//       </body>
+//     </Html>
+//   );
+// }
+
+
+
+
+
+
+
+
 import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
-    <Html lang="en" prefix="og: https://ogp.me/ns#">
+    <Html lang="en">
       <Head>
-        {/* Core Meta Tags */}
+        {/* Google Analytics Tag */}
+        {/* <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-RTHH33WQWQ');
+            `
+          }}
+        /> */}
+        
+        {/* Meta tags */}
         <meta charSet="UTF-8" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="TV, shows, news, and movies for free with Free Streaming. Access thousands of movies + live news, entertainment, weather and more. Watch now." />
+        <meta name="keywords" content="free movies, free streaming, watch online, TV shows, no subscription, free movie streaming, live cinema online, watch movies free, scheduled movie times, streaming, HD movies online, live movie streaming, free cinema, online movie theater, news, news online" />
         
-        {/* Primary Meta Tags */}
-        <meta name="description" content="Watch free movies, TV shows, live sports & news online. Stream thousands of movies in HD quality without registration or subscription." />
-        <meta name="keywords" content="free movies, free streaming, watch movies online, HD movies, TV shows, live sports, news streaming, free cinema, online movies" />
+        {/* Fonts */}
+        <link 
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" 
+          rel="stylesheet"
+        />
         
-        {/* Robots & SEO */}
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+        {/* Basic SEO */}
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <meta name="googlebot" content="index, follow" />
         <meta name="bingbot" content="index, follow" />
         <meta name="author" content="Free Streaming" />
         <meta name="copyright" content="Free Streaming" />
-        <meta name="rating" content="general" />
         <meta name="distribution" content="global" />
-        <meta name="language" content="English" />
-        <meta name="coverage" content="Worldwide" />
+        <meta name="rating" content="general" />
         
         {/* Open Graph */}
-        <meta property="og:site_name" content="Free Streaming" />
-        <meta property="og:locale" content="en_US" />
+        <meta property="og:title" content="Free Streaming - Watch Movies, TV Shows, Live Sports & News Online" />
+        <meta property="og:description" content="TV, shows, news, sports and movies for free with Free Streaming. Access thousands of movies + live news, entertainment, weather and more. Watch now." />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Free Streaming" />
         
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:creator" content="@freestreaming" />
-        
-        {/* Verification */}
-        <meta name="google-site-verification" content="BZNZaUyoS1nXyRfa99f4VJ3ABKZUZhkKB0pZ3DU3L8s" />
-        <meta name="yandex-verification" content="36e10a0828a7c53f" />
-        
-        {/* Icons */}
+        {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-        <meta name="msapplication-TileColor" content="#da532c" />
-        <meta name="theme-color" content="#000000" />
         
-        {/* Preconnect for performance */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Montserrat:wght@800;900&display=swap" rel="stylesheet" />
+        {/* Verification tags */}
+        <meta name="google-site-verification" content="BZNZaUyoS1nXyRfa99f4VJ3ABKZUZhkKB0pZ3DU3L8s" />
+        <meta name="yandex-verification" content="36e10a0828a7c53f" />
+        <meta name="facebook-domain-verification" content="61583910555206" />
+        
+        {/* Viewport - IMPORTANT FOR MOBILE */}
+        {/* <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
       </Head>
       <body>
         <Main />
