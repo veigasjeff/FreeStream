@@ -1,15 +1,8 @@
 {
   "name": "freestream",
   "version": "1.0.0",
-  "type": "module",
   "scripts": {
-    "generate": "node generate-movies.js",
-    "dev": "npx serve ."
-  },
-  "engines": {
-    "node": "18.x"
-  },
-  "keywords": ["streaming", "movies", "entertainment"],
-  "author": "FreeStream",
-  "license": "MIT"
+    "build": "echo 'No build needed' && exit 0",
+    "generate": "echo 'No build needed' && exit 0"
+  }
 }
