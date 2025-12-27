@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://freestream.vercel.app/sitemap.xml
