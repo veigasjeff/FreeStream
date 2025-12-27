@@ -6,11 +6,8 @@
     "generate": "node generate-movies.js",
     "dev": "npx serve ."
   },
-  "dependencies": {
-    "@vercel/edge": "^0.1.2"
-  },
   "engines": {
-    "node": ">=18.0.0"
+    "node": "18.x"
   },
   "keywords": ["streaming", "movies", "entertainment"],
   "author": "FreeStream",
