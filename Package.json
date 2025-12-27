@@ -4,12 +4,12 @@
   "type": "module",
   "scripts": {
     "generate": "node generate-movies.js",
-    "build": "npm run generate",
     "dev": "npx serve ."
   },
   "engines": {
     "node": "18.x"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "keywords": ["streaming", "movies", "entertainment"],
+  "author": "FreeStream",
+  "license": "MIT"
 }
