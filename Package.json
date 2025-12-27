@@ -6,6 +6,9 @@
     "generate": "node generate-movies.js",
     "dev": "npx serve ."
   },
+  "dependencies": {
+    "@vercel/edge": "^0.1.2"
+  },
   "engines": {
     "node": ">=18.0.0"
   },
