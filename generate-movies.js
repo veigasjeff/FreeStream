@@ -246,7 +246,7 @@ function generateMoviePage(movie) {
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             height: 450px;
-            width: 300px;
+            width: 330px;
             position: relative;
             background: #1a1a1a;
         }
@@ -254,7 +254,7 @@ function generateMoviePage(movie) {
         .movie-poster img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: fill;
         }
         
         .movie-info {
