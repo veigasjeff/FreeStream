@@ -1,6 +1,35 @@
 {
   "movies": [
           {
+        "id": "code-3-2025-full-tv-show",
+        "title": "Code 3 (2025)",
+        "genre": "Drama",
+        "date": "September 12, 2025",
+        "poster": "https://freestreaming.vercel.app/public/Code_3_2025.jpg",
+        "playUrl": "1wshn2hTT0o",
+        "streamUrl": "https://vidsrc.cc/v2/embed/movie/1161617", 
+        "stream2Url": "https://vidsrc-embed.ru/embed/movie?tmdb=1161617&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1",
+        "stream3Url": "https://short.icu/Smw-PDDSL?thumbnail=https://freestreaming.vercel.app/public/Code_3_2025.jpg",
+        "stream4Url": "",
+        "keywords": "code 3, code 3 (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free",
+        "downloadUrl": "https://dl.openx.xyz/?v=Smw-PDDSL",
+        "description": "Follows a paramedic that is so burnt-out by the job that he is forcing himself to resign, however, he first must embark on one last 24-hour shift to train his replacement.",
+       "content": "Code 3 (2025) unfolds over a relentless 24-hour period, immersing viewers in the emotionally exhausting world of emergency medical response. The film centers on a veteran paramedic who has reached his breaking point after years of trauma, sleepless nights, and lives lost despite his best efforts. Mentally and emotionally drained, he has already decided to resign, believing that walking away is the only way to survive what the job has taken from him.\n\nBefore he can leave, he is assigned one final responsibility: training his replacement during a full shift. The rookie paramedic is eager but untested, representing both hope and frustration. Their dynamic forms the emotional backbone of the story, as experience clashes with optimism and hardened realism challenges youthful confidence.\n\nAs the shift begins, the calls arrive without pause. Each emergency exposes a different facet of the job’s toll—violent accidents, medical crises, and moments where seconds mean the difference between life and death. The film captures the physical chaos of emergency scenes alongside the quieter emotional aftermath that responders carry with them long after the sirens fade.\n\nThrough these encounters, the veteran paramedic is forced to confront unresolved guilt and suppressed grief. Teaching the rookie becomes less about procedures and more about survival—how to endure loss, manage fear, and remain human in a profession that demands emotional detachment. The rookie, in turn, begins to realize the weight of the role he is stepping into.\n\nAs the final hours approach, one critical call forces both men into a situation that mirrors everything the veteran has been running from. Code 3 ultimately becomes a story about endurance, responsibility, and the invisible cost of saving others. The film closes on a quiet yet powerful note, questioning whether leaving is an escape—or another kind of sacrifice.",
+        "director": [
+          "Christopher Leone"
+        ],
+       "cast": ["Rainn Wilson", "Lil Rel Howery", "Aimee Carrero"],
+       "castimage": [
+          "https://ntvb.tmsimg.com/assets/assets/222248_v9_bc.jpg?w=360&h=480",
+          "https://media.themoviedb.org/t/p/w235_and_h235_face/9MDi35Fy6ym7SYbO3B04vf1vBnm.jpg",
+          "https://resizing.flixster.com/cu4ePvEPxDMMc0kox9Fk-XLa-SI=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/545659_v9_bc.jpg"
+        ],
+        "timestamp": 1700000000,
+        "ratingTotal": 72,
+        "ratingCount": 10,
+        "views": 2050
+      },
+          {
         "id": "anaconda-2025-full-tv-show",
         "title": "Anaconda (2025)",
         "genre": "Adventure",
@@ -29,7 +58,7 @@
         "ratingCount": 10,
         "views": 3050
       },
-                {
+     {
         "id": "mathe-witcher-s04-2025-full-tv-show",
         "title": "The Witcher Season 4 (2025)",
         "genre": "TvSeries",
