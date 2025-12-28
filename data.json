@@ -115,6 +115,11 @@
         "Maria Clara",
         "Jose Rizal"
       ],
+        "castimage": [
+        "https://m.media-amazon.com/images/M/MV5BNjViMGYxYjUtNjI1OS00YWZmLWIxZjQtN2I5M2U3MTczZmYzXkEyXkFqcGc@._V1_QL75_UX140_CR0,12,140,140_.jpg",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyPhm8t0ppPC3MsXTXy2Ce67WMArEmBGoTWg&s",
+        ""
+      ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
