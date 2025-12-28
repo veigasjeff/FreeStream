@@ -137,8 +137,8 @@ function generateMoviePage(movie) {
     }
     </script>
     
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
+   
+
     <style>
         /* Reset */
         * {
@@ -1053,6 +1053,21 @@ function generateMoviePage(movie) {
     <button class="theme-toggle" id="themeToggle">
         <i class="fas fa-moon"></i>
     </button>
+    <!-- Ad Scripts -->
+    <script>(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+    <script>(function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+
+    <script async data-id="101498160" src="//static.getclicky.com/js"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-RTHH33WQWQ');
+</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
         // Movie data
