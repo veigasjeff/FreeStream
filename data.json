@@ -1,12 +1,40 @@
 {
   "movies": [
     {
+      "id": "oh-what-fun-2025-full-movie",
+      "title": "Oh What Fun (2025)",
+      "genre": "Comedy",
+      "poster": "../public/Oh_What_Fun_2025.jpg",
+      "playUrl": "FRfj0OHlcvo",
+      "streamUrl": "https://vidsrc.cc/v2/embed/movie/1261825",
+      "stream2Url": "https://vidsrc-embed.ru/embed/movie?tmdb=1261825&sub_url=https%3A%2F%2Fvidsrc.me%2Fsample.srt&autoplay=1",
+      "stream3Url": "https://short.icu/ahfQTrdCK?thumbnail=https://freestreaming.vercel.app/public/Oh_What_Fun_2025.jpg",
+      "stream4Url": "",
+      "keywords": " Oh What Fun, Oh What Fun (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free",
+      "downloadUrl": "https://dl.openx.xyz/?v=ahfQTrdCK",
+      "description": "Claire plans a special Christmas, but is forgotten by her family. When they realize that she's missing, their holiday is at risk until she returns to give them the celebration they deserve.",
+      "content": "Oh What Fun (2025) Released in 2025, 'Oh What Fun' is a comedy built around escalation—how a single ordinary day can spiral into uncontrollable madness. The film begins with a group of interconnected characters, each dealing with their own small frustrations, expectations, and unfinished business. What starts as manageable inconvenience quickly snowballs into a series of misunderstandings, bad timing, and impulsive decisions that pull everyone into the same orbit of chaos.\n\nThe plot thrives on coincidence. Seemingly unrelated storylines begin to overlap as characters cross paths in unexpected ways, triggering reactions that none of them anticipate. A simple plan goes wrong, an innocent lie grows larger, and attempts to fix mistakes only make situations worse. The humor doesn’t rely on isolated jokes but on momentum, where each event feeds into the next, increasing tension while keeping the tone light and playful.\n\nAs the middle of the film unfolds, personal stakes emerge beneath the comedy. Friendships are tested, romantic expectations clash with reality, and hidden insecurities come to the surface. The characters are forced to confront how poorly they communicate and how often they avoid responsibility. The film balances its fast pace with moments of emotional clarity, reminding viewers that chaos often reveals truth rather than hiding it.\n\nThe final act brings all storylines together in a crowded, high-energy climax where secrets are exposed and misunderstandings finally collide head-on. What could have ended in disaster instead becomes a turning point. Characters gain perspective, accept their flaws, and learn to laugh at situations they can no longer control.\n\nOh What Fun succeeds by portraying chaos as both destructive and freeing. It delivers a story that embraces imperfection, showing that sometimes life’s messiest moments create the most memorable outcomes. The result is a comedy driven by timing, character chemistry, and the universal experience of things going hilariously wrong.",
+      "director": [
+        "Michael Showalter"
+      ],
+      "cast": ["Michelle Pfeiffer", "Denis Leary", "Felicity Jones"],
+      "castimage": [
+        "https://m.media-amazon.com/images/M/MV5BMTUzNjI0Njc5NF5BMl5BanBnXkFtZTYwOTM2MjYz._V1_FMjpg_UX1000_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BMTk2MzM4NTA5OV5BMl5BanBnXkFtZTcwMTAxNjA3Mg@@._V1_FMjpg_UX1000_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BMjA0MTIwMzIyN15BMl5BanBnXkFtZTgwNDEyMzg1NDE@._V1_FMjpg_UX1000_.jpg"
+      ],
+      "timestamp": 1700000000,
+      "ratingTotal": 45,
+      "ratingCount": 10,
+      "views": 1500
+    },
+     {
       "id": "pharma-2025-full-movie",
       "title": "Pharma (2025)",
       "genre": "Drama",
       "poster": "../public/Pharma_2025.jpg",
       "playUrl": "O7wQuF6OKtI",
-      "streamUrl": "https://short.icu/PqYLFFeKU?thumbnail=https://freestreaming.vercel.app/Pharma_2025.jpg",
+      "streamUrl": "https://short.icu/PqYLFFeKU?thumbnail=https://freestreaming.vercel.app/public/Pharma_2025.jpg",
       "stream2Url": "",
       "stream3Url": "",
       "stream4Url": "",
@@ -23,9 +51,9 @@
         "Narain"
       ],
       "castimage": [
-        "https://m.media-amazon.com/images/M/MV5BMTU1MzE5Mjk1M15BMl5BanBnXkFtZTgwMTAyMTIzOTE@._V1_FMjpg_UX1000_.jpg",
-        "https://m.media-amazon.com/images/M/MV5BMzRmMDE2ZjMtMTY2Yi00YmJmLWI0ZWMtNjU1NDAwMTNlNGU2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-        "https://m.media-amazon.com/images/M/MV5BMTg5MDAyNTkwMF5BMl5BanBnXkFtZTcwODgyOTY0OA@@._V1_FMjpg_UX1000_.jpg"
+        "https://m.media-amazon.com/images/M/MV5BY2U1OGVjNDItYThmZC00YmMyLWFmMWItYjY1NDFlNDFlYTM2XkEyXkFqcGc@._V1_.jpg",
+        "https://image.tmdb.org/t/p/w500/mIl7WUFRUY5MO3mrwC53ePoAsVT.jpg",
+        "https://preview.redd.it/opinion-on-narain-v0-ck68tyybla6a1.jpg?auto=webp&s=9c1da7fa7d8f1ed20a67f9d39f1f9188d2d0ff3a"
       ],
       "timestamp": 1700000000,
       "ratingTotal": 45,
@@ -38,7 +66,7 @@
       "genre": "Comedy",
       "poster": "../public/Single_Papa_2025.jpg",
       "playUrl": "WYhyxUbOLK8",
-      "streamUrl": "https://short.icu/rxiYRm4pM?thumbnail=https://freestreaming.vercel.app/Single_Papa_2025.jpg",
+      "streamUrl": "https://short.icu/rxiYRm4pM?thumbnail=https://freestreaming.vercel.app/public/Single_Papa_2025.jpg",
       "stream2Url": "",
       "stream3Url": "",
       "stream4Url": "",
@@ -55,6 +83,11 @@
         "Kunal Kemmu",
         "Manoj Pahwa"
       ],
+      "castimage": [
+        "https://influencersplace.com/wp-content/uploads/2025/07/Prajakta-Koli.webp",
+        "https://m.media-amazon.com/images/M/MV5BZTJlY2FhODItMDMyZS00Y2QxLWI4NzEtNjA5MjBjMDBmN2QyXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/manoj-pahwa-1366-24-03-2017-12-41-27.jpg"
+      ],
       "timestamp": 1700000000,
       "ratingTotal": 45,
       "ratingCount": 10,
@@ -67,7 +100,7 @@
       "poster": "../public/Posthouse_2025.jpg",
       "playUrl": "nKce-y5DLSU",
       "streamUrl": "https://vidsrc.cc/v2/embed/movie/1460778",
-      "stream2Url": "https://short.icu/xX8k1UUEa?thumbnail=https://freestreaming.vercel.app/Posthouse_2025.jpg",
+      "stream2Url": "https://short.icu/xX8k1UUEa?thumbnail=https://freestreaming.vercel.app/public/Posthouse_2025.jpg",
       "stream3Url": "https://cdn01.vdocipher.com/h6/xqUNLGkwRmrjO/a2b17da3/stream.m3u8",
       "stream4Url": "",
       "keywords": "posthouse, posthouse (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free",
