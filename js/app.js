@@ -40,6 +40,7 @@ let filteredMovies = [];
 let currentPage = 1;
 const itemsPerPage = 12;
 let currentGenre = 'all';
+let currentLanguage = 'all';
 
 // Load data from data.json
 async function loadData() {
@@ -177,18 +178,62 @@ function setupCategories() {
     });
 }
 
-// Filter movies by genre
+// Setup languages
+function setupLanguages() {
+    const container = document.getElementById('languageList');
+    if (!container) return;
+    
+    const languages = ['all', "English", "Hindi", "Marathi", "Tagalog", "Tamil", "Kannada", "Telugu", "Malayalam", "Punjabi",
+    "Bengali", "Spanish", "French", "German", "Italian", "Japanese", "Korean", "Chinese"];
+    
+    container.innerHTML = '';
+    
+    languages.forEach(language => {
+        const button = document.createElement('button');
+        button.className = 'category-btn language-btn';
+        if (language === 'all') button.classList.add('active');
+        button.textContent = language === 'all' ? 'All Languages' : language;
+        button.dataset.language = language;
+        
+        button.addEventListener('click', function() {
+            // Update active button for language
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            this.classList.add('active');
+            
+            // Filter movies by language
+            currentLanguage = language;
+            currentPage = 1;
+            filterMovies();
+        });
+        
+        container.appendChild(button);
+    });
+}
+
+// Filter movies by genre and language
 function filterMovies() {
-    if (currentGenre === 'all') {
+    if (currentGenre === 'all' && currentLanguage === 'all') {
         filteredMovies = [...allMovies];
     } else {
-        filteredMovies = allMovies.filter(movie => 
-            movie.genre.toLowerCase() === currentGenre.toLowerCase()
-        );
+        filteredMovies = allMovies.filter(movie => {
+            const genreMatch = currentGenre === 'all' || 
+                movie.genre.toLowerCase() === currentGenre.toLowerCase();
+            
+            // Note: Since data.json doesn't have language field for movies,
+            // we'll need to add it. For now, we'll simulate with available data.
+            // In your actual data.json, each movie should have a language field.
+            const languageMatch = currentLanguage === 'all' || 
+                (movie.language && movie.language.toLowerCase() === currentLanguage.toLowerCase());
+            
+            return genreMatch && languageMatch;
+        });
     }
     
     displayMovies();
 }
+
 
 // Display live channels
 function displayLiveChannels() {

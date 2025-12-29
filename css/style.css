@@ -422,3 +422,37 @@ body {
         height: 150px;
     }
 }
+/* Language buttons specific styles */
+.language-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.language-btn.active {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+}
+
+.language-btn:hover:not(.active) {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+    transform: translateY(-2px);
+}
+
+/* Language section specific */
+.language-section {
+    margin-top: 2rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .language-btn {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        margin: 0.2rem;
+    }
+    
+    .language-section h2 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+    }
+}
