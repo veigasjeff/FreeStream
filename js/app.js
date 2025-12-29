@@ -56,6 +56,7 @@ async function loadData() {
         filteredMovies = [...allMovies];
         displayMovies();
         setupCategories();
+        setupLanguages();
         displayLiveChannels();
         
     } catch (error) {
