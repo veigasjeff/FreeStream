@@ -69,7 +69,7 @@ function generateMoviePage(movie) {
         { name: 'Server 1', url: movie.streamUrl },
         { name: 'Server 2', url: movie.stream2Url },
         { name: 'Server 3', url: movie.stream3Url },
-        { name: 'Server 4', url: movie.stream4Url }
+        { name: 'Server - Hindi Dubbed', url: movie.stream4Url }
     ].filter(stream => stream.url && stream.url.trim() !== '');
     
     const hasYoutube = movie.playUrl && movie.playUrl.trim() !== '';
