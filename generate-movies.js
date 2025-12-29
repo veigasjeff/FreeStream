@@ -121,7 +121,13 @@ function generateMoviePage(movie) {
     <meta name="twitter:title" content="${movie.title}">
     <meta name="twitter:description" content="${movie.description.replace(/"/g, '&quot;')}">
     <meta name="twitter:image" content="${posterUrl}">
-    
+     <!-- Icons -->
+     <link rel="icon" href="https://freestreaming.vercel.app/public/favicon.ico" />
+     <link rel="apple-touch-icon" sizes="180x180" href="https://freestreaming.vercel.app/public/apple-touch-icon.png">
+     <link rel="icon" type="image/png" sizes="32x32" href="https://freestreaming.vercel.app/public/favicon-32x32.png">
+     <link rel="icon" type="image/png" sizes="16x16" href="https://freestreaming.vercel.app/public/favicon-16x16.png">
+     <link rel="manifest" href="https://freestreaming.vercel.app/public/site.webmanifest">
+
     <!-- Schema.org -->
     <script type="application/ld+json">
     {
