@@ -689,10 +689,10 @@
       "description": "Live Willow Cricket Channel in HD quality.",
       "content": "Watch the Willow Cricket Channel live in high definition. Enjoy live cricket matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
       "director": [
-        ""
+        "Willow Cricket Media Network"
       ],
       "cast": [
-        ""
+           "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -703,6 +703,7 @@
       "id": "willow-xtra-hd-live",
       "title": "Willow XTRA HD Live",
       "genre": "Sports",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/willow_xtra.jpg",
       "playUrl": "oKv35OB_7lo",
@@ -715,10 +716,10 @@
       "description": "Live Willow Cricket Channel in HD quality.",
       "content": "Watch the Willow Cricket Channel live in high definition. Enjoy live cricket matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
       "director": [
-        ""
+        "Willow Cricket Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -729,6 +730,7 @@
       "id": "sky-sports-cricket-hd-live",
       "title": "Sky Sports Cricket HD Live",
       "genre": "Sports",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/Sky_Sports_Cricket.jpg",
       "playUrl": "oKv35OB_7lo",
@@ -741,10 +743,10 @@
       "description": "Live Sky Sports Cricket Channel in HD quality.",
       "content": "Watch the Sky Sports Cricket Channel live in high definition. Enjoy live cricket matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
       "director": [
-        ""
+        "Sky Sports Media Network"
       ],
       "cast": [
-        ""
+           "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -755,6 +757,7 @@
       "id": "fox-cricket-hd-live",
       "title": "Fox Cricket HD Live",
       "genre": "Sports",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/Fox_Cricket.jpg",
       "playUrl": "N4YDuOVIYIE",
@@ -767,10 +770,10 @@
       "description": "Live Fox Cricket Channel in HD quality.",
       "content": "Watch the Fox Cricket Channel live in high definition. Enjoy live cricket matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
       "director": [
-        ""
+        "Fox Sports Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -781,6 +784,7 @@
       "id": "sky-sports-main-event-hd-live",
       "title": "Sky Sports Main Event HD Live",
       "genre": "Sports",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/Sky_Sports_Main_Event.jpg",
       "playUrl": "FNXEByCx97w",
@@ -793,10 +797,10 @@
       "description": "Live Sky Sports Main Event Channel in HD quality.",
       "content": "Watch the Sky Sports Main Event Channel live in high definition. Enjoy live football matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
       "director": [
-        ""
+        "Sky Sports Media Network"
       ],
       "cast": [
-        ""
+           "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -807,6 +811,7 @@
       "id": "sky-sports-football-uk-hd-live",
       "title": "Sky Sports Football UK HD Live",
       "genre": "Sports",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/Sky_Sport_Football_UK.jpg",
       "playUrl": "FNXEByCx97w",
@@ -819,10 +824,10 @@
       "description": "Live Sky Sports Football UK Channel in HD quality.",
       "content": "Watch the Sky Sports Football UK Channel live in high definition. Enjoy live football matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
       "director": [
-        ""
+        "Sky Sports Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -833,6 +838,7 @@
       "id": "fx-movie-channel-hd",
       "title": "FX Movie Channel HD",
       "genre": "TvShow",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/FX_Movie_Channel.jpg",
       "playUrl": "mwbdUNwLNOw",
@@ -845,10 +851,10 @@
       "description": "Live FX Movie Channel in HD quality.",
       "content": "Watch the FX Movie Channel live in high definition. Enjoy a wide range of movies and TV shows from various genres, all in stunning HD quality.",
       "director": [
-        ""
+        "FX Movie Media Network"
       ],
       "cast": [
-        ""
+           "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -859,6 +865,7 @@
       "id": "hbo-usa-hd",
       "title": "HBO USA Channel HD",
       "genre": "TvShow",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/HBO.jpg",
       "playUrl": "6H_2k4O5oF0",
@@ -866,15 +873,15 @@
       "stream2Url": "",
       "stream3Url": "",
       "stream4Url": "",
-     "keywords": "fx movie channel, fx movie channel live, fx movie, live tv, tv shows live, streaming tv, free live tv, watch tv online, online tv streaming, free tv channels, live tv streaming, watch live tv online, free streaming tv channels, online tv channels, live tv online free, watch free live tv, streaming live tv online",
+     "keywords": "hbo usa channel, hbo usa channel live, hbo usa, live tv, tv shows live, streaming tv, free live tv, watch tv online, online tv streaming, free tv channels, live tv streaming, watch live tv online, free streaming tv channels, online tv channels, live tv online free, watch free live tv, streaming live tv online",
       "downloadUrl": "",
-      "description": "Live FX Movie Channel in HD quality.",
-      "content": "Watch the FX Movie Channel live in high definition. Enjoy a wide range of movies and TV shows from various genres, all in stunning HD quality.",
+      "description": "Live HBO USA Channel in HD quality.",
+      "content": "Watch the HBO USA Channel live in high definition. Enjoy a wide range of movies and TV shows from various genres, all in stunning HD quality.",
       "director": [
-        ""
+        "HBO USA Media Network"
       ],
       "cast": [
-        ""
+           "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -885,6 +892,7 @@
       "id": "bbc-news-channel-hd",
       "title": "BBC News Channel HD",
       "genre": "News",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/BBC.jpg",
       "playUrl": "-DbWrmElhus",
@@ -897,10 +905,10 @@
       "content": "Watch the BBC News Channel live in high definition. Stay updated with the latest news, breaking stories, and in-depth analysis from around the world.",
       "keywords": "bbc, bbc news, bbc world news, live news, global news, international news, breaking news, world events",
       "director": [
-        ""
+        "BBC Media Network"
       ],
       "cast": [
-        ""
+         "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -911,6 +919,7 @@
       "id": "euronews-world-channel-hd",
       "title": "Euronews World Channel HD",
       "genre": "News",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/Euronews_World.jpg",
       "playUrl": "Jbc4iuW8nXc",
@@ -923,10 +932,10 @@
       "content": "Watch the Euronews World Channel live in high definition. Stay updated with the latest news, breaking stories, and in-depth analysis from around the world.",
       "keywords": "euronews World, euronews, euronews news, live news, global news, international news, breaking news, world events",
       "director": [
-        ""
+        "Euronews World Media Network"
       ],
       "cast": [
-        ""
+           "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -937,6 +946,7 @@
       "id": "cnn-headlines-channel-hd",
       "title": "CNN Headlines Channel HD",
       "genre": "News",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/CNN_Headlines.jpg",
       "playUrl": "uxKtbxH4AEo",
@@ -949,10 +959,10 @@
       "content": "Watch the CNN Headlines Channel live in high definition. Stay updated with the latest news, breaking stories, and in-depth analysis from around the world.",
       "keywords": "cnn headlines, cnn, cnn news, live news, global news, international news, breaking news, world events",
       "director": [
-        ""
+        "CNN Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -963,6 +973,7 @@
       "id": "reuters-channel-hd",
       "title": "Reuters Channel HD",
       "genre": "News",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/Reuters.jpg",
       "playUrl": "is3oxryj52Y",
@@ -975,10 +986,10 @@
       "content": "Watch the Reuters Channel live in high definition. Stay updated with the latest news, breaking stories, and in-depth analysis from around the world.",
       "keywords": "reuters, reuters news, live news, global news, international news, breaking news, world events",
       "director": [
-        ""
+        "Reuters Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -989,6 +1000,7 @@
       "id": "usa-today-channel-hd",
       "title": "USA Today Channel HD",
       "genre": "News",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/USA_Today.jpg",
       "playUrl": "WXZOsGH4r0c",
@@ -1001,10 +1013,10 @@
       "content": "Watch the USA Today Channel live in high definition. Stay updated with the latest news, breaking stories, and in-depth analysis from around the world.",
       "keywords": "usa today, usa today news, live news, global news, international news, breaking news, world events",
       "director": [
-        ""
+        "USA Today Media Network"
       ],
       "cast": [
-        ""
+        "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1015,6 +1027,7 @@
       "id": "aljazeera-channel-hd",
       "title": "Al Jazeera Channel HD",
       "genre": "News",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/Aljazeera.jpg",
       "playUrl": "XJC0fM7kHg8",
@@ -1027,10 +1040,10 @@
       "content": "Watch the Al Jazeera Channel live in high definition. Stay updated with the latest news, breaking stories, and in-depth analysis from around the world.",
       "keywords": "al jazeera, al jazeera news, live news, global news, international news, breaking news, world events",
       "director": [
-        ""
+        "Al Jazeera Media Network"
       ],
       "cast": [
-        ""
+        "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1041,6 +1054,7 @@
       "id": "kapag-tumayo-ang-testigo-2025-full-movie",
       "title": "Kapag Tumayo Ang Testigo (2025)",
       "genre": "Adult",
+      "date": "December 05, 2025",
       "language": "Tagalog",
       "poster": "https://freestreaming.vercel.app/public/Kapag_Tumayo_Ang_Testigo_2025.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1069,6 +1083,7 @@
       "id": "trianggulo-2025-full-movie",
       "title": "Trianggulo (2025)",
       "genre": "Adult",
+      "date": "August 12, 2025",
       "language": "Tagalog",
       "poster": "https://freestreaming.vercel.app/public/Trianggulo_2025.jpg",
       "playUrl": "WzzdNqZL6sQ",
@@ -1097,6 +1112,7 @@
       "id": "pagdaong-2025-full-movie",
       "title": "Pagdaong (2025)",
       "genre": "Adult",
+      "date": "December 12, 2025",
       "language": "Tagalog",
       "poster": "https://freestreaming.vercel.app/public/Pagdaong_2025.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1125,6 +1141,7 @@
       "id": "deep-inside-angeli-khang-2025-full-movie",
       "title": "Deep Inside Angeli Khang (2025)",
       "genre": "Adult",
+      "date": "April 29, 2025",
       "language": "Tagalog",
       "poster": "https://freestreaming.vercel.app/public/Deep_Inside_Angeli_Khang_2025.jpg",
       "playUrl": "Pb9CZrYnNvg",
@@ -1152,6 +1169,7 @@
       "id": "sorority-2025-full-movie",
       "title": "Sorority (2025)",
       "genre": "Adult",
+      "date": "June 20, 2025",
       "language": "Tagalog",
       "poster": "https://freestreaming.vercel.app/public/Sorority_2025.jpg",
       "playUrl": "6eYO4FQWyQg",
@@ -1180,6 +1198,7 @@
       "id": "maria-azama-da-best-porn-star-2025-full-movie",
       "title": "Maria Azama: Da Best P*rn Star (2025)",
       "genre": "Adult",
+      "date": "December 05, 2025",
       "language": "Tagalog",
       "poster": "https://freestreaming.vercel.app/public/Maria_Azama_Da_Best_Porn_Star_2025.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1208,6 +1227,7 @@
       "id": "adult-20-hd-live-channel",
       "title": "Adult - CH 20",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1220,10 +1240,10 @@
       "content": "Watch Adult - CH 20 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live,  adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+         "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1234,6 +1254,7 @@
       "id": "adult-19-hd-live-channel",
       "title": "Adult - CH 19",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1246,10 +1267,10 @@
       "content": "Watch Adult - CH 19 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live,  adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+        "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1260,6 +1281,7 @@
       "id": "adult-18-hd-live-channel",
       "title": "Adult - CH 18",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1272,10 +1294,10 @@
       "content": "Watch Adult - CH 18 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live,  adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1286,6 +1308,7 @@
       "id": "adult-17-hd-live-channel",
       "title": "Adult - CH 17",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1298,10 +1321,10 @@
       "content": "Watch Adult - CH 17 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+         "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1312,6 +1335,7 @@
       "id": "adult-16-hd-live-channel",
       "title": "Adult - CH 16",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1324,10 +1348,10 @@
       "content": "Watch Adult - CH 16 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1338,6 +1362,7 @@
       "id": "adult-15-hd-live-channel",
       "title": "Adult - CH 15",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1350,10 +1375,10 @@
       "content": "Watch Adult - CH 15 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1364,6 +1389,7 @@
       "id": "adult-14-hd-live-channel",
       "title": "Adult - CH 14",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1376,10 +1402,10 @@
       "content": "Watch Adult - CH 14 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1390,6 +1416,7 @@
       "id": "adult-13-hd-live-channel",
       "title": "Adult - CH 13",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1402,10 +1429,10 @@
       "content": "Watch Adult - CH 13 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1416,6 +1443,7 @@
       "id": "adult-12-hd-live-channel",
       "title": "Adult - CH 12",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1428,10 +1456,10 @@
       "content": "Watch Adult - CH 12 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1442,6 +1470,7 @@
       "id": "adult-11-hd-live-channel",
       "title": "Adult - CH 11",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1454,10 +1483,10 @@
       "content": "Watch Adult - CH 11 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1468,6 +1497,7 @@
       "id": "adult-10-hd-live-channel",
       "title": "Adult - CH 10",
       "genre": "Adult",
+      "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1480,10 +1510,10 @@
       "content": "Watch Adult - CH 10 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1494,6 +1524,7 @@
       "id": "adult-9-hd-live-channel",
       "title": "Adult - CH 9",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1506,10 +1537,10 @@
       "content": "Watch Adult - CH 9 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+         "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1520,6 +1551,7 @@
       "id": "adult-8-hd-live-channel",
       "title": "Adult - CH 8",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1532,10 +1564,10 @@
       "content": "Watch Adult - CH 8 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+         "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1546,6 +1578,7 @@
       "id": "adult-7-hd-live-channel",
       "title": "Adult - CH 7",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1558,10 +1591,10 @@
       "content": "Watch Adult - CH 7 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1572,6 +1605,7 @@
       "id": "adult-6-hd-live-channel",
       "title": "Adult - CH 6",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1584,10 +1618,10 @@
       "content": "Watch Adult - CH 6 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1598,6 +1632,7 @@
       "id": "adult-5-hd-live-channel",
       "title": "Adult - CH 5",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1610,10 +1645,10 @@
       "content": "Watch Adult - CH 5 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1624,6 +1659,7 @@
       "id": "adult-4-hd-live-channel",
       "title": "Adult - CH 4",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1636,10 +1672,10 @@
       "content": "Watch Adult - CH 4 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+         "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1650,6 +1686,7 @@
       "id": "adult-3-hd-live-channel",
       "title": "Adult - CH 3",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1662,10 +1699,10 @@
       "content": "Watch Adult - CH 3 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+         "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1676,6 +1713,7 @@
       "id": "adult-2-hd-live-channel",
       "title": "Adult - CH 2",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1688,10 +1726,10 @@
       "content": "Watch Adult - CH 2 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+          "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
@@ -1702,6 +1740,7 @@
       "id": "adult-1-hd-live-channel",
       "title": "Adult - CH 1",
       "genre": "Adult",
+       "date": "Live Broadcast",
       "language": "English",
       "poster": "https://freestreaming.vercel.app/public/18only.jpg",
       "playUrl": "4PA6i3YXE7U",
@@ -1714,10 +1753,10 @@
       "content": "Watch Adult - CH 1 live in high definition. Enjoy a variety of adult content and live shows available 24/7.",
      "keywords": "adult, adult live, racing live, adult streaming, live sports, free live adult, watch adult online, online adult streaming, free adult channels, live adult streaming, watch live adult online, free streaming adult channels, online adult channels, live adult online free, watch free live adult, streaming live adult online",
       "director": [
-        ""
+        "Adult Media Network"
       ],
       "cast": [
-        ""
+          "Live Broadcasters"
       ],
       "timestamp": 1704000000,
       "ratingTotal": 48,
