@@ -879,7 +879,7 @@ function generateMoviePage(movie) {
                             <i class="fas fa-eye"></i> ${movie.views.toLocaleString()} views
                         </span>
                         <span class="language">
-                       Original Language :  <i class="fas fa-language"></i>  ${movie.language} 
+                       Original Language :  ${movie.language} 
                         </span>
                     </div>
                     
@@ -1422,7 +1422,7 @@ function generateMoviePage(movie) {
             .light-mode .similar-card,
             .light-mode .details,
             .light-mode .keywords {
-                background: rgba(29, 5, 248, 1);
+                background: rgba(0,0,0,0.05);
                 color: #333;
             }
             .light-mode .footer {
