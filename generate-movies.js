@@ -294,7 +294,11 @@ function generateMoviePage(movie) {
             padding: 5px 15px;
             border-radius: 20px;
         }
-        
+        .language {
+            background: rgba(29, 5, 248, 1);
+            padding: 5px 15px;
+            border-radius: 20px;
+        }    
         .views {
             color: #999;
             display: flex;
@@ -874,6 +878,9 @@ function generateMoviePage(movie) {
                         <span class="views">
                             <i class="fas fa-eye"></i> ${movie.views.toLocaleString()} views
                         </span>
+                        <span class="language">
+                       Original Language :  <i class="fas fa-language"></i>  ${movie.language} 
+                        </span>
                     </div>
                     
                     <div class="action-buttons">
@@ -1407,7 +1414,17 @@ function generateMoviePage(movie) {
                 background: rgba(0,0,0,0.05);
                 color: #333;
             }
-            
+            .light-mode .language,
+            .light-mode .btn-secondary,
+            .light-mode .server-btn,
+            .light-mode .cast-card,
+            .light-mode .keyword-tag,
+            .light-mode .similar-card,
+            .light-mode .details,
+            .light-mode .keywords {
+                background: rgba(29, 5, 248, 1);
+                color: #333;
+            }
             .light-mode .footer {
                 background: rgba(0,0,0,0.05);
                 border-top: 1px solid rgba(0,0,0,0.1);
