@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
 });
 
+
 // Global variables
 let allMovies = [];
 let filteredMovies = [];
