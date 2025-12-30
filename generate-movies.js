@@ -1074,7 +1074,7 @@ function generateMoviePage(movie) {
     <button class="theme-toggle" id="themeToggle">
         <i class="fas fa-moon"></i>
     </button>
-    <!-- Ad Scripts 
+    <!-- Ad Scripts -->
     <script>(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     <script>(function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
@@ -1087,7 +1087,7 @@ function generateMoviePage(movie) {
   gtag('js', new Date());
 
   gtag('config', 'G-RTHH33WQWQ');
-</script>-->
+</script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
