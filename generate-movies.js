@@ -138,6 +138,7 @@ function generateMoviePage(movie) {
         "image": "${posterUrl}",
         "datePublished": "${year}",
         "genre": "${movie.genre}",
+        "director": "${movie.director.join(', ').replace(/"/g, '\\"')}",
         "aggregateRating": {
         "@type": "AggregateRating",
         "ratingValue": "${rating}",
