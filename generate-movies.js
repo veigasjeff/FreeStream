@@ -127,7 +127,7 @@ function generateMoviePage(movie) {
      <link rel="icon" type="image/png" sizes="32x32" href="https://freestreaming.vercel.app/public/favicon-32x32.png">
      <link rel="icon" type="image/png" sizes="16x16" href="https://freestreaming.vercel.app/public/favicon-16x16.png">
      <link rel="manifest" href="https://freestreaming.vercel.app/public/site.webmanifest">
-
+     
     <!-- Schema.org -->
     <script type="application/ld+json">
     {
@@ -139,10 +139,12 @@ function generateMoviePage(movie) {
         "datePublished": "${year}",
         "genre": "${movie.genre}",
         "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "${rating}",
-            "ratingCount": "${movie.ratingCount}"
-        }
+        "@type": "AggregateRating",
+        "ratingValue": "${rating}",
+        "ratingCount": "${movie.ratingCount}",
+        "bestRating": "10",
+        "worstRating": "0"
+}
     }
     </script>
     
@@ -305,6 +307,7 @@ function generateMoviePage(movie) {
             padding: 5px 15px;
             border-radius: 20px;
         }    
+        
         .views {
             color: #999;
             display: flex;
@@ -1069,7 +1072,7 @@ function generateMoviePage(movie) {
     <button class="theme-toggle" id="themeToggle">
         <i class="fas fa-moon"></i>
     </button>
-    <!-- Ad Scripts -->
+    <!-- Ad Scripts 
     <script>(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
     <script>(function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
@@ -1082,7 +1085,7 @@ function generateMoviePage(movie) {
   gtag('js', new Date());
 
   gtag('config', 'G-RTHH33WQWQ');
-</script>
+</script>-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script>
@@ -1430,7 +1433,8 @@ function generateMoviePage(movie) {
             .light-mode .keywords {
                 background: rgba(0,0,0,0.05);
                 color: #333;
-            }
+            }    
+            
             .light-mode .footer {
                 background: rgba(0,0,0,0.05);
                 border-top: 1px solid rgba(0,0,0,0.1);
