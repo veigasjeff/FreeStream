@@ -501,8 +501,7 @@ function setupLanguages() {
     const container = document.getElementById('languageList');
     if (!container) return;
     
-    const languages = ['all', "English", "Hindi", "Marathi", "Tagalog", "Tamil", "Kannada", "Telugu", "Malayalam", "Punjabi",
-    "Bengali", "Spanish", "French", "German", "Italian", "Japanese", "Korean", "Chinese"];
+    const languages = ['all', "English", "Hindi", "Marathi", "Tagalog", "Tamil", "Kannada", "Telugu", "Malayalam", "Punjabi","Gujarati","Bengali", "Spanish", "French", "German", "Italian", "Japanese", "Korean", "Chinese"];
     
     container.innerHTML = '';
     
