@@ -1,6 +1,36 @@
 {
   "movies": [
    {
+        "id": "mark-2025-full-movie",
+        "title": "Mark (2025)",
+        "genre": "Kannada",
+        "date": "December 25, 2025",
+        "language": "Kannada",
+        "poster": "https://freestreaming.vercel.app/public/Mark_2025.jpg",
+        "playUrl": "p3rOLWgkXPo",
+        "streamUrl": "https://short.icu/WFbskx_JS?thumbnail=https://freestreaming.vercel.app/public/Mark_2025.jpg", 
+        "stream2Url": "",
+        "stream3Url": "",
+        "stream4Url": "",
+        "keywords": "mark, mark (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free",
+        "downloadUrl": "https://dl.openx.xyz/?v=WFbskx_JS", 
+        "description": "A suspended police officer confronts criminals and corrupt politicians terrorizing the state. As violence erupts, he returns to duty to defeat the villains and restore justice.",
+        "content": "Mark (2025) delivers a hard-hitting action drama centered on a police officer whose suspension becomes the turning point of his life. Once respected for his uncompromising principles, he is abruptly pushed out of the system after standing in the way of powerful interests. Stripped of his badge and authority, he is forced to watch from the sidelines as criminals and corrupt politicians tighten their grip on the state.\n\nAs lawlessness spreads, the officer witnesses innocent lives being crushed by extortion, intimidation, and politically protected violence. The very system meant to safeguard the public begins to crumble under corruption. Unable to remain silent, he starts investigating from the shadows, piecing together how deep the rot runs and who truly controls the streets.\n\nThe film escalates when open violence erupts between rival criminal factions, backed by political muscle. Chaos spills into public spaces, exposing the failure of compromised institutions. With pressure mounting and the truth threatening to surface, forces in power attempt to permanently silence the suspended officer.\n\nDriven by a relentless sense of duty, he makes the decision to return—not just to the force, but to the fight itself. His comeback is marked by brutal confrontations, tactical intelligence, and a refusal to bow to intimidation. Each battle pushes him closer to the core of the conspiracy, where crime and politics are inseparably linked.\n\nMark explores the cost of integrity in a system designed to break it. The officer’s journey is not just about defeating villains, but about reclaiming his identity and restoring faith in justice. As alliances shift and betrayals unfold, the line between lawful action and personal vengeance begins to blur.\n\nThe film builds toward a decisive showdown where power, truth, and accountability collide. Mark (2025) ultimately stands as a story of resistance, proving that even a broken system can be challenged by one individual who refuses to surrender his conscience.",
+       "director": [
+         "Vijay Karthikeyan"
+        ],
+       "cast": [ "Sudeep", "Naveen Chandra", "Deepshika"],
+        "castimage": [
+        "https://images.filmibeat.com/img/popcorn/profile_photos/sudeep-20220902160733-343.jpg",
+        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/naveen-chandra-30844-1654346859.jpg",
+        "https://images.filmibeat.com/img/popcorn/profile_photos/deepshikha-1009.jpg"
+        ],
+        "timestamp": 1700000000,
+        "ratingTotal": 71,
+        "ratingCount": 10,
+        "views": 3350
+      },
+        {
         "id": "devil-2025-full-movie",
         "title": "Devil (2025)",
         "genre": "Kannada",
