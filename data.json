@@ -2213,6 +2213,87 @@
       "views": 1200
     },
     {
+      "id": "discovery-channel-hd-live",
+      "title": "Discovery Channel HD Live",
+      "genre": "TvShow",
+      "date": "Live Broadcast",
+      "language": "English",
+      "poster": "https://freestreaming.vercel.app/public/Discovery_Channel1.jpg",
+      "playUrl": "vwHpfEXCv2Q",
+      "streamUrl": "https://daddyhd.com/stream/stream-313.php",
+      "stream2Url": "",
+      "stream3Url": "",
+      "stream4Url": "",
+     "keywords": "discovery channel, discovery channel live, discovery channel live,  discovery channel streaming, live discovery channel,  free discovery channel, live discovery channel streaming, watch live discovery channel online, free streaming discovery channel, online discovery channel, live discovery channel online free, watch free live discovery channel, streaming live discovery channel online",
+      "downloadUrl": "",
+      "description": "Live Discovery channel in HD quality.",
+      "content": "Watch the Discovery channel live in high definition. Enjoy live Shows, highlights, and expert analysis from around the world, all in stunning HD quality.",
+      "director": [
+        "Discovery Network Media"
+      ],
+      "cast": [
+          "Live Broadcasters"
+      ],
+      "timestamp": 1701000000,
+      "ratingTotal": 38,
+      "ratingCount": 8,
+      "views": 1200
+    },
+     {
+      "id": "tlc-channel-hd-live",
+      "title": "TLC Channel HD Live",
+      "genre": "TvShow",
+      "date": "Live Broadcast",
+      "language": "English",
+      "poster": "https://freestreaming.vercel.app/public/TLC_Channel.jpg",
+      "playUrl": "jDBklPpBixk",
+      "streamUrl": "https://daddyhd.com/stream/stream-337.php",
+      "stream2Url": "",
+      "stream3Url": "",
+      "stream4Url": "",
+     "keywords": "tlc channel, tlc channel live, tlc channel live,  tlc channel streaming, live tlc channel,  free tlc channel, live tlc channel streaming, watch live tlc channel online, free streaming tlc channel, online tlc channel, live tlc channel online free, watch free live tlc channel, streaming live tlc channel online",
+      "downloadUrl": "",
+      "description": "Live TLC channel in HD quality.",
+      "content": "Watch the TLC channel live in high definition. Enjoy live Shows, highlights, and expert analysis from around the world, all in stunning HD quality.",
+      "director": [
+        "TLC Network Media"
+      ],
+      "cast": [
+          "Live Broadcasters"
+      ],
+      "timestamp": 1701000000,
+      "ratingTotal": 38,
+      "ratingCount": 8,
+      "views": 1200
+    },
+    {
+      "id": "nat-geo-wild-usa-channel-hd-live",
+      "title": "Nat Geo Wild USA Channel HD Live",
+      "genre": "TvShow",
+      "date": "Live Broadcast",
+      "language": "English",
+      "poster": "https://freestreaming.vercel.app/public/Nat_Geo_Wild_USA.jpg",
+      "playUrl": "yJL-OAPBDa8",
+      "streamUrl": "https://daddyhd.com/stream/stream-745.php",
+      "stream2Url": "",
+      "stream3Url": "",
+      "stream4Url": "",
+     "keywords": "nat geo wild usa channel, nat geo wild usa channel live, nat geo wild usa channel live,  nat geo wild usa channel streaming, live nat geo wild usa channel,  free nat geo wild usa channel, live nat geo wild usa channel streaming, watch live nat geo wild usa channel online, free streaming nat geo wild usa channel, online nat geo wild usa channel, live nat geo wild usa channel online free, watch free live nat geo wild usa channel, streaming live nat geo wild usa channel online",
+      "downloadUrl": "",
+      "description": "Live Nat Geo Wild USA channel in HD quality.",
+      "content": "Watch the Nat Geo Wild USA channel live in high definition. Enjoy live Shows, highlights, and expert analysis from around the world, all in stunning HD quality.",
+      "director": [
+        "Nat Geo Wild USA Media Network"
+      ],
+      "cast": [
+          "Live Broadcasters"
+      ],
+      "timestamp": 1701000000,
+      "ratingTotal": 38,
+      "ratingCount": 8,
+      "views": 1200
+    },
+    {
       "id": "willow-xtra-hd-live",
       "title": "Willow XTRA HD Live",
       "genre": "Sports",
@@ -2230,6 +2311,33 @@
       "content": "Watch the Willow Cricket Channel live in high definition. Enjoy live cricket matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
       "director": [
         "Willow Cricket Media Network"
+      ],
+      "cast": [
+          "Live Broadcasters"
+      ],
+      "timestamp": 1701000000,
+      "ratingTotal": 38,
+      "ratingCount": 8,
+      "views": 1200
+    },
+    {
+      "id": "supersport-grandstand-hd-live",
+      "title": "SuperSport Grandstand HD Live",
+      "genre": "Sports",
+      "date": "Live Broadcast",
+      "language": "English",
+      "poster": "https://freestreaming.vercel.app/public/SuperSport_Grandstand.jpg",
+      "playUrl": "oKv35OB_7lo",
+      "streamUrl": "https://daddyhd.com/stream/stream-412.php",
+      "stream2Url": "",
+      "stream3Url": "",
+      "stream4Url": "",
+     "keywords": "supersport grandstand, sports live, cricket live,  cricket streaming, live sports, free live cricket, watch cricket online, online cricket streaming, free sports channels, live sports streaming, watch live sports online, free streaming sports channels, online sports channels, live sports online free, watch free live sports, streaming live sports online",
+      "downloadUrl": "",
+      "description": "Live SuperSport Grandstand Channel in HD quality.",
+      "content": "Watch the SuperSport Grandstand Channel live in high definition. Enjoy live cricket matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
+      "director": [
+        "SuperSport Grandstand Media Network"
       ],
       "cast": [
           "Live Broadcasters"
@@ -2314,6 +2422,60 @@
       ],
       "cast": [
            "Live Broadcasters"
+      ],
+      "timestamp": 1701000000,
+      "ratingTotal": 38,
+      "ratingCount": 8,
+      "views": 1200
+    },
+    {
+      "id": "usa-network-hd-live",
+      "title": "USA Network HD Live",
+      "genre": "TvShow",
+      "date": "Live Broadcast",
+      "language": "English",
+      "poster": "https://freestreaming.vercel.app/public/USA_Network.jpg",
+      "playUrl": "VuDzpB_Q_g4",
+      "streamUrl": "https://daddyhd.com/stream/stream-343.php",
+      "stream2Url": "",
+      "stream3Url": "",
+      "stream4Url": "",
+     "keywords": "usa network, usa network live, usa network live,  usa network streaming, live usa network, free live usa network, watch usa network online, online usa network streaming, free usa network channels, live usa network streaming, watch live usa network online, free streaming usa network channels, online usa network channels, live usa network online free, watch free live usa network, streaming live usa network online",
+      "downloadUrl": "",
+      "description": "Live usa network Channel in HD quality.",
+      "content": "Watch the usa network Channel live in high definition. Enjoy live Shows, highlights, and expert analysis from around the world, all in stunning HD quality.",
+      "director": [
+        "USA Network Media Network"
+      ],
+      "cast": [
+          "Live Broadcasters"
+      ],
+      "timestamp": 1701000000,
+      "ratingTotal": 38,
+      "ratingCount": 8,
+      "views": 1200
+    },
+      {
+      "id": "tennis-channel-hd-live",
+      "title": "Tennis Channel HD Live",
+      "genre": "Sports",
+      "date": "Live Broadcast",
+      "language": "English",
+      "poster": "https://freestreaming.vercel.app/public/Tennis_Channel_HD.jpg",
+      "playUrl": "_cNWlkYnw04",
+      "streamUrl": "https://daddyhd.com/stream/stream-40.php",
+      "stream2Url": "",
+      "stream3Url": "",
+      "stream4Url": "",
+     "keywords": "tennis channel, sports live, football live,  football streaming, live sports, free live football, watch football online, online football streaming, free sports channels, live sports streaming, watch live sports online, free streaming sports channels, online sports channels, live sports online free, watch free live sports, streaming live sports online",
+      "downloadUrl": "",
+      "description": "Live Tennis Channel in HD quality.",
+      "content": "Watch the Tennis Channel live in high definition. Enjoy live football matches, highlights, and expert analysis from around the world, all in stunning HD quality.",
+      "director": [
+        "Sky Sports Media Network"
+      ],
+      "cast": [
+          "Live Broadcasters"
       ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
