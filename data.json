@@ -2208,7 +2208,7 @@
            "Live Broadcasters"
       ],
        "castimage": [
-        "https://freestreaming.vercel.app/public/author.png"
+        "https://freestreaming.vercel.app/public/free_test.jpg"
                ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
@@ -2264,6 +2264,9 @@
       "cast": [
           "Live Broadcasters"
       ],
+      "castimage": [
+        "https://freestreaming.vercel.app/public/free_test.jpg"
+               ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
@@ -2291,6 +2294,9 @@
       "cast": [
           "Live Broadcasters"
       ],
+      "castimage": [
+        "https://freestreaming.vercel.app/public/free_test.jpg"
+               ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
@@ -2318,6 +2324,9 @@
       "cast": [
           "Live Broadcasters"
       ],
+      "castimage": [
+        "https://freestreaming.vercel.app/public/free_test.jpg"
+               ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
@@ -2345,6 +2354,9 @@
       "cast": [
           "Live Broadcasters"
       ],
+      "castimage": [
+        "https://freestreaming.vercel.app/public/free_test.jpg"
+               ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
@@ -2372,6 +2384,9 @@
       "cast": [
            "Live Broadcasters"
       ],
+      "castimage": [
+        "https://freestreaming.vercel.app/public/free_test.jpg"
+               ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
@@ -2399,6 +2414,9 @@
       "cast": [
           "Live Broadcasters"
       ],
+      "castimage": [
+        "https://freestreaming.vercel.app/public/free_test.jpg"
+               ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
@@ -2426,6 +2444,9 @@
       "cast": [
            "Live Broadcasters"
       ],
+      "castimage": [
+        "https://freestreaming.vercel.app/public/free_test.jpg"
+               ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
