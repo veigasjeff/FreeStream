@@ -2207,6 +2207,9 @@
       "cast": [
            "Live Broadcasters"
       ],
+       "castimage": [
+        "https://freestreaming.vercel.app/public/author.png"
+               ],
       "timestamp": 1701000000,
       "ratingTotal": 38,
       "ratingCount": 8,
