@@ -1787,7 +1787,7 @@ function generateMoviePage(movie) {
     const escapedUserIconSVG = escapeForOnError(userIconSVG);
     
     // SEO elements
-    const seoTitle = `Watch ${movie.title} (${year}) Online Free | FreeStream`;
+    const seoTitle = `Watch ${movie.title}  Online Free | FreeStream`;
     const seoDescription = movie.description.length > 155 ? 
         movie.description.substring(0, 152) + '...' : movie.description;
     const canonicalUrl = `https://freestreaming.vercel.app/movies/${movie.id}/`;
@@ -1813,18 +1813,18 @@ function generateMoviePage(movie) {
     <link rel="canonical" href="${canonicalUrl}">
     
     <!-- Open Graph -->
-    <meta property="og:title" content="${escapeHtml(movie.title)} (${year})">
+    <meta property="og:title" content="${escapeHtml(movie.title)}">
     <meta property="og:description" content="${escapeHtml(seoDescription)}">
     <meta property="og:image" content="${posterUrl}">
     <meta property="og:url" content="${canonicalUrl}">
-    <meta property="og:type" content="video.movie">
+    <meta property="og:type" content="website">
     <meta property="og:site_name" content="FreeStream">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="${escapeHtml(movie.title)} (${year})">
+    <meta name="twitter:title" content="${escapeHtml(movie.title)}">
     <meta name="twitter:description" content="${escapeHtml(seoDescription)}">
     <meta name="twitter:image" content="${posterUrl}">
     
@@ -2595,7 +2595,7 @@ function generateMoviePage(movie) {
     <!-- Share Modal -->
     <div class="share-modal" id="shareModal">
         <div class="share-content">
-            <h2>Share "${escapeHtml(movie.title)}"</h2>
+            <h2>Share "${(movie.title)}"</h2>
             <div class="share-buttons">
                 <button class="share-btn facebook" onclick="shareToFacebook()">
                     <i class="fab fa-facebook"></i> Facebook
