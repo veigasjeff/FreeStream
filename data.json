@@ -2216,6 +2216,60 @@
       "views": 1200
     },
     {
+      "id": "the-food-network-channel-hd-live",
+      "title": "The Food Network Channel HD Live",
+      "genre": "TvShow",
+      "date": "Live Broadcast",
+      "language": "English",
+      "poster": "https://freestreaming.vercel.app/public/The_Food_Network1.jpg",
+      "playUrl": "4DzbWQTc79g",
+      "streamUrl": "https://daddyhd.com/stream/stream-384.php",
+      "stream2Url": "",
+      "stream3Url": "",
+      "stream4Url": "",
+     "keywords": "the food network channel, the food network channel live, the food network channel live, the food network channel streaming, live the food network channel, free the food network channel, live the food network channel streaming, watch live the food network channel online, free streaming the food network channel , online the food network channel , live the food network channel online free, watch free live the food network channel , streaming live the food network channel online",
+      "downloadUrl": "",
+      "description": "Live The Food Network Channel in HD quality.",
+      "content": "Watch The Food Network Channel live in high definition. Enjoy live Shows, highlights, and expert analysis from around the world, all in stunning HD quality.",
+      "director": [
+        "Discovery Network Media"
+      ],
+      "cast": [
+          "Live Broadcasters"
+      ],
+      "timestamp": 1701000000,
+      "ratingTotal": 38,
+      "ratingCount": 8,
+      "views": 1200
+    },
+    {
+      "id": "history-usa-channel-hd-live",
+      "title": "History USA Channel HD Live",
+      "genre": "TvShow",
+      "date": "Live Broadcast",
+      "language": "English",
+      "poster": "https://freestreaming.vercel.app/public/History_USA.jpg",
+      "playUrl": "a4L8XOngn1k",
+      "streamUrl": "https://daddyhd.com/stream/stream-322.php",
+      "stream2Url": "",
+      "stream3Url": "",
+      "stream4Url": "",
+     "keywords": "history usa channel, history usa channel channel live, history usa channel channel live,  history usa channel channel streaming, live history usa channel channel, free history usa channel channel, live history usa channel channel streaming, watch live history usa channel channel online, free streaming history usa channel, online history usa channel, live history usa channel online free, watch free live history usa channel, streaming live history usa channel online",
+      "downloadUrl": "",
+      "description": "Live History USA Channel in HD quality.",
+      "content": "Watch History USA Channel live in high definition. Enjoy live Shows, highlights, and expert analysis from around the world, all in stunning HD quality.",
+      "director": [
+        "Discovery Network Media"
+      ],
+      "cast": [
+          "Live Broadcasters"
+      ],
+      "timestamp": 1701000000,
+      "ratingTotal": 38,
+      "ratingCount": 8,
+      "views": 1200
+    },
+    {
       "id": "discovery-channel-hd-live",
       "title": "Discovery Channel HD Live",
       "genre": "TvShow",
