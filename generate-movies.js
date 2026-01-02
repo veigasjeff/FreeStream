@@ -1844,7 +1844,7 @@ function generateMoviePage(movie) {
         "description": "${escapeJson(movie.description)}",
         "image": "${posterUrl}",
         "url": "${canonicalUrl}",
-        "datePublished": "${year}",
+        "datePublished": "${(movie.date)}",        
         "genre": "${escapeJson(movie.genre)}",
         "director": "${escapeJson(movie.director.join(', '))}",
         "actor": "${escapeJson(movie.cast.join(', '))}",
