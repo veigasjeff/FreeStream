@@ -3729,7 +3729,7 @@ console.log('✅ robots.txt created');
 
 // Generate news-sitemap.xml for NewsArticle schema - FIXED VERSION
 console.log('📄 Generating news-sitemap.xml...');
-const newsSitemap = `<?xml version="1.0" encoding="UTF-8"?>
+let newsSitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">`;
 
