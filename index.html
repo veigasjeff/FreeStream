@@ -42,7 +42,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
     <link rel="manifest" href="/public/site.webmanifest">
     
-        <!-- Schema Markup for Movie/TV Show Collections -->
+  <!-- Schema Markup for Movie/TV Show Collections -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -50,6 +50,7 @@
         "name": "FreeStream Movie Collection",
         "description": "Collection of 5000+ HD movies and TV shows available for free streaming",
         "url": "https://freestreaming.vercel.app",
+        "image": "https://freestreaming.vercel.app/public/og-image.jpg",
         "hasPart": [
             {
                 "@type": "ItemList",
@@ -93,7 +94,102 @@
     }
     </script>
     
-    <!-- Additional Schema for Movie/TV Show Items -->
+    <!-- Additional Schema for Movie/TV Show Items with all required fields -->
+    <!-- <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@type": "Movie",
+                    "name": "Psych Siddhartha (2026)",
+                    "description": "Down-on-his-luck Siddharth faces loss after loss until meeting Shravya, a single mom who brings hope. As he works to rebuild and find love, his troubled past threatens to derail everything.",
+                    "image": "https://freestreaming.vercel.app/public/Psych_Siddhartha_2026.jpg",
+                    "dateCreated": "2026-01-01",
+                    "director": {
+                        "@type": "Person",
+                        "name": "Dr Trailer"
+                    },
+                    "contentRating": "Various",
+                    "genre": ["Action", "Comedy", "Drama", "Thriller", "Horror"],
+                    "encodingFormat": "video/mp4",
+                    "url": "https://freestreaming.vercel.app"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@type": "Movie",
+                    "name": "Ikkis (2026)",
+                    "description": "An untold true story of India's youngest Param Vir Chakra awardee - Second Lieutenant Arun Khetarpal",
+                    "image": "https://freestreaming.vercel.app/public/Ikkis_2026.jpg",
+                    "dateCreated": "2026-01-01",
+                    "director": {
+                        "@type": "Person",
+                        "name": "Dr Trailer"
+                    },
+                    "contentRating": "Various",
+                    "genre": ["Action", "Comedy", "Drama"],
+                    "encodingFormat": "video/mp4",
+                    "url": "https://freestreaming.vercel.app"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                    "@type": "Movie",
+                    "name": "Andhra King Taluka (2025)",
+                    "description": "A heartfelt tribute to fan culture, the story follows Sagar, an ardent fan whose life, relationships,'Andhra King' Surya Kumar.",
+                    "image": "https://freestreaming.vercel.app/public/Andhra_King_Taluka_2025.jpg",
+                    "dateCreated": "2026-01-01",
+                    "director": {
+                        "@type": "Person",
+                        "name": "Dr Trailer"
+                    },
+                    "contentRating": "Various",
+                    "genre": ["Thriller", "Horror", "Drama"],
+                    "encodingFormat": "video/mp4",
+                    "url": "https://freestreaming.vercel.app"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                    "@type": "TVSeries",
+                    "name": "Cashero Season 1 (2025)",
+                    "description": "A superhero named Kang Sang Woong and other ordinary superheroes who protect ordinary people's daily lives.",
+                    "image": "https://freestreaming.vercel.app/public/Cashero_2025.jpg",
+                    "dateCreated": "2025-12-26",
+                    "numberOfEpisodes": 08,
+                    "encodingFormat": "video/mp4",
+                    "url": "https://freestreaming.vercel.app"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 5,
+                "item": {
+                    "@type": "CreativeWorkSeries",
+                    "name": "Live Channels",
+                    "description": "Live sports and news channels",
+                    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
+                    "dateCreated": "2025-02-28",
+                    "numberOfEpisodes": 50,
+                    "encodingFormat": "video/stream",
+                    "url": "https://freestreaming.vercel.app"
+                }
+            }
+        ]
+    }
+    </script> -->
+
+    <!-- Additional Schema for Movie/TV Show Items with all required fields -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -106,36 +202,88 @@
                     "@type": "Movie",
                     "name": "Movie Collection 1",
                     "description": "HD quality movie available for free streaming",
+                    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
+                    "dateCreated": "2025-03-15",
+                    "director": {
+                        "@type": "Person",
+                        "name": "Dr Trailer"
+                    },
                     "contentRating": "Various",
                     "genre": ["Action", "Comedy", "Drama", "Thriller", "Horror"],
-                    "encodingFormat": "video/mp4"
+                    "encodingFormat": "video/mp4",
+                    "url": "https://freestreaming.vercel.app"
                 }
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "item": {
-                    "@type": "TVSeries",
-                    "name": "TV Shows Collection",
-                    "description": "Latest TV shows available for free streaming",
-                    "numberOfEpisodes": 100,
-                    "encodingFormat": "video/mp4"
+                    "@type": "Movie",
+                    "name": "Movie Collection 2",
+                    "description": "Premium HD movies collection for free streaming",
+                    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
+                    "dateCreated": "2025-06-22",
+                    "director": {
+                        "@type": "Person",
+                        "name": "Dr Trailer"
+                    },
+                    "contentRating": "Various",
+                    "genre": ["Action", "Comedy", "Drama"],
+                    "encodingFormat": "video/mp4",
+                    "url": "https://freestreaming.vercel.app"
                 }
             },
             {
                 "@type": "ListItem",
                 "position": 3,
                 "item": {
+                    "@type": "Movie",
+                    "name": "Movie Collection 3",
+                    "description": "Latest movies collection in HD quality",
+                    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
+                    "dateCreated": "2025-01-10",
+                    "director": {
+                        "@type": "Person",
+                        "name": "Dr Trailer"
+                    },
+                    "contentRating": "Various",
+                    "genre": ["Thriller", "Horror", "Drama"],
+                    "encodingFormat": "video/mp4",
+                    "url": "https://freestreaming.vercel.app"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 4,
+                "item": {
+                    "@type": "TVSeries",
+                    "name": "TV Shows Collection",
+                    "description": "Latest TV shows available for free streaming",
+                    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
+                    "dateCreated": "2025-04-18",
+                    "numberOfEpisodes": 100,
+                    "encodingFormat": "video/mp4",
+                    "url": "https://freestreaming.vercel.app"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 5,
+                "item": {
                     "@type": "CreativeWorkSeries",
                     "name": "Live Channels",
                     "description": "Live sports and news channels",
+                    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
+                    "dateCreated": "2025-02-28",
                     "numberOfEpisodes": 50,
-                    "encodingFormat": "video/stream"
+                    "encodingFormat": "video/stream",
+                    "url": "https://freestreaming.vercel.app"
                 }
             }
         ]
     }
     </script>
+
 
     <!-- FAQ Schema -->
     <script type="application/ld+json">
