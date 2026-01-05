@@ -42,15 +42,44 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
     <link rel="manifest" href="/public/site.webmanifest">
     
-<!-- Schema Markup for Website/Movie Collection -->
+<!-- Main Website Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FreeStream",
+    "description": "Free streaming website with 5000+ HD movies and TV shows",
+    "url": "https://freestreaming.vercel.app",
+    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
+    "inLanguage": "en",
+    "copyrightHolder": {
+        "@type": "Organization",
+        "name": "FreeStream"
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "bestRating": "5",
+        "worstRating": "1",
+        "ratingCount": "1500",
+        "reviewCount": "1500"
+    },
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+    }
+}
+</script>
+
+<!-- Movie Collections Schema -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "FreeStream Movie Collection",
-    "description": "Collection of 5000+ HD movies and TV shows available for free streaming",
+    "description": "Collection of 5000+ HD movies and TV shows",
     "url": "https://freestreaming.vercel.app",
-    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
     "hasPart": [
         {
             "@type": "ItemList",
@@ -72,36 +101,18 @@
                 {"@type": "ListItem", "position": 6, "name": "Horror Movies"},
                 {"@type": "ListItem", "position": 7, "name": "All Categories"}
             ]
-        },
-        {
-            "@type": "ItemList",
-            "name": "Movies by Language",
-            "numberOfItems": 10,
-            "description": "Movies available in multiple languages"
         }
-    ],
-    "mainEntity": {
-        "@type": "Website",
-        "name": "FreeStream",
-        "description": "Free streaming website for movies and TV shows",
-        "url": "https://freestreaming.vercel.app",
-        "inLanguage": "en",
-        "copyrightHolder": {
-            "@type": "Organization",
-            "name": "FreeStream"
-        }
-    }
+    ]
 }
 </script>
 
-<!-- Movie/TV Show Collections Schema -->
+<!-- Movie Items Schema -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "FreeStream Collections",
     "description": "Featured movie and TV show collections",
-    "url": "https://freestreaming.vercel.app",
     "itemListElement": [
         {
             "@type": "ListItem",
@@ -111,14 +122,8 @@
                 "name": "Action Movie Pack",
                 "description": "Collection of action movies in HD quality",
                 "image": "https://freestreaming.vercel.app/public/og-image.jpg",
-                "dateCreated": "2025-03-15",
-                "director": {
-                    "@type": "Person",
-                    "name": "Michael Director"
-                },
                 "contentRating": "PG-13",
                 "genre": ["Action", "Adventure"],
-                "encodingFormat": "video/mp4",
                 "url": "https://freestreaming.vercel.app#action"
             }
         },
@@ -130,14 +135,8 @@
                 "name": "Comedy Collection",
                 "description": "Premium comedy movies collection",
                 "image": "https://freestreaming.vercel.app/public/og-image.jpg",
-                "dateCreated": "2025-06-22",
-                "director": {
-                    "@type": "Person",
-                    "name": "Sarah Producer"
-                },
                 "contentRating": "PG-13",
                 "genre": ["Comedy", "Romance"],
-                "encodingFormat": "video/mp4",
                 "url": "https://freestreaming.vercel.app#comedy"
             }
         },
@@ -149,14 +148,8 @@
                 "name": "Thriller Series",
                 "description": "Latest thriller movies in HD",
                 "image": "https://freestreaming.vercel.app/public/og-image.jpg",
-                "dateCreated": "2025-01-10",
-                "director": {
-                    "@type": "Person",
-                    "name": "David Creator"
-                },
                 "contentRating": "R",
                 "genre": ["Thriller", "Mystery"],
-                "encodingFormat": "video/mp4",
                 "url": "https://freestreaming.vercel.app#thriller"
             }
         },
@@ -168,46 +161,10 @@
                 "name": "TV Shows Collection",
                 "description": "Latest TV shows available for free streaming",
                 "image": "https://freestreaming.vercel.app/public/og-image.jpg",
-                "dateCreated": "2025-04-18",
-                "numberOfEpisodes": 100,
-                "encodingFormat": "video/mp4",
                 "url": "https://freestreaming.vercel.app#tv"
-            }
-        },
-        {
-            "@type": "ListItem",
-            "position": 5,
-            "item": {
-                "@type": "CreativeWorkSeries",
-                "name": "Live Sports Channels",
-                "description": "Live sports and news channels streaming",
-                "image": "https://freestreaming.vercel.app/public/og-image.jpg",
-                "dateCreated": "2025-02-28",
-                "numberOfEpisodes": 50,
-                "encodingFormat": "video/stream",
-                "url": "https://freestreaming.vercel.app#live"
             }
         }
     ]
-}
-</script>
-
-<!-- Website Rating Schema -->
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "AggregateRating",
-    "itemReviewed": {
-        "@type": "Website",
-        "name": "FreeStream",
-        "url": "https://freestreaming.vercel.app",
-        "description": "Free streaming website for movies and TV shows"
-    },
-    "ratingValue": "4.5",
-    "bestRating": "5",
-    "worstRating": "1",
-    "ratingCount": "1500",
-    "reviewCount": "1500"
 }
 </script>
 
