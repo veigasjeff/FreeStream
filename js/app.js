@@ -1,752 +1,3 @@
-// // Main Application
-// document.addEventListener('DOMContentLoaded', function() {
-//     console.log('App loaded');
-    
-//     // Load analytics scripts
-//     (function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
-
-//     (function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
-    
-//     // Initialize
-//     loadData();
-//     setupEventListeners();
-    
-//     // Load Google Analytics
-//     (function() {
-//         var gaScript = document.createElement('script');
-//         gaScript.async = true;
-//         gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ';
-//         document.head.appendChild(gaScript);
-        
-//         window.dataLayer = window.dataLayer || [];
-//         function gtag(){dataLayer.push(arguments);}
-//         gtag('js', new Date());
-//         gtag('config', 'G-RTHH33WQWQ');
-//     })();
-    
-//     // Load Clicky Analytics
-//     (function() {
-//         var clickyScript = document.createElement('script');
-//         clickyScript.async = true;
-//         clickyScript.setAttribute('data-id', '101498160');
-//         clickyScript.src = '//static.getclicky.com/js';
-//         document.head.appendChild(clickyScript);
-//     })();
-// });
-
-
-// // // Global variables
-// // let allMovies = [];
-// // let filteredMovies = [];
-// // let currentPage = 1;
-// // const itemsPerPage = 12;
-// // let currentGenre = 'all';
-// // let currentLanguage = 'all';
-
-// // // Load data from data.json
-// // async function loadData() {
-// //     try {
-// //         const response = await fetch('data.json');
-// //         const data = await response.json();
-// //         allMovies = data.movies;
-        
-// //         console.log(`Loaded ${allMovies.length} movies`);
-        
-// //         // Initial display
-// //         filteredMovies = [...allMovies];
-// //         displayMovies();
-// //         setupCategories();
-// //         setupLanguages();
-// //         displayLiveChannels();
-        
-// //     } catch (error) {
-// //         console.error('Error loading data:', error);
-// //         document.getElementById('moviesGrid').innerHTML = `
-// //             <div class="error" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-// //                 <h3>Failed to load movies</h3>
-// //                 <p>Please check your data.json file</p>
-// //             </div>
-// //         `;
-// //     }
-// // }
-
-// // // Display movies in grid - NOW EXACTLY LIKE LIVE CHANNELS
-// // function displayMovies() {
-// //     const grid = document.getElementById('moviesGrid');
-// //     if (!grid) return;
-    
-// //     // Clear existing
-// //     grid.innerHTML = '';
-    
-// //     // Calculate items to show
-// //     const start = 0;
-// //     const end = currentPage * itemsPerPage;
-// //     const moviesToShow = filteredMovies.slice(start, end);
-    
-// //     if (moviesToShow.length === 0) {
-// //         grid.innerHTML = `
-// //             <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-// //                 <h3>No movies found</h3>
-// //                 <p>Try a different category or search</p>
-// //             </div>
-// //         `;
-// //         return;
-// //     }
-    
-// //     // Create movie cards - SAME STRUCTURE AS CHANNEL CARDS
-// //     moviesToShow.forEach(movie => {
-// //         const card = createMovieCard(movie);
-// //         grid.appendChild(card);
-// //     });
-    
-// //     // Update load more button
-// //     const loadMoreBtn = document.getElementById('loadMoreBtn');
-// //     if (loadMoreBtn) {
-// //         if (end >= filteredMovies.length) {
-// //             loadMoreBtn.style.display = 'none';
-// //         } else {
-// //             loadMoreBtn.style.display = 'block';
-// //         }
-// //     }
-// // }
-
-// // // Create movie card HTML - SAME STRUCTURE AS CHANNEL CARDS
-// // function createMovieCard(movie) {
-// //     const div = document.createElement('div');
-// //     div.className = 'movie-card';
-    
-// //     // Calculate rating
-// //     const rating = movie.ratingCount > 0 ? 
-// //         (movie.ratingTotal / movie.ratingCount).toFixed(1) : 'N/A';
-    
-// //     // SAME EXACT STRUCTURE AS CHANNEL CARDS
-// //     div.innerHTML = `
-// //         <img src="${movie.poster}" alt="${movie.title}" loading="lazy" 
-// //              onerror="this.src='https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'">
-// //         <h3><a href="movies/${movie.id}/" style="color: white; text-decoration: none;">${movie.title}</a></h3>
-// //         <p>${movie.description.substring(0, 100)}${movie.description.length > 100 ? '...' : ''}</p>
-// //         <div class="movie-meta">
-// //             <span class="movie-rating">
-// //                 <i class="fas fa-star"></i> ${rating}
-// //             </span>
-// //             <span class="movie-views">
-// //                 <i class="fas fa-eye"></i> ${movie.views}
-// //             </span>
-// //         </div>
-// //         <a href="movies/${movie.id}/" style="
-// //             display: inline-block;
-// //             background: #e50914;
-// //             color: white;
-// //             padding: 8px 16px;
-// //             border-radius: 4px;
-// //             text-decoration: none;
-// //             margin-top: 10px;
-// //         ">Watch Now</a>
-// //     `;
-    
-// //     return div;
-// // }
-
-// // // Setup categories
-// // function setupCategories() {
-// //     const container = document.getElementById('categoryList');
-// //     if (!container) return;
-    
-// //     // Get unique genres from movies
-// //     const genres = ['all', "Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Romance", "Thriller", "Adult", "Adventure",
-// //     "Fantasy", "Crime", "News", "Sports", "TvSeries", "TvShow", "Family", "Mystery", "Biography", "History", "War"];
-    
-// //     genres.forEach(genre => {
-// //         const button = document.createElement('button');
-// //         button.className = 'category-btn';
-// //         if (genre === 'all') button.classList.add('active');
-// //         button.textContent = genre === 'all' ? 'All Movies' : genre;
-// //         button.dataset.genre = genre;
-        
-// //         button.addEventListener('click', function() {
-// //             // Update active button
-// //             document.querySelectorAll('.category-btn').forEach(btn => {
-// //                 btn.classList.remove('active');
-// //             });
-// //             this.classList.add('active');
-            
-// //             // Filter movies
-// //             currentGenre = genre;
-// //             currentPage = 1;
-// //             filterMovies();
-// //         });
-        
-// //         container.appendChild(button);
-// //     });
-// // }
-
-// // // Setup languages
-// // function setupLanguages() {
-// //     const container = document.getElementById('languageList');
-// //     if (!container) return;
-    
-// //     const languages = ['all', "English", "Hindi", "Marathi", "Tagalog", "Tamil", "Kannada", "Telugu", "Malayalam", "Punjabi",
-// //     "Bengali", "Spanish", "French", "German", "Italian", "Japanese", "Korean", "Chinese"];
-    
-// //     container.innerHTML = '';
-    
-// //     languages.forEach(language => {
-// //         const button = document.createElement('button');
-// //         button.className = 'category-btn language-btn';
-// //         if (language === 'all') button.classList.add('active');
-// //         button.textContent = language === 'all' ? 'All Languages' : language;
-// //         button.dataset.language = language;
-        
-// //         button.addEventListener('click', function() {
-// //             // Update active button for language
-// //             document.querySelectorAll('.language-btn').forEach(btn => {
-// //                 btn.classList.remove('active');
-// //             });
-// //             this.classList.add('active');
-            
-// //             // Filter movies by language
-// //             currentLanguage = language;
-// //             currentPage = 1;
-// //             filterMovies();
-// //         });
-        
-// //         container.appendChild(button);
-// //     });
-// // }
-
-// // // Filter movies by genre and language
-// // function filterMovies() {
-// //     if (currentGenre === 'all' && currentLanguage === 'all') {
-// //         filteredMovies = [...allMovies];
-// //     } else {
-// //         filteredMovies = allMovies.filter(movie => {
-// //             const genreMatch = currentGenre === 'all' || 
-// //                 movie.genre.toLowerCase() === currentGenre.toLowerCase();
-            
-// //             // Note: Since data.json doesn't have language field for movies,
-// //             // we'll need to add it. For now, we'll simulate with available data.
-// //             // In your actual data.json, each movie should have a language field.
-// //             const languageMatch = currentLanguage === 'all' || 
-// //                 (movie.language && movie.language.toLowerCase() === currentLanguage.toLowerCase());
-            
-// //             return genreMatch && languageMatch;
-// //         });
-// //     }
-    
-// //     displayMovies();
-// // }
-
-
-// // // Display live channels
-// // function displayLiveChannels() {
-// //     const container = document.getElementById('channelsGrid');
-// //     if (!container) return;
-    
-// //     // Filter live channels
-// //     const liveChannels = allMovies.filter(movie => 
-// //         movie.genre === 'Sports' || movie.genre === 'News' || movie.genre === 'TvShow'
-// //     );
-    
-// //     if (liveChannels.length === 0) {
-// //         container.innerHTML = `
-// //             <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
-// //                 <h3>No live channels available</h3>
-// //                 <p>Check back later for live TV updates</p>
-// //             </div>
-// //         `;
-// //         return;
-// //     }
-    
-// //     // Create channel cards - SAME STRUCTURE AS MOVIE CARDS
-// //     liveChannels.forEach(channel => {
-// //         const div = document.createElement('div');
-// //         div.className = 'channel-card';
-        
-// //         div.innerHTML = `
-// //             <img src="${channel.poster}" alt="${channel.title}" 
-// //                  onerror="this.src='https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'">
-// //             <h3>${channel.title}</h3>
-// //             <p>${channel.description.substring(0, 100)}${channel.description.length > 100 ? '...' : ''}</p>
-// //             <a href="movies/${channel.id}/" style="
-// //                 display: inline-block;
-// //                 background: #e50914;
-// //                 color: white;
-// //                 padding: 8px 16px;
-// //                 border-radius: 4px;
-// //                 text-decoration: none;
-// //                 margin-top: 10px;
-// //             ">Watch Live</a>
-// //         `;
-        
-// //         container.appendChild(div);
-// //     });
-// // }
-
-// // // Setup event listeners
-// // function setupEventListeners() {
-// //     // Theme toggle
-// //     const themeToggle = document.getElementById('themeToggle');
-// //     if (themeToggle) {
-// //         themeToggle.addEventListener('click', function() {
-// //             document.body.classList.toggle('light-theme');
-// //             const icon = this.querySelector('i');
-// //             if (document.body.classList.contains('light-theme')) {
-// //                 icon.className = 'fas fa-sun';
-// //                 document.documentElement.style.setProperty('--dark', '#f5f5f5');
-// //                 document.documentElement.style.setProperty('--dark-light', '#fff');
-// //                 document.documentElement.style.setProperty('--light', '#333');
-// //             } else {
-// //                 icon.className = 'fas fa-moon';
-// //                 document.documentElement.style.setProperty('--dark', '#141414');
-// //                 document.documentElement.style.setProperty('--dark-light', '#222');
-// //                 document.documentElement.style.setProperty('--light', '#fff');
-// //             }
-// //         });
-// //     }
-    
-// //     // Search functionality
-// //     const searchBtn = document.getElementById('searchBtn');
-// //     const searchInput = document.getElementById('searchInput');
-    
-// //     if (searchBtn && searchInput) {
-// //         const performSearch = () => {
-// //             const query = searchInput.value.toLowerCase().trim();
-            
-// //             if (query === '') {
-// //                 filteredMovies = [...allMovies];
-// //             } else {
-// //                 filteredMovies = allMovies.filter(movie => 
-// //                     movie.title.toLowerCase().includes(query) ||
-// //                     movie.description.toLowerCase().includes(query) ||
-// //                     movie.genre.toLowerCase().includes(query)
-// //                 );
-// //             }
-            
-// //             currentPage = 1;
-// //             displayMovies();
-// //         };
-        
-// //         searchBtn.addEventListener('click', performSearch);
-// //         searchInput.addEventListener('keypress', function(e) {
-// //             if (e.key === 'Enter') performSearch();
-// //         });
-// //     }
-    
-// //     // Load more button
-// //     const loadMoreBtn = document.getElementById('loadMoreBtn');
-// //     if (loadMoreBtn) {
-// //         loadMoreBtn.addEventListener('click', function() {
-// //             currentPage++;
-// //             displayMovies();
-// //         });
-// //     }
-// // }
-// // Global variables
-// let allMovies = [];
-// let filteredMovies = [];
-// let currentPage = 1;
-// const itemsPerPage = 12;
-// let currentGenre = 'all';
-// let currentLanguage = 'all';
-
-// // Age verification variables
-// let pendingAdultMovieId = null;
-// let pendingAdultMovieTitle = null;
-
-// // Load data from data.json
-// async function loadData() {
-//     try {
-//         const response = await fetch('data.json');
-//         const data = await response.json();
-//         allMovies = data.movies;
-        
-//         console.log(`Loaded ${allMovies.length} movies`);
-        
-//         // Initial display
-//         filteredMovies = [...allMovies];
-//         displayMovies();
-//         setupCategories();
-//         setupLanguages();
-//         displayLiveChannels();
-        
-//     } catch (error) {
-//         console.error('Error loading data:', error);
-//         document.getElementById('moviesGrid').innerHTML = `
-//             <div class="error" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-//                 <h3>Failed to load movies</h3>
-//                 <p>Please check your data.json file</p>
-//             </div>
-//         `;
-//     }
-// }
-
-// // Display movies in grid
-// function displayMovies() {
-//     const grid = document.getElementById('moviesGrid');
-//     if (!grid) return;
-    
-//     // Clear existing
-//     grid.innerHTML = '';
-    
-//     // Calculate items to show
-//     const start = 0;
-//     const end = currentPage * itemsPerPage;
-//     const moviesToShow = filteredMovies.slice(start, end);
-    
-//     if (moviesToShow.length === 0) {
-//         grid.innerHTML = `
-//             <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-//                 <h3>No movies found</h3>
-//                 <p>Try a different category or search</p>
-//             </div>
-//         `;
-//         return;
-//     }
-    
-//     // Create movie cards
-//     moviesToShow.forEach(movie => {
-//         const card = createMovieCard(movie);
-//         grid.appendChild(card);
-//     });
-    
-//     // Update load more button
-//     const loadMoreBtn = document.getElementById('loadMoreBtn');
-//     if (loadMoreBtn) {
-//         if (end >= filteredMovies.length) {
-//             loadMoreBtn.style.display = 'none';
-//         } else {
-//             loadMoreBtn.style.display = 'block';
-//         }
-//     }
-// }
-
-// // Create movie card HTML
-// function createMovieCard(movie) {
-//     const div = document.createElement('div');
-//     div.className = 'movie-card';
-    
-//     // Calculate rating
-//     const rating = movie.ratingCount > 0 ? 
-//         (movie.ratingTotal / movie.ratingCount).toFixed(1) : 'N/A';
-    
-//     // Add adult badge if adult content
-//     const adultBadge = movie.genre === 'Adult' ? 
-//         '<div class="adult-badge">18+</div>' : '';
-    
-//     div.innerHTML = `
-//         ${adultBadge}
-//         <img src="${movie.poster}" alt="${movie.title}" loading="lazy" 
-//              onerror="this.src='https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'">
-//         <h3>${movie.title}</h3>
-//         <p>${movie.description.substring(0, 100)}${movie.description.length > 100 ? '...' : ''}</p>
-//         <div class="movie-meta">
-//             <span class="movie-rating">
-//                 <i class="fas fa-star"></i> ${rating}
-//             </span>
-//             <span class="movie-views">
-//                 <i class="fas fa-eye"></i> ${movie.views}
-//             </span>
-//         </div>
-//         <a href="movies/${movie.id}/" class="watch-now-link" data-movie-id="${movie.id}" data-is-adult="${movie.genre === 'Adult'}" style="
-//             display: inline-block;
-//             background: #e50914;
-//             color: white;
-//             padding: 8px 16px;
-//             border-radius: 4px;
-//             text-decoration: none;
-//             margin-top: 10px;
-//         ">Watch Now</a>
-//     `;
-    
-//     return div;
-// }
-
-// // Setup categories by genre
-// function setupCategories() {
-//     const container = document.getElementById('categoryList');
-//     if (!container) return;
-    
-//     // Get unique genres from movies
-//     const genres = ['all', "Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Romance", "Thriller", "Adult", "Adventure",
-//     "Fantasy", "Crime", "News", "Sports", "TvSeries", "TvShow", "Family", "Mystery", "Biography", "History", "War"];
-    
-//     container.innerHTML = '';
-    
-//     genres.forEach(genre => {
-//         const button = document.createElement('button');
-//         button.className = 'category-btn';
-//         if (genre === 'all') button.classList.add('active');
-//         button.textContent = genre === 'all' ? 'All Movies' : genre;
-//         button.dataset.genre = genre;
-        
-//         button.addEventListener('click', function() {
-//             // Update active button
-//             document.querySelectorAll('.category-btn').forEach(btn => {
-//                 btn.classList.remove('active');
-//             });
-//             this.classList.add('active');
-            
-//             // Filter movies by genre
-//             currentGenre = genre;
-//             currentPage = 1;
-//             filterMovies();
-//         });
-        
-//         container.appendChild(button);
-//     });
-// }
-
-// // Setup languages
-// function setupLanguages() {
-//     const container = document.getElementById('languageList');
-//     if (!container) return;
-    
-//     const languages = ['all', "English", "Hindi", "Marathi", "Tagalog", "Tamil", "Kannada", "Telugu", "Malayalam", "Punjabi","Gujarati","Bengali", "Spanish", "French", "German", "Italian", "Japanese", "Korean", "Chinese"];
-    
-//     container.innerHTML = '';
-    
-//     languages.forEach(language => {
-//         const button = document.createElement('button');
-//         button.className = 'category-btn language-btn';
-//         if (language === 'all') button.classList.add('active');
-//         button.textContent = language === 'all' ? 'All Languages' : language;
-//         button.dataset.language = language;
-        
-//         button.addEventListener('click', function() {
-//             // Update active button for language
-//             document.querySelectorAll('.language-btn').forEach(btn => {
-//                 btn.classList.remove('active');
-//             });
-//             this.classList.add('active');
-            
-//             // Filter movies by language
-//             currentLanguage = language;
-//             currentPage = 1;
-//             filterMovies();
-//         });
-        
-//         container.appendChild(button);
-//     });
-// }
-
-// // Filter movies by genre and language
-// function filterMovies() {
-//     if (currentGenre === 'all' && currentLanguage === 'all') {
-//         filteredMovies = [...allMovies];
-//     } else {
-//         filteredMovies = allMovies.filter(movie => {
-//             const genreMatch = currentGenre === 'all' || 
-//                 movie.genre.toLowerCase() === currentGenre.toLowerCase();
-            
-//             const languageMatch = currentLanguage === 'all' || 
-//                 (movie.language && movie.language.toLowerCase() === currentLanguage.toLowerCase());
-            
-//             return genreMatch && languageMatch;
-//         });
-//     }
-    
-//     displayMovies();
-// }
-
-// // Display live channels
-// function displayLiveChannels() {
-//     const container = document.getElementById('channelsGrid');
-//     if (!container) return;
-    
-//     // Filter live channels
-//     const liveChannels = allMovies.filter(movie => 
-//         movie.genre === 'Sports' || movie.genre === 'News' || movie.genre === 'TvShow'
-//     );
-    
-//     if (liveChannels.length === 0) {
-//         container.innerHTML = `
-//             <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
-//                 <h3>No live channels available</h3>
-//                 <p>Check back later for live TV updates</p>
-//             </div>
-//         `;
-//         return;
-//     }
-    
-//     // Create channel cards
-//     liveChannels.forEach(channel => {
-//         const div = document.createElement('div');
-//         div.className = 'channel-card';
-        
-//         div.innerHTML = `
-//             <img src="${channel.poster}" alt="${channel.title}" 
-//                  onerror="this.src='https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'">
-//             <h3>${channel.title}</h3>
-//             <p>${channel.description.substring(0, 100)}${channel.description.length > 100 ? '...' : ''}</p>
-//             <a href="movies/${channel.id}/" class="watch-now-link" data-movie-id="${channel.id}" data-is-adult="${channel.genre === 'Adult'}" style="
-//                 display: inline-block;
-//                 background: #e50914;
-//                 color: white;
-//                 padding: 8px 16px;
-//                 border-radius: 4px;
-//                 text-decoration: none;
-//                 margin-top: 10px;
-//             ">Watch Live</a>
-//         `;
-        
-//         container.appendChild(div);
-//     });
-// }
-
-// // Age verification system
-// function showAgeVerification(movieId, movieTitle) {
-//     pendingAdultMovieId = movieId;
-//     pendingAdultMovieTitle = movieTitle;
-    
-//     const modal = document.getElementById('ageVerificationModal');
-//     modal.style.display = 'flex';
-    
-//     // Prevent scrolling
-//     document.body.style.overflow = 'hidden';
-// }
-
-// function hideAgeVerification() {
-//     const modal = document.getElementById('ageVerificationModal');
-//     modal.style.display = 'none';
-    
-//     // Restore scrolling
-//     document.body.style.overflow = 'auto';
-    
-//     pendingAdultMovieId = null;
-//     pendingAdultMovieTitle = null;
-// }
-
-// function handleAgeVerification() {
-//     const confirmYesBtn = document.getElementById('ageConfirmYes');
-//     const confirmNoBtn = document.getElementById('ageConfirmNo');
-    
-//     if (confirmYesBtn) {
-//         confirmYesBtn.addEventListener('click', function() {
-//             if (pendingAdultMovieId) {
-//                 // User confirmed they are 18+, redirect to movie page
-//                 window.location.href = `movies/${pendingAdultMovieId}/`;
-//             }
-//             hideAgeVerification();
-//         });
-//     }
-    
-//     if (confirmNoBtn) {
-//         confirmNoBtn.addEventListener('click', function() {
-//             // User is under 18
-//             alert('You must be 18 years or older to access adult content.');
-//             hideAgeVerification();
-//         });
-//     }
-    
-//     // Close modal when clicking outside
-//     const modal = document.getElementById('ageVerificationModal');
-//     modal.addEventListener('click', function(e) {
-//         if (e.target === modal) {
-//             hideAgeVerification();
-//         }
-//     });
-// }
-
-// // Setup event listeners
-// function setupEventListeners() {
-//     // Theme toggle
-//     const themeToggle = document.getElementById('themeToggle');
-//     if (themeToggle) {
-//         themeToggle.addEventListener('click', function() {
-//             document.body.classList.toggle('light-theme');
-//             const icon = this.querySelector('i');
-//             if (document.body.classList.contains('light-theme')) {
-//                 icon.className = 'fas fa-sun';
-//                 document.documentElement.style.setProperty('--dark', '#f5f5f5');
-//                 document.documentElement.style.setProperty('--dark-light', '#fff');
-//                 document.documentElement.style.setProperty('--light', '#333');
-//             } else {
-//                 icon.className = 'fas fa-moon';
-//                 document.documentElement.style.setProperty('--dark', '#141414');
-//                 document.documentElement.style.setProperty('--dark-light', '#222');
-//                 document.documentElement.style.setProperty('--light', '#fff');
-//             }
-//         });
-//     }
-    
-//     // Search functionality
-//     const searchBtn = document.getElementById('searchBtn');
-//     const searchInput = document.getElementById('searchInput');
-    
-//     if (searchBtn && searchInput) {
-//         const performSearch = () => {
-//             const query = searchInput.value.toLowerCase().trim();
-            
-//             if (query === '') {
-//                 filteredMovies = [...allMovies];
-//             } else {
-//                 filteredMovies = allMovies.filter(movie => 
-//                     movie.title.toLowerCase().includes(query) ||
-//                     movie.description.toLowerCase().includes(query) ||
-//                     movie.genre.toLowerCase().includes(query)
-//                 );
-//             }
-            
-//             currentPage = 1;
-//             displayMovies();
-//         };
-        
-//         searchBtn.addEventListener('click', performSearch);
-//         searchInput.addEventListener('keypress', function(e) {
-//             if (e.key === 'Enter') performSearch();
-//         });
-//     }
-    
-//     // Load more button
-//     const loadMoreBtn = document.getElementById('loadMoreBtn');
-//     if (loadMoreBtn) {
-//         loadMoreBtn.addEventListener('click', function() {
-//             currentPage++;
-//             displayMovies();
-//         });
-//     }
-    
-//     // Setup age verification handlers
-//     handleAgeVerification();
-    
-//     // Handle watch now link clicks (using event delegation)
-//     document.addEventListener('click', function(e) {
-//         if (e.target.classList.contains('watch-now-link')) {
-//             const isAdult = e.target.dataset.isAdult === 'true';
-//             const movieId = e.target.dataset.movieId;
-            
-//             if (isAdult) {
-//                 // Prevent default link behavior for adult content
-//                 e.preventDefault();
-                
-//                 // Show age verification
-//                 showAgeVerification(movieId, e.target.textContent);
-//             }
-//             // Non-adult content will proceed with normal link behavior
-//         }
-//     });
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Main Application
 document.addEventListener('DOMContentLoaded', function() {
     console.log('App loaded');
@@ -755,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     (function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
 
-    // Initialize
+    Initialize
     loadData();
     setupEventListeners();
     setupMobileMenu();
@@ -784,431 +35,866 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(clickyScript);
     })();
 
-// Mobile menu functionality
-function setupMobileMenu() {
-    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const navLinks = document.getElementById('navLinks');
+// ===== GLOBAL VARIABLES =====
+let moviesData = [];
+let filteredMovies = [];
+let currentView = 'grid';
+let currentCategory = 'all';
+let visibleMovies = 9;
+let isLoading = false;
+
+// YouTube API Variables
+let youtubePlayer = null;
+let youtubeAPILoaded = false;
+
+
+// ===== DOM ELEMENTS =====
+const featuredMoviesEl = document.getElementById('featuredMovies');
+const categoriesGridEl = document.getElementById('categoriesGrid');
+const moviesGridEl = document.getElementById('moviesGrid');
+const languagesGridEl = document.getElementById('languagesGrid');
+const liveChannelsEl = document.getElementById('liveChannels');
+const searchInput = document.getElementById('searchInput');
+const heroSearchInput = document.getElementById('heroSearch');
+const searchBtn = document.getElementById('searchBtn');
+const heroSearchBtn = document.getElementById('heroSearchBtn');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const themeToggle = document.getElementById('themeToggle');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const movieModal = document.getElementById('movieModal');
+const playerModal = document.getElementById('playerModal');
+const ageModal = document.getElementById('ageModal');
+const backToTopBtn = document.getElementById('backToTop');
+const loadingOverlay = document.getElementById('loadingOverlay');
+const closeModalBtns = document.querySelectorAll('.close-modal');
+const filterBtns = document.querySelectorAll('.filter-btn');
+const viewBtns = document.querySelectorAll('.view-btn');
+const faqQuestions = document.querySelectorAll('.faq-question');
+const ageConfirmBtn = document.getElementById('ageConfirm');
+const ageDenyBtn = document.getElementById('ageDeny');
+
+// ===== YOUTUBE API FUNCTIONS (EXACT FROM GENERATE-MOVIES.JS) =====
+function loadYouTubeAPI() {
+    if (youtubeAPILoaded) return;
     
-    if (mobileMenuToggle && navLinks) {
-        mobileMenuToggle.addEventListener('click', function() {
-            navLinks.classList.toggle('active');
-            
-            // Change icon based on menu state
-            const icon = this.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.className = 'fas fa-times';
-                document.body.style.overflow = 'hidden';
-            } else {
-                icon.className = 'fas fa-bars';
-                document.body.style.overflow = 'auto';
-            }
-        });
-        
-        // Close menu when clicking on a link
-        const links = navLinks.querySelectorAll('a');
-        links.forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.classList.remove('active');
-                mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
-                document.body.style.overflow = 'auto';
-            });
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            if (!navLinks.contains(event.target) && 
-                !mobileMenuToggle.contains(event.target) && 
-                navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                mobileMenuToggle.querySelector('i').className = 'fas fa-bars';
-                document.body.style.overflow = 'auto';
-            }
-        });
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    youtubeAPILoaded = true;
+}
+
+window.onYouTubeIframeAPIReady = function() {
+    console.log('YouTube API ready');
+};
+
+function initYouTubePlayer(videoId, containerId = 'videoContainer') {
+    if (youtubePlayer) {
+        youtubePlayer.destroy();
+    }
+    
+    youtubePlayer = new YT.Player(containerId, {
+        height: '100%',
+        width: '100%',
+        videoId: videoId,
+        playerVars: {
+            'autoplay': 1,
+            'mute': 1,
+            'playsinline': 1,
+            'rel': 0,
+            'loop': 1,
+            'modestbranding': 1,
+            'controls': 1,
+            'showinfo': 0,
+            'playlist': videoId
+        },
+        events: {
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
+        }
+    });
+    
+    return youtubePlayer;
+}
+
+function onPlayerReady(event) {
+    console.log('YouTube player ready');
+    event.target.playVideo();
+}
+
+function onPlayerStateChange(event) {
+    console.log('Player state changed:', event.data);
+}
+
+function stopYouTubePlayer() {
+    if (youtubePlayer) {
+        try {
+            youtubePlayer.stopVideo();
+            youtubePlayer.destroy();
+        } catch (e) {
+            console.log('Error stopping YouTube player:', e);
+        }
+        youtubePlayer = null;
     }
 }
 
-// Global variables
-let allMovies = [];
-let filteredMovies = [];
-let currentPage = 1;
-const itemsPerPage = 12;
-let currentGenre = 'all';
-let currentLanguage = 'all';
+function stopIframeVideos() {
+    const videoContainer = document.getElementById('videoContainer');
+    const iframe = videoContainer.querySelector('iframe');
+    if (iframe) {
+        const currentSrc = iframe.src;
+        iframe.dataset.src = currentSrc;
+        iframe.src = '';
+        
+        try {
+            iframe.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+        } catch (e) {
+            // Ignore errors
+        }
+    }
+}
 
-// Age verification variables
-let pendingAdultMovieId = null;
-let pendingAdultMovieTitle = null;
+function stopAllVideos() {
+    stopYouTubePlayer();
+    stopIframeVideos();
+}
 
-// Load data from data.json
-async function loadData() {
+// ===== INITIALIZATION =====
+async function init() {
+    showLoading();
     try {
         const response = await fetch('data.json');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const data = await response.json();
-        allMovies = data.movies;
+        moviesData = data.movies;
+        filteredMovies = [...moviesData];
         
-        console.log(`Loaded ${allMovies.length} movies`);
+        // Populate all sections
+        populateFeaturedMovies();
+        populateCategories(data.genres);
+        populateMovies();
+        populateLanguages(data.language);
+        populateLiveChannels();
         
-        // Initial display
-        filteredMovies = [...allMovies];
-        displayMovies();
-        setupCategories();
-        setupLanguages();
-        displayLiveChannels();
+        hideLoading();
+        
+        // Check age verification
+        checkAgeVerification();
+        
+        // Load YouTube API
+        loadYouTubeAPI();
         
     } catch (error) {
         console.error('Error loading data:', error);
-        document.getElementById('moviesGrid').innerHTML = `
-            <div class="error" style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-                <h3>Failed to load movies</h3>
-                <p>Please check your data.json file</p>
-            </div>
-        `;
+        showError('Failed to load movies. Please try again later.');
+        hideLoading();
     }
 }
 
-// Display movies in grid
-function displayMovies() {
-    const grid = document.getElementById('moviesGrid');
-    if (!grid) return;
-    
-    // Clear existing
-    grid.innerHTML = '';
-    
-    // Calculate items to show
-    const start = 0;
-    const end = currentPage * itemsPerPage;
-    const moviesToShow = filteredMovies.slice(start, end);
-    
-    if (moviesToShow.length === 0) {
-        grid.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 3rem;">
-                <h3>No movies found</h3>
-                <p>Try a different category or search</p>
+// ===== POPULATE SECTIONS =====
+function populateFeaturedMovies() {
+    const featured = moviesData.slice(0, 6);
+    featuredMoviesEl.innerHTML = featured.map(movie => {
+        const rating = movie.ratingCount > 0 ? 
+            (movie.ratingTotal / movie.ratingCount).toFixed(1) : '0.0';
+        const hasYouTube = movie.playUrl && movie.playUrl.trim() !== '';
+        
+        return `
+            <div class="featured-card" data-id="${movie.id}">
+                <div class="featured-badge">🔥 Trending</div>
+                <img src="${movie.poster}" alt="${movie.title}" 
+                     onerror="this.src='https://images.unsplash.com/photo-1489599809516-9827b6d1cf13?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                <div class="featured-content">
+                    <h3>${movie.title}</h3>
+                    <p>${movie.description.substring(0, 100)}...</p>
+                    <div class="featured-rating">
+                        <span class="stars">${'⭐'.repeat(Math.floor(rating))}</span>
+                        <span>${rating}</span>
+                    </div>
+                    <button class="watch-btn" onclick="playMovie('${movie.id}')">
+                        <i class="fas fa-play"></i> ${hasYouTube ? 'Watch Trailer' : 'Watch Now'}
+                    </button>
+                </div>
             </div>
         `;
-        return;
+    }).join('');
+}
+
+function populateCategories(genres) {
+    categoriesGridEl.innerHTML = genres.map(genre => {
+        const count = moviesData.filter(m => m.genre === genre).length;
+        const icons = {
+            'Action': 'fa-gun',
+            'Comedy': 'fa-face-laugh',
+            'Drama': 'fa-masks-theater',
+            'Horror': 'fa-ghost',
+            'Sci-Fi': 'fa-rocket',
+            'Romance': 'fa-heart',
+            'Thriller': 'fa-user-secret',
+            'Adult': 'fa-18',
+            'Adventure': 'fa-mountain-sun',
+            'Fantasy': 'fa-dragon',
+            'Crime': 'fa-handcuffs',
+            'War': 'fa-helmet-battle',
+            'Biography': 'fa-user-pen',
+            'History': 'fa-landmark',
+            'Family': 'fa-users',
+            'Mystery': 'fa-magnifying-glass'
+        };
+        
+        return `
+            <div class="category-card" data-category="${genre.toLowerCase()}" onclick="filterByCategory('${genre.toLowerCase()}')">
+                <i class="fas ${icons[genre] || 'fa-film'}"></i>
+                <h3>${genre}</h3>
+                <span>${count} Movies</span>
+            </div>
+        `;
+    }).join('');
+}
+
+function populateMovies() {
+    const moviesToShow = filteredMovies.slice(0, visibleMovies);
+    const viewClass = currentView === 'list' ? 'list-view' : '';
+    
+    moviesGridEl.innerHTML = moviesToShow.map(movie => {
+        const rating = movie.ratingCount > 0 ? 
+            (movie.ratingTotal / movie.ratingCount).toFixed(1) : '0.0';
+        const hasYouTube = movie.playUrl && movie.playUrl.trim() !== '';
+        
+        return `
+            <div class="movie-card ${viewClass}" data-id="${movie.id}">
+                <div class="movie-poster">
+                    <img src="${movie.poster}" alt="${movie.title}"
+                         onerror="this.src='https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80'">
+                    <div class="movie-badge">${movie.language}</div>
+                    ${hasYouTube ? `` : ''}
+                </div>
+                <div class="movie-content">
+                    <h3>${movie.title}</h3>
+                    <div class="movie-meta">
+                        <div class="movie-rating">
+                            ${'★'.repeat(Math.floor(rating))}
+                            <span>${rating}</span>
+                        </div>
+                        <div class="movie-views">
+                            <i class="fas fa-eye"></i> ${movie.views.toLocaleString()}
+                        </div>
+                    </div>
+                    <div class="movie-genre">${movie.genre}</div>
+                    <p class="movie-description">${movie.description.substring(0, 100)}...</p>
+                    <div class="movie-actions">
+                        <button class="watch-btn" onclick="playMovie('${movie.id}')">
+                            <i class="fas fa-play"></i> Watch Now
+                        </button>
+                        <button class="details-btn" onclick="showMovieDetails('${movie.id}')">
+                            <i class="fas fa-info-circle"></i> Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    // Show/hide load more button
+    loadMoreBtn.style.display = filteredMovies.length > visibleMovies ? 'flex' : 'none';
+}
+
+function populateLanguages(languages) {
+    languagesGridEl.innerHTML = languages.map(language => {
+        const count = moviesData.filter(m => m.language === language).length;
+        const flags = {
+            'English': '',
+            'Hindi': '',
+            'Telugu': '',
+            'Tamil': '',
+            'Korean': '',
+            'Marathi': '',
+            'Tagalog': '',
+            'Kannada': '',
+            'Malayalam': '',
+            'Punjabi': '',
+            'Gujarati': '',
+            'Bengali': ''            
+        };
+        
+        return `
+            <div class="language-card" data-language="${language.toLowerCase()}" onclick="filterByLanguage('${language.toLowerCase()}')">
+                <h3>${flags[language] || '🌐'} ${language}</h3>
+                <span>${count} Movies</span>
+            </div>
+        `;
+    }).join('');
+}
+
+function populateLiveChannels() {
+    // First 6 channels visible initially
+    const initialChannels = liveChannelsData.slice(0, 6);
+    
+    liveChannelsEl.innerHTML = initialChannels.map(channel => `
+        <div class="live-channel">
+            <div class="channel-header">
+                <img src="${channel.logo}" alt="${channel.name}" 
+                     onerror="this.src='https://images.unsplash.com/photo-1560523160-754a9e25c68f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                <div class="live-badge">
+                    <i class="fas fa-circle"></i> LIVE
+                </div>
+            </div>
+            <div class="channel-content">
+                <h3>${channel.name}</h3>
+                <div class="channel-category">${channel.category}</div>
+                <div class="channel-viewers">
+                    <i class="fas fa-users"></i> ${channel.viewers} watching
+                </div>
+                <button class="watch-live-btn" onclick="playLiveChannel('${channel.id}')">
+                    <i class="fas fa-play"></i> Watch Live
+                </button>
+            </div>
+        </div>
+    `).join('');
+    
+    // Add Load More button for Live TV if needed
+    if (liveChannelsData.length > 6) {
+        const loadMoreLiveBtn = document.createElement('div');
+        loadMoreLiveBtn.className = 'load-more';
+        loadMoreLiveBtn.innerHTML = `
+            <button id="loadMoreLiveBtn" class="load-more-btn">
+                <i class="fas fa-tv"></i> Load More Channels
+            </button>
+        `;
+        liveChannelsEl.after(loadMoreLiveBtn);
+        
+        document.getElementById('loadMoreLiveBtn').addEventListener('click', loadMoreLiveChannels);
     }
+}
+
+let visibleLiveChannels = 6;
+function loadMoreLiveChannels() {
+    const moreChannels = liveChannelsData.slice(visibleLiveChannels, visibleLiveChannels + 6);
     
-    // Create movie cards
-    moviesToShow.forEach(movie => {
-        const card = createMovieCard(movie);
-        grid.appendChild(card);
-    });
-    
-    // Update load more button
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    if (loadMoreBtn) {
-        if (end >= filteredMovies.length) {
-            loadMoreBtn.style.display = 'none';
-        } else {
-            loadMoreBtn.style.display = 'block';
+    if (moreChannels.length > 0) {
+        moreChannels.forEach(channel => {
+            const channelHTML = `
+                <div class="live-channel">
+                    <div class="channel-header">
+                        <img src="${channel.logo}" alt="${channel.name}" 
+                             onerror="this.src='https://images.unsplash.com/photo-1560523160-754a9e25c68f?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+                        <div class="live-badge">
+                            <i class="fas fa-circle"></i> LIVE
+                        </div>
+                    </div>
+                    <div class="channel-content">
+                        <h3>${channel.name}</h3>
+                        <div class="channel-category">${channel.category}</div>
+                        <div class="channel-viewers">
+                            <i class="fas fa-users"></i> ${channel.viewers} watching
+                        </div>
+                        <button class="watch-live-btn" onclick="playLiveChannel('${channel.id}')">
+                            <i class="fas fa-play"></i> Watch Live
+                        </button>
+                    </div>
+                </div>
+            `;
+            liveChannelsEl.insertAdjacentHTML('beforeend', channelHTML);
+        });
+        
+        visibleLiveChannels += 6;
+        
+        // Hide button if all channels loaded
+        if (visibleLiveChannels >= liveChannelsData.length) {
+            document.getElementById('loadMoreLiveBtn').style.display = 'none';
         }
     }
 }
 
-// Create movie card HTML
-function createMovieCard(movie) {
-    const div = document.createElement('div');
-    div.className = 'movie-card';
+// ===== MOVIE FUNCTIONS =====
+function showMovieDetails(movieId) {
+    const movie = moviesData.find(m => m.id === movieId);
+    if (!movie) return;
     
-    // Calculate rating
     const rating = movie.ratingCount > 0 ? 
-        (movie.ratingTotal / movie.ratingCount).toFixed(1) : 'N/A';
+        (movie.ratingTotal / movie.ratingCount).toFixed(1) : '0.0';
     
-    // Add adult badge if adult content
-    const adultBadge = movie.genre === 'Adult' ? 
-        '<div class="adult-badge">18+</div>' : '';
-    
-    div.innerHTML = `
-        ${adultBadge}
-        <img src="${movie.poster}" alt="${movie.title}" loading="lazy" 
-             onerror="this.src='https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'">
-        <h3>${movie.title}</h3>
-        <p>${movie.description.substring(0, 100)}${movie.description.length > 100 ? '...' : ''}</p>
-        <div class="movie-meta">
-            <span class="movie-rating">
-                <i class="fas fa-star"></i> ${rating}
-            </span>
-            <span class="movie-views">
-                <i class="fas fa-eye"></i> ${movie.views}
-            </span>
+    const modalContent = document.getElementById('movieModalContent');
+    modalContent.innerHTML = `
+        <div class="movie-details-header">
+            <div class="movie-details-poster">
+                <img src="${movie.poster}" alt="${movie.title}"
+                     onerror="this.src='https://images.unsplash.com/photo-1536440136628-849c177e76a1?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80'">
+            </div>
+            <div class="movie-details-info">
+                <h2>${movie.title}</h2>
+                <div class="movie-details-meta">
+                    <span class="meta-badge genre">${movie.genre}</span>
+                    <span class="meta-badge language">${movie.language}</span>
+                    <span class="meta-badge year">${new Date(movie.date).getFullYear()}</span>
+                </div>
+                <div class="movie-details-rating">
+                    <div class="rating-stars">${'★'.repeat(5)}</div>
+                    <div class="rating-value">${rating}/10</div>
+                </div>
+                <div class="movie-details-content">
+                    <h3>Description</h3>
+                    <p>${movie.content || movie.description}</p>
+                </div>
+                <div class="cast-crew">
+                    <div class="cast-member">
+                        <h4>Director</h4>
+                        <p>${movie.director?.join(', ') || 'Not specified'}</p>
+                    </div>
+                    <div class="cast-member">
+                        <h4>Cast</h4>
+                        <p>${movie.cast?.slice(0, 3).join(', ') || 'Not specified'}</p>
+                    </div>
+                </div>
+                <div class="movie-details-actions">
+                    <button class="btn-primary" onclick="playMovie('${movie.id}')">
+                        <i class="fas fa-play"></i> Watch Movie
+                    </button>
+                    ${movie.downloadUrl ? `
+                    <a href="${movie.downloadUrl}" class="btn-secondary" target="_blank">
+                        <i class="fas fa-download"></i> Download
+                    </a>` : ''}
+                </div>
+            </div>
         </div>
-        <a href="movies/${movie.id}/" class="watch-now-link" data-movie-id="${movie.id}" data-is-adult="${movie.genre === 'Adult'}" style="
-            display: inline-block;
-            background: #e50914;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            margin-top: 10px;
-        ">Watch Now</a>
     `;
     
-    return div;
-}
-
-// Setup categories by genre
-function setupCategories() {
-    const container = document.getElementById('categoryList');
-    if (!container) return;
-    
-    // Get unique genres from movies
-    const genres = ['all', "Action", "Comedy", "Drama", "Horror", "Sci-Fi", "Romance", "Thriller", "Adult", "Adventure",
-    "Fantasy", "Crime", "News", "Sports", "TvSeries", "TvShow", "Family", "Mystery", "Biography", "History", "War"];
-    
-    container.innerHTML = '';
-    
-    genres.forEach(genre => {
-        const button = document.createElement('button');
-        button.className = 'category-btn';
-        if (genre === 'all') button.classList.add('active');
-        button.textContent = genre === 'all' ? 'All Movies' : genre;
-        button.dataset.genre = genre;
-        
-        button.addEventListener('click', function() {
-            // Update active button
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            this.classList.add('active');
-            
-            // Filter movies by genre
-            currentGenre = genre;
-            currentPage = 1;
-            filterMovies();
-        });
-        
-        container.appendChild(button);
-    });
-}
-
-// Setup languages
-function setupLanguages() {
-    const container = document.getElementById('languageList');
-    if (!container) return;
-    
-    const languages = ['all', "English", "Hindi", "Marathi", "Tagalog", "Tamil", "Kannada", "Telugu", "Malayalam", "Punjabi","Gujarati","Bengali", "Spanish", "French", "German", "Italian", "Japanese", "Korean", "Chinese"];
-    
-    container.innerHTML = '';
-    
-    languages.forEach(language => {
-        const button = document.createElement('button');
-        button.className = 'category-btn language-btn';
-        if (language === 'all') button.classList.add('active');
-        button.textContent = language === 'all' ? 'All Languages' : language;
-        button.dataset.language = language;
-        
-        button.addEventListener('click', function() {
-            // Update active button for language
-            document.querySelectorAll('.language-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            this.classList.add('active');
-            
-            // Filter movies by language
-            currentLanguage = language;
-            currentPage = 1;
-            filterMovies();
-        });
-        
-        container.appendChild(button);
-    });
-}
-
-// Filter movies by genre and language
-function filterMovies() {
-    if (currentGenre === 'all' && currentLanguage === 'all') {
-        filteredMovies = [...allMovies];
-    } else {
-        filteredMovies = allMovies.filter(movie => {
-            const genreMatch = currentGenre === 'all' || 
-                movie.genre.toLowerCase() === currentGenre.toLowerCase();
-            
-            const languageMatch = currentLanguage === 'all' || 
-                (movie.language && movie.language.toLowerCase() === currentLanguage.toLowerCase());
-            
-            return genreMatch && languageMatch;
-        });
-    }
-    
-    displayMovies();
-}
-
-// Display live channels
-function displayLiveChannels() {
-    const container = document.getElementById('channelsGrid');
-    if (!container) return;
-    
-    // Filter live channels
-    const liveChannels = allMovies.filter(movie => 
-        movie.genre === 'Sports' || movie.genre === 'News' || movie.genre === 'TvShow'
-    );
-    
-    if (liveChannels.length === 0) {
-        container.innerHTML = `
-            <div style="grid-column: 1/-1; text-align: center; padding: 2rem;">
-                <h3>No live channels available</h3>
-                <p>Check back later for live TV updates</p>
-            </div>
-        `;
-        return;
-    }
-    
-    // Create channel cards
-    liveChannels.forEach(channel => {
-        const div = document.createElement('div');
-        div.className = 'channel-card';
-        
-        div.innerHTML = `
-            <img src="${channel.poster}" alt="${channel.title}" 
-                 onerror="this.src='https://images.unsplash.com/photo-1560179707-f14e90ef3623?ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80'">
-            <h3>${channel.title}</h3>
-            <p>${channel.description.substring(0, 100)}${channel.description.length > 100 ? '...' : ''}</p>
-            <a href="movies/${channel.id}/" class="watch-now-link" data-movie-id="${channel.id}" data-is-adult="${channel.genre === 'Adult'}" style="
-                display: inline-block;
-                background: #e50914;
-                color: white;
-                padding: 8px 16px;
-                border-radius: 4px;
-                text-decoration: none;
-                margin-top: 10px;
-            ">Watch Live</a>
-        `;
-        
-        container.appendChild(div);
-    });
-}
-
-// Age verification system
-function showAgeVerification(movieId, movieTitle) {
-    pendingAdultMovieId = movieId;
-    pendingAdultMovieTitle = movieTitle;
-    
-    const modal = document.getElementById('ageVerificationModal');
-    modal.style.display = 'flex';
-    
-    // Prevent scrolling
+    movieModal.classList.add('active');
     document.body.style.overflow = 'hidden';
 }
 
-function hideAgeVerification() {
-    const modal = document.getElementById('ageVerificationModal');
-    modal.style.display = 'none';
+// ===== STREAMING FUNCTIONS (EXACT FROM GENERATE-MOVIES.JS) =====
+function loadYouTubeStream(videoId) {
+    stopAllVideos();
     
-    // Restore scrolling
-    document.body.style.overflow = 'auto';
+    const videoContainer = document.getElementById('videoContainer');
+    videoContainer.innerHTML = '<div id="youtubePlayerContainer"></div>';
     
-    pendingAdultMovieId = null;
-    pendingAdultMovieTitle = null;
+    // Load YouTube API and initialize player
+    loadYouTubeAPI();
+    
+    if (window.YT && window.YT.Player) {
+        initYouTubePlayer(videoId, 'youtubePlayerContainer');
+    } else {
+        // Fallback if API doesn't load
+        const checkReady = setInterval(() => {
+            if (window.YT && window.YT.Player) {
+                clearInterval(checkReady);
+                initYouTubePlayer(videoId, 'youtubePlayerContainer');
+            }
+        }, 100);
+    }
 }
 
-function handleAgeVerification() {
-    const confirmYesBtn = document.getElementById('ageConfirmYes');
-    const confirmNoBtn = document.getElementById('ageConfirmNo');
+function loadIframeStream(url) {
+    stopAllVideos();
     
-    if (confirmYesBtn) {
-        confirmYesBtn.addEventListener('click', function() {
-            if (pendingAdultMovieId) {
-                // User confirmed they are 18+, redirect to movie page
-                window.location.href = `movies/${pendingAdultMovieId}/`;
-            }
-            hideAgeVerification();
-        });
-    }
+    const videoContainer = document.getElementById('videoContainer');
+    videoContainer.innerHTML = `
+        <iframe src="${url}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+    `;
+}
+
+function loadM3U8Stream(url) {
+    stopAllVideos();
     
-    if (confirmNoBtn) {
-        confirmNoBtn.addEventListener('click', function() {
-            // User is under 18
-            alert('You must be 18 years or older to access adult content.');
-            hideAgeVerification();
-        });
-    }
+    const videoContainer = document.getElementById('videoContainer');
+    videoContainer.innerHTML = `
+        <video id="m3u8Player" controls autoplay style="width:100%;height:100%;">
+            <source src="${url}" type="application/x-mpegURL">
+            Your browser does not support the video tag.
+        </video>
+    `;
     
-    // Close modal when clicking outside
-    const modal = document.getElementById('ageVerificationModal');
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            hideAgeVerification();
+    // Initialize HLS.js for M3U8 streams if needed
+    if (url.includes('.m3u8')) {
+        if (Hls.isSupported()) {
+            const video = document.getElementById('m3u8Player');
+            const hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = url;
+            video.addEventListener('loadedmetadata', function() {
+                video.play();
+            });
         }
-    });
+    }
 }
 
-// Setup event listeners
-function setupEventListeners() {
-    // Theme toggle
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            document.body.classList.toggle('light-theme');
-            const icon = this.querySelector('i');
-            if (document.body.classList.contains('light-theme')) {
-                icon.className = 'fas fa-sun';
-                document.documentElement.style.setProperty('--dark', '#f5f5f5');
-                document.documentElement.style.setProperty('--dark-light', '#fff');
-                document.documentElement.style.setProperty('--light', '#333');
-            } else {
-                icon.className = 'fas fa-moon';
-                document.documentElement.style.setProperty('--dark', '#141414');
-                document.documentElement.style.setProperty('--dark-light', '#222');
-                document.documentElement.style.setProperty('--light', '#fff');
-            }
-        });
+function extractYouTubeId(url) {
+    if (!url) return '';
+    
+    const regExp = /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    
+    if (match && match[2].length === 11) {
+        return match[2];
     }
     
-    // Search functionality
-    const searchBtn = document.getElementById('searchBtn');
-    const searchInput = document.getElementById('searchInput');
+    // If it's already just the ID
+    if (url.length === 11 && !url.includes('/') && !url.includes('?')) {
+        return url;
+    }
     
-    if (searchBtn && searchInput) {
-        const performSearch = () => {
-            const query = searchInput.value.toLowerCase().trim();
-            
-            if (query === '') {
-                filteredMovies = [...allMovies];
-            } else {
-                filteredMovies = allMovies.filter(movie => 
-                    movie.title.toLowerCase().includes(query) ||
-                    movie.description.toLowerCase().includes(query) ||
-                    movie.genre.toLowerCase().includes(query)
-                );
-            }
-            
-            currentPage = 1;
-            displayMovies();
-        };
+    return null;
+}
+
+function playMovie(movieId) {
+    const movie = moviesData.find(m => m.id === movieId);
+    if (!movie) return;
+    
+    const playerTitle = document.getElementById('playerTitle');
+    const videoContainer = document.getElementById('videoContainer');
+    const playerServers = document.getElementById('playerServers');
+    
+    playerTitle.textContent = `Now Playing: ${movie.title}`;
+    
+    // Get all available streams (EXACT FROM GENERATE-MOVIES.JS)
+    const streams = [
+        { name: 'YouTube Trailer', url: movie.playUrl, type: 'youtube' },
+        { name: 'Server 1 (HD)', url: movie.streamUrl, type: 'iframe' },
+        { name: 'Server 2', url: movie.stream2Url, type: 'iframe' },
+        { name: 'Server 3', url: movie.stream3Url, type: 'iframe' },
+        { name: 'Server 4 (Hindi Dubbed)', url: movie.stream4Url, type: 'iframe' }
+    ].filter(stream => stream.url && stream.url.trim() !== '');
+    
+    // Auto-play YouTube trailer if available, otherwise first server
+    const hasYouTube = movie.playUrl && movie.playUrl.trim() !== '';
+    
+    if (hasYouTube) {
+        const youtubeId = extractYouTubeId(movie.playUrl);
+        if (youtubeId) {
+            loadYouTubeStream(youtubeId);
+        } else {
+            loadIframeStream(movie.playUrl);
+        }
+    } else if (movie.streamUrl && movie.streamUrl.trim() !== '') {
+        loadIframeStream(movie.streamUrl);
+    }
+    
+    // Create server options
+    playerServers.innerHTML = `
+        <h4>Available Servers</h4>
+        <div class="server-buttons">
+            ${streams.map((server, index) => `
+                <button class="server-btn ${(hasYouTube && index === 0) || (!hasYouTube && index === 0) ? 'active' : ''}" 
+                        onclick="switchServer('${server.url}', '${server.type}', this)">
+                    <i class="fas fa-server"></i> ${server.name}
+                </button>
+            `).join('')}
+        </div>
+    `;
+    
+    playerModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function playLiveChannel(channelId) {
+    const channel = liveChannelsData.find(c => c.id === channelId);
+    if (!channel) return;
+    
+    const playerTitle = document.getElementById('playerTitle');
+    const videoContainer = document.getElementById('videoContainer');
+    const playerServers = document.getElementById('playerServers');
+    
+    playerTitle.textContent = `Live: ${channel.name}`;
+    
+    // Check if it's M3U8 stream
+    if (channel.streamUrl.includes('.m3u8')) {
+        loadM3U8Stream(channel.streamUrl);
+    } else {
+        // Fallback to iframe
+        loadIframeStream(channel.streamUrl);
+    }
+    
+    playerServers.innerHTML = `
+        <h4>Live Streaming</h4>
+        <p>Enjoy live ${channel.name} broadcast</p>
+        <div class="server-buttons">
+            <button class="server-btn active">
+                <i class="fas fa-satellite-dish"></i> Live Stream
+            </button>
+            <button class="server-btn" onclick="loadIframeStream('${channel.streamUrl}')">
+                <i class="fas fa-wifi"></i> Alternative Stream
+            </button>
+        </div>
+    `;
+    
+    playerModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function switchServer(url, type, button) {
+    // Update active button
+    document.querySelectorAll('.server-btn').forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+    
+    if (type === 'youtube') {
+        const youtubeId = extractYouTubeId(url);
+        if (youtubeId) {
+            loadYouTubeStream(youtubeId);
+        } else {
+            loadIframeStream(url);
+        }
+    } else {
+        loadIframeStream(url);
+    }
+}
+
+// ===== FILTER FUNCTIONS =====
+function filterMovies() {
+    const searchTerm = searchInput.value.toLowerCase() || heroSearchInput.value.toLowerCase();
+    const category = currentCategory;
+    
+    filteredMovies = moviesData.filter(movie => {
+        const matchesSearch = !searchTerm || 
+            movie.title.toLowerCase().includes(searchTerm) ||
+            movie.description.toLowerCase().includes(searchTerm) ||
+            (movie.keywords && movie.keywords.toLowerCase().includes(searchTerm));
         
-        searchBtn.addEventListener('click', performSearch);
-        searchInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') performSearch();
-        });
-    }
+        const matchesCategory = category === 'all' || 
+            movie.genre.toLowerCase() === category ||
+            movie.language.toLowerCase() === category;
+        
+        return matchesSearch && matchesCategory;
+    });
     
-    // Load more button
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    if (loadMoreBtn) {
-        loadMoreBtn.addEventListener('click', function() {
-            currentPage++;
-            displayMovies();
-        });
-    }
-    
-    // Setup age verification handlers
-    handleAgeVerification();
-    
-    // Handle watch now link clicks (using event delegation)
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('watch-now-link')) {
-            const isAdult = e.target.dataset.isAdult === 'true';
-            const movieId = e.target.dataset.movieId;
-            
-            if (isAdult) {
-                // Prevent default link behavior for adult content
-                e.preventDefault();
-                
-                // Show age verification
-                showAgeVerification(movieId, e.target.textContent);
-            }
-            // Non-adult content will proceed with normal link behavior
+    visibleMovies = 9;
+    populateMovies();
+}
+
+function filterByCategory(category) {
+    currentCategory = category;
+    filterBtns.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === category) {
+            btn.classList.add('active');
         }
     });
+    
+    if (category === 'all') {
+        filteredMovies = [...moviesData];
+    } else {
+        filteredMovies = moviesData.filter(movie => 
+            movie.genre.toLowerCase() === category
+        );
+    }
+    
+    visibleMovies = 9;
+    populateMovies();
+    window.scrollTo({ top: moviesGridEl.offsetTop - 100, behavior: 'smooth' });
 }
+
+function filterByLanguage(language) {
+    currentCategory = language;
+    filterBtns.forEach(btn => btn.classList.remove('active'));
+    
+    filteredMovies = moviesData.filter(movie => 
+        movie.language.toLowerCase() === language
+    );
+    
+    visibleMovies = 9;
+    populateMovies();
+    window.scrollTo({ top: moviesGridEl.offsetTop - 100, behavior: 'smooth' });
+}
+
+// ===== UI FUNCTIONS =====
+function showLoading() {
+    loadingOverlay.classList.add('active');
+}
+
+function hideLoading() {
+    loadingOverlay.classList.remove('active');
+}
+
+function showError(message) {
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.innerHTML = `
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>${message}</span>
+    `;
+    document.querySelector('.main-content').prepend(errorDiv);
+    setTimeout(() => errorDiv.remove(), 5000);
+}
+
+function checkAgeVerification() {
+    const isVerified = localStorage.getItem('ageVerified');
+    if (!isVerified) {
+        setTimeout(() => {
+            ageModal.classList.add('active');
+        }, 1000);
+    }
+}
+
+function toggleTheme() {
+    document.body.classList.toggle('light-theme');
+    const icon = themeToggle.querySelector('i');
+    if (document.body.classList.contains('light-theme')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+    }
+}
+
+// ===== EVENT LISTENERS =====
+document.addEventListener('DOMContentLoaded', init);
+
+// Search functionality
+searchBtn.addEventListener('click', filterMovies);
+heroSearchBtn.addEventListener('click', filterMovies);
+searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') filterMovies();
+});
+heroSearchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') filterMovies();
+});
+
+// Load more movies
+loadMoreBtn.addEventListener('click', () => {
+    visibleMovies += 9;
+    populateMovies();
+});
+
+// Category filters
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        filterByCategory(btn.dataset.filter);
+    });
+});
+
+// View toggle
+viewBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        viewBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentView = btn.dataset.view;
+        moviesGridEl.classList.toggle('list-view', currentView === 'list');
+    });
+});
+
+// Theme toggle
+themeToggle.addEventListener('click', toggleTheme);
+
+// Mobile menu
+mobileMenuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('active');
+});
+
+// Close modals
+closeModalBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        movieModal.classList.remove('active');
+        playerModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        // Stop all videos (EXACT FROM GENERATE-MOVIES.JS)
+        stopAllVideos();
+    });
+});
+
+// Age verification
+ageConfirmBtn.addEventListener('click', () => {
+    localStorage.setItem('ageVerified', 'true');
+    ageModal.classList.remove('active');
+});
+
+ageDenyBtn.addEventListener('click', () => {
+    window.location.href = 'https://www.google.com';
+});
+
+// FAQ toggle
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const item = question.parentElement;
+        item.classList.toggle('active');
+    });
+});
+
+// Back to top
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+});
+
+backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// Close modals on outside click
+window.addEventListener('click', (e) => {
+    if (e.target === movieModal) {
+        movieModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    if (e.target === playerModal) {
+        playerModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        stopAllVideos();
+    }
+    if (e.target === ageModal) {
+        ageModal.classList.remove('active');
+    }
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.pageYOffset > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+});
+
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+    }
+});
+
+// Keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    // Escape to close modals
+    if (e.key === 'Escape') {
+        movieModal.classList.remove('active');
+        playerModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        stopAllVideos();
+    }
+    
+    // Space to play first movie
+    if (e.key === ' ' && !e.target.matches('input, textarea')) {
+        e.preventDefault();
+        if (moviesData.length > 0) {
+            playMovie(moviesData[0].id);
+        }
+    }
+});
+
+// Auto-open player if URL has #watch
+if (window.location.hash === '#watch' && moviesData.length > 0) {
+    setTimeout(() => playMovie(moviesData[0].id), 1000);
+}
+
+// Add HLS.js for M3U8 support
+const hlsScript = document.createElement('script');
+hlsScript.src = 'https://cdn.jsdelivr.net/npm/hls.js@latest';
+document.head.appendChild(hlsScript);
+
+console.log('🎬 FreeStream app.js loaded successfully!');
