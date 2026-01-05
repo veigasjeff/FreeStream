@@ -42,6 +42,143 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
     <link rel="manifest" href="/public/site.webmanifest">
     
+        <!-- Schema Markup for Movie/TV Show Collections -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "FreeStream Movie Collection",
+        "description": "Collection of 5000+ HD movies and TV shows available for free streaming",
+        "url": "https://freestreaming.vercel.app",
+        "hasPart": [
+            {
+                "@type": "ItemList",
+                "name": "Trending Movies",
+                "numberOfItems": 20,
+                "itemListOrder": "Descending",
+                "url": "https://freestreaming.vercel.app#home"
+            },
+            {
+                "@type": "ItemList",
+                "name": "Movie Categories",
+                "numberOfItems": 7,
+                "itemListElement": [
+                    {"@type": "ListItem", "position": 1, "name": "Action Movies"},
+                    {"@type": "ListItem", "position": 2, "name": "Comedy Movies"},
+                    {"@type": "ListItem", "position": 3, "name": "Drama Movies"},
+                    {"@type": "ListItem", "position": 4, "name": "Thriller Movies"},
+                    {"@type": "ListItem", "position": 5, "name": "Adult Content"},
+                    {"@type": "ListItem", "position": 6, "name": "Horror Movies"},
+                    {"@type": "ListItem", "position": 7, "name": "All Categories"}
+                ]
+            },
+            {
+                "@type": "ItemList",
+                "name": "Movies by Language",
+                "numberOfItems": 10,
+                "description": "Movies available in multiple languages"
+            }
+        ],
+        "mainEntity": {
+            "@type": "WebApplication",
+            "name": "FreeStream",
+            "applicationCategory": "EntertainmentApplication",
+            "operatingSystem": "Any",
+            "offers": {
+                "@type": "Offer",
+                "price": "0",
+                "priceCurrency": "USD"
+            }
+        }
+    }
+    </script>
+    
+    <!-- Additional Schema for Movie/TV Show Items -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "item": {
+                    "@type": "Movie",
+                    "name": "Movie Collection 1",
+                    "description": "HD quality movie available for free streaming",
+                    "contentRating": "Various",
+                    "genre": ["Action", "Comedy", "Drama", "Thriller", "Horror"],
+                    "encodingFormat": "video/mp4"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "item": {
+                    "@type": "TVSeries",
+                    "name": "TV Shows Collection",
+                    "description": "Latest TV shows available for free streaming",
+                    "numberOfEpisodes": 100,
+                    "encodingFormat": "video/mp4"
+                }
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "item": {
+                    "@type": "CreativeWorkSeries",
+                    "name": "Live Channels",
+                    "description": "Live sports and news channels",
+                    "numberOfEpisodes": 50,
+                    "encodingFormat": "video/stream"
+                }
+            }
+        ]
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Is FreeStream really free?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! FreeStream is 100% free forever. No subscriptions, no hidden fees, no registration required. Just visit and start watching."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What quality are the movies?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "All content is available in HD (720p/1080p) quality. Many movies also support 4K streaming where available."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Are there any viewing limits?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "No limits at all! Watch as many movies and shows as you want, for as long as you want, completely unlimited."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Is it available worldwide?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes! FreeStream is accessible from any country without geographic restrictions."
+                }
+            }
+        ]
+    }
+    </script>
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
