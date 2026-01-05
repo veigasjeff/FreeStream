@@ -2,9 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('App loaded');
     
-    // (function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    (function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
 
-    // (function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    (function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
 
     Initialize
     loadData();
@@ -14,26 +14,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
    // Load Google Analytics
-    // (function() {
-    //     var gaScript = document.createElement('script');
-    //     gaScript.async = true;
-    //     gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ';
-    //     document.head.appendChild(gaScript);
+    (function() {
+        var gaScript = document.createElement('script');
+        gaScript.async = true;
+        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ';
+        document.head.appendChild(gaScript);
         
-    //     window.dataLayer = window.dataLayer || [];
-    //     function gtag(){dataLayer.push(arguments);}
-    //     gtag('js', new Date());
-    //     gtag('config', 'G-RTHH33WQWQ');
-    // })();
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RTHH33WQWQ');
+    })();
     
     // Load Clicky Analytics
-    // (function() {
-    //     var clickyScript = document.createElement('script');
-    //     clickyScript.async = true;
-    //     clickyScript.setAttribute('data-id', '101498160');
-    //     clickyScript.src = '//static.getclicky.com/js';
-    //     document.head.appendChild(clickyScript);
-    // })();
+    (function() {
+        var clickyScript = document.createElement('script');
+        clickyScript.async = true;
+        clickyScript.setAttribute('data-id', '101498160');
+        clickyScript.src = '//static.getclicky.com/js';
+        document.head.appendChild(clickyScript);
+    })();
 
 // ===== GLOBAL VARIABLES =====
 let moviesData = [];
