@@ -42,7 +42,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
     <link rel="manifest" href="/public/site.webmanifest">
     
-<!-- Schema Markup for Movie/TV Show Collections -->
+<!-- Schema Markup for Website/Movie Collection -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -81,38 +81,27 @@
         }
     ],
     "mainEntity": {
-        "@type": "WebApplication",
+        "@type": "Website",
         "name": "FreeStream",
-        "applicationCategory": "EntertainmentApplication",
-        "operatingSystem": "Any",
-        "aggregatedRating": {
-            "@type": "AggregateRating",
-            "itemReviewed": {
-                "@type": "WebApplication",
-                "name": "FreeStream",
-                "url": "https://freestreaming.vercel.app"
-            },
-            "ratingValue": "4.5",
-            "ratingCount": "1500",
-            "bestRating": "5",
-            "worstRating": "1"
-        },
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
+        "description": "Free streaming website for movies and TV shows",
+        "url": "https://freestreaming.vercel.app",
+        "inLanguage": "en",
+        "copyrightHolder": {
+            "@type": "Organization",
+            "name": "FreeStream"
         }
     }
 }
 </script>
 
-<!-- Additional Schema for Movie/TV Show Items with all required fields -->
+<!-- Movie/TV Show Collections Schema -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "name": "FreeStream Collections",
     "description": "Featured movie and TV show collections",
+    "url": "https://freestreaming.vercel.app",
     "itemListElement": [
         {
             "@type": "ListItem",
@@ -203,7 +192,24 @@
 }
 </script>
 
-<!-- Review/Aggregate Rating Schema (Fixed Version) -->
+<!-- Website Rating Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "AggregateRating",
+    "itemReviewed": {
+        "@type": "Website",
+        "name": "FreeStream",
+        "url": "https://freestreaming.vercel.app",
+        "description": "Free streaming website for movies and TV shows"
+    },
+    "ratingValue": "4.5",
+    "bestRating": "5",
+    "worstRating": "1",
+    "ratingCount": "1500",
+    "reviewCount": "1500"
+}
+</script>
 
 <!-- FAQ Schema -->
 <script type="application/ld+json">
