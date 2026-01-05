@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', function() {
     })();
     
     // Load Clicky Analytics
-    (function() {
-        var clickyScript = document.createElement('script');
-        clickyScript.async = true;
-        clickyScript.setAttribute('data-id', '101498160');
-        clickyScript.src = '//static.getclicky.com/js';
-        document.head.appendChild(clickyScript);
-    })();
+    // (function() {
+    //     var clickyScript = document.createElement('script');
+    //     clickyScript.async = true;
+    //     clickyScript.setAttribute('data-id', '101498160');
+    //     clickyScript.src = '//static.getclicky.com/js';
+    //     document.head.appendChild(clickyScript);
+    // })();
 
 // ===== GLOBAL VARIABLES =====
 let moviesData = [];
