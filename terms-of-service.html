@@ -4,42 +4,231 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terms of Service - FreeStream</title>
-    <meta name="description" content="Terms of Service for FreeStream. Read our terms and conditions.">
+    <meta name="description" content="FreeStream Terms of Service. Read our terms, conditions, and user agreement for using our free streaming service.">
     
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
+    <!-- Main Styles -->
     <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" type="image/x-icon" href="public/favicon.ico">
+     <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
+    <link rel="manifest" href="/public/site.webmanifest">
     <style>
-        .legal-content {
+        .terms-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .terms-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .terms-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-header p {
+            font-size: 1.1rem;
             max-width: 800px;
             margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        .last-updated {
+            background: rgba(229, 9, 20, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+        
+        .terms-content {
+            background: var(--dark-light);
+            border-radius: var(--radius);
             padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        .legal-content h1 {
-            color: #e50914;
+        .terms-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .terms-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .terms-section h2 {
+            font-size: 1.8rem;
             margin-bottom: 1rem;
-            border-bottom: 2px solid #333;
+            color: var(--light);
             padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
         }
         
-        .legal-content h2 {
-            color: #fff;
+        .terms-section h3 {
+            font-size: 1.4rem;
             margin: 1.5rem 0 1rem;
+            color: var(--light);
         }
         
-        .legal-content p {
+        .terms-section p {
+            color: var(--gray);
             margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .terms-section ul, .terms-section ol {
+            color: var(--gray);
+            margin: 1rem 0 1rem 2rem;
+            padding: 0;
+        }
+        
+        .terms-section li {
+            margin-bottom: 0.8rem;
             line-height: 1.6;
         }
         
-        .legal-content ul {
-            margin-left: 2rem;
+        .terms-section strong {
+            color: var(--light);
+            font-weight: 600;
+        }
+        
+        .important-note {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        
+        .important-note p {
+            color: var(--warning);
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .warning-box {
+            background: rgba(255, 71, 87, 0.1);
+            border: 2px solid #ff4757;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+        }
+        
+        .warning-box h3 {
+            color: #ff4757;
+            margin-top: 0;
+        }
+        
+        .warning-box p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .acceptance-section {
+            background: rgba(0, 180, 216, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius);
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .acceptance-section h3 {
+            color: var(--accent);
             margin-bottom: 1rem;
         }
         
-        .legal-content li {
-            margin-bottom: 0.5rem;
+        .acceptance-section p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .terms-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .terms-header h1 {
+                font-size: 2rem;
+            }
+            
+            .terms-content {
+                padding: 1.5rem;
+            }
+            
+            .terms-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .terms-section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .terms-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .terms-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .terms-header p {
+                font-size: 1rem;
+            }
+            
+            .terms-container {
+                padding: 1rem;
+            }
+            
+            .terms-content {
+                padding: 1rem;
+            }
+            
+            .terms-section {
+                margin-bottom: 2rem;
+            }
         }
     </style>
 </head>
@@ -47,142 +236,344 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-play"></i>
-                <span>Free<span style="color: #e50914">Stream</span></span>
-            </div>
+            <a href="index.html" class="logo">
+                <i class="fas fa-play-circle"></i>
+                <span>Free<span class="logo-highlight">Stream</span></span>
+            </a>
             
             <div class="nav-links">
                 <a href="index.html"><i class="fas fa-home"></i> Home</a>
-                <a href="movies.html"><i class="fas fa-film"></i> Movies</a>
-                <a href="tvshows.html"><i class="fas fa-tv"></i> TV Shows</a>
-                <a href="live-tv.html"><i class="fas fa-satellite-dish"></i> Live TV</a>
+                <a href="index.html#movies"><i class="fas fa-film"></i> Movies</a>
+                <a href="index.html#categories"><i class="fas fa-list"></i> Categories</a>
+                <a href="index.html#languages"><i class="fas fa-globe"></i> Languages</a>
+                <a href="https://median.co/share/pwwoxpk" class="apk-btn"><i class="fab fa-android"></i> Download APK</a>
             </div>
             
-            <button class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon"></i>
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="index.html#home" class="mobile-menu-btn" style="text-decoration: none;">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
             </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="index.html#categories"><i class="fas fa-list"></i> Categories</a>
+            <a href="index.html#languages"><i class="fas fa-globe"></i> Languages</a>
+            <a href="https://median.co/share/pwwoxpk"><i class="fab fa-android"></i> Download APK</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+            <a href="terms-of-service.html"><i class="fas fa-file-contract"></i> Terms of Service</a>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="legal-content">
-        <h1>Terms of Service</h1>
-        <p><strong>Last Updated: January 1, 2025</strong></p>
-        
-        <section>
-            <h2>1. Acceptance of Terms</h2>
-            <p>By accessing and using FreeStream ("the Website"), you accept and agree to be bound by the terms and provision of this agreement.</p>
+    <main class="main-content">
+        <div class="terms-container">
+            <div class="terms-header">
+                <h1>Terms of <span class="highlight">Service</span></h1>
+                <p>Please read these Terms of Service carefully before using the FreeStream website and services.</p>
+                <div class="last-updated">
+                    <i class="fas fa-calendar-alt"></i> Last Updated: December 28, 2023
+                </div>
+            </div>
             
-            <p>If you do not agree to abide by these terms, please do not use this site.</p>
-        </section>
-        
-        <section>
-            <h2>2. Description of Service</h2>
-            <p>FreeStream provides a platform for streaming movies, TV shows, and live TV channels. Our service is provided free of charge for personal, non-commercial use.</p>
-            
-            <p>We do not host any content on our servers. All content is streamed from third-party sources.</p>
-        </section>
-        
-        <section>
-            <h2>3. User Responsibilities</h2>
-            <p>As a user of FreeStream, you agree to:</p>
-            <ul>
-                <li>Use the service only for lawful purposes</li>
-                <li>Not reproduce, duplicate, copy, sell, or resell any part of the service</li>
-                <li>Not use any automated system to access the service</li>
-                <li>Not interfere with or disrupt the service or servers</li>
-                <li>Comply with all applicable laws and regulations</li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>4. Intellectual Property</h2>
-            <p>All content available on FreeStream, including but not limited to text, graphics, logos, and software, is the property of FreeStream or its content suppliers and protected by international copyright laws.</p>
-            
-            <p>The movies, TV shows, and other media displayed on our site are the property of their respective owners. We do not claim ownership of any media content.</p>
-        </section>
-        
-        <section>
-            <h2>5. Disclaimer of Warranties</h2>
-            <p>The service is provided "as is" and "as available" without any warranties of any kind, either express or implied, including but not limited to implied warranties of merchantability, fitness for a particular purpose, or non-infringement.</p>
-            
-            <p>We do not guarantee that:</p>
-            <ul>
-                <li>The service will be uninterrupted or error-free</li>
-                <li>Defects will be corrected</li>
-                <li>The service or server are free of viruses or other harmful components</li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>6. Limitation of Liability</h2>
-            <p>FreeStream shall not be liable for any direct, indirect, incidental, special, consequential, or exemplary damages, including but not limited to damages for loss of profits, goodwill, use, data, or other intangible losses resulting from:</p>
-            <ul>
-                <li>The use or inability to use the service</li>
-                <li>Unauthorized access to or alteration of your transmissions or data</li>
-                <li>Statements or conduct of any third party on the service</li>
-                <li>Any other matter relating to the service</li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>7. Third-Party Links</h2>
-            <p>Our service may contain links to third-party websites or services that are not owned or controlled by FreeStream.</p>
-            
-            <p>We have no control over, and assume no responsibility for, the content, privacy policies, or practices of any third-party websites or services.</p>
-        </section>
-        
-        <section>
-            <h2>8. Termination</h2>
-            <p>We may terminate or suspend access to our service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
-        </section>
-        
-        <section>
-            <h2>9. Changes to Terms</h2>
-            <p>We reserve the right to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days notice prior to any new terms taking effect.</p>
-            
-            <p>What constitutes a material change will be determined at our sole discretion.</p>
-        </section>
-        
-        <section>
-            <h2>10. Governing Law</h2>
-            <p>These Terms shall be governed and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.</p>
-        </section>
-        
-        <section>
-            <h2>11. Contact Information</h2>
-            <p>If you have any questions about these Terms, please contact us at:</p>
-            <p>Email: legal@freestream.vercel.app</p>
-        </section>
+            <div class="terms-content">
+                <!-- Section 1 -->
+                <div class="terms-section">
+                    <h2>1. Acceptance of Terms</h2>
+                    <p>By accessing and using FreeStream ("the Service"), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by these terms, please do not use this service.</p>
+                    
+                    <div class="important-note">
+                        <p><i class="fas fa-exclamation-circle"></i> <strong>Important:</strong> Continued use of FreeStream constitutes acceptance of these terms and any future modifications.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 2 -->
+                <div class="terms-section">
+                    <h2>2. Service Description</h2>
+                    <p>FreeStream is a free streaming platform that provides access to movies, TV shows, and other video content. The Service is offered "as is" without any warranties or guarantees.</p>
+                    
+                    <h3>2.1 Service Features</h3>
+                    <ul>
+                        <li>Free access to streaming content</li>
+                        <li>No registration required</li>
+                        <li>Multiple video quality options</li>
+                        <li>Content from various sources</li>
+                        <li>Regular content updates</li>
+                    </ul>
+                    
+                    <h3>2.2 Service Limitations</h3>
+                    <p>We do not guarantee:</p>
+                    <ul>
+                        <li>Availability of specific content</li>
+                        <li>Uninterrupted service access</li>
+                        <li>Content quality or accuracy</li>
+                        <li>Removal of specific content upon request</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 3 -->
+                <div class="terms-section">
+                    <h2>3. User Responsibilities</h2>
+                    <p>As a user of FreeStream, you agree to:</p>
+                    
+                    <h3>3.1 Legal Compliance</h3>
+                    <ul>
+                        <li>Use the service in compliance with all applicable laws and regulations</li>
+                        <li>Not engage in any illegal activities through the service</li>
+                        <li>Respect copyright laws in your jurisdiction</li>
+                        <li>Not redistribute or commercially exploit content</li>
+                    </ul>
+                    
+                    <h3>3.2 Prohibited Activities</h3>
+                    <p>You agree not to:</p>
+                    <ul>
+                        <li>Use automated scripts to access the service</li>
+                        <li>Attempt to circumvent security measures</li>
+                        <li>Upload malicious software or content</li>
+                        <li>Interfere with other users' experience</li>
+                        <li>Use the service for commercial purposes without permission</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 4 -->
+                <div class="terms-section">
+                    <h2>4. Content Disclaimer</h2>
+                    
+                    <div class="warning-box">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Important Notice</h3>
+                        <p>FreeStream does not host any content on its servers. All content is provided by third-party sources. We act as an index and directory for content available elsewhere on the internet.</p>
+                    </div>
+                    
+                    <h3>4.1 Content Sources</h3>
+                    <p>Content available through FreeStream may include:</p>
+                    <ul>
+                        <li>Public domain content</li>
+                        <li>User-generated content</li>
+                        <li>Content from third-party streaming services</li>
+                        <li>Embedded content from various sources</li>
+                    </ul>
+                    
+                    <h3>4.2 Age Restrictions</h3>
+                    <p>Some content may be restricted to users 18 years or older. By using our service, you confirm that you are of legal age to view the content in your jurisdiction.</p>
+                </div>
+                
+                <!-- Section 5 -->
+                <div class="terms-section">
+                    <h2>5. Intellectual Property</h2>
+                    <p>All trademarks, service marks, and trade names are proprietary to their respective owners. FreeStream claims no ownership over the content streamed through the service.</p>
+                    
+                    <h3>5.1 DMCA Compliance</h3>
+                    <p>We respect intellectual property rights and comply with the Digital Millennium Copyright Act (DMCA). Copyright owners who believe their work has been infringed may submit a DMCA takedown notice.</p>
+                    
+                    <h3>5.2 Copyright Infringement Reports</h3>
+                    <p>To report copyright infringement, please contact us at <strong>conatctfreestream@protonmail.com</strong> with:</p>
+                    <ul>
+                        <li>Identification of the copyrighted work</li>
+                        <li>URL of the allegedly infringing content</li>
+                        <li>Your contact information</li>
+                        <li>A statement of good faith belief</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 6 -->
+                <div class="terms-section">
+                    <h2>6. Privacy Policy</h2>
+                    <p>Your use of FreeStream is also governed by our Privacy Policy. We do not collect personal information, but we may collect anonymous usage data for analytics purposes.</p>
+                    
+                    <h3>6.1 Data Collection</h3>
+                    <p>We may collect:</p>
+                    <ul>
+                        <li>Anonymous usage statistics</li>
+                        <li>Browser and device information</li>
+                        <li>IP addresses for security purposes</li>
+                        <li>Cookies for functionality</li>
+                    </ul>
+                    
+                    <h3>6.2 Third-Party Services</h3>
+                    <p>Our service may include third-party analytics and advertisements. These services have their own privacy policies.</p>
+                </div>
+                
+                <!-- Section 7 -->
+                <div class="terms-section">
+                    <h2>7. Limitations of Liability</h2>
+                    
+                    <div class="warning-box">
+                        <h3><i class="fas fa-shield-alt"></i> Liability Disclaimer</h3>
+                        <p>FreeStream and its operators are not liable for any damages resulting from the use or inability to use the service. This includes direct, indirect, incidental, or consequential damages.</p>
+                    </div>
+                    
+                    <h3>7.1 Service Availability</h3>
+                    <p>We do not guarantee uninterrupted access to the service. The service may be unavailable due to maintenance, technical issues, or other reasons.</p>
+                    
+                    <h3>7.2 Content Accuracy</h3>
+                    <p>We are not responsible for the accuracy, legality, or appropriateness of content available through third-party sources.</p>
+                </div>
+                
+                <!-- Section 8 -->
+                <div class="terms-section">
+                    <h2>8. Termination</h2>
+                    <p>We reserve the right to terminate or suspend access to our service immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+                    
+                    <h3>8.1 User Termination</h3>
+                    <p>You may stop using our service at any time. Continued use constitutes acceptance of these terms.</p>
+                    
+                    <h3>8.2 Service Termination</h3>
+                    <p>We reserve the right to discontinue the service at any time without notice.</p>
+                </div>
+                
+                <!-- Section 9 -->
+                <div class="terms-section">
+                    <h2>9. Modifications to Terms</h2>
+                    <p>We reserve the right to modify these terms at any time. We will notify users of any changes by updating the "Last Updated" date at the top of this page.</p>
+                    
+                    <h3>9.1 Continued Use</h3>
+                    <p>Your continued use of the service after any modifications constitutes acceptance of the updated terms.</p>
+                    
+                    <h3>9.2 Review Responsibility</h3>
+                    <p>It is your responsibility to review these terms periodically for changes.</p>
+                </div>
+                
+                <!-- Section 10 -->
+                <div class="terms-section">
+                    <h2>10. Governing Law</h2>
+                    <p>These Terms shall be governed and construed in accordance with international copyright laws and treaties, without regard to its conflict of law provisions.</p>
+                    
+                    <h3>10.1 Jurisdiction</h3>
+                    <p>Any disputes shall be resolved through arbitration or in the courts of the service provider's jurisdiction.</p>
+                    
+                    <h3>10.2 Severability</h3>
+                    <p>If any provision of these Terms is held to be invalid or unenforceable, the remaining provisions will remain in effect.</p>
+                </div>
+                
+                <!-- Acceptance Section -->
+                <div class="acceptance-section">
+                    <h3><i class="fas fa-check-circle"></i> Acceptance of Terms</h3>
+                    <p>By using FreeStream, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service. If you do not agree, please discontinue use of our service immediately.</p>
+                </div>
+                
+                <!-- Navigation -->
+                <div class="terms-navigation">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
     </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h3>FreeStream</h3>
-                <p>Watch free movies, TV shows, live sports and news channels in HD quality.</p>
+                <div class="footer-logo">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Free<span class="logo-highlight">Stream</span></span>
+                </div>
+                <p class="footer-description">Watch free movies, TV shows, live sports and news channels in HD quality without any subscription.</p>
+              
             </div>
+            
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <a href="index.html">Home</a>
-                <a href="movies.html">Movies</a>
-                <a href="tvshows.html">TV Shows</a>
-                <a href="live-tv.html">Live TV</a>
+                <a href="index.html#categories">Categories</a>
+                <a href="index.html#languages">Languages</a>
             </div>
+            
             <div class="footer-section">
                 <h3>Legal</h3>
                 <a href="privacy-policy.html">Privacy Policy</a>
                 <a href="terms-of-service.html">Terms of Service</a>
                 <a href="dmca.html">DMCA</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Download App</h3>
+                <p>Get our Android app for better experience</p>
+                <a href="https://median.co/share/pwwoxpk" class="download-btn">
+                    <i class="fab fa-android"></i> Download APK
+                </a>
             </div>
         </div>
+        
         <div class="footer-bottom">
-            <p>&copy; 2025 FreeStream. All content is provided for entertainment purposes only.</p>
+            <p>&copy; 2026 FreeStream. All content is provided for entertainment purposes only.</p>
+            <p class="disclaimer">Disclaimer: We do not host any content. All content is provided by third-party services.</p>
         </div>
     </footer>
 
-    <script src="js/app.js"></script>
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('light-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+        
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.className = 'back-to-top';
+        backToTopBtn.id = 'backToTop';
+        backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        document.body.appendChild(backToTopBtn);
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
 </body>
 </html>
