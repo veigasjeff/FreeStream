@@ -72,14 +72,16 @@
 }
 </script>
 
-<!-- Movie Collections Schema -->
+<!-- Schema for Movie Collection Website -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": "FreeStream Movie Collection",
-    "description": "Collection of 5000+ HD movies and TV shows",
+    "name": "FreeStream",
+    "description": "Free streaming website with 5000+ HD movies and TV shows",
     "url": "https://freestreaming.vercel.app",
+    "image": "https://freestreaming.vercel.app/public/og-image.jpg",
+    "inLanguage": "en",
     "hasPart": [
         {
             "@type": "ItemList",
@@ -106,24 +108,22 @@
 }
 </script>
 
-<!-- Movie Items Schema -->
+<!-- Schema for Movie Collections -->
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "FreeStream Collections",
-    "description": "Featured movie and TV show collections",
+    "name": "Featured Collections",
+    "description": "Movie and TV show collections available for streaming",
     "itemListElement": [
         {
             "@type": "ListItem",
             "position": 1,
             "item": {
                 "@type": "Movie",
-                "name": "Action Movie Pack",
-                "description": "Collection of action movies in HD quality",
+                "name": "Action Movies",
+                "description": "HD action movies collection",
                 "image": "https://freestreaming.vercel.app/public/og-image.jpg",
-                "contentRating": "PG-13",
-                "genre": ["Action", "Adventure"],
                 "url": "https://freestreaming.vercel.app#action"
             }
         },
@@ -132,11 +132,9 @@
             "position": 2,
             "item": {
                 "@type": "Movie",
-                "name": "Comedy Collection",
-                "description": "Premium comedy movies collection",
+                "name": "Comedy Movies",
+                "description": "Latest comedy movies",
                 "image": "https://freestreaming.vercel.app/public/og-image.jpg",
-                "contentRating": "PG-13",
-                "genre": ["Comedy", "Romance"],
                 "url": "https://freestreaming.vercel.app#comedy"
             }
         },
@@ -144,22 +142,9 @@
             "@type": "ListItem",
             "position": 3,
             "item": {
-                "@type": "Movie",
-                "name": "Thriller Series",
-                "description": "Latest thriller movies in HD",
-                "image": "https://freestreaming.vercel.app/public/og-image.jpg",
-                "contentRating": "R",
-                "genre": ["Thriller", "Mystery"],
-                "url": "https://freestreaming.vercel.app#thriller"
-            }
-        },
-        {
-            "@type": "ListItem",
-            "position": 4,
-            "item": {
                 "@type": "TVSeries",
-                "name": "TV Shows Collection",
-                "description": "Latest TV shows available for free streaming",
+                "name": "TV Shows",
+                "description": "Complete TV series collection",
                 "image": "https://freestreaming.vercel.app/public/og-image.jpg",
                 "url": "https://freestreaming.vercel.app#tv"
             }
