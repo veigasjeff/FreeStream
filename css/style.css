@@ -157,8 +157,7 @@ p {
 
 .nav-links {
     display: flex;
-    /* gap: clamp(0.5rem, 1.5vw, 1.5rem); */
-     gap: clamp( 1.5vw, 1.5rem);
+    gap: clamp( 1.5vw, 1.5rem);
     align-items: center;
 }
 
@@ -680,8 +679,8 @@ p {
 
 .movies-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(clamp(280px, 30vw, 400px), 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(280px, 22vw, 320px), 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
 }
 
 .movies-grid.list-view {
@@ -707,7 +706,7 @@ p {
 
 .movie-poster {
     position: relative;
-    height: clamp(300px, 50vh, 450px);
+    height: clamp(220px, 40vh, 350px);
     overflow: hidden;
 }
 
@@ -719,7 +718,7 @@ p {
 }
 
 .movie-card:hover .movie-poster img {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
 .movie-badge {
@@ -736,16 +735,15 @@ p {
 }
 
 .movie-content {
-    padding: clamp(1rem, 3vw, 2rem);
+    padding: clamp(1rem, 2vw, 1.5rem);
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
 .movie-content h3 {
-    font-size: clamp(1.4rem, 4vw, 1.8rem);
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
     margin-bottom: 0.5rem;
-    color: #ffffff;
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -1628,6 +1626,7 @@ p {
     }
 }
 
+/* MOBILE DEVICES ONLY (max-width: 600px) - Latest Movies to look like Trending Now */
 @media (max-width: 600px) {
     .hero {
         background-attachment: scroll;
@@ -1638,9 +1637,9 @@ p {
         display: none;
     }
 
-    /* Latest Movies Grid - Make it look like Trending Now */
+    /* Latest Movies Grid - Make it look like Trending Now on mobile only */
     .movies-grid {
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
@@ -1736,6 +1735,7 @@ p {
     }
 }
 
+/* Desktop styles remain unchanged */
 @media (min-width: 2000px) {
     .container, .nav-container, .main-content {
         max-width: 2200px;

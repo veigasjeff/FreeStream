@@ -2,9 +2,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('App loaded');
     
-    (function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    // (function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
 
-    (function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    // (function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
 
     Initialize
     loadData();
@@ -14,17 +14,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
    // Load Google Analytics
-    (function() {
-        var gaScript = document.createElement('script');
-        gaScript.async = true;
-        gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ';
-        document.head.appendChild(gaScript);
+    // (function() {
+    //     var gaScript = document.createElement('script');
+    //     gaScript.async = true;
+    //     gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ';
+    //     document.head.appendChild(gaScript);
         
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-RTHH33WQWQ');
-    })();
+    //     window.dataLayer = window.dataLayer || [];
+    //     function gtag(){dataLayer.push(arguments);}
+    //     gtag('js', new Date());
+    //     gtag('config', 'G-RTHH33WQWQ');
+    // })();
     
     // Load Clicky Analytics
     // (function() {
@@ -40,7 +40,7 @@ let moviesData = [];
 let filteredMovies = [];
 let currentView = 'grid';
 let currentCategory = 'all';
-let visibleMovies = 8;
+let visibleMovies = 9;
 let isLoading = false;
 
 // YouTube API Variables
@@ -668,7 +668,7 @@ function filterMovies() {
         return matchesSearch && matchesCategory;
     });
     
-    visibleMovies = 8;
+    visibleMovies = 9;
     populateMovies();
 }
 
@@ -689,7 +689,7 @@ function filterByCategory(category) {
         );
     }
     
-    visibleMovies = 8;
+    visibleMovies = 9;
     populateMovies();
     window.scrollTo({ top: moviesGridEl.offsetTop - 100, behavior: 'smooth' });
 }
@@ -702,7 +702,7 @@ function filterByLanguage(language) {
         movie.language.toLowerCase() === language
     );
     
-    visibleMovies = 8;
+    visibleMovies = 9;
     populateMovies();
     window.scrollTo({ top: moviesGridEl.offsetTop - 100, behavior: 'smooth' });
 }
@@ -763,7 +763,7 @@ heroSearchInput.addEventListener('keypress', (e) => {
 
 // Load more movies
 loadMoreBtn.addEventListener('click', () => {
-    visibleMovies += 8;
+    visibleMovies += 9;
     populateMovies();
 });
 
