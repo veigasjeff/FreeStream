@@ -40,7 +40,7 @@ let moviesData = [];
 let filteredMovies = [];
 let currentView = 'grid';
 let currentCategory = 'all';
-let visibleMovies = 9;
+let visibleMovies = 8;
 let isLoading = false;
 
 // YouTube API Variables
@@ -668,7 +668,7 @@ function filterMovies() {
         return matchesSearch && matchesCategory;
     });
     
-    visibleMovies = 9;
+    visibleMovies = 8;
     populateMovies();
 }
 
@@ -689,7 +689,7 @@ function filterByCategory(category) {
         );
     }
     
-    visibleMovies = 9;
+    visibleMovies = 8;
     populateMovies();
     window.scrollTo({ top: moviesGridEl.offsetTop - 100, behavior: 'smooth' });
 }
@@ -702,7 +702,7 @@ function filterByLanguage(language) {
         movie.language.toLowerCase() === language
     );
     
-    visibleMovies = 9;
+    visibleMovies = 8;
     populateMovies();
     window.scrollTo({ top: moviesGridEl.offsetTop - 100, behavior: 'smooth' });
 }
@@ -763,7 +763,7 @@ heroSearchInput.addEventListener('keypress', (e) => {
 
 // Load more movies
 loadMoreBtn.addEventListener('click', () => {
-    visibleMovies += 9;
+    visibleMovies += 8;
     populateMovies();
 });
 
