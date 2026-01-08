@@ -1,5 +1,14 @@
 {
   "movies": [
+    
+
+
+
+
+
+
+
+    
     {
         "id": "dear-radhi-2026-full-movie",
         "title": "Dear Radhi (2026)",
@@ -20,7 +29,7 @@
          "Praveen K Mani"
         ],
        "cast": [ "Mano Ve Kannathasan", "Saravana Vickram", "Rajesh Balachandiran"],
-       
+       "duration":"2h 02m",
         "timestamp": 1700000000,
         "ratingTotal": 78,
         "ratingCount": 10,
