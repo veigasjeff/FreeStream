@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
         gtag('config', 'G-RTHH33WQWQ');
     })();
     
-    Load Clicky Analytics
+//    Load Clicky Analytics
     (function() {
         var clickyScript = document.createElement('script');
         clickyScript.async = true;
