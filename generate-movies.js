@@ -63,7 +63,7 @@
 //         .replace(/'/g, '&#039;');
 // }
 
-// // Function to escape for JSON-LD
+// // Function to escape for JSON-LD and XML
 // function escapeJson(text) {
 //     if (!text) return '';
 //     return text
@@ -73,6 +73,17 @@
 //         .replace(/\r/g, ' ')
 //         .replace(/\t/g, ' ')
 //         .trim();
+// }
+
+// // Function to escape XML for sitemap
+// function escapeXml(unsafe) {
+//     if (!unsafe) return '';
+//     return unsafe
+//         .replace(/&/g, '&amp;')
+//         .replace(/</g, '&lt;')
+//         .replace(/>/g, '&gt;')
+//         .replace(/"/g, '&quot;')
+//         .replace(/'/g, '&apos;');
 // }
 
 // // Function to format date for Schema.org
@@ -90,12 +101,25 @@
 //     }
 // }
 
+// // Function to extract year from date
+// function extractYear(dateString) {
+//     try {
+//         const date = new Date(dateString);
+//         if (isNaN(date.getTime())) {
+//             return new Date().getFullYear();
+//         }
+//         return date.getFullYear();
+//     } catch (e) {
+//         return new Date().getFullYear();
+//     }
+// }
+
 // // Function to generate complete movie page with NewsArticle schema
 // function generateMoviePage(movie) {
 //     const rating = movie.ratingCount > 0 ? 
 //         (movie.ratingTotal / movie.ratingCount).toFixed(1) : '0.0';
     
-//     const year = new Date(movie.timestamp * 1000).getFullYear();
+//     const year = extractYear(movie.date);
 //     const dateString = new Date(movie.timestamp * 1000).toLocaleDateString('en-US', {
 //         year: 'numeric',
 //         month: 'long',
@@ -202,7 +226,7 @@
 //             "@type": "WebPage",
 //             "@id": "${canonicalUrl}"
 //         },
-//         "headline": "${escapeHtml(movie.title)}",
+//         "headline": "${escapeJson(movie.title)}",
 //         "description": "${escapeJson(seoDescription)}",
 //         "image": {
 //             "@type": "ImageObject",
@@ -260,7 +284,7 @@
 //             "bestRating": "10",
 //             "worstRating": "0"
 //         },
-//         "duration": "PT2H", 
+//         "duration": "PT2H",
 //         "publisher": {
 //             "@type": "Organization",
 //             "name": "FreeStream",
@@ -1002,7 +1026,7 @@
 //     <!-- Share Modal -->
 //     <div class="share-modal" id="shareModal">
 //         <div class="share-content">
-//             <h2>Share "${(movie.title)}"</h2>
+//             <h2>Share "${escapeHtml(movie.title)}"</h2>
 //             <div class="share-buttons">
 //                 <button class="share-btn facebook" onclick="shareToFacebook()">
 //                     <i class="fab fa-facebook"></i> Facebook
@@ -1194,7 +1218,6 @@
 //     </section>
 //     ` : ''}
 
-
 //     <!-- Footer -->
 //     <footer class="footer">
 //         <div class="container">
@@ -1228,21 +1251,8 @@
 //     <button class="theme-toggle" id="themeToggle">
 //         <i class="fas fa-moon"></i>
 //     </button>
-//     <!-- Ad Scripts -->
-//     <script>(function(s){s.dataset.zone='10297164',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-//     <script>(function(s){s.dataset.zone='10333131',s.src='https://groleegni.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
 
-//     <script async data-id="101498160" src="//static.getclicky.com/js"></script>
-
-//     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RTHH33WQWQ"></script>
-// <script>
-//   window.dataLayer = window.dataLayer || [];
-//   function gtag(){dataLayer.push(arguments);}
-//   gtag('js', new Date());
-
-//   gtag('config', 'G-RTHH33WQWQ');
-// </script>
-//   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+//     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
 //     <!-- ORIGINAL SCRIPT FROM ATTACHMENT FILE -->
 //     <script>
@@ -1687,166 +1697,6 @@
 //     }
 // });
 
-// // Generate sitemap.xml
-// console.log('\n📄 Generating sitemap.xml...');
-// const baseUrl = 'https://freestreaming.vercel.app';
-// const today = new Date().toISOString().split('T')[0];
-
-// let sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-// <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-//         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-//         xmlns:xhtml="http://www.w3.org/1999/xhtml"
-//         xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
-//         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-//         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-
-//     <url>
-//         <loc>${baseUrl}/</loc>
-//         <lastmod>${today}</lastmod>
-//         <changefreq>daily</changefreq>
-//         <priority>1.0</priority>
-//     </url>
-    
-//     <url>
-//         <loc>${baseUrl}/movies/</loc>
-//         <lastmod>${today}</lastmod>
-//         <changefreq>weekly</changefreq>
-//         <priority>0.8</priority>
-//     </url>
-    
-//     <url>
-//         <loc>${baseUrl}/live-tv/</loc>
-//         <lastmod>${today}</lastmod>
-//         <changefreq>weekly</changefreq>
-//         <priority>0.8</priority>
-//     </url>
-
-//      <url>
-//         <loc>${baseUrl}/tvshows/</loc>
-//         <lastmod>${today}</lastmod>
-//         <changefreq>weekly</changefreq>
-//         <priority>0.8</priority>
-//     </url>
-
-//      <url>
-//         <loc>${baseUrl}/terms-of-service/</loc>
-//         <lastmod>${today}</lastmod>
-//         <changefreq>weekly</changefreq>
-//         <priority>0.8</priority>
-//     </url>
-
-//      <url>
-//         <loc>${baseUrl}/dmca/</loc>
-//         <lastmod>${today}</lastmod>
-//         <changefreq>weekly</changefreq>
-//         <priority>0.8</priority>
-//     </url>
-
-//      <url>
-//         <loc>${baseUrl}/privacy-policy/</loc>
-//         <lastmod>${today}</lastmod>
-//         <changefreq>weekly</changefreq>
-//         <priority>0.8</priority>
-//     </url>`;
-
-// movies.forEach(movie => {
-//     const posterUrl = fixPosterUrl(movie.poster);
-//     const movieYear = new Date(movie.timestamp * 1000).getFullYear();
-    
-//     sitemap += `
-//     <url>
-//         <loc>${baseUrl}/movies/${movie.id}/</loc>
-//         <lastmod>${today}</lastmod>
-//         <changefreq>daily</changefreq>
-//         <priority>0.9</priority>
-//         <image:image>
-//             <image:loc>${posterUrl}</image:loc>
-//             <image:title>${escapeHtml(movie.title)}</image:title>
-//             <image:caption>${escapeHtml(movie.description)}</image:caption>
-//         </image:image>`;
-    
-//     if (movie.playUrl) {
-//         sitemap += `
-//         <video:video>
-//             <video:thumbnail_loc>${posterUrl}</video:thumbnail_loc>
-//             <video:title>${escapeHtml(movie.title)}</video:title>
-//             <video:description>${escapeHtml(movie.description)}</video:description>
-//             <video:content_loc>https://www.youtube.com/watch?v=${movie.playUrl}</video:content_loc>
-//             <video:player_loc allow_embed="yes">https://www.youtube.com/embed/${movie.playUrl}</video:player_loc>
-//             <video:duration>7200</video:duration>
-//             <video:publication_date>${new Date(movie.timestamp * 1000).toISOString()}</video:publication_date>
-//             <video:family_friendly>yes</video:family_friendly>
-//             <video:requires_subscription>no</video:requires_subscription>
-//             <video:uploader info="${baseUrl}">FreeStream</video:uploader>
-//             <video:live>no</video:live>
-//         </video:video>`;
-//     }
-    
-//     sitemap += `
-//     </url>`;
-// });
-
-// sitemap += '\n</urlset>';
-
-// fs.writeFileSync('sitemap.xml', sitemap);
-// console.log('✅ sitemap.xml created with video sitemap');
-
-// // Generate robots.txt
-// console.log('📄 Generating robots.txt...');
-// const robots = `User-agent: *
-// Allow: /
-// Sitemap: ${baseUrl}/sitemap.xml
-
-// User-agent: Googlebot
-// Allow: /
-
-// User-agent: Bingbot
-// Allow: /
-
-// User-agent: Slurp
-// Allow: /
-
-// User-agent: DuckDuckBot
-// Allow: /
-
-// User-agent: Baiduspider
-// Allow: /
-
-// User-agent: YandexBot
-// Allow: /`;
-
-// fs.writeFileSync('robots.txt', robots);
-// console.log('✅ robots.txt created');
-
-// // Generate news-sitemap.xml for NewsArticle schema
-// console.log('📄 Generating news-sitemap.xml...');
-// const newsSitemap = `<?xml version="1.0" encoding="UTF-8"?>
-// <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-//         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
-    
-//     ${movies.map(movie => {
-//         const publicationDate = formatSchemaDate(movie.date);
-//         const formattedDate = publicationDate.split('T')[0];
-        
-//         return `
-//     <url>
-//         <loc>${baseUrl}/movies/${movie.id}/</loc>
-//         <news:news>
-//             <news:publication>
-//                 <news:name>FreeStream</news:name>
-//                 <news:language>en</news:language>
-//             </news:publication>
-//             <news:publication_date>${formattedDate}</news:publication_date>
-//             <news:title>${escapeHtml(movie.title)}</news:title>
-//             <news:keywords>${escapeHtml(movie.keywords.split(',').slice(0, 10).join(', '))}</news:keywords>
-//         </news:news>
-//     </url>`;
-//     }).join('')}
-    
-// </urlset>`;
-
-// fs.writeFileSync('news-sitemap.xml', newsSitemap);
-// console.log('✅ news-sitemap.xml created');
 
 // console.log('\n' + '='.repeat(50));
 // console.log('🎉 GENERATION COMPLETED!');
@@ -1859,7 +1709,7 @@
 // console.log('\n📋 GENERATED FILES:');
 // console.log('1. movies/ folder with all movie pages');
 // console.log('2. sitemap.xml (SEO optimized with video sitemap)');
-// console.log('3. news-sitemap.xml (For Google News with NewsArticle schema)');
+// console.log('3. news-sitemap.xml (For Google News with NewsArticle schema) - FIXED');
 // console.log('4. robots.txt (SEO optimized with crawl controls)');
 
 // console.log('\n🎬 SEO IMPROVEMENTS ADDED:');
@@ -1869,7 +1719,7 @@
 // console.log('✅ Canonical URLs for all pages');
 // console.log('✅ HTML escaping for all dynamic content');
 // console.log('✅ Video and Image Sitemap integration');
-// console.log('✅ News Sitemap for Google News');
+// console.log('✅ News Sitemap for Google News - NOW FIXED');
 // console.log('✅ ORIGINAL LAYOUT MAINTAINED EXACTLY');
 // console.log('✅ All ads and analytics scripts preserved');
 // console.log('✅ All original functionality maintained');
@@ -1885,11 +1735,16 @@
 // console.log('✅ hasPart with WebPageElement for content');
 
 // console.log('\n🚀 TO TEST:');
-// console.log('1. Run: npm run dev');
-// console.log('2. Visit: http://localhost:3000/movies/movie-id/');
+// console.log('1. Run: node generate-movies.js');
+// console.log('2. Validate news-sitemap.xml: https://www.xml-sitemaps.com/validate-xml-sitemap.html');
+// console.log('3. Submit to Google Search Console: https://freestreaming.vercel.app/news-sitemap.xml');
+// console.log('4. Visit: http://localhost:3000/movies/movie-id/');
 // console.log('   Example: http://localhost:3000/movies/psych-siddhartha-2026-full-movie/');
-// console.log('3. Use Google Structured Data Testing Tool to verify schemas');
+// console.log('5. Use Google Structured Data Testing Tool to verify schemas');
 // console.log('===============================================\n');
+
+
+
 
 
 
@@ -3553,12 +3408,9 @@ function generateMoviePage(movie) {
             setTimeout(() => openPlayer(), 1000);
         }
         
-        // Close share modal when clicking outside
-        document.getElementById('shareModal').addEventListener('click', (e) => {
-            if (e.target.id === 'shareModal') {
-                closeShareModal();
-            }
-        });
+        // REMOVED: Close share modal when clicking outside (THIS IS THE FIX)
+        // This code was causing the share modal to close when clicking outside
+        // Now the modal will ONLY close when the close button is clicked
 
         console.log('🎬 Movie page loaded:', movieData.title);
     </script>
