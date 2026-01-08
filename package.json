@@ -8,7 +8,7 @@
     "generate": "node generate-movies.js"
   },
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "keywords": [
     "streaming",
