@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - FreeStream</title>
+    <meta name="description" content="FreeStream Privacy Policy. Learn how we protect your data and privacy while using our streaming service.">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="css/style.css">
+     <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/public/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/favicon-16x16.png">
+    <link rel="manifest" href="/public/site.webmanifest">
+    <style>
+        .privacy-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .privacy-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .privacy-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--gray);
+        }
+        
+        .last-updated {
+            background: rgba(229, 9, 20, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius-sm);
+            display: inline-block;
+            margin-top: 1rem;
+            font-weight: 600;
+        }
+        
+        .privacy-content {
+            background: var(--dark-light);
+            border-radius: var(--radius);
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .privacy-section {
+            margin-bottom: 2.5rem;
+        }
+        
+        .privacy-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .privacy-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .privacy-section h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--light);
+        }
+        
+        .privacy-section p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .privacy-section ul, .privacy-section ol {
+            color: var(--gray);
+            margin: 1rem 0 1rem 2rem;
+            padding: 0;
+        }
+        
+        .privacy-section li {
+            margin-bottom: 0.8rem;
+            line-height: 1.6;
+        }
+        
+        .privacy-section strong {
+            color: var(--light);
+            font-weight: 600;
+        }
+        
+        .data-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .data-type {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius);
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .data-type h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .data-type p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+        
+        .important-note {
+            background: rgba(255, 152, 0, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        
+        .important-note p {
+            color: var(--warning);
+            margin: 0;
+            font-weight: 500;
+        }
+        
+        .info-box {
+            background: rgba(0, 180, 216, 0.1);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            margin: 2rem 0;
+        }
+        
+        .info-box h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+        
+        .info-box p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .privacy-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .privacy-header h1 {
+                font-size: 2rem;
+            }
+            
+            .privacy-content {
+                padding: 1.5rem;
+            }
+            
+            .privacy-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .privacy-section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .data-types {
+                grid-template-columns: 1fr;
+            }
+            
+            .privacy-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-link {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .privacy-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .privacy-header p {
+                font-size: 1rem;
+            }
+            
+            .privacy-container {
+                padding: 1rem;
+            }
+            
+            .privacy-content {
+                padding: 1rem;
+            }
+            
+            .privacy-section {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-play-circle"></i>
+                <span>Free<span class="logo-highlight">Stream</span></span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="index.html#movies"><i class="fas fa-film"></i> Movies</a>
+                <a href="index.html#categories"><i class="fas fa-list"></i> Categories</a>
+                <a href="index.html#languages"><i class="fas fa-globe"></i> Languages</a>
+                <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+                <a href="https://median.co/share/pwwoxpk" class="apk-btn"><i class="fab fa-android"></i> Download APK</a>
+            </div>
+            
+            <div class="nav-right">
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="index.html#home" class="mobile-menu-btn" style="text-decoration: none;">
+                    <i class="fas fa-home"></i>
+                </a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+           <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="index.html#movies"><i class="fas fa-film"></i> Movies</a>
+            <a href="index.html#categories"><i class="fas fa-list"></i> Categories</a>
+            <a href="index.html#languages"><i class="fas fa-globe"></i> Languages</a>
+            <a href="contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+            <a href="https://median.co/share/pwwoxpk"><i class="fab fa-android"></i> Download APK</a>
+          
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="privacy-container">
+            <div class="privacy-header">
+                <h1>Privacy <span class="highlight">Policy</span></h1>
+                <p>Your privacy is important to us. This policy explains how FreeStream handles your information.</p>
+                <div class="last-updated">
+                    <i class="fas fa-calendar-alt"></i> Last Updated: December 28, 2023
+                </div>
+            </div>
+            
+            <div class="privacy-content">
+                <!-- Section 1 -->
+                <div class="privacy-section">
+                    <h2>1. Introduction</h2>
+                    <p>Welcome to FreeStream. This Privacy Policy explains how we handle information when you use our streaming service. We are committed to protecting your privacy and providing a safe online experience.</p>
+                    
+                    <div class="important-note">
+                        <p><i class="fas fa-exclamation-circle"></i> <strong>Important:</strong> FreeStream does not require registration or collect personal information. Your privacy is our priority.</p>
+                    </div>
+                </div>
+                
+                <!-- Section 2 -->
+                <div class="privacy-section">
+                    <h2>2. Information We Don't Collect</h2>
+                    <p>FreeStream is designed to be privacy-focused. We do not collect or store:</p>
+                    
+                    <div class="data-types">
+                        <div class="data-type">
+                            <h4>Personal Information</h4>
+                            <p>We don't ask for names, email addresses, phone numbers, or any personal details.</p>
+                        </div>
+                        
+                        <div class="data-type">
+                            <h4>Account Data</h4>
+                            <p>No registration required. No usernames, passwords, or account information stored.</p>
+                        </div>
+                        
+                        <div class="data-type">
+                            <h4>Payment Information</h4>
+                            <p>FreeStream is completely free. No payment details, credit cards, or billing information.</p>
+                        </div>
+                        
+                        <div class="data-type">
+                            <h4>Identity Data</h4>
+                            <p>No age, gender, location, or other identity markers are collected.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Section 3 -->
+                <div class="privacy-section">
+                    <h2>3. Information We Automatically Receive</h2>
+                    
+                    <div class="info-box">
+                        <h3><i class="fas fa-info-circle"></i> Technical Information Only</h3>
+                        <p>Like all websites, our servers automatically receive certain technical information when you visit:</p>
+                    </div>
+                    
+                    <h3>3.1 Browser Information</h3>
+                    <ul>
+                        <li>Browser type and version</li>
+                        <li>Device type (mobile, desktop, tablet)</li>
+                        <li>Operating system</li>
+                        <li>Screen resolution</li>
+                    </ul>
+                    
+                    <h3>3.2 Technical Data</h3>
+                    <ul>
+                        <li>IP address (anonymized for analytics)</li>
+                        <li>Connection type and speed</li>
+                        <li>Date and time of access</li>
+                        <li>Pages visited and time spent</li>
+                    </ul>
+                    
+                    <h3>3.3 Usage Statistics</h3>
+                    <p>We collect aggregated, anonymous usage data to improve our service:</p>
+                    <ul>
+                        <li>Most popular movies and shows</li>
+                        <li>Peak usage times</li>
+                        <li>Feature usage patterns</li>
+                        <li>Error reports and performance data</li>
+                    </ul>
+                </div>
+                
+                <!-- Section 4 -->
+                <div class="privacy-section">
+                    <h2>4. Cookies and Tracking</h2>
+                    
+                    <h3>4.1 Essential Cookies</h3>
+                    <p>We use minimal cookies for essential functionality:</p>
+                    <ul>
+                        <li>Session cookies for basic site operations</li>
+                        <li>Preference cookies for theme settings</li>
+                        <li>Security cookies to prevent abuse</li>
+                    </ul>
+                    
+                    <h3>4.2 Third-Party Services</h3>
+                    <p>Some third-party services may use their own cookies:</p>
+                    <ul>
+                        <li>Video players and streaming services</li>
+                        <li>Analytics services (anonymous data only)</li>
+                        <li>Content delivery networks</li>
+                    </ul>
+                    
+                    <h3>4.3 Cookie Control</h3>
+                    <p>You can control cookies through your browser settings. However, disabling cookies may affect site functionality.</p>
+                </div>
+                
+                <!-- Section 5 -->
+                <div class="privacy-section">
+                    <h2>5. Third-Party Services</h2>
+                    <p>FreeStream may use third-party services to enhance functionality:</p>
+                    
+                    <h3>5.1 Analytics Providers</h3>
+                    <p>We use anonymous analytics to understand usage patterns and improve our service. No personal data is shared.</p>
+                    
+                    <h3>5.2 Content Delivery</h3>
+                    <p>Video content is delivered through third-party streaming services. Their privacy policies apply to their services.</p>
+                    
+                    <h3>5.3 External Links</h3>
+                    <p>Our site may contain links to external websites. We are not responsible for their privacy practices.</p>
+                </div>
+                
+                <!-- Section 6 -->
+                <div class="privacy-section">
+                    <h2>6. Data Security</h2>
+                    
+                    <div class="info-box">
+                        <h3><i class="fas fa-shield-alt"></i> Security Measures</h3>
+                        <p>We implement security measures to protect the minimal data we handle:</p>
+                    </div>
+                    
+                    <h3>6.1 Technical Security</h3>
+                    <ul>
+                        <li>HTTPS encryption for all connections</li>
+                        <li>Regular security updates</li>
+                        <li>Firewall protection</li>
+                        <li>DDoS mitigation</li>
+                    </ul>
+                    
+                    <h3>6.2 Data Minimization</h3>
+                    <p>We follow the principle of data minimization - we only collect what is absolutely necessary for service operation.</p>
+                    
+                    <h3>6.3 No Data Storage</h3>
+                    <p>Since we don't collect personal information, there's no personal data to store or secure.</p>
+                </div>
+                
+                <!-- Section 7 -->
+                <div class="privacy-section">
+                    <h2>7. Children's Privacy</h2>
+                    <p>FreeStream is not directed at children under 13. We do not knowingly collect any information from children.</p>
+                    
+                    <h3>7.1 Age Restrictions</h3>
+                    <p>Some content may be restricted to users 18 years or older. We rely on user honesty for age verification.</p>
+                    
+                    <h3>7.2 Parental Control</h3>
+                    <p>Parents and guardians are responsible for monitoring their children's internet usage and implementing parental controls.</p>
+                </div>
+                
+                <!-- Section 8 -->
+                <div class="privacy-section">
+                    <h2>8. Your Rights</h2>
+                    
+                    <h3>8.1 Right to Information</h3>
+                    <p>You have the right to know what information we collect. This policy provides that information.</p>
+                    
+                    <h3>8.2 Right to Control</h3>
+                    <p>You can control cookie settings through your browser. You can also use privacy-focused browsers and extensions.</p>
+                    
+                    <h3>8.3 Right to Object</h3>
+                    <p>You can choose not to use our service if you disagree with our privacy practices.</p>
+                </div>
+                
+                <!-- Section 9 -->
+                <div class="privacy-section">
+                    <h2>9. Policy Updates</h2>
+                    <p>We may update this Privacy Policy from time to time. We will notify users of significant changes by updating the "Last Updated" date.</p>
+                    
+                    <h3>9.1 Notification</h3>
+                    <p>Continued use of FreeStream after policy updates constitutes acceptance of the new terms.</p>
+                    
+                    <h3>9.2 Review Responsibility</h3>
+                    <p>It is your responsibility to review this policy periodically for changes.</p>
+                </div>
+                
+                <!-- Section 10 -->
+                <div class="privacy-section">
+                    <h2>10. Contact Information</h2>
+                    <p>If you have questions about this Privacy Policy, you can contact us:</p>
+                    
+                    <h3>10.1 Email Contact</h3>
+                    <p>For privacy-related inquiries: <strong>conatctfreestream@protonmail.com</strong></p>
+                    
+                    <h3>10.2 Response Time</h3>
+                    <p>We aim to respond to privacy inquiries within 48 hours.</p>
+                </div>
+                
+                <!-- Navigation -->
+                <div class="privacy-navigation">
+                    <a href="index.html" class="nav-link">
+                        <i class="fas fa-home"></i> Back to Home
+                    </a>
+                    <a href="contact.html" class="nav-link">
+                        <i class="fas fa-envelope"></i> Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Free<span class="logo-highlight">Stream</span></span>
+                </div>
+                <p class="footer-description">Watch free movies, TV shows, live sports and news channels in HD quality without any subscription.</p>
+               
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="index.html#categories">Categories</a>
+                <a href="index.html#languages">Languages</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="dmca.html">DMCA</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Download App</h3>
+                <p>Get our Android app for better experience</p>
+                <a href="https://median.co/share/pwwoxpk" class="download-btn">
+                    <i class="fab fa-android"></i> Download APK
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2026 FreeStream. All content is provided for entertainment purposes only.</p>
+            <p class="disclaimer">Disclaimer: We do not host any content. All content is provided by third-party services.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-theme');
+            const icon = themeToggle.querySelector('i');
+            if (document.body.classList.contains('light-theme')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        });
+        
+        // Mobile Menu
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.pageYOffset > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Back to Top Button
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.className = 'back-to-top';
+        backToTopBtn.id = 'backToTop';
+        backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        document.body.appendChild(backToTopBtn);
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
