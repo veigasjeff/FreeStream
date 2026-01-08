@@ -8,7 +8,6 @@ import FAQ from '../components/FAQ';
 import Footer from '../components/Footer';
 import MovieModal from '../components/MovieModal';
 import PlayerModal from '../components/PlayerModal';
-import AgeVerificationModal from '../components/AgeVerificationModal';
 import { moviesData, genres, languages } from '../utils/data';
 
 export default function Home({ theme, toggleTheme }) {
@@ -353,11 +352,7 @@ export default function Home({ theme, toggleTheme }) {
         theme={theme}
       />
       
-      <AgeVerificationModal 
-        isOpen={showAgeModal}
-        onConfirm={handleAgeConfirm}
-        onDeny={handleAgeDeny}
-      />
+     
 
       {/* Back to Top Button */}
       <button className="back-to-top" id="backToTop">
