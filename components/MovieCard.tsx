@@ -22,6 +22,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onPlay, onViewDetails }) =
                  </div>
                  <div className="absolute bottom-0 left-0 right-0 p-3">
                     <h3 className="text-white font-bold truncate">{movie.title}</h3>
+                      <span className="text-white font-bold truncate">{movie.language}</span>
                     <div className="text-gray-400 text-sm flex justify-between">
                         <span>{movie.genre}</span>
                         <span>{new Date(movie.date).getFullYear()}</span>

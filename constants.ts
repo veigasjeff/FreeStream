@@ -1,7 +1,82 @@
 import { Movie } from './types';
 
 export const MOVIES_DATA: Movie[] = [
-    {
+      {
+        "id": "his-and-hers-s01-2026-full-series",
+        "title": "His & Hers Season 01 (2026)",
+        "genre": "Crime",
+        "date": "January 08, 2026",
+        "language": "English",
+        "poster": "/His_And_Hers_S01_2026.jpg",
+        "playUrl": "8_szlvBLll0",
+         "streamUrl": "https://vidsrc.cc/v2/embed/tv/259731", 
+        "stream2Url": "https://short.icu/lfhv4KQwj?thumbnail=https://freestreaming.vercel.app/His_And_Hers_S01_2026.jpg",
+        "stream3Url": "",
+        "stream4Url": "https://short.icu/tyiiqPGLF?thumbnail=https://freestreaming.vercel.app/His_And_Hers_S01_2026.jpg",
+        "keywords": "his-and-hers season 01, his-and-hers season 01 (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free",
+        "downloadUrl": "https://dl.openx.xyz/?v=15oYK8lLf3", 
+        "description": "A journalist investigates a murder in her hometown, clashing with a suspicious detective. Two sides to every story - someone is lying.",
+        "content": "His & Hers Season 1 (2026) centers on a journalist who returns to her hometown after a brutal murder shakes the community she once left behind. What begins as a professional investigation quickly becomes personal, as buried memories, unresolved relationships, and long-standing tensions resurface. The town’s quiet exterior hides fractures that grow more visible with every question she asks.\n\nStanding in her way is a detective tasked with the same case, a man whose guarded nature and selective transparency raise immediate suspicion. Their interactions are charged with mistrust, as both pursue the truth from opposite angles. Each believes the other is missing something—or deliberately avoiding it. The investigation unfolds through parallel perspectives, revealing how facts can shift depending on who is telling the story.\n\nThe series builds its tension on the idea that every event carries two versions: what is seen and what is concealed. Witness accounts conflict, timelines blur, and motives remain elusive. As the journalist digs deeper, she begins to suspect that the truth may implicate people she knows, forcing her to choose between loyalty and integrity. Meanwhile, the detective’s own actions suggest he may be protecting more than just the integrity of the case.\n\nHis & Hers uses its episodic structure to peel back layers of deception, exploring how personal bias shapes perception. Each episode reframes earlier assumptions, steadily dismantling the notion of a single, objective truth. The question is no longer just who committed the murder, but who has been lying all along—and why.\n\nBy the end of the season, the series positions truth as a fragile construct, easily manipulated and fiercely guarded. His & Hers Season 1 (2026) stands as a sharp psychological crime drama about power, memory, and the dangerous space between fact and belief.",
+        "director": [
+         "William Oldroyd"
+        ],
+       "cast": [ "Tessa Thompson", "Jon Bernthal", "Pablo Schreiber"], 
+       "timestamp": 1700000000,
+        "ratingTotal": 72,
+        "ratingCount": 10,
+        "views": 3680
+      },
+      {
+        "id": "central-2025-full-movie",
+        "title": "Central (2025)",
+        "genre": "Drama",
+        "date": "July 18, 2025",
+        "language": "Tamil",
+        "poster": "/Central_2025.jpg",
+        "playUrl": "aeRN9_CjX_U",
+        "streamUrl": "https://short.icu/15oYK8lLf3?thumbnail=https://freestreaming.vercel.app/Central_2025.jpg", 
+        "stream2Url": "",
+        "stream3Url": "",
+        "stream4Url": "",
+        "keywords": "central, central (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free",
+        "downloadUrl": "https://dl.openx.xyz/?v=15oYK8lLf3", 
+        "description": "The story is about the hero who comes to Chennai Central from a small village due to his family situation, what kind of hardships does he experience in the name of capitalism and how does he recover from it.",
+        "content": "Central (2025) unfolds through the journey of a young man forced to leave his small village because of unavoidable family circumstances. With limited resources and uncertain hope, he arrives at Chennai Central, a place that symbolizes opportunity, chaos, and relentless motion. What initially appears as a gateway to a better life soon reveals itself as a harsh testing ground shaped by money, power, and inequality.\n\nAs the protagonist struggles to establish himself, he encounters the unforgiving mechanics of urban capitalism. Daily survival becomes a battle against exploitation, unstable work, and systems designed to benefit only those already in control. The city does not offer sympathy; it demands endurance. Each setback chips away at his confidence, exposing how migrants are often reduced to disposable labor within a profit-driven environment.\n\nThe film carefully portrays how economic pressure affects dignity, relationships, and moral choices. Small compromises made to survive begin to accumulate, forcing the hero to question who he is becoming in the process. Chennai Central functions as more than a location—it becomes a living metaphor for constant movement without rest, where countless lives pass through without being seen.\n\nDespite repeated failures, the narrative does not surrender to despair. Recovery comes slowly, not through sudden success, but through resilience, self-awareness, and the ability to adapt without losing humanity. The hero learns to navigate the system without being consumed by it, reclaiming agency in a world that thrives on imbalance.\n\nCentral (2025) presents capitalism not as an abstract concept, but as a lived experience felt through hunger, exhaustion, and emotional isolation. The film ultimately argues that survival in such a system requires both strength and conscience, and that true recovery lies in resisting dehumanization.\n\nRooted in realism and emotional restraint, Central stands as a reflective social drama about migration, economic struggle, and the quiet determination required to endure modern urban life.",
+        "director": [
+         "Bharathi Sivalingam"
+        ],
+       "cast": [ "J. Vignesh", "Perarasu", "Soneshwari"], 
+        "timestamp": 1700000000,
+        "ratingTotal": 71,
+        "ratingCount": 10,
+        "views": 1680
+      },
+  {
+        "id": "udaala-2025-full-movie",
+        "title": "Udaala (2025)",
+        "genre": "Romance",
+        "date": "November 14, 2025",
+        "language": "Kannada",
+        "poster": "/Udaala_2025.jpg",
+        "playUrl": "XuqONvSxqHk",
+        "streamUrl": "https://short.icu/d6e9a3MoZ?thumbnail=https://freestreaming.vercel.app/Udaala_2025.jpg", 
+        "stream2Url": "",
+        "stream3Url": "",
+        "stream4Url": "",
+        "keywords": "udaala, udaala (2025), free movies online, watch movies free, streaming movies, hd movies online, full movies online, movies online free, watch free movies, online movie streaming, free hd movies, movie streaming sites, free movie websites, watch movies online free, online movies free, free streaming movies, watch full movies, movie sites free, free online movies, stream movies free, hd movies free, full hd movies online, free movie streaming, online free movies, watch hd movies free, movies streaming free, free movies streaming, watch online movies, stream free movies, hd movies online free, full movies free, online movie free, free movie sites, movies online streaming, watch free hd movies, streaming movies free, online movies streaming, free full movies, movies free online, watch movies online hd, free movies hd, online hd movies, stream movies online, free movies to watch,  watch full hd movies, movies stream free, free online movie, hd movies streaming, full movies online free, movie streaming free",
+        "downloadUrl": "https://dl.openx.xyz/?v=d6e9a3MoZ", 
+        "description": "In Bijapur, an orphaned auto driver falls in love and follows a girl into college, where playful revenge against bullies takes many twists, can the wisdom of the city's monuments turn conflict into love, respect, and harmony?",
+        "content": "Udaala (2025) is set against the culturally rich backdrop of Bijapur, where history, stone monuments, and everyday life quietly influence human choices. At the center of the story is an orphaned auto driver whose life has been shaped by hardship, independence, and street-earned resilience. When he falls in love with a young woman pursuing her education, his world expands beyond the auto stand and into the unfamiliar corridors of a college campus.\n\nDriven by affection and determination, he follows her into college life, only to find himself caught between social hierarchies, student rivalries, and bullying that targets those seen as outsiders. What begins as lighthearted retaliation against bullies gradually spirals into a series of clever, sometimes chaotic confrontations. Each act of revenge is laced with humor, but also exposes deeper insecurities and unspoken class divides within the campus.\n\nAs tensions rise, the film carefully balances romance with conflict. The protagonist’s actions, initially fueled by ego and impulse, are slowly reshaped by moments of reflection. Bijapur’s ancient monuments stand as silent witnesses throughout the narrative, symbolizing endurance, wisdom, and the passage of time. These landmarks become more than scenery; they serve as metaphors for restraint, perspective, and the possibility of harmony over hostility.\n\nThe relationship between the lead characters evolves as misunderstandings give way to empathy. Love in Udaala is not portrayed as effortless, but as something earned through growth and self-awareness. The protagonist learns that respect cannot be demanded through intimidation or tricks, but must be built through accountability and change.\n\nBy transforming playful revenge into personal evolution, Udaala highlights how youthful conflict can mature into understanding. The film ultimately suggests that the wisdom of the past, embedded in the city’s monuments and traditions, can guide the present toward balance.\n\nUdaala (2025) is a warm, socially grounded romantic drama that blends humor, emotion, and local flavor, offering a story where love triumphs not through dominance, but through respect, learning, and harmony.",
+        "director": [
+         "Amol Patil"
+        ],
+       "cast": [ "Vadiraj Babaladi", "Dayanand Beeligi", "Yograj Bhat"], 
+        "timestamp": 1700000000,
+        "ratingTotal": 86,
+        "ratingCount": 10,
+        "views": 1370
+      }, 
+  {
         "id": "dear-radhi-2026-full-movie",
         "title": "Dear Radhi (2026)",
         "genre": "Romance",
