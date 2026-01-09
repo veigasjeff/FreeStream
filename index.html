@@ -59,44 +59,286 @@
       }
     </script>
     
-    <!-- Schema.org for Website -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "FreeStream™",
-        "description": "Free streaming website with 5000+ HD movies and TV shows",
-        "url": "https://freestreaming.vercel.app",
-        "image": "https://picsum.photos/1200/630",
-        "inLanguage": "en"
+    !-- Main Website Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "FreeStream™",
+    "description": "Free streaming website with 5000+ HD movies and TV shows",
+    "url": "https://freestreaming.vercel.app",
+    "image": "https://freestreaming.vercel.app/og-image.jpg",
+    "inLanguage": "en",
+    "copyrightHolder": {
+        "@type": "Organization",
+        "name": "FreeStream"
+    },
+    "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
     }
-    </script>
+}
+</script>
 
-    <!-- FAQ Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-            {
-                "@type": "Question",
-                "name": "Is FreeStream really free?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "Yes! FreeStream is 100% free forever. No subscriptions, no hidden fees, no registration required. Just visit and start watching."
-                }
-            },
-            {
-                "@type": "Question",
-                "name": "What quality are the movies?",
-                "acceptedAnswer": {
-                    "@type": "Answer",
-                    "text": "All content is available in HD (720p/1080p) quality. Many movies also support 4K streaming where available."
-                }
+<!-- Schema for Movie Collection Website -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "FreeStream™",
+    "description": "Free streaming website with 5000+ HD movies and TV shows",
+    "url": "https://freestreaming.vercel.app",
+    "image": "https://freestreaming.vercel.app/og-image.jpg",
+    "inLanguage": "en",
+    "hasPart": [
+        {
+            "@type": "ItemList",
+            "name": "Trending Movies",
+            "numberOfItems": 20,
+            "itemListOrder": "Descending",
+            "url": "https://freestreaming.vercel.app#home"
+        },
+        {
+            "@type": "ItemList",
+            "name": "Movie Categories",
+            "numberOfItems": 7,
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Action Movies"},
+                {"@type": "ListItem", "position": 2, "name": "Comedy Movies"},
+                {"@type": "ListItem", "position": 3, "name": "Drama Movies"},
+                {"@type": "ListItem", "position": 4, "name": "Thriller Movies"},
+                {"@type": "ListItem", "position": 5, "name": "Adult Content"},
+                {"@type": "ListItem", "position": 6, "name": "Horror Movies"},
+                {"@type": "ListItem", "position": 7, "name": "All Categories"}
+            ]
+        }
+    ]
+}
+</script>
+
+<!-- Schema for Movie Collections -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Movie Collections",
+    "description": "Featured movie collections available for streaming",
+    "itemListElement": [
+        {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+                "@type": "Movie",
+                "name": "Action Movies Collection",
+                "description": "HD action movies collection with explosive content",
+                "image": "https://freestreaming.vercel.app/og-image.jpg",
+                "dateCreated": "2025-03-15",
+                "director": {
+                    "@type": "Person",
+                    "name": "Dr Tralier"
+                },
+                "url": "https://freestreaming.vercel.app#action"
             }
-        ]
-    }
-    </script>
+        },
+        {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+                "@type": "Movie",
+                "name": "Comedy Movies Collection",
+                "description": "Latest comedy movies for endless laughter",
+                "image": "https://freestreaming.vercel.app/og-image.jpg",
+                "dateCreated": "2025-06-22",
+                "director": {
+                    "@type": "Person",
+                    "name": "Dr Tralier"
+                },
+                "url": "https://freestreaming.vercel.app#comedy"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 3,
+            "item": {
+                "@type": "Movie",
+                "name": "Drama Movies Collection",
+                "description": "Emotional drama movies collection",
+                "image": "https://freestreaming.vercel.app/og-image.jpg",
+                "dateCreated": "2025-04-10",
+                "director": {
+                    "@type": "Person",
+                    "name": "Dr Tralier"
+                },
+                "url": "https://freestreaming.vercel.app#drama"
+            }
+        },
+        {
+            "@type": "ListItem",
+            "position": 4,
+            "item": {
+                "@type": "Movie",
+                "name": "Romance Movies Collection",
+                "description": "Romantic movies collection for love stories",
+                "image": "https://freestreaming.vercel.app/og-image.jpg",
+                "dateCreated": "2025-05-18",
+                "director": {
+                    "@type": "Person",
+                    "name": "Dr Tralier"
+                },
+                "url": "https://freestreaming.vercel.app#romance"
+            }
+        }
+    ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Movie Collections",
+  "description": "Featured movie collections available for streaming",
+  "url": "https://freestreaming.vercel.app/",
+   "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "CollectionPage",
+          "name": "Action Series",
+          "url": "https://freestreaming.vercel.app/#action"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "CollectionPage",
+          "name": "Comedy Series",
+          "url": "https://freestreaming.vercel.app/#comedy"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "CollectionPage",
+          "name": "Drama Series",
+          "url": "https://freestreaming.vercel.app/#drama"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "CollectionPage",
+          "name": "Romance Series",
+          "url": "https://freestreaming.vercel.app/#romance"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "TV Series Collection",
+  "description": "Complete TV series collection with all seasons",
+  "url": "https://freestreaming.vercel.app/",
+  "mainEntity": {
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "CollectionPage",
+          "name": "Action Series",
+          "url": "https://freestreaming.vercel.app/#action"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "CollectionPage",
+          "name": "Comedy Series",
+          "url": "https://freestreaming.vercel.app/#comedy"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "CollectionPage",
+          "name": "Drama Series",
+          "url": "https://freestreaming.vercel.app/#drama"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "item": {
+          "@type": "CollectionPage",
+          "name": "Romance Series",
+          "url": "https://freestreaming.vercel.app/#romance"
+        }
+      }
+    ]
+  }
+}
+</script>
+
+<!-- FAQ Schema -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Is FreeStream really free?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! FreeStream is 100% free forever. No subscriptions, no hidden fees, no registration required. Just visit and start watching."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What quality are the movies?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All content is available in HD (720p/1080p) quality. Many movies also support 4K streaming where available."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Are there any viewing limits?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No limits at all! Watch as many movies and shows as you want, for as long as you want, completely unlimited."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Is it available worldwide?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes! FreeStream is accessible from any country without geographic restrictions."
+            }
+        }
+    ]
+}
+</script>
+
 <script type="importmap">
 {
   "imports": {
