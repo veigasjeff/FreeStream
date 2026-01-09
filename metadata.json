@@ -1,0 +1,5 @@
+{
+  "name": "FreeStream - Movie & TV Show Streaming",
+  "description": "A modern, single-page streaming application for watching HD movies and TV shows for free. Features a dark, cinematic UI inspired by popular streaming platforms, with dynamic filtering and search capabilities.",
+  "requestFramePermissions": []
+}

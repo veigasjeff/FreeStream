@@ -1,5 +1,11 @@
-{
-  "movies": [
+
+import { Movie } from './types';
+
+export const MOVIES_DATA: Movie[] = [
+
+
+ 
+    
     {
         "id": "dear-radhi-2026-full-movie",
         "title": "Dear Radhi (2026)",
@@ -4022,44 +4028,9 @@
       "ratingTotal": 48,
       "ratingCount": 12,
       "views": 1600
-    }
-  ],
-  "reports": [],
-  "language": [
-    "English",
-    "Hindi",
-    "Marathi",
-    "Tagalog",
-    "Tamil",
-    "Kannada",
-    "Telugu",
-    "Malayalam",
-    "Punjabi",
-    "Gujarati",
-    "Bengali",
-    "Korean"
-    
-    ],
-  "genres": [
-    "Action",
-    "Comedy",
-    "Drama",
-    "Horror",
-    "Sci-Fi",
-    "Romance",
-    "Thriller",
-    "Adult",
-    "Adventure",
-    "Fantasy",
-    "Crime",
-    "News",
-    "Sports",
-    "TvSeries",
-    "TvShow",
-    "Family",
-    "Mystery",
-    "Biography",
-    "History",
-    "War"
-  ]
-}
+    },
+];
+
+// Fix: Dynamically generate and export GENRES and LANGUAGES arrays from MOVIES_DATA.
+export const GENRES = [...new Set(MOVIES_DATA.map(movie => movie.genre))].sort();
+export const LANGUAGES = [...new Set(MOVIES_DATA.map(movie => movie.language))].sort();
