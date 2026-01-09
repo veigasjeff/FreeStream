@@ -16,13 +16,16 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie, onPlay, onViewDetails }) =
         <div className="bg-gray-900 rounded-lg overflow-hidden group relative cursor-pointer" onClick={() => onViewDetails(movie)}>
             <div className="aspect-[2/3] relative">
                  <img src={movie.poster} alt={movie.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110" loading="lazy" />
+               
                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
                  <div className="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">
                      {rating} <i className="fas fa-star text-yellow-300"></i>
                  </div>
+                 
                  <div className="absolute bottom-0 left-0 right-0 p-3">
                     <h3 className="text-white font-bold truncate">{movie.title}</h3>
-                    <div className="text-gray-400 text-sm flex justify-between">
+                     <span className="text-white font-bold truncate">{movie.language}</span>
+                 <div className="text-gray-400 text-sm flex justify-between">
                         <span>{movie.genre}</span>
                         <span>{new Date(movie.date).getFullYear()}</span>
                     </div>
