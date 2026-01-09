@@ -3,7 +3,7 @@ import { Movie } from './types';
 export const MOVIES_DATA: Movie[] = [
       {
         "id": "his-and-hers-s01-2026-full-series",
-        "title": "His & Hers Season 01 (2026)",
+        "title": "His & Hers S01 (2026)",
         "genre": "Crime",
         "date": "January 08, 2026",
         "language": "English",
