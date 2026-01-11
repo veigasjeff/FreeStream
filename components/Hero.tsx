@@ -21,7 +21,7 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
     ];
 
     return (
-        <section id="home" className="relative bg-cover bg-center min-h-[75vh] md:min-h-[90vh] flex items-center justify-center text-center text-white" style={{ backgroundImage: `url(https://picsum.photos/1920/1080?grayscale&blur=2)` }}>
+        <section id="home" className="relative bg-cover bg-center min-h-[75vh] md:min-h-[90vh] flex items-center justify-center text-center text-white" style={{ backgroundImage: `url(https://freestreaming.vercel.app/og-image.jpg)` }}>
             <div className="absolute inset-0 bg-black/80"></div>
             <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <h1 className="font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-4">
