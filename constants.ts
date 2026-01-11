@@ -1,7 +1,7 @@
 import { Movie } from './types';
 
 export const MOVIES_DATA: Movie[] = [
-      {
+    {
         "id": "his-and-hers-s01-2026-full-series",
         "title": "His & Hers S01 (2026)",
         "genre": "Crime",
@@ -20,7 +20,15 @@ export const MOVIES_DATA: Movie[] = [
         "director": [
          "William Oldroyd"
         ],
-       "cast": [ "Tessa Thompson", "Jon Bernthal", "Pablo Schreiber"], 
+        "directorimage": [
+        "https://resizing.flixster.com/YG7GLHllRT5OWnOF5Dt7XJ2L9_M=/fit-in/352x330/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/1002338_v9_ba.jpg"
+        ],
+        "cast": [ "Tessa Thompson", "Jon Bernthal", "Pablo Schreiber"],      
+        "castimage": [
+        "https://image.tmdb.org/t/p/w500/fycqdiiM6dsNSbnONBVVQ57ILV1.jpg",
+        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/jon-bernthal-17834-24-03-2017-12-35-19.jpg",
+        "https://resizing.flixster.com/mLV5UZS8D4JRhXBVncHGsYUrPOo=/218x280/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/GNLZZGG002HJS08.jpg"
+        ],
        "timestamp": 1700000000,
         "ratingTotal": 72,
         "ratingCount": 10,
@@ -45,7 +53,15 @@ export const MOVIES_DATA: Movie[] = [
         "director": [
          "Bharathi Sivalingam"
         ],
+        "directorimage": [
+        "https://nettv4u.com/imagine/23-06-2025/bharathi-sivalingam.png"
+        ],
        "cast": [ "J. Vignesh", "Perarasu", "Soneshwari"], 
+        "castimage": [
+        "https://media.themoviedb.org/t/p/w235_and_h235_face/6RFOclIyBySN5ecnNB7qEkoUYuW.jpg",
+        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/perarasu-7453-1732507041.jpg",
+        "https://lk-aps.bmscdn.com/Artist/5216.jpg"
+        ],
         "timestamp": 1700000000,
         "ratingTotal": 71,
         "ratingCount": 10,
@@ -70,13 +86,21 @@ export const MOVIES_DATA: Movie[] = [
         "director": [
          "Amol Patil"
         ],
+        "directorimage": [
+        ""
+        ],
        "cast": [ "Vadiraj Babaladi", "Dayanand Beeligi", "Yograj Bhat"], 
+        "castimage": [
+        "https://in.bmscdn.com/artist/vadiraj-babaladi-2011339-1657698640.jpg",
+        "",
+        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/yogaraj-bhat-1051205-1762513255.jpg"
+        ],
         "timestamp": 1700000000,
         "ratingTotal": 86,
         "ratingCount": 10,
         "views": 1370
-      }, 
-  {
+      },
+      {
         "id": "dear-radhi-2026-full-movie",
         "title": "Dear Radhi (2026)",
         "genre": "Romance",
@@ -95,8 +119,15 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Praveen K Mani"
         ],
+        "directorimage": [
+        "https://images.filmibeat.com/img/popcorn/profile_photos/rio-raj-20251201095559-43992.jpg"
+        ],
        "cast": [ "Mano Ve Kannathasan", "Saravana Vickram", "Rajesh Balachandiran"],
-       
+        "castimage": [
+        "https://nettv4u.com/imagine/17-12-2021/mano-ve-kannathasan.png",
+        "https://images.filmibeat.com/192x258/img/popcorn/profile_photos/saravana-vickram-20231001150257-59673.jpg",
+        "https://images.filmibeat.com/img/162x203/popcorn/profile_photos/rajesh-balachandiran-20251231132951-39695.jpg"
+        ],
         "timestamp": 1700000000,
         "ratingTotal": 78,
         "ratingCount": 10,
@@ -121,8 +152,15 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Sudha Kongara"
         ],
+        "directorimage": [
+        "https://images.mubicdn.net/images/cast_member/494880/cache-579164-1598062781/image-w856.jpg"
+        ],
        "cast": [ "Sivakarthikeyan", "Atharvaa Murali", "Sreeleela"],
-       
+        "castimage": [
+        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/sivakarthikeyan-1042969-18-09-2017-03-37-23.jpg",
+        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/atharvaa-murali-28524-06-12-2017-01-13-48.jpg",
+        "https://images.filmibeat.com/192x258/img/popcorn/profile_photos/sree-leela-20231013174826-40142.jpg"
+        ],
         "timestamp": 1700000000,
         "ratingTotal": 67,
         "ratingCount": 10,
@@ -146,6 +184,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Psych Siddhartha (2026) is a layered psychological drama that explores emotional collapse, fragile hope, and the enduring scars of unresolved trauma. At its center is Siddharth, a man battered by repeated personal losses that have left him isolated, financially strained, and emotionally exhausted. Life has reduced him to survival mode, where every attempt to move forward seems to be met with another setback.\n\nJust as Siddharth reaches his lowest point, he encounters Shravya, a resilient single mother navigating her own struggles with quiet strength. Her presence introduces warmth and stability into Siddharth’s fractured world. Through simple moments and shared vulnerabilities, their bond grows into something deeply restorative. Shravya becomes not just a source of affection, but a mirror that reflects Siddharth’s forgotten capacity for care, responsibility, and emotional connection.\n\nAs Siddharth begins rebuilding his life, the film shifts into a tense psychological space. His past, marked by unresolved guilt, suppressed memories, and destructive patterns, starts resurfacing. The progress he makes is fragile, and the audience witnesses how internal demons can be more dangerous than external hardships. The narrative carefully blurs the line between healing and relapse, questioning whether love alone can mend deeply rooted psychological wounds.\n\nShravya’s role is equally complex. As a mother, she must protect her child and herself, even as she empathizes with Siddharth’s pain. Her growing attachment forces her to confront the risk of letting someone broken into her carefully rebuilt life. The film avoids idealized romance, instead portraying love as something that demands accountability, honesty, and emotional courage.\n\nPsych Siddhartha balances intimacy with tension, portraying mental struggle not as spectacle but as lived reality. The storytelling emphasizes silence, internal conflict, and emotional restraint, allowing the psychological weight to unfold gradually. Each step Siddharth takes toward stability is shadowed by the possibility of collapse, creating an atmosphere of constant unease.\n\nUltimately, the film asks difficult questions about redemption and self-forgiveness. Can a person truly escape their past, or must they confront it head-on to move forward? Is healing a destination, or an ongoing, fragile process?\n\nPsych Siddhartha (2026) stands as a grounded, emotionally resonant exploration of love, mental resilience, and the painful effort required to reclaim one’s life when the mind itself becomes the battleground.",
        "director": [
          "Varun Reddy"
+        ],
+        "directorimage": [
+        "https://telugustop.com/wp-content/uploads/2024/05/IAS-Topper-Karnati-Varun-Reddy-inspirational-success-story-detailsd.jpg"
         ],
        "cast": [ "Sakshi Atree Chaturvedi", "Yamini Bhaskar", "Pradyumna Billuri"],
        "castimage": [
@@ -177,6 +218,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Sriram Raghavan"
         ],
+        "directorimage": [
+        "https://in.bmscdn.com/iedb/artist/images/website/poster/large/sriram-raghavan-2224-24-03-2017-17-55-24.jpg"
+        ],
        "cast": [ "Late Dharmendra", "Jaideep Ahlawat", "Agastya Nanda"],    
        "castimage": [
         "https://resizing.flixster.com/VRMi9jKhIumqR7PrI3O_u9i-csA=/fit-in/352x330/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/171367_v9_ba.jpg",
@@ -206,6 +250,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Andhra King Taluka (2025) is a deeply emotional tribute to fan culture and the powerful bond between a star and those who live through their admiration. At its core is Sagar, an ordinary man whose extraordinary devotion to his cinematic idol, the legendary ‘Andhra King’ Surya Kumar, defines every aspect of his life. From daily routines to personal dreams, Sagar’s world revolves around the larger-than-life presence of the star he worships.\n\nSagar’s fandom is not casual admiration but a way of existence. Posters, film dialogues, celebrations of releases, and unwavering loyalty give him identity and belonging. Within his community, he is known not just by name but by his association with Surya Kumar, earning respect, recognition, and purpose through his passion. Yet, this intense devotion comes at a cost. As life moves forward, cracks begin to form in his personal relationships, testing how far admiration can go before it consumes the self.\n\nThe film delicately portrays the emotional highs of fandom—the joy of victories, the pride of representation, and the comfort of shared belief—while also confronting its darker edges. Sagar’s family and loved ones struggle to understand his obsession, questioning whether devotion to a distant icon can coexist with real-world responsibilities and emotional intimacy.\n\nAs challenges mount, Sagar is forced to confront uncomfortable truths about identity, self-worth, and dependence. The line between inspiration and escape blurs, pushing him toward moments of reckoning where he must decide whether his admiration empowers him or holds him back. The presence of Surya Kumar, both as a symbol and an influence, looms large, shaping Sagar’s journey without direct interaction, highlighting the invisible yet profound impact of cinema on ordinary lives.\n\nAndhra King Taluka does not mock fandom; instead, it honors it with empathy and realism. The narrative recognizes fans as emotional stakeholders in cinema’s legacy, while asking thoughtful questions about individuality, balance, and growth. In doing so, the film becomes both a celebration and a reflection.\n\nRooted in emotion and cultural authenticity, Andhra King Taluka (2025) stands as a sincere exploration of devotion, identity, and the powerful role cinema plays in shaping lives far beyond the screen.",
        "director": [
          "Mahesh Babu P."
+        ],
+        "directorimage": [
+        "https://images.filmibeat.com/192x258/img/popcorn/profile_photos/mahesh-babup-20251125122250-8896.jpg"
         ],
        "cast": [ "Ram Pothineni", "Bhagyashri Borse", "Upendra"],
        "castimage": [
@@ -237,6 +284,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Won-sub Choi"
         ],
+        "directorimage": [
+        "https://image.tmdb.org/t/p/w500/2IsWyAKPTE0vKVZWxZy6ITzT7EE.jpg"
+        ],
        "cast": [ "Kwon Sang-woo", "Lee Ji-won", "Jeong Jun-ho"],
        "castimage": [
         "https://image.tmdb.org/t/p/w500/sXWZ82ph4ZPPG9kv2x6nXha1Kk4.jpg",
@@ -266,6 +316,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Holy Night: Demon Hunters (2025) plunges viewers into a shadowed world where ancient evil quietly seeps into modern society. When a sudden surge of violent and unexplainable incidents begins terrorizing the city, authorities quickly realize they are facing forces beyond human understanding. Possessions, ritualistic killings, and supernatural disturbances point to something far older and far more dangerous than any ordinary crime.\n\nAt the center of the chaos is a covert group known only as the Demon Hunters—a small but highly trained team specializing in occult warfare. Each member brings a unique skill set to the fight: deep knowledge of forbidden rituals, physical combat expertise, spiritual resistance, and the mental discipline required to face horrors that defy logic. Bound by a shared past and a grim mission, they operate in secrecy, stepping in where science and law fail.\n\nAs the hunters investigate, they uncover signs of a coordinated uprising of evil spirits led by a powerful entity seeking to tear open the boundary between worlds. The threat is not merely physical; the demons prey on guilt, fear, and hidden trauma, forcing each hunter to confront personal demons alongside the supernatural ones. Every encounter pushes the team closer to collapse as trust is tested and sacrifices become unavoidable.\n\nThe film escalates through intense confrontations, brutal exorcisms, and atmospheric set pieces where faith and violence collide. With time running out, the hunters must stop a ritual that could plunge the city into endless darkness, even if it costs them everything.\n\nHoly Night: Demon Hunters (2025) delivers a dark, adrenaline-fueled experience that combines occult mythology with modern action. Beneath the spectacle lies a story about belief, resilience, and the price of standing between humanity and the abyss.",
        "director": [
          "Lim Dae-hee"
+        ],
+        "directorimage": [
+        "https://biz.chosun.com/resizer/v2/XR2KOU2UTHI3QGQMUWMVCBP2EQ.jpg?auth=aae7dcc390a521b638c80e8022762f124de225e89dc25a994cdcdab14e0604b1&width=530&height=278&smart=true"
         ],
        "cast": [ "Ma Dong-seok", "Seohyun", "Mitch Craig"],
        "castimage": [
@@ -297,6 +350,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Sun Namkoong"
         ],
+        "directorimage": [
+        "https://i.mydramalist.com/02ojO_5c.jpg"
+        ],
        "cast": [ "Gong Myoung", "Shin Eun-soo", "Cha Woo-min"],
        "castimage": [
         "https://i.mydramalist.com/NdLRwA_5c.jpg",
@@ -326,6 +382,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Midnight Sun (2025) is an emotionally driven romance that centers on a seventeen-year-old girl whose life is defined by isolation and careful routines. Due to a rare sun allergy, she cannot be exposed to daylight, forcing her to live a sheltered existence indoors while the rest of the world moves freely outside. Protected by her family yet confined by her condition, her days are quiet, lonely, and filled with longing for a normal teenage life she can only watch from behind glass.\n\nWhen night falls, however, her world changes. Darkness becomes her freedom. Under the cover of moonlight, she ventures outdoors, finding solace in music as she plays her guitar beneath the stars. These nighttime moments are where she feels most alive, expressing emotions she keeps hidden during the day. It is during one of these evenings that she meets a boy she has admired from afar—a connection that sparks an unexpected and deeply felt romance.\n\nAs their relationship grows, the girl experiences joy, excitement, and fear in equal measure. For the first time, she tastes love and connection, but her happiness is shadowed by the secret she keeps. Afraid that the truth about her condition will change how he sees her, she chooses silence, believing that hiding her reality is the only way to protect their fragile bond. Each shared laugh and tender moment deepens the emotional stakes, while the weight of deception quietly builds.\n\nThe tension escalates as her double life becomes harder to maintain. Missed moments, unanswered questions, and unexplained limitations strain the relationship, forcing both characters to confront vulnerability and trust. The story delicately explores themes of honesty, acceptance, and the fear of being truly seen, highlighting how love can be both healing and frightening.\n\nMidnight Sun (2025) is not just a romance, but a coming-of-age story about embracing life despite its limits. Through soft emotions and heartfelt moments, the film asks whether love can survive in the shadows—and whether truth, when finally revealed, can shine brighter than fear.",
        "director": [
          "Young-Jun Cho"
+        ],
+        "directorimage": [
+        "https://i.mydramalist.com/l0qAq4_5f.jpg"
         ],
        "cast": [ "Jung Ji-so", "Kim Sang-ho", "Jin Kyung"],
        "castimage": [
@@ -357,6 +416,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Jin-hwang Kim"
         ],
+       "directorimage": [
+        "https://korean-vibe.com/news/data/20250131/yna1065625209980803_833_thum.jpg"
+        ], 
        "cast": [ "Kim Chan-hyung", "Yoo Da-in", "Park Jong-hwan"],
        "castimage": [
         "https://i.mydramalist.com/Xngld_5c.jpg",
@@ -386,6 +448,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Omniscient Reader: The Prophecy (2025) is a high-concept apocalyptic fantasy that blurs the line between imagination and reality, asking what happens when fiction stops being a story and starts becoming law. The film centers on Kim Dokja, an unremarkable office worker whose only escape from a monotonous life has been an obscure web novel he followed obsessively until its final chapter. For Dokja, the novel was never popular, never celebrated, and never meant to be real—until the day its opening catastrophe unfolds exactly as written.\n\nWithout warning, the world is thrust into a brutal survival scenario governed by mysterious rules, monstrous trials, and unseen cosmic forces. Cities descend into chaos as ordinary people are forced to participate in deadly scenarios where failure means death. While everyone else struggles to understand what is happening, Dokja realizes the horrifying truth: the events unfolding around him are identical to the novel he once read alone. Every disaster, every character, and every cruel twist is something he already knows.\n\nArmed with this unique foresight, Dokja becomes an anomaly in a world spiraling toward extinction. He knows which alliances will shatter, which heroes will rise or fall, and which moments will decide humanity’s fate. However, knowledge alone does not guarantee control. Each attempt to alter the story introduces unpredictable consequences, turning certainty into risk. The more Dokja intervenes, the more the narrative begins to diverge, threatening even his advantage as the sole reader who knows how the story was meant to end.\n\nThe film explores Dokja’s internal struggle as much as its large-scale destruction. Once a passive observer of fictional suffering, he is now forced to confront the moral weight of survival. Saving others may require sacrifice, manipulation, or allowing tragedies he knows are coming. The question is no longer whether he can survive, but whether he deserves to shape the destiny of a world that never chose him as its hero.\n\nOmniscient Reader: The Prophecy blends action, fantasy, and psychological tension, presenting an apocalypse where stories themselves are weapons. It challenges the idea of fate, suggesting that even a predetermined narrative can be rewritten—if someone is willing to bear the cost.\n\nWith its mix of spectacle and introspection, Omniscient Reader: The Prophecy (2025) stands as a gripping exploration of destiny, responsibility, and the terrifying power of knowing what comes next.",
        "director": [
          "Byung-woo Kim"
+        ],
+        "directorimage": [
+        "https://i.mydramalist.com/RBQwBz_5c.jpg"
         ],
        "cast": [ "Ahn Hyo-seop", "Chae Soo-bin", "Kwon Eun-sung"],
        "castimage": [
@@ -417,6 +482,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Hee-chan Ra"
         ],
+        "directorimage": [
+        "https://i.mydramalist.com/xzEVX_5c.jpg"
+        ],
        "cast": [ "Jung Kyung-ho", "Jo Woo-jin", "Park Ji-hwan"],
        "castimage": [
         "https://media.themoviedb.org/t/p/w235_and_h235_face/fanLZsECF5nDy17HkhcdoLJjPaw.jpg",
@@ -446,6 +514,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Projapati 2 (2025) returns to the intimate emotional landscape established in its predecessor, unfolding within the warm yet fragile space of a Bengali family’s restaurant and ancestral home. As a major festival approaches, family members long scattered across cities and lives begin to return, each carrying their own silences, regrets, and unspoken expectations. What appears to be a simple reunion gradually reveals deeper emotional fractures shaped by time, ambition, and unresolved misunderstandings.\n\nThe restaurant stands at the heart of the narrative, functioning as both a livelihood and a living archive of shared memories. It is a place where past laughter lingers in the walls, where routine once meant unity, and where absence has slowly rewritten relationships. As generations gather under one roof, the contrast between tradition and change becomes unavoidable. Elders cling to rituals that once defined family identity, while the younger generation questions whether belonging is tied to place, duty, or emotional connection.\n\nConversations unfold organically through daily interactions, shared meals, and moments of quiet tension. Old conflicts resurface not through confrontation but through hesitation, body language, and emotional distance. The film carefully explores how love persists even when communication fails, and how separation does not erase attachment but reshapes it.\n\nProjapati 2 places particular emphasis on generational perspective. Parents confront the realization that their children’s lives no longer orbit the family home, while the younger members struggle with guilt for choosing independence over proximity. The festival, meant to symbolize unity and renewal, becomes a catalyst for emotional reckoning, pushing each character to reassess what family truly means in a changing world.\n\nRather than offering dramatic resolutions, the film embraces emotional realism. Healing comes through small gestures, shared responsibility, and moments of mutual understanding rather than grand declarations. The restaurant and home, once strained by absence, slowly regain their warmth as the family learns to coexist with difference rather than resist it.\n\nProjapati 2 (2025) is a tender continuation that reflects on modern Bengali family life, capturing the quiet strength of emotional reconciliation and the evolving nature of belonging in a world where home is both a place and a feeling.",
        "director": [
          "Avijit Sen"
+        ],
+        "directorimage": [
+        "https://image.tmdb.org/t/p/w500/cz5u2JCch1HCh6RP8dJ3zwmbCAe.jpg"
         ],
        "cast": [ "Aparajita Adhya", "Anirban Chakrabarti", "Mithun Chakraborty"],
        "castimage": [
@@ -477,6 +548,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Sayantan Ghosal"
         ],
+       "directorimage": [
+        "https://image.tmdb.org/t/p/w500/iTag4JCh7VHPzqM4iolPTmHYvj6.jpg"
+        ], 
        "cast": [ "Rituparna Sengupta", "Rahul Bose", "Kaushik Sen"],
         "castimage": [
         "https://in.bmscdn.com/iedb/artist/images/website/poster/large/rituparna-sengupta-1886-24-03-2017-12-31-25.jpg",
@@ -507,6 +581,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Subramanian RameshKumar"
         ],
+       "directorimage": [
+        "https://nettv4u.com/imagine/24-09-2025/subramanian-ramesh-kumar.png"
+        ],  
        "cast": [ "Udhay Mahesh", "Muthuraman", "Arun Pandian"],
         "castimage": [
         "",
@@ -537,6 +614,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Vijay Karthikeyan"
         ],
+        "directorimage": [
+        "https://upload.wikimedia.org/wikipedia/commons/c/c4/Vijayakarthikeyan_with_his_smile.png"
+        ], 
        "cast": [ "Sudeep", "Naveen Chandra", "Deepshika"],
         "castimage": [
         "https://images.filmibeat.com/img/popcorn/profile_photos/sudeep-20220902160733-343.jpg",
@@ -567,6 +647,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Likith Kumar"
         ],
+       "directorimage": [
+        "https://in.bmscdn.com/artist/likith-kumar-2003830-1753282792.jpg"
+        ],  
        "cast": [ "Chaithra J. Achar", "Master Anurag", "Maahir Mohiuddin"],
        "castimage": [
         "https://media.themoviedb.org/t/p/w235_and_h235_face/mCpqijk7HhguNYcffPhprGVHts5.jpg",
@@ -574,7 +657,7 @@ export const MOVIES_DATA: Movie[] = [
         "https://in.bmscdn.com/artist/maahir-mohiuddin-1064421-1720775209.jpg"
         ],
         "timestamp": 1700000000,
-        "ratingTotal": 59,
+        "ratingTotal": 86,
         "ratingCount": 10,
         "views": 1250
       },
@@ -597,6 +680,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Kumar"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": [ "Reshma Lingarajappa", "Siddu Moolimani", "Tabla Nani"],
        "castimage": [
         "https://nettv4u.com/imagine/08-07-2025/reshma-lingarajappa.png",
@@ -626,6 +712,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Sanju Weds Geetha 2 (2025) revisits a deeply emotional love story rooted in tradition, ambition, and unwavering devotion. The film opens with Sanju, a skilled and passionate weaver, whose life revolves around looms, fabric, and the quiet poetry of craftsmanship. His love for Geetha is expressed not through grand words, but through his art—most memorably when he creates a saree so exquisite that it earns national recognition, symbolizing both his talent and his feelings.\n\nDespite strong opposition from Geetha’s father, who doubts Sanju’s financial stability and social standing, the couple chooses love over approval. Their marriage is an act of courage, marking the beginning of a shared dream rather than its conclusion. Together, they set out to build a textile business from the ground up, blending tradition with modern ambition. The early years are filled with struggle, sacrifice, and small victories that strengthen their bond.\n\nAs their business gains recognition, the film shifts focus to the emotional cost of success. Long hours, mounting responsibilities, and unspoken pressures begin to test their relationship. Yet, Sanju and Geetha remain united, drawing strength from the very love that once defied social barriers.\n\nThe narrative takes a dramatic turn during their wedding anniversary celebration—a moment meant to honor how far they’ve come. An unexpected tragedy strikes, shattering the joy they’ve built and forcing both to confront grief, guilt, and fear of loss. What follows is an intense emotional journey where love is no longer just about dreams, but survival.\n\nSanju Weds Geetha 2 explores how relationships endure when tested by fate rather than circumstance. It reflects on resilience, the price of ambition, and the quiet power of standing together when everything familiar begins to unravel. The film ultimately asks whether love shaped by hardship can withstand tragedy—and emerge stronger than before.",
        "director": [
          "Nagashekar"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": [ "Rachita Ram", "Sadhu Kokila", "Rangayana Raghu"],
         "castimage": [
@@ -657,6 +746,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Prakash Veer"
         ],
+         "directorimage": [
+        ""
+        ],
        "cast": [ "Darshan Thoogudeep", "Mahesh Manjrekar", "Huli Karthik"],
         "castimage": [
         "https://image.tmdb.org/t/p/w500/9kfjzl9jFDEU4ZE0KJfrZVg6mFC.jpg",
@@ -687,6 +779,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Full Stop (2025) is a socially driven drama that places resilience, solidarity, and moral conviction at the center of its narrative. Set across Gujarat and international locations, the film follows three brave women whose lives intersect through a shared mission to stand against injustice. Each woman comes from a different background, shaped by distinct personal struggles, yet they are bound by a common refusal to remain silent in the face of wrongdoing.\n\nWhat begins as a sincere effort to help victims of injustice soon transforms into something far more complex. As the women extend their support to others, they uncover deeply rooted systems of exploitation, fear, and abuse that operate quietly but powerfully. Their initial acts of compassion evolve into deliberate resistance, forcing them to step into roles they never imagined for themselves. With every step forward, the stakes grow higher, and the risks more personal.\n\nThe film carefully explores how activism tests not only courage but trust. As the trio navigates social pressure, legal obstacles, and emotional exhaustion, cracks begin to form within their unity. External threats challenge their safety, while internal doubts threaten their resolve. Each woman must confront her own fears, questioning how much she is willing to sacrifice for a cause that offers no guarantees of victory.\n\nFull Stop does not present heroism as effortless or glamorous. Instead, it portrays resistance as exhausting, lonely, and often dangerous. The strength of the story lies in its honest depiction of sisterhood—how solidarity can empower individuals, yet also demand painful compromises. Moments of doubt, disagreement, and vulnerability make their bond feel deeply human and real.\n\nAs their mission reaches a critical turning point, the women are forced to decide whether standing together is enough to overcome forces far larger than themselves. The film asks difficult questions about justice, accountability, and the true cost of speaking out.\n\nAt its core, Full Stop (2025) is a story about voices that refuse to be muted. It is a tribute to collective courage and the belief that even when the odds are overwhelming, standing firm together can create ripples of change. The film leaves viewers reflecting on the power of unity and the importance of drawing a line—once and for all—against injustice.",
        "director": [
          "Jakee Patel", "Pritesh Patel"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": [ "Saurabh Barot", "Damini Dave", "Aman Kureshi"],
        
@@ -724,6 +819,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Dheeraj Rattan"
         ],
+         "directorimage": [
+        ""
+        ],
        "cast": ["Babbu Mann", "Guru Randhawa", "Guggu Gill"],
        "castimage": [
         "https://image.tmdb.org/t/p/w500/brN5DzuCHvaUERUGwWhBipTXnSu.jpg",
@@ -754,6 +852,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Rohan Sen"
         ],
+         "directorimage": [
+        ""
+        ],
        "cast": [ "Biswanath Basu", "Biswajit Chakraborty", "Amrita De"],
         "castimage": [
         "https://image.tmdb.org/t/p/w500/2du8ue0P7ewiy5YzIPsCUYxVc9x.jpg",
@@ -783,6 +884,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Surprise (2025) is a stylish, suspense-driven crime thriller that explores how one unexpected encounter can dismantle even the most carefully planned escape. The story follows two sharp, fashionable thieves who have just pulled off a lucrative robbery and are headed to Goa, believing they are finally free to disappear into luxury, anonymity, and indulgence.\n\nTheir journey feels effortless at first, driven by confidence and the illusion of control. With stolen riches in hand and the road stretching ahead, the pair believes the danger is behind them. That illusion shatters when they pick up a lone stranger along the way. What begins as a casual act soon takes a darker turn when the stranger reveals that he recognizes one of them.\n\nFrom that moment, the escape transforms into a psychological trap. Conversations grow tense, glances carry suspicion, and trust between the thieves begins to fracture. The stranger’s knowledge is unsettlingly precise, hinting at a past neither thief is prepared to confront. Lies pile upon lies as each character attempts to maintain dominance, hide fear, and stay one step ahead.\n\nAs the road trip continues, buried secrets surface—far darker and more dangerous than the original heist. The stolen money becomes secondary to survival as manipulation, paranoia, and hidden motives collide. Every stop feels like a potential ambush, and every word spoken could trigger irreversible consequences.\n\nSurprise (2025) thrives on slow-burning tension and character unraveling rather than explosive action. It examines how criminal partnerships are tested under pressure and how the past has a way of demanding payment at the worst possible moment. By the time the truth fully reveals itself, the film makes it clear that the real crime was never just the theft—but the secrets the characters believed they could outrun.",
        "director": [
           "Sachin Brahmbhatt"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": [ "Helly Shah", "Jahnvi Chauhan", "Vatsal Sheth"],
        "castimage": [
@@ -815,6 +919,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Ksshitij Chaudhary"
         ],
+         "directorimage": [
+        ""
+        ],
        "cast": [ "Alish Alish", "Sanjeev Attri", "Sukhdev Barnala"],
        "castimage": [
         "",
@@ -844,6 +951,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "NA",
        "director": [
           "Rajesh Pinjani"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": [ "Mohan Agashe", "Ashwini Giri", "Bhushan Manjule"],
        "castimage": [
@@ -877,6 +987,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Jorge Torregrossa"
         ],
+        "directorimage": [
+        "https://resizing.flixster.com/Rpx8TYsq09oLg5pTvWPWpnN5dUs=/218x280/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/432412_v9_ba.jpg"
+        ],
        "cast": ["Vicky Peña", "Àgata Roca", "David Bagés"],      
        "castimage": [
         "https://media.themoviedb.org/t/p/w235_and_h235_face/xH6QQR5dd9pesS7hhxz9hMg1HB.jpg",
@@ -906,6 +1019,9 @@ export const MOVIES_DATA: Movie[] = [
        "content": "Tenu Suit Suit Karda (2025) is a delightful family comedy that proves how even the smallest gestures can take on a life of their own. At the heart of the story is a simple suit, gifted by a daughter-in-law with genuine affection and the hope of acceptance. However, when Harpal Kaur, the strong-willed matriarch of the family, bluntly rejects the gift, what should have been a quiet disappointment turns into the beginning of an unexpected adventure.\n\nUnwilling to let emotions sour the household, the father-in-law secretly intervenes. Believing that intentions matter more than pride, he quietly sends the suit back into circulation, hoping it will find appreciation without reopening old tensions. From that moment on, the suit begins a curious journey, moving between relatives’ homes, neighbors, and extended family members, each transfer driven by misunderstanding, assumption, or well-meaning interference.\n\nAs the suit changes hands, confusion multiplies. Characters misinterpret motives, suspect secret admirers, and draw their own conclusions about who truly wanted the gift and why. Each household adds its own layer of drama and humor, turning an ordinary piece of clothing into a symbol of unresolved emotions, unspoken affection, and family politics.\n\nThe film uses situational comedy rather than exaggeration, finding humor in everyday domestic behavior. Pride clashes with kindness, ego with empathy, and tradition with emotional honesty. The suit becomes a silent observer of family dynamics, exposing how easily communication breaks down when people assume instead of listen.\n\nEventually, the journey circles back to where it began. As truths surface and intentions are revealed, misunderstandings dissolve into laughter and reconciliation. The suit’s return marks more than the end of confusion—it signals emotional acceptance and renewed harmony within the family.\n\nTenu Suit Suit Karda (2025) is a gentle reminder that love often hides behind awkward moments and misplaced pride. Warm, relatable, and quietly humorous, the film celebrates family bonds through everyday chaos, proving that sometimes, happiness simply needs to find its way back home.",
        "director": [
           "Satti Bhairupa"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": ["Jagtar Benipal", "Kuldeep Dosanjh", "Gurpreet Ghudha"],
        "castimage": [
@@ -937,6 +1053,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Byung-woo Kim"
         ],
+         "directorimage": [
+        ""
+        ],
        "cast": ["Kim Da-mi", "Park Hae-soo", "Kwon Eun-sung"],
        "castimage": [
         "https://i.mydramalist.com/rEmV7c.jpg",
@@ -966,6 +1085,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Misri (2025) is a gentle, emotionally grounded romance that explores how unexpected connections can quietly change the course of ordinary lives. The story centers on two individuals from different creative worlds who meet not through planning, but through chance. One is a spontaneous photographer, driven by instinct and emotion, always chasing fleeting moments through his lens. The other is a pottery instructor, calm and methodical, someone who believes in shaping life slowly, carefully, with patience and discipline.\n\nTheir first encounters are marked by curiosity rather than certainty. Conversations flow easily, silences feel comfortable, and a subtle attraction begins to take shape. What draws them together is not dramatic confession, but a shared appreciation for creation—whether it is capturing light in a photograph or molding clay into something meaningful. Through small moments, walks, shared routines, and creative exchanges, their bond deepens into an unexpected romance.\n\nAs their relationship grows stronger, reality begins to intervene. Personal responsibilities, emotional baggage, and unspoken fears surface, testing the fragile balance they have built. The photographer’s impulsive nature clashes with the instructor’s need for stability, forcing both to question whether love alone is enough to bridge their differences. Life presents challenges that neither anticipated, pushing them to confront sacrifices, timing, and the cost of staying true to themselves while staying together.\n\nMisri does not rely on grand gestures or dramatic twists. Instead, it focuses on emotional authenticity—the kind of love that grows quietly but feels deeply. The film reflects on how relationships evolve when ideals meet reality, and how two people must decide whether to adapt, compromise, or let go.\n\nAt its heart, Misri (2025) is a story about modern love shaped by uncertainty. It celebrates vulnerability, creative passion, and the courage it takes to choose connection even when the future feels unclear. The film resonates as a soft yet honest portrayal of romance, reminding viewers that some of the most meaningful relationships begin without intention, but survive only through understanding and growth.",
        "director": [
           "Kushal Naik"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": [ "Manasi Parekh", "Raunaq Kamdar", "Tiku Talsania"],
         "castimage": [
@@ -997,6 +1119,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Siddhartha Chakraborty", "Souvik Dey"
         ],
+         "directorimage": [
+        ""
+        ],
        "cast": [ "Tanushree Chakraborty", "Rajatabha Dutta", "Debraj Bhattacharjee"],
        "castimage": [
         "https://image.tmdb.org/t/p/w500/9oO5fh4Cwnwaza6BtvSPKp3VtI6.jpg",
@@ -1026,6 +1151,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "The Great Flood (2025) unfolds in a world pushed beyond its breaking point as a catastrophic global flood consumes cities, erases borders, and collapses civilization within hours. Oceans rise without mercy, storms converge, and humanity is left scrambling for higher ground as the planet itself turns hostile. There are no safe zones, no governments left in control, only fragments of people clinging to survival.\n\nAt the heart of this global catastrophe is a single apartment building slowly filling with water. Inside, a desperate struggle unfolds as adults race against time to save a trapped child. What begins as a localized rescue quickly transforms into a brutal test of endurance, morality, and hope. Each rising floor becomes a reminder that escape is running out and that the flood does not negotiate.\n\nThe film narrows its focus deliberately, trading large-scale spectacle for suffocating intimacy. Water crashes through windows, power fails, and walls that once offered safety turn into barriers of death. Panic, exhaustion, and fear collide as choices must be made in seconds. Every decision carries irreversible consequences.\n\nAs the flood climbs higher, the story strips humanity down to its rawest instincts. Sacrifice becomes inevitable. Survival is no longer about saving oneself, but about preserving innocence in a world that may not see another sunrise. The adults are forced to confront the meaning of responsibility when the future itself is uncertain.\n\nThe Great Flood (2025) is not just a disaster film, but a meditation on love and courage at the edge of extinction. Against unstoppable natural forces, the film argues that the final measure of humanity is not whether the world survives, but whether compassion does. In the face of total collapse, saving one life becomes an act of defiance against the end of everything.",
        "director": [
           "Byung-woo Kim"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": ["Kim Da-mi", "Park Hae-soo", "Kwon Eun-sung"],
        "castimage": [
@@ -1057,6 +1185,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Lee Chang-min"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": ["Lee Jun-ho", "Kim Hye-jun", "Kim Byeong-cheol"],
        "castimage": [
         "https://image.tmdb.org/t/p/w500/DJYwG0eWdCoxvqWhLsnJNKQlMR.jpg",
@@ -1087,6 +1218,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Santosh Davakhar"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": [ "Trupthi Ravindra", "Ishita Deshmukh", "Kailash Waghmare"],
        "castimage": [
         "https://images.filmibeat.com/ph-big/2025/09/trupthi-ravindra1757322127_5.jpg",
@@ -1117,6 +1251,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Claudio Fähn"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": ["Hera Hilmar", "Jeremy Irvine", "Kelsey Grammer"],
        "castimage": [
         "https://resizing.flixster.com/5Mcm1kctykGoWNokJB-zdOO8O8E=/fit-in/705x460/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/679284_v9_bb.jpg",
@@ -1147,6 +1284,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Joseph Clinton"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": ["Harsh Roshan", "Bhanu Prakash", "Jayateertha"],
        "castimage": [
         "https://images.filmibeat.com/192x258/img/popcorn/profile_photos/harsh-roshan-20250310102310-51877.jpg",
@@ -1177,6 +1317,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Taj"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": ["Nirmal Rishi", "Sukhwinder Chahal", "Baljinder Kaur"],
        "castimage": [
         "https://in.bmscdn.com/iedb/artist/images/website/poster/large/nirmal-rishi-8449-1745243974.jpg",
@@ -1207,6 +1350,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Dhrubo Banerjee"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": [ "Dev", "Anirban Bhattacharya", "Sohini Sarkar"],
        "castimage": [
         "https://image.tmdb.org/t/p/w500/5mBOEEyenbcHgxwAV0NCGNRHaxY.jpg",
@@ -1237,6 +1383,9 @@ export const MOVIES_DATA: Movie[] = [
         "director": [
           "Christopher Leone"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": ["Rainn Wilson", "Lil Rel Howery", "Aimee Carrero"],
        "castimage": [
           "https://ntvb.tmsimg.com/assets/assets/222248_v9_bc.jpg?w=360&h=480",
@@ -1267,6 +1416,9 @@ export const MOVIES_DATA: Movie[] = [
         "director": [
           "Tom Gormican"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": ["Jack Black", "Paul Rudd", "Steve Zahn"],
        "castimage": [
         "https://m.media-amazon.com/images/M/MV5BNjY3OTQwMDctY2M2Ni00OGE2LThiNjMtYjg0MDg3YjVjN2FiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
@@ -1296,6 +1448,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Jalso: A Family Invitation (2025) unfolds as an intimate family drama centered on Aastha, a woman who returns to her ancestral home after many years to attend a wedding. What begins as a simple family gathering soon turns into a deeply emotional journey as old memories, unresolved conflicts, and unspoken judgments resurface the moment she steps back into familiar surroundings.\n\nSurrounded by relatives, traditions, and the rituals of celebration, Aastha finds herself quietly scrutinized for the life she chose away from home. Beneath the warmth of hospitality lies subtle disapproval, whispered opinions, and expectations shaped by tradition rather than understanding. The wedding becomes a backdrop against which her personal struggles play out, forcing her to confront not only how her family sees her, but how she sees herself.\n\nAs festivities progress, a shadow from Aastha’s past begins to emerge. An old emotional wound—linked to love, loss, or a difficult choice she once made—threatens to overwhelm her during what should be a joyous occasion. The tension between societal norms and personal truth intensifies, creating moments of quiet pain as well as powerful reflection.\n\nThroughout her stay, faith plays a grounding role in Aastha’s journey. Her connection to Dwarkadishji becomes a source of inner strength, offering her clarity and resilience when judgment feels suffocating. Through prayer, reflection, and meaningful conversations, she begins to reclaim confidence in her beliefs and choices.\n\nJalso is not just about conflict; it is about healing through bonds. Unexpected support from family members, moments of honesty, and emotional breakthroughs help Aastha rediscover her voice. By facing her past instead of fleeing from it, she learns that truth does not weaken relationships—it strengthens them.\n\nJalso: A Family Invitation (2025) is a heartfelt tale of love, faith, tradition, and self-acceptance. It captures the emotional complexity of returning home, reminding audiences that finding one’s voice often requires standing firm in truth, even within the walls of family.",
        "director": [
           "Rajiv S. Ruia"
+        ],
+        "directorimage": [
+        ""
         ],
        "cast": [ "Bhavin Bhanushali", "Hemang Dave", "Kurush Deboo"],
        "castimage": [
@@ -1327,7 +1482,7 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Vinit Parulekar"
         ],
-       "cast": ["Nikhil Bane", "Juilee Temkar", "Dhanshri Kadgoankar"],
+        "cast": ["Nikhil Bane", "Juilee Temkar", "Dhanshri Kadgoankar"],
        "castimage": [
         "https://nettv4u.com/imagine/19-03-2024/nikhil-bane.jpg",
         "https://assets-in.bmscdn.com/iedb/artist/images/website/poster/large/juilee-temkar-2051302-1759499031.jpg",
@@ -1357,6 +1512,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Prem Singh Sidhu"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": [ "Neeru Bajwa", "Tania Amrit", "Amrit Amby"],
        "castimage": [
         "https://image.tmdb.org/t/p/w500/8WmLolNEPl2mq0JxTUi6Opzwk8c.jpg",
@@ -1387,6 +1545,9 @@ export const MOVIES_DATA: Movie[] = [
         "director": [
           "Alex Garcia Lopezi, Jeremy Webb"
         ],
+        "directorimage": [
+        ""
+        ], 
       "cast": ["Freya Allan", "Anya Chalotra", "Eamon Farren"],
         "castimage": [
           "https://media.themoviedb.org/t/p/w235_and_h235_face/8RuLG2mePw8YgFNUjWROBuxMrwT.jpg",
@@ -1417,6 +1578,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Puneet Prakash"
       ],
+      "directorimage": [
+        ""
+        ], 
      "cast": ["Huma Qureshi", "Siddhi Malviya", "Uday Atroliya"],
       "castimage": [
         "https://media.themoviedb.org/t/p/w235_and_h235_face/j4RI7eoSqbWTK6hkCNO9wN78dMM.jpg",
@@ -1447,6 +1611,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Edgar Wright"
       ],
+      "directorimage": [
+        ""
+        ], 
       "cast": ["Glen Powell", "Alyssa Benn", "Sienna Benn"],
       "castimage": [
         "https://image.tmdb.org/t/p/w500/fUnIaJkdgvQTztyR1nLeUceSzly.jpg",
@@ -1477,6 +1644,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Gaurav Rana"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": ["Seerat Mast", "Mahabir Bhullar", "Sukhwinder Chahal"],
        "castimage": [
         "",
@@ -1507,6 +1677,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Jessica Swale"
       ],
+      "directorimage": [
+        ""
+        ], 
       "cast": ["Zooey Deschanel", "Charlie Cox", "Ellyn Jameson"],
       "castimage": [
         "https://m.media-amazon.com/images/M/MV5BMTgzMjM2NDE1OF5BMl5BanBnXkFtZTcwMjA2NDU5OA@@._V1_FMjpg_UX1000_.jpg",
@@ -1537,6 +1710,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Sandeep Sathi"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": [ "Aparajita Adhya", "Buddhadeb Bhattacharya", "Shoaib Kabeer"],
        "castimage": [
         "https://image.tmdb.org/t/p/w500/aZ9kI3oc5YU0bEwDEVbMDHUOHVc.jpg",
@@ -1567,6 +1743,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Sachit Patil", "Pushkar Shrotri"
         ],
+        "directorimage": [
+        ""
+        ], 
        "cast": ["Priya Bapat", "Mukta Barve", "Sandeep Kulkarni"],
        "castimage": [
         "https://m.media-amazon.com/images/M/MV5BMzk0MTM0NjYtYzU3ZS00OGMyLWFhODQtY2ZjZDMxNWQwMDFhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
@@ -1597,6 +1776,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Ernesto Díaz Espinoza"
       ],
+       "directorimage": [
+        ""
+        ],
       "cast": ["Scott Adkins", "Marko Zaror", "Alanna De La Rossa"],
       "castimage": [
         "https://image.tmdb.org/t/p/w500/9NRr2a1riIn5CWn5McZLJlk4vxR.jpg",
@@ -1627,8 +1809,10 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Manish Saini"
         ],
-       "cast": [ "Utkarsh Mazumdar", "Neela Mulherkar", "Vyoma Nandi"],
-
+         "directorimage": [
+        ""
+        ],
+      "cast": [ "Utkarsh Mazumdar", "Neela Mulherkar", "Vyoma Nandi"],
        "castimage": [
         "https://in.bmscdn.com/artist/utkarsh-mazumdar-18021-1741327344.jpg",
         "https://nettv4u.com/imagine/29-07-2019/neela-malurkar.jpg",
@@ -1658,6 +1842,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Yorgos Lanthimos"
       ],
+        "directorimage": [
+        ""
+        ],
       "cast": ["Emma Stone", "Jesse Plemons", "Aidan Delbis"],
       "castimage": [
         "https://images.mubicdn.net/images/cast_member/51060/cache-2852-1482873231/image-w856.jpg",
@@ -1687,6 +1874,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "NA",
        "director": [
           "Amol Shetge"
+        ],
+        "directorimage": [
+        ""
         ],
        "cast": ["Ajinkya Deo", "Maadhav Deochake", "Krishnakant Keni"],
        "castimage": [
@@ -1718,6 +1908,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Dan Trachtenberg"
       ],
+       "directorimage": [
+        ""
+        ],
      "cast": ["Elle Fanning", "Dimitrius Schuster-Koloamatangi", "Ravi Narayan"],
       "castimage": [
         "https://media.themoviedb.org/t/p/w235_and_h235_face/e8CUyxQSE99y5IOfzSLtHC0B0Ch.jpg",
@@ -1747,6 +1940,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Furlow (2025) is a sharply observed social drama that explores corruption not as a sudden fall, but as a gradual erosion of conscience. The film follows a newly appointed food inspector who enters his role with a sense of responsibility and quiet pride. Tasked with ensuring public safety and enforcing regulations, he initially views his job as a chance to bring fairness and accountability into a system riddled with shortcuts.\n\nHowever, reality quickly challenges his ideals. From his first days in the field, he encounters an ecosystem where bribes are normalized, inspections are performative, and rules exist only on paper. Shop owners, factory managers, and middlemen approach him with subtle offers—free meals, small favors, envelopes passed discreetly. At first, he resists, convinced that integrity will protect him.\n\nThe pressure intensifies as colleagues casually justify corruption as survival rather than crime. He begins to rationalize small compromises, telling himself that accepting minor perks harms no one. Slowly, those compromises grow. What starts as distraction turns into dependence, and moral clarity blurs as comfort replaces conviction.\n\nThe film carefully traces his internal conflict, showing how corruption thrives not just through greed, but through exhaustion, isolation, and fear of standing alone. As he sinks deeper into the system, consequences emerge—unsafe food passes inspections, public trust erodes, and guilt becomes impossible to silence.\n\nFurlow avoids sensationalism, instead focusing on the quiet damage caused by everyday dishonesty. The protagonist is neither villain nor hero, but a reflection of how systems fail individuals who enter them unprepared for moral pressure.\n\nBy the film’s final act, the inspector is forced to confront the cost of his choices, facing a reckoning that questions whether redemption is still possible. Furlow (2025) is a sobering reminder that corruption often begins not with evil intent, but with one moment of looking away.",
        "director": [
           "Viikkram Groverr"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": ["Gurlove Singh Ratol", "Parvinder Singh", "Gurpreet Ghuggi"],
        "castimage": [
@@ -1779,6 +1975,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Anusha Rizvi"
       ],
+      "directorimage": [
+        ""
+        ],
       "cast": ["Shreya Dhanwanthary", "Kritika Kamra", "Sheeba Chaddha"],
       "castimage": [
         "https://media.themoviedb.org/t/p/w235_and_h235_face/kzLK1i4bQeajhzRAMPZAonAM6b7.jpg",
@@ -1808,6 +2007,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Auntypreneur (2025) is a lively Hindi comedy that flips age, gender, and economic stereotypes on their head through the story of Jasuben, a sharp-witted 65-year-old woman who refuses to fade quietly into retirement. Played by Supriya Pathak Kapur, Jasuben becomes an unlikely entrepreneur, driven not by greed, but by dignity, independence, and a question that challenges decades of conditioning: why should boys have all the funds.\n\nHaving spent her life managing homes, sacrifices, and invisible labor, Jasuben realizes that financial dependence has always been society’s unspoken rule for women like her. Instead of accepting it, she assembles a group of fellow homemakers, women long underestimated for their age and domestic roles, and together they venture into the world of business with determination, humor, and unapologetic confidence.\n\nThe film draws its comedy from everyday realities, generational clashes, and the joy of watching underestimated women outsmart systems never built for them. Yet beneath the humor lies a sharp social commentary on economic inequality, gendered access to money, and the quiet strength of women who have always been capable, just never given the platform.\n\nAs Jasuben and her team navigate skepticism, bureaucratic hurdles, and personal doubts, Auntypreneur celebrates the idea that ambition has no expiry date. Their journey becomes less about profit and more about self-worth, mutual support, and reclaiming identities beyond wife, mother, or grandmother.\n\nAuntypreneur (2025) stands as an empowering, feel-good film that champions financial independence, collective strength, and the courage to begin again at any age. It leaves audiences smiling, inspired, and reminded that empowerment is most powerful when it is shared.",
        "director": [
           "Pratik Kothari"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": [ "Supriya Pathak", "Brinda Trivedi", "Margi Desai"],
        "castimage": [
@@ -1839,6 +2041,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Debjit Hazra"
         ],
+         "directorimage": [
+        ""
+        ],
        "cast": [ "Saurav Das", "Juiee Sarkar", "Rajatabha Dutta"],
        "castimage": [
         "https://image.tmdb.org/t/p/w500/pmWYgVDeSGiPFiU1eevF7ilWq8b.jpg",
@@ -1868,6 +2073,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Reel Star (2025) is a socially driven thriller that follows the life of a humble cycle vendor whose simple dreams are shattered in a single violent moment. His most prized possession, a dream bike symbolizing years of hard work and aspiration, is destroyed in a sudden blast that ripples through his neighborhood. What begins as personal loss soon reveals itself as part of something far larger and far more dangerous.\n\nAs the protagonist searches for answers, he stumbles into a hidden network of corruption that reaches deep into local systems of power. Authorities dismiss the incident as collateral damage, urging him to move on, but unanswered questions refuse to fade. Each step he takes exposes layers of manipulation, cover-ups, and silence enforced through fear.\n\nHis journey changes course when he crosses paths with a fearless journalist determined to expose the truth. Unlike others, she listens. Together, they begin piecing together evidence, connecting the blast to illegal dealings and powerful figures who thrive on invisibility. Their alliance is built on shared risk—one driven by personal injustice, the other by professional integrity.\n\nThe film balances tension with emotional realism, showing how standing up to corruption comes at a heavy cost. Threats escalate, trust is tested, and the line between safety and truth grows increasingly thin. The cycle vendor, once defined by routine and survival, evolves into an unlikely symbol of resistance, discovering strength he never believed he possessed.\n\nReel Star (2025) is ultimately a story about dignity and courage in the face of overwhelming odds. It highlights how ordinary lives can ignite extraordinary change, reminding audiences that justice often begins with a single voice refusing to stay silent.",
        "director": [
           "Simmy Joseph","Robin Verghese"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": [ "Prasad Oak", "Bhushan Manjule", "Milind Shinde"],
        "castimage": [
@@ -1899,6 +2107,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Aditya Dhar"
       ],
+       "directorimage": [
+        ""
+        ],
       "cast": ["Ranveer Singh", "Akshaye Khanna", "Sanjay Dutt"],
       "castimage": [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjxgF1RtBh_v8apmAf2TG2faxmGjOqKEq-SQ&s",
@@ -1928,6 +2139,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Asurvan (2025) is a slow-burning mystery thriller that draws its power from atmosphere, folklore, and psychological tension rather than conventional spectacle. The film follows an outsider who arrives at a remote tribal village surrounded by a dense, ancient forest known as Asurvan. From the moment he steps into this isolated world, it becomes clear that the village operates under rules shaped as much by fear as by tradition.\n\nStrange incidents plague the community—disappearances, unsettling sounds in the night, and rituals rooted in generations of belief. The villagers attribute these events to forces that dwell within the forest, entities spoken of only in whispers. To them, Asurvan is not merely land, but a living presence capable of punishment and protection. The outsider, armed with logic and skepticism, initially dismisses these fears as superstition, choosing observation over belief.\n\nAs he spends more time among the villagers, cracks begin to appear in his certainty. What seems like coincidence slowly turns into a pattern. Stories passed down through oral tradition start aligning with real-world events, blurring the boundary between myth and reality. The forest itself becomes an ever-present character, looming, silent, and watchful, amplifying the sense of dread.\n\nThe film carefully unravels its mystery by revealing layers of buried history, forbidden truths, and secrets deliberately hidden to preserve order within the village. Each revelation challenges the outsider’s perception of reason, forcing him to confront the possibility that some fears survive because they are rooted in truth.\n\nAsurvan builds toward a gripping conclusion where belief, survival, and reality collide. Rather than offering simple answers, the film leaves audiences questioning whether the true horror lies within the forest—or within the human need to suppress what it cannot control. Dark, immersive, and unsettling, Asurvan (2025) is a haunting exploration of fear shaped by time, land, and memory.",
        "director": [
           "Sachin Ramchandra Ambat"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": ["Rohit Ayare", "Nilesh Badhe", "Sachin Chandwade"],
        "castimage": [
@@ -1959,6 +2173,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Milap Zaveri"
       ],
+       "directorimage": [
+        ""
+        ],
       "cast": [ "Riteish Deshmukh", "Vivek Oberoi", "Aftab Shivdasani"],
       "castimage": [
         "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Riteish_Deshmukh_at_the_Promotion_of_%27Kyaa_Super_Kool_Hain_Hum%27_06.jpg/250px-Riteish_Deshmukh_at_the_Promotion_of_%27Kyaa_Super_Kool_Hain_Hum%27_06.jpg",
@@ -1988,6 +2205,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Yamla (2025) tells a deeply personal story of identity, responsibility, and the price of following one’s passion. Set in the bustling streets of Amritsar, the film follows a young man born into privilege as the heir to his father’s powerful business empire. From the outside, his future appears secure and clearly defined. Generations before him have upheld the family name through discipline, tradition, and commerce, and he is expected to continue that legacy without question.\n\nYet beneath the surface, Yamla carries a different dream. Music, not business, fuels his sense of purpose. The rhythms of Punjab’s streets, the poetry in everyday voices, and the emotional pull of melody speak to him in ways balance sheets never could. His passion becomes a quiet rebellion, practiced in stolen moments away from the watchful eyes of family expectations.\n\nAs pressure mounts to step into his father’s role, Yamla finds himself trapped between duty and desire. His father represents stability, sacrifice, and the belief that tradition ensures survival. Yamla represents a generation questioning whether success without fulfillment is truly success at all. Their conflict unfolds not through loud confrontations, but through disappointment, silence, and emotional distance.\n\nThe film uses music as both escape and expression, allowing Yamla to articulate emotions he cannot voice openly. Relationships strain as choices become unavoidable, forcing him to confront what he is willing to lose in order to stay true to himself.\n\nYamla (2025) is ultimately a story about courage—the courage to honor one’s roots while daring to grow beyond them. It captures the tension between inherited responsibility and personal ambition, offering a heartfelt portrait of a young man searching for harmony between legacy and self-expression in a world that demands he choose only one.",
        "director": [
           "Rakesh Mehta"
+        ],
+         "directorimage": [
+        ""
         ],
        "cast": ["Rana Jung Bahadur", "Pushap Bawa", "Raghveer Boli"],
        "castimage": [
@@ -2019,6 +2239,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Michael Showalter"
       ],
+      "directorimage": [
+        ""
+        ],
       "cast": ["Michelle Pfeiffer", "Denis Leary", "Felicity Jones"],
       "castimage": [
         "https://m.media-amazon.com/images/M/MV5BMTUzNjI0Njc5NF5BMl5BanBnXkFtZTYwOTM2MjYz._V1_FMjpg_UX1000_.jpg",
@@ -2048,6 +2271,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Kadhipatta (2025) is a warm, emotionally grounded drama that examines a relationship worn down by years of unresolved conflict. At the center of the story is a married couple forced to live under the same roof again after a long period of emotional distance. Conversations are strained, silences are heavy, and old wounds resurface through ordinary routines that once held comfort.\n\nAs they navigate shared spaces, the film shifts its focus away from dramatic confrontations and instead highlights subtle, everyday moments—shared meals, household responsibilities, family gatherings, and unspoken gestures. These seemingly insignificant interactions slowly begin to reveal layers of care that never truly disappeared. What appears to be resentment is often rooted in misunderstood intentions and sacrifices that went unnoticed.\n\nThe narrative deepens when a hidden act of love comes to light, reshaping how both partners see their past. This revelation is not grand or theatrical, but deeply personal, emphasizing how love often expresses itself quietly rather than loudly. Through this discovery, the couple begins to reassess their assumptions, recognizing how pride, silence, and routine eroded their emotional connection over time.\n\nFamily life plays a crucial role in Kadhipatta, acting as both pressure and healing force. Relatives, traditions, and shared responsibilities create friction, but they also remind the couple of what once bound them together. The film gently explores how relationships evolve, not through dramatic change, but through patience, understanding, and emotional honesty.\n\nKadhipatta (2025) ultimately becomes a reflection on companionship, forgiveness, and the fragile beauty of second chances. It suggests that love does not always fade—it waits, hidden in daily moments, for the courage to be seen again.",
        "director": [
           "Vishwaa"
+        ],
+        "directorimage": [
+        ""
         ],
        "cast": [ "Chetana Bhat", "Kunal Gajbhare", "Shubhangi Gokhale"],
        "castimage": [
@@ -2079,6 +2305,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Arun Prabhu Purushothaman"
       ],
+      "directorimage": [
+        ""
+        ],
       "cast": [
         "Nivin Pauly",
         "Shruti Ramachandran",
@@ -2113,6 +2342,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Shhivaji Doltade"
         ],
+        "directorimage": [
+        ""
+        ],
        "cast": ["Vinamra Babhal", "Anushka Benke", "Bhakti Chavan"],
        "castimage": [
         "https://in.bmscdn.com/iedb/artist/images/website/poster/large/vinamra-bhabal-1091489-1699277520.jpg",
@@ -2142,6 +2374,9 @@ export const MOVIES_DATA: Movie[] = [
        "content": "Fari Ek Vaar (2025) is a heartfelt Punjabi drama that centers on hope, love, and the power of togetherness in a world that rarely unfolds as planned. The film gently reminds audiences that happiness is not born from perfection, but from acceptance, resilience, and the support we give one another through life’s uncertainties.\n\nThe story follows individuals weighed down by emotional scars, unfulfilled dreams, and personal losses, each carrying the quiet belief that joy may no longer be meant for them. Their lives intersect in unexpected ways, forming bonds that challenge their fears and reopen doors they believed were permanently closed.\n\nRather than chasing ideal outcomes, the film focuses on everyday moments—shared conversations, silent understanding, and the comfort of companionship. Love in Fari Ek Vaar is not portrayed as flawless or dramatic, but as steady, nurturing, and deeply human. It grows through patience, forgiveness, and the courage to begin again despite past heartbreaks.\n\nAs the characters learn to lean on one another, the film explores the idea that happiness is a right, not a reward. It questions the pressure to live perfectly and instead celebrates lives shaped by compassion, empathy, and mutual support. Each setback becomes an opportunity to rediscover meaning, not alone, but together.\n\nFari Ek Vaar (2025) ultimately delivers an uplifting message about second chances and emotional healing. It leaves viewers with a renewed belief that even broken paths can lead to fulfillment, and that a life filled with love, understanding, and shared strength is more than enough to be truly happy.",
        "director": [
           "Akhil Kotak"
+        ],
+        "directorimage": [
+        ""
         ],
        "cast": [ "Supriya Pathak", "Tiku Talsania", "Netri Trivedi"],
        "castimage": [
@@ -2173,6 +2408,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
          "Madhan Dakshinamurthy"
         ],
+        "directorimage": [
+        ""
+        ],
        "cast": [ "Kamakshi Bhaskarla", "G.S. Chalapathy", "Naveen Chandra"],
         "castimage": [
         "https://media.themoviedb.org/t/p/w235_and_h235_face/rS6eRKX0ZldriYdZjx6zf8faoHH.jpg",
@@ -2202,6 +2440,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Ikk Kudi (2025) is a reflective romantic mystery that explores how inherited pain and unanswered questions shape modern relationships. The story centers on a young woman raised in a family marked by failed relationships, unfulfilled marriages, and emotional scars passed quietly from one generation to the next. Growing up surrounded by broken hearts has taught her to be cautious, observant, and deeply skeptical of promises made too easily.\n\nWhen her family arranges her marriage to a seemingly perfect man, everything appears ideal on the surface. He is polite, well-settled, and respectful, fitting every expectation placed upon him. Yet as wedding preparations begin, subtle inconsistencies begin to trouble her. Small gaps in his stories, unexplained silences, and an emotional distance she cannot fully explain awaken her deepest fears—that love built on incomplete truth may collapse just like the marriages she has witnessed all her life.\n\nDriven by intuition rather than accusation, she embarks on a quiet investigation into her fiancé’s past. What begins as curiosity slowly turns into a personal quest for clarity. Along the way, she confronts uncomfortable truths not only about him, but also about herself, her family’s expectations, and the cultural pressure to accept security over certainty.\n\nAs secrets surface, the film delicately balances romance with suspense, questioning whether love can survive when foundations are shaken. The protagonist must decide whether truth is worth risking everything she has been promised, or if some histories are better left undiscovered.\n\nIkk Kudi (2025) is ultimately a story about agency and emotional courage. It examines the cost of silence, the strength required to ask difficult questions, and the power of choosing honesty over comfort in a world that often demands compromise.",
        "director": [
           "Amarjit Singh Saron"
+        ],
+        "directorimage": [
+        ""
         ],
        "cast": [ "Shehnaaz Gill", "Juss", "Udaybir Sandhu"],
        "castimage": [
@@ -2234,6 +2475,9 @@ export const MOVIES_DATA: Movie[] = [
         "Ishita Moitra",
         "Abhinav Vaidya"
       ],
+      "directorimage": [
+        ""
+        ],
       "cast": [
         "Prajakta Koli",
         "Kunal Kemmu",
@@ -2270,6 +2514,9 @@ export const MOVIES_DATA: Movie[] = [
        "director": [
           "Ram R Mallik", "Deepak Wagh"
         ],
+        "directorimage": [
+        ""
+        ],
        "cast": ["Hari Alhat", "Arun Baraskar", "Komal Bhojane"],
        "castimage": [
         "",
@@ -2299,6 +2546,9 @@ export const MOVIES_DATA: Movie[] = [
       "director": [
         "Maria Santos"
       ],
+      "directorimage": [
+        ""
+        ],
       "cast": [
         "Juan Dela Cruz",
         "Maria Clara",
@@ -2332,6 +2582,9 @@ export const MOVIES_DATA: Movie[] = [
         "content": "Nikka Zaildar 4 (2025) continues the beloved Punjabi franchise with its trademark blend of romance, humor, and emotional confusion, pushing the story beyond courtship into the unpredictable territory of married life. This time, Nikka finds himself genuinely in love, determined not just to impress the woman of his dreams but also to earn the approval of her family. What follows is a familiar yet entertaining journey of grand gestures, misunderstandings, and heartfelt persistence.\n\nThe first half of the film focuses on Nikka’s efforts to prove he is worthy. From navigating family expectations to balancing pride and sincerity, his attempts are equal parts earnest and comical. The romance blooms amid cultural traditions, playful banter, and the pressure to meet everyone’s idea of the perfect match. Eventually, love triumphs, and marriage seems to promise a happily-ever-after.\n\nBut Nikka Zaildar 4 refuses to stop where most love stories end. Once married, the film shifts gears dramatically when a long-hidden secret comes to light. This revelation turns daily married life into a rollercoaster, challenging trust, communication, and emotional maturity. What once felt like simple romance now demands patience and understanding, as both partners struggle to process the truth and its consequences.\n\nThe humor intensifies as situations spiral out of control, dragging relatives, friends, and family dynamics into the chaos. Misinterpretations multiply, tempers flare, and laughter arises from how quickly certainty turns into confusion. Beneath the comedy, the film explores how secrets—no matter how well-intended—can reshape relationships.\n\nNikka Zaildar 4 (2025) ultimately becomes a story about growth after love is won. It highlights the difference between falling in love and staying in love, using humor to reflect on honesty, compromise, and resilience. Energetic, emotional, and packed with surprises, the film delivers a Punjabi rom-com that extends beyond romance into the realities that follow it.",
        "director": [
           "Simerjit Singh"
+        ],
+        "directorimage": [
+        ""
         ],
        "cast": [ "Ammy Virk", "Sonam Bajwa", "Sukhi Chahal"],
        "castimage": [
