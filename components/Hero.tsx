@@ -28,9 +28,14 @@ const Hero: React.FC<HeroProps> = ({ onSearch }) => {
                     Watch Unlimited <span className="text-primary">Movies & TV Shows</span>
                 </h1>
                 <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
-                    Stream 5000+ HD movies, latest TV shows, live sports and news channels. No registration, no subscription fees.
+                    FreeStream™ lets you watch free HD movies and TV shows online without registration. Explore thousands of latest movies, popular TV series, and multi-language content — all available for instant streaming.
                 </p>
-
+<h2 className="font-display font-black text-2xl sm:text-2xl md:text-2xl lg:text-2xl leading-tight mb-4">
+                  Only Latest <span className="text-primary">Movies, TV shows, Live Sports, Live News & TV Series are Updated Daily.</span>
+                </h2>
+                <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+                    Discover newly released movies available for free streaming in HD quality. Watch online anytime without signing up.
+                </p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto mb-10">
                     {stats.map((stat, index) => (
                         <div key={index} className="bg-white/10 backdrop-blur-sm rounded-lg p-4 flex items-center gap-4 transition-transform hover:scale-105 hover:bg-white/20">
