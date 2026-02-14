@@ -344,8 +344,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-01",
     title: "Adult Channel 01",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -359,8 +359,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-02",
     title: "Adult Channel 02",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -374,8 +374,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-03",
     title: "Adult Channel 03",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -389,8 +389,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-04",
     title: "Adult Channel 04",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -404,8 +404,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-05",
     title: "Adult Channel 05",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -419,8 +419,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-06",
     title: "Adult Channel 06",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -434,8 +434,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-07",
     title: "Adult Channel 07",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -449,8 +449,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-08",
     title: "Adult Channel 08",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -464,8 +464,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-09",
     title: "Adult Channel 09",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -479,8 +479,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-10",
     title: "Adult Channel 10",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -494,8 +494,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-11",
     title: "Adult Channel 11",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -509,8 +509,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-12",
     title: "Adult Channel 12",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -524,8 +524,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-13",
     title: "Adult Channel 13",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -539,8 +539,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-14",
     title: "Adult Channel 14",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -554,8 +554,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-15",
     title: "Adult Channel 15",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -569,8 +569,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-16",
     title: "Adult Channel 16",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -584,8 +584,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-17",
     title: "Adult Channel 17",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -599,8 +599,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-18",
     title: "Adult Channel 18",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -614,8 +614,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-19",
     title: "Adult Channel 19",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -629,8 +629,8 @@ export const UNIQUE_TV_LIVE: MediaItem[] = [
   {
     id: "adult-channel-20",
     title: "Adult Channel 20",
-    poster_path: "/18only.png",
-    backdrop_path: "/18only.png",
+    poster_path: "/18only.jpg",
+    backdrop_path: "/18only.jpg",
     release_date: "2024-01-20",
     vote_average: 8.4,
     duration: "24/7",
@@ -1472,7 +1472,7 @@ export const UNIQUE_TV_SHOWS: MediaItem[] = [
 export const getImageUrl = (path: string | null, size: 'w500' | 'original' = 'w500') => {
   if (!path) return 'https://picsum.photos/500/750'; 
   if (path.startsWith('http')) return path;
-  if (path.startsWith('/images/') || path === '/18only.png' || path === '/logo.png') return path;
+  if (path.startsWith('/images/') || path === '/18only.jpg' || path === '/logo.png') return path;
   return `${IMAGE_BASE_URL}/${size}${path.startsWith('/') ? path : `/${path}`}`;
 };
 
