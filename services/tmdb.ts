@@ -871,8 +871,53 @@ export const UNIQUE_MOVIES: MediaItem[] = [
       "Server 3": "https://vidara.to/e/SHuWR9w1UWVYD",
         },
     overview: "Buried memories from his subconscious mind suddenly resurface. A triggering event turns his life upside down. From this turmoil is born a thrilling, suspenseful, and thought-provoking case - Case Number 73.",
+  },
+  {
+    id: "paro-pinaki-ki--kahani-2026",
+    yt_id: "RIkPtqHXmSY",
+    title: "Paro Pinaki Ki Kahani (2026) ", 
+    poster_path: "https://media.themoviedb.org/t/p/w500/mU8MoyOmXNJCru3ys11h6jGvQZn.jpg",
+    backdrop_path: "https://media.themoviedb.org/t/p/w780/5pldneH6NuuSsTDGlh5xFo5ta0Y.jpg",
+    release_date: "2026-01-16",
+    vote_average: 6.4,
+    duration: "2h 40m",
+    media_type: 'movie',
+    genres: ["Crime", "Thriller", "Drama"],
+    streams: {
+      "Server 1": "https://byseqekaho.com/e/04o8sanluesy/",
+      "Server 2": "https://iframe.mediadelivery.net/embed/596139/2d99e316-742a-441b-8bd5-b9e3c66e12c0?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 3": "https://vidara.to/e/KwAHYxJ1v2Za",
+      
+        },
+    overview: "A manhole cleaner and vegetable vendor fall in love during secret meetings in a train bathroom. When she stops appearing, he begins a dangerous search to find her.",
+  },
+  {
+    id: "godaan-2026",
+    yt_id: "5DrU79n-UxM",
+    title: "Godaan (2026) ", 
+    poster_path: "https://media.themoviedb.org/t/p/w500/A13J7VV2QM8n7ZVawcPjq2lWoiA.jpg",
+    backdrop_path: "https://media.themoviedb.org/t/p/w780/ttUHnCUZpyNiaOkU9VjHsuCC3Y6.jpg",
+    release_date: "2026-01-16",
+    vote_average: 6.4,
+    duration: "2h 40m",
+    media_type: 'movie',
+    genres: ["Drama", "Family", "Thriller"],
+    streams: {
+      "Server 1": "https://byseqekaho.com/e/4h504ewn3nol/",
+      "Server 2": "https://iframe.mediadelivery.net/embed/596139/2855fe6e-376d-4db8-b6ab-5b753670c58b?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      
+        },
+    overview: "Godaan tells the story of Surbhi, an Indian cow who transforms a modern scientist’s beliefs. Her presence leads to discoveries in Panchgavya-based medicine, sustainable living, and the spiritual science behind cow reverence.",
   }
 ];
+
+
+
+
+
+
+
+
 
 export const UNIQUE_HINDI_DUBBED: MediaItem[] = [
   {
@@ -1062,11 +1107,150 @@ export const UNIQUE_HINDI_DUBBED: MediaItem[] = [
      },
     
     overview: "Lucy, a college student, along with her friends, spend their vacation at her family's home in Hawaii, which includes her pet chimpanzee, Ben. However, when Ben contracts rabies after being bitten by a rabid animal, the group must fight for their lives in order to avoid the now-violent chimp.",
+  },
+    {
+    id: "queen-of-chess-2026-multi-lang",
+    yt_id: "8pmJgtLKBXg",
+    title: "Queen Of Chess (2026) Multi-Lang",
+    poster_path: "https://media.themoviedb.org/t/p/w500/ag5TZNcK3vHdCCpZIY8syjwzgfr.jpg",
+    backdrop_path: "https://media.themoviedb.org/t/p/w780/y5haKgSz1hCDatwIOMuqZ1CFKPW.jpg",
+    release_date: "2026-01-16",
+    vote_average: 6.4,
+    duration: "2h 40m",
+    media_type: 'movie',
+    genres: ["Documentry ", "Thriller", "Mystery"],
+    streams: {
+      "Server 1 - Multi-Lang": "https://iframe.mediadelivery.net/embed/596139/96583c70-121b-40cc-971f-dfeafa27bc2e?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 2 - Multi-Lang": "https://byseqekaho.com/e/lucjyc64ttlx/",
+      "Server 3 - Multi-Lang": "https://vidara.to/e/nhXcofWUiKEJ",
+       "Server 4": "https://cinemaos.tech/player/1596291",
+      "Server 5": "https://xprime.today/watch/1596291",
+      "Server 6": "https://www.cinezo.net/watch/movie/1596291",
+      "Server 7": "https://vidsrc-embed.ru/embed/movie/1596291",
+      "Server 8": "https://api.cinezo.net/embed/tmdb-movie-1596291",
+     },    
+    overview: "A Hungarian girl dreams of conquering international men’s chess. After a 15-year battle against world champion Garry Kasparov and her domineering father, Judit Polgár revolutionizes the sport’s patriarchal culture to become one of the greatest chess prodigies in history and the greatest woman chess player of all time.",
+  },
+  {
+    id: "twisted-2026-multi-lang",
+    yt_id: "fAkM20N5YV0",
+    title: "Twisted (2026) Multi-Lang",
+    poster_path: "https://media.themoviedb.org/t/p/w500/rF6txsM6cgF9vg6Ra5sNbkvUwrw.jpg",
+    backdrop_path: "https://media.themoviedb.org/t/p/w780/qg6wGnkBhCcsGfNz1eGtPMtKGDs.jpg",
+    release_date: "2026-01-16",
+    vote_average: 6.4,
+    duration: "2h 40m",
+    media_type: 'movie',
+    genres: ["Crime ", "Horror", "Thriller"],
+    streams: {
+      "Server 1 - Multi-Lang": "https://byseqekaho.com/e/z3tle7cbn3pi/",
+      "Server 2 - Multi-Lang": "https://iframe.mediadelivery.net/embed/596139/5f8997ed-0a41-4a70-b2b1-892585618845?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 3": "https://www.vidking.net/embed/movie/1373198?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 4": "https://cinemaos.tech/player/1373198",
+      "Server 5": "https://xprime.today/watch/1373198",
+      "Server 6": "https://www.cinezo.net/watch/movie/1373198",
+      "Server 7": "https://api.cinezo.net/embed/tmdb-movie-1373198",
+    },
+    overview: "Two millennials make quick money by leasing incredible New York City apartments they don’t own to people who don’t know they are being scammed. The con works brilliantly until they run into an apartment owner with a dark secret who flips the game on them.",
+  },
+  {
+    id: "guns-up-2025-multi-lang",
+    yt_id: "em64F7k27ws",
+    title: "Guns Up (2025) Multi-Lang",
+    poster_path: "https://media.themoviedb.org/t/p/w500/3RokBWEkQqJRZEVP3DPwGm5MYh6.jpg",
+    backdrop_path: "https://media.themoviedb.org/t/p/w780/4bYpERIjVMfDJJPEKDONI784sRb.jpg",
+    release_date: "2026-01-16",
+    vote_average: 6.4,
+    duration: "2h 40m",
+    media_type: 'movie',
+    genres: ["Action ", "Crime", "Thriller"],
+    streams: {
+      "Server 1 - Multi-Lang": "https://byseqekaho.com/e/4vdbms6mhva8/",
+      "Server 2 - Multi-Lang": "https://vidara.to/e/EIjP84hbEf6b7",
+      "Server 3": "https://www.vidking.net/embed/movie/1181540?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 4": "https://cinemaos.tech/player/1181540",
+      "Server 5": "https://xprime.today/watch/1181540",
+      "Server 6": "https://www.cinezo.net/watch/movie/1181540",
+      "Server 7": "https://api.cinezo.net/embed/tmdb-movie-1181540",
+    },
+    overview: "When a job goes horribly wrong, an ex-cop and family man who moonlights as a mob henchman has one night to get his family out of the city.",
+  },
+  {
+    id: "redux-redux-2026-multi-lang",
+    yt_id: "q3MIBtD4zuY",
+    title: "Redux Redux (2026) Multi-Lang",
+    poster_path: "https://media.themoviedb.org/t/p/w500/9u7sUTYPPTxGCXbkcw8FTq50PnO.jpg",
+    backdrop_path: "https://media.themoviedb.org/t/p/w780/rdiOHydT17DtZ9WBVFLnVK4cU2R.jpg",
+    release_date: "2026-01-16",
+    vote_average: 6.4,
+    duration: "2h 40m",
+    media_type: 'movie',
+    genres: ["Action ", "Crime", "Thriller"],
+    streams: {
+      "Server 1 - Multi-Lang": "https://byseqekaho.com/e/g0jmgyuvyt4b/",
+      "Server 2 - Multi-Lang": "https://vidara.to/e/O7DOapKazrpy2",
+      "Server 3": "https://www.vidking.net/embed/movie/1340110?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 4": "https://cinemaos.tech/player/1340110",
+      "Server 5": "https://xprime.today/watch/1340110",
+      "Server 6": "https://www.cinezo.net/watch/movie/1340110",
+      "Server 7": "https://api.cinezo.net/embed/tmdb-movie-1340110",
+    },
+    overview: "In an attempt to avenge her daughter's death, Irene Kelly travels parallel universes, killing her daughter's murderer over and over again. She grows addicted to the revenge streak, putting her own humanity in jeopardy.",
+  },
+  {
+    id: "return-to-silent-hill-2026-multi-lang",
+    yt_id: "PKex8MPiB_U",
+    title: "Return to Silent Hill (2026) Multi-Lang",
+    poster_path: "https://media.themoviedb.org/t/p/w500/fqAGFN2K2kDL0EHxvJaXzaMUkkt.jpg",
+    backdrop_path: "https://media.themoviedb.org/t/p/w780/nTbO6UF944b0VZrgypMK5rFYRSW.jpg",
+    release_date: "2026-01-16",
+    vote_average: 6.4,
+    duration: "2h 40m",
+    media_type: 'movie',
+    genres: ["Horror ", "Mystery", "Thriller"],
+    streams: {
+      "Server 1 - Multi-Lang": "https://byseqekaho.com/e/q4ihrv5i0fub/",
+      "Server 2 - Multi-Lang": "https://vidara.to/e/3UNqgpNCeHmGh",
+      "Server 3": "https://www.vidking.net/embed/movie/680493?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 4": "https://cinemaos.tech/player/680493",
+      "Server 5": "https://xprime.today/watch/680493",
+      "Server 6": "https://www.cinezo.net/watch/movie/680493",
+      "Server 7": "https://api.cinezo.net/embed/tmdb-movie-680493",
+    },
+    overview: "When James receives a mysterious letter from his lost love Mary, he is drawn to Silent Hill—a once-familiar town now consumed by darkness. As he searches for her, James faces monstrous creatures and unravels a terrifying truth that will push him to the edge of his sanity.",
+  },
+  {
+    id: "send-help-2026-multi-lang",
+    yt_id: "R4wiXj9NmEE",
+    title: "Send Help (2026) Multi-Lang",
+    poster_path: "https://media.themoviedb.org/t/p/w500/mlV70IuchLZXcXKowjwSpSfdfUB.jpg",
+    backdrop_path: "https://media.themoviedb.org/t/p/w780/eyvIBnJSxZDyek4s7YytUNmtstR.jpg",
+    release_date: "2026-01-16",
+    vote_average: 6.4,
+    duration: "2h 40m",
+    media_type: 'movie',
+    genres: ["Horror ", "Mystery", "Thriller"],
+    streams: {
+      "Server 1 - Multi-Lang": "https://byseqekaho.com/e/a659bel7ym71/",
+      "Server 2 - Multi-Lang": "https://vidara.to/e/CQLTpO47YK74d",
+      "Server 3": "https://www.vidking.net/embed/movie/1198994?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 4": "https://cinemaos.tech/player/1198994",
+      "Server 5": "https://xprime.today/watch/1198994",
+      "Server 6": "https://www.cinezo.net/watch/movie/1198994",
+      "Server 7": "https://api.cinezo.net/embed/tmdb-movie-1198994",
+    },
+    overview: "Two colleagues become stranded on a deserted island, the only survivors of a plane crash. On the island, they must overcome past grievances and work together to survive, but ultimately, it's a battle of wills and wits to make it out alive.",
   }
 
   
-  
 ];
+
+
+
+
+
+
+
 
 export const UNIQUE_ADULT: MediaItem[] = [
   {
@@ -1226,7 +1410,6 @@ export const UNIQUE_ADULT: MediaItem[] = [
   },
   {
     id: "patikim-ni-robb-guinto-2026",
-    
     title: "Patikim ni Robb Guinto (2026)",
     poster_path: "https://media.themoviedb.org/t/p/w500/4rL4XpHnngzElgdYDqaDtZnmtEH.jpg",
     backdrop_path: "https://media.themoviedb.org/t/p/w780/AarN9NHen3V3z2H4Naw5Izc11x.jpg",
@@ -1263,6 +1446,16 @@ export const UNIQUE_ADULT: MediaItem[] = [
   },
   
 ];
+
+
+
+
+
+
+
+
+
+
 
 export const UNIQUE_TV_SHOWS: MediaItem[] = [
   {
@@ -1364,7 +1557,7 @@ export const UNIQUE_TV_SHOWS: MediaItem[] = [
   {
     id: "pharma-2025",
     yt_id: "O7wQuF6OKtI",
-    title: "Pharma (2025)",
+    title: "Pharma (2025) Web Series",
     poster_path: "https://image.tmdb.org/t/p/w500/hQWT47GFQyvO1tFqx6IgCOvrrr8.jpg",
     backdrop_path: "https://image.tmdb.org/t/p/original/hQWT47GFQyvO1tFqx6IgCOvrrr8.jpg",
     release_date: "2025-01-08",
@@ -1382,7 +1575,7 @@ export const UNIQUE_TV_SHOWS: MediaItem[] = [
   {
     id: "the-night-manager-s02-2026",
     yt_id: "FrOIFz4Koe0",
-    title: "The Night Manager S02 (2026)",
+    title: "The Night Manager S02 (2026) Tv Series",
     poster_path: "https://image.tmdb.org/t/p/w500/1MccRnw41qQjREuZkovqP2UX1i3.jpg",
     backdrop_path: "https://image.tmdb.org/t/p/original/lJoaiZcYMc8RkmPLROcdS2WQxn9.jpg",
     release_date: "2026-01-08",
@@ -1399,7 +1592,7 @@ export const UNIQUE_TV_SHOWS: MediaItem[] = [
   {
     id: "cheekatilo-2026",
     yt_id: "C2eaHHMCWuY",
-    title: "Cheekatilo (2026)",
+    title: "Cheekatilo (2026) Web Series",
     poster_path: "https://image.tmdb.org/t/p/w500/pO86EjZb7QyGYk5RW4Xm4UWe5Uv.jpg",
     backdrop_path: "https://image.tmdb.org/t/p/original/iHT55IAd2qErJKhH8vCGKbZSniU.jpg",
     release_date: "2026-01-08",
@@ -1433,9 +1626,9 @@ export const UNIQUE_TV_SHOWS: MediaItem[] = [
     overview: "Simon and Trevor, two actors at opposite ends of their careers, chase life-changing roles.",
   },
   {
-    id: "mayasabha-s01-2026-multi-lang",
+    id: "mayasabha-s01-2026-hindi-series",
     yt_id: "pPGPA13ucTs",
-    title: "Mayasabha S01 (2026) Multi-Lang",
+    title: "Mayasabha S01 (2026) Hindi Series",
     poster_path: "https://media.themoviedb.org/t/p/w500/ddhOEoAqefgzcxlx5hIvkFpF9cw.jpg",
     backdrop_path: "https://media.themoviedb.org/t/p/w780/nofMFwwxPMkv76NqrbvoAVwiH4J.jpg",
     release_date: "2026-01-16",
@@ -1450,9 +1643,9 @@ export const UNIQUE_TV_SHOWS: MediaItem[] = [
     overview: "Mayasabha is a period political drama set in Mid 70s Andhra Pradesh. Krishnama Naidu, an idealistic student leader and a charismatic MS Rami Reddy wade into the world of Andhra politics. As they turn thick friends, they strive to use politics as a means to achieve public good. But caste fault lines erupt, loyalties are tested and their bond is pushed to the brink. Will their friendship sustain the brutal ascent of power where there is place for only one at the summit?",
   },
   {
-    id: "unfamiliar-s01-2026-multi-lang",
+    id: "unfamiliar-s01-2026-tv-series",
     yt_id: "RY-FSHJ7fKA",
-    title: "Unfamiliar S01 (2026) Multi-Lang",
+    title: "Unfamiliar S01 (2026) Tv Series",
     poster_path: "https://media.themoviedb.org/t/p/w500/fX0Kvvo6hj9feqS3JyFpVmscz2Y.jpg",
     backdrop_path: "https://media.themoviedb.org/t/p/w780/qDq3dG4ElRohih5fUGNQRLHuBaC.jpg",
     release_date: "2026-01-16",
@@ -1466,7 +1659,127 @@ export const UNIQUE_TV_SHOWS: MediaItem[] = [
       "Server 3": "https://api.cinezo.net/embed/tmdb-tv-274776",
     },
     overview: "When the past catches up with two former spies, their biggest challenge isn't car chases, shootouts or fistfights — it's telling each other the truth.",
-  }
+  },
+  {
+    id: "cross=s02-2026-tv-series",
+    yt_id: "H1tFYjJ515M",
+    title: "Cross S02 (2026) Tv Series",
+    poster_path: "https://image.tmdb.org/t/p/w500/6hhKdavCEZi8d584ZtIrQIrBvZI.jpg",
+    backdrop_path: "https://image.tmdb.org/t/p/original/cYHJfdRnIhmeBoYN4jRMMnBDroO.jpg",
+    release_date: "2025-01-08",
+    vote_average: 7.2,
+    duration: "45m",
+    media_type: 'tv',
+    streams: {
+      "Server 1 - Multi-Lang": "https://byseqekaho.com/e/ph2inyx7o6mj/",
+      "Server 2 - Multi-Lang": "https://iframe.mediadelivery.net/embed/596139/f03ab48c-bb05-4927-b5e5-7a07934c997c?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 3": "https://xprime.today/watch/213306/1/1",
+      "Server 4": "https://www.vidking.net/embed/tv/213306/1/8?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 5": "https://api.cinezo.net/embed/tmdb-tv-213306",
+    },
+    genres: ["Drama", "Crime", "Mystery"],
+    overview: "Alex Cross is a brilliant but flawed homicide detective and full of contradictions. A doting father and family man, Cross is single-minded to the point of obsession when he hunts killers. He is desperate for love, but his wife’s murder has left him too damaged to receive it.",
+  },
+   {
+    id: "kohrra-s02-2026-hindi-series",
+    yt_id: "pxcgMDOPdsw",
+    title: "Kohrra S02 (2026) Hindi Series",
+    poster_path: "https://image.tmdb.org/t/p/w500/vI23w796RfqWHlRKEcN4N6bD2DY.jpg",
+    backdrop_path: "https://image.tmdb.org/t/p/original/bXXoR0UgauJaKePUWUXsBFsRSed.jpg",
+    release_date: "2025-01-08",
+    vote_average: 7.2,
+    duration: "45m",
+    media_type: 'tv',
+    streams: {
+      "Server 1 - Multi-Lang": "https://byseqekaho.com/e/agzevue8rtps/",
+      "Server 2 - Multi-Lang": "https://iframe.mediadelivery.net/embed/596139/b3c83030-59f6-4cf3-a533-8782881678fe?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 3": "https://xprime.today/watch/230034/2/1",
+      "Server 4": "https://www.vidking.net/embed/tv/230034/2/8?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 5": "https://api.cinezo.net/embed/tmdb-tv-230034",
+    },
+    genres: ["Drama", "Crime", "Mystery"],
+    overview: "When an NRI bridegroom is found dead days before his wedding in the countryside of Punjab, two cops must unravel the troubling case as turbulence unfolds in their own lives.",
+  },
+  {
+    id: "amar-vishwas-s01-2026-hindi-series",
+    yt_id: "lQAhJ-SSTQk",
+    title: "Amar Vishwas S01 (2026) Hindi Series",
+    poster_path: "https://image.tmdb.org/t/p/w500/eai2N6BgHlQdL5oSeo94UX45CBN.jpg",
+    backdrop_path: "https://image.tmdb.org/t/p/original/9Pn2P17F2M0M7F0uHb9JJxPzdae.jpg",
+    release_date: "2025-01-08",
+    vote_average: 7.2,
+    duration: "45m",
+    media_type: 'tv',
+    streams: {
+      "Server 1": "https://byseqekaho.com/e/mc3gcdgbvsij/",
+      "Server 2": "https://iframe.mediadelivery.net/embed/596139/cd626b66-e2e7-4213-a7af-fd1627628249?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 3": "https://xprime.today/watch/313716/1/1",
+      "Server 4": "https://www.vidking.net/embed/tv/313716/1/8?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 5": "https://api.cinezo.net/embed/tmdb-tv-313716",
+    },
+    genres: ["Drama", "Crime", "Mystery"],
+    overview: "Brilliant, eccentric Mumbai lawyer Amar Vishwas defends the underprivileged while seeking hidden truths. When a powerful businessman is murdered, he navigates a deadly web of lies, suspects, and shocking twists to deliver justice.",
+  },
+  {
+    id: "dil-dhokha-aur-desire-s01-2026-hindi-series",
+    yt_id: "5KD3iU9f-0w",
+    title: "Dil Dhokha Aur Desire (2026) S01 Hindi Series",
+    poster_path: "https://image.tmdb.org/t/p/w500/rKpQmijH1afO8QdeeR3efiFiN7a.jpg",
+    backdrop_path: "https://image.tmdb.org/t/p/original/AnnucFNhk6aTa2YFDnJ9OKOJC5b.jpg",
+    release_date: "2025-01-08",
+    vote_average: 7.2,
+    duration: "45m",
+    media_type: 'tv',
+    streams: {
+      "Server 1": "https://byseqekaho.com/e/x40jqljd71o7/",
+      "Server 2": "https://iframe.mediadelivery.net/embed/596139/408db29c-eaa8-48c3-b433-214055a892af?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 3": "https://xprime.today/watch/313956/1/1",
+      "Server 4": "https://www.vidking.net/embed/tv/313956/1/8?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 5": "https://api.cinezo.net/embed/tmdb-tv-313956",
+    },
+    genres: ["Drama", "Crime", "Mystery"],
+    overview: "Duty spirals into a volatile triangle of love, loyalty and betrayal when the dreams of a young boxer lands him in the dangerous world of a ruthless businessman, entangling him with his wife, the one woman he was hired to protect. He must now choose who, and what, he's willing to lose.",
+  },
+  {
+    id: "hasratein-3-s03-2026-hindi-series",
+    yt_id: "UEyF_hf5ZBE",
+    title: "Hasratein 3 (2026) S03 Hindi Series",
+    poster_path: "https://image.tmdb.org/t/p/w500/9ng6iEsgclvmjOYLL0CUC1cjQZw.jpg",
+    backdrop_path: "https://image.tmdb.org/t/p/original/ztbQ0JhrlwPImOLBCYHLLYlJgYn.jpg",
+    release_date: "2025-01-08",
+    vote_average: 7.2,
+    duration: "45m",
+    media_type: 'tv',
+    streams: {
+      "Server 1": "https://byseqekaho.com/e/4j5y0mo40qnn/",
+      "Server 2": "https://iframe.mediadelivery.net/embed/596139/ad9286c2-27c6-4488-bc0b-abac88502322?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 3": "https://xprime.today/watch/216284/1/1",
+      "Server 4": "https://www.vidking.net/embed/tv/216284/1/8?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 5": "https://api.cinezo.net/embed/tmdb-tv-216284",
+    },
+    genres: ["Drama", "Crime", "Mystery"],
+    overview: "Hasratein is an anthology which traces the lives of five real women who break the shackles of a male chauvinistic taboo to explore their sexuality and desire. To experience just a few moments true passion, they are willing to face all odds and challenges posed by the society, family and other factors affecting their lives.",
+  },
+    {
+    id: "bandwaale-s01-2026-hindi-series",
+    yt_id: "7AaUBhs1L1g",
+    title: "Bandwaale (2026) S01 Hindi Series",
+    poster_path: "https://image.tmdb.org/t/p/w500/h1heLNN77Jmjin06ihQdMKTGGIt.jpg",
+    backdrop_path: "https://image.tmdb.org/t/p/original/uz0OhuErhylmCBszXwYAxOU3oVo.jpg",
+    release_date: "2025-01-08",
+    vote_average: 7.2,
+    duration: "45m",
+    media_type: 'tv',
+    streams: {
+      "Server 1": "https://byseqekaho.com/e/momnxk4us35x/",
+      "Server 2": "https://iframe.mediadelivery.net/embed/596139/3320a31c-a0b6-45b0-8f2e-92c79109fbd6?autoplay=false&loop=false&muted=true&preload=true&responsive=true",
+      "Server 3": "https://xprime.today/watch/249760/1/1",
+      "Server 4": "https://www.vidking.net/embed/tv/249760/1/8?autoPlay=true&nextEpisode=true&episodeSelector=true",
+      "Server 5": "https://api.cinezo.net/embed/tmdb-tv-249760",
+    },
+    genres: ["Drama", "Comedy", "Mystery"],
+    overview: "Mariam, a young poetess, finds herself trapped in a sleepy town, where every young girl's future lies in wedlock. Mariam hopes to find her freedom against all odds, by uploading her poetry on the internet through an anonymous account.Along with her band of misfits - Robo and Psy, Mariam discovers the power of her poetry and her own voice.",
+  },
 ];
 
 export const getImageUrl = (path: string | null, size: 'w500' | 'original' = 'w500') => {
