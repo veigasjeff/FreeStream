@@ -68,6 +68,27 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     dream: 'blur(0.5px) brightness(1.1) saturate(1.2)',
   };
 
+const { from } = router.query
+
+const handleBack = () => {
+  switch (type) {
+    case 'movie':
+      router.push('/Movies')
+      break
+    case 'tv':
+      router.push('/tv')
+      break
+    case 'sports':
+      router.push('/Sports')
+      break
+    case 'tv_live':
+      router.push('/live')
+      break
+    default:
+      router.push('/')
+  }
+}
+
   // ---------- STREAMS: USE customStreams IF PROVIDED, OTHERWISE FALLBACK ----------
   const streams = useMemo<StreamSource[]>(() => {
     const format = (raw: any): StreamSource[] => {
@@ -312,7 +333,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
     <div className="relative w-full mt-8 sm:mt-0">
       <div className="mb-3 sm:mb-4">
         <button
-          onClick={() => router.back()}
+          // onClick={() => router.back()}
+              // onClick={() => router.push('/')}
+              onClick={handleBack}
+    
           className="flex items-center gap-2 px-4 py-2.5 sm:py-3 bg-black/95 backdrop-blur-md rounded-lg sm:rounded-xl border-2 border-white/20 sm:border hover:bg-miraj-red text-white transition-all duration-300 shadow-2xl hover:shadow-2xl hover:scale-105 active:scale-95 group touch-manipulation min-h-[48px] sm:min-h-0"
           aria-label="Go back"
         >
